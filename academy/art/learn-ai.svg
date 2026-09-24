@@ -1,29 +1,57 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400">
-<g class="a-float">
-<path class="f-soft s-acc" stroke-width="2.5" d="M170,60 H330 Q350,60 350,80 V110 Q350,130 330,130 L344,152 L310,130 H170 Q150,130 150,110 V80 Q150,60 170,60Z"/>
-<path class="s-line" stroke-width="6" d="M176,86 H324 M176,106 H268"/>
-</g>
-<g class="a-float d2">
-<path class="f-panel s-line" stroke-width="2.5" d="M72,166 H268 Q290,166 290,188 V246 Q290,268 268,268 H100 L66,290 L76,268 H72 Q50,268 50,246 V188 Q50,166 72,166Z"/>
-<path class="f-acc" d="M82,183 Q82,197 96,197 Q82,197 82,211 Q82,197 68,197 Q82,197 82,183Z"/>
-<path class="s-line a-draw" stroke-width="6" d="M112,197 H262"/>
-<path class="s-dim a-draw d1" stroke-width="6" d="M76,222 H254"/>
-<path class="s-dim a-draw d2" stroke-width="6" d="M76,245 H196"/>
-<path class="s-acc a-dash" stroke-width="2" d="M110,272 V298 M170,270 V298 M230,270 V298"/>
-<rect class="f-panel s-dim" stroke-width="2" x="88" y="300" width="44" height="44" rx="12"/>
-<rect class="f-panel s-dim" stroke-width="2" x="148" y="300" width="44" height="44" rx="12"/>
-<rect class="f-panel s-dim" stroke-width="2" x="208" y="300" width="44" height="44" rx="12"/>
-<circle class="s-line" stroke-width="2.5" cx="107" cy="319" r="7.5"/>
-<path class="s-line" stroke-width="2.5" d="M113,325 L119,331"/>
-<rect class="s-line" stroke-width="2.5" x="159" y="312" width="22" height="20" rx="3"/>
-<path class="s-line" stroke-width="2.5" d="M159,318 H181 M165,308 V313 M175,308 V313"/>
-<circle class="f-acc" cx="170" cy="325" r="2.5"/>
-<path class="s-line" stroke-width="2.5" d="M221,314 L214,322 L221,330 M239,314 L246,322 L239,330"/>
-<path class="s-acc" stroke-width="2.5" d="M233,312 L227,332"/>
-</g>
-<path class="f-gold a-pulse" d="M330,197 Q330,214 347,214 Q330,214 330,231 Q330,214 313,214 Q330,214 330,197Z"/>
-<path class="f-acc a-pulse d2" d="M358,174 Q358,182 366,182 Q358,182 358,190 Q358,182 350,182 Q358,182 358,174Z"/>
-<path class="f-acc a-pulse d1" d="M66,102 Q66,112 76,112 Q66,112 66,122 Q66,112 56,112 Q66,112 66,102Z"/>
-<path class="f-ink a-pulse d3" d="M318,293 Q318,300 325,300 Q318,300 318,307 Q318,300 311,300 Q318,300 318,293Z"/>
-<path class="f-gold a-pulse d4" d="M112,52 Q112,58 118,58 Q112,58 112,64 Q112,58 106,58 Q112,58 112,52Z"/>
+  <!-- Connectors from each assistant to the chat -->
+  <path class="s-acc a-dash" stroke-width="2" d="M92 108 C120 130 128 140 140 150"/>
+  <path class="s-acc a-dash d1" stroke-width="2" d="M308 108 C282 130 272 140 260 150"/>
+  <path class="s-acc a-dash d2" stroke-width="2" d="M200 300 L200 272"/>
+
+  <!-- The chat window -->
+  <g class="a-float">
+    <rect class="f-panel s-line" stroke-width="3" x="118" y="126" width="164" height="146" rx="18"/>
+    <circle class="f-dim" cx="138" cy="144" r="4"/>
+    <circle class="f-dim" cx="152" cy="144" r="4"/>
+    <circle class="f-dim" cx="166" cy="144" r="4"/>
+    <rect class="f-soft s-acc" stroke-width="2" x="168" y="160" width="98" height="30" rx="12"/>
+    <path class="s-line" stroke-width="3" d="M180 175 H250"/>
+    <path class="s-line a-draw" stroke-width="3" d="M134 208 H250"/>
+    <path class="s-dim a-draw d1" stroke-width="3" d="M134 226 H232"/>
+    <path class="s-dim a-draw d2" stroke-width="3" d="M134 244 H210"/>
+    <rect class="s-acc a-blink" stroke-width="3" x="216" y="238" width="3" height="13" rx="1"/>
+  </g>
+
+  <!-- Claude: a warm starburst -->
+  <g class="a-float d1">
+    <circle class="f-panel s-dim" stroke-width="2" cx="78" cy="88" r="36"/>
+    <g class="a-spin">
+      <circle cx="78" cy="88" r="22" fill="none"/>
+      <path class="s-claude" stroke-width="5" d="M78 70 V80 M78 96 V106 M60 88 H70 M86 88 H96 M65.3 75.3 L72.3 82.3 M83.7 93.7 L90.7 100.7 M90.7 75.3 L83.7 82.3 M72.3 93.7 L65.3 100.7"/>
+    </g>
+    <text class="t-label" x="78" y="142" text-anchor="middle">Claude</text>
+  </g>
+
+  <!-- ChatGPT: an interlaced knot of three loops -->
+  <g class="a-float d2">
+    <circle class="f-panel s-dim" stroke-width="2" cx="322" cy="88" r="36"/>
+    <g class="a-spin">
+      <circle cx="322" cy="88" r="22" fill="none"/>
+      <rect class="s-line" stroke-width="3.2" x="304" y="81" width="36" height="14" rx="7"/>
+      <rect class="s-line" stroke-width="3.2" x="304" y="81" width="36" height="14" rx="7" transform="rotate(60 322 88)"/>
+      <rect class="s-line" stroke-width="3.2" x="304" y="81" width="36" height="14" rx="7" transform="rotate(120 322 88)"/>
+    </g>
+    <text class="t-label" x="322" y="142" text-anchor="middle">ChatGPT</text>
+  </g>
+
+  <!-- Gemini: a four-point sparkle -->
+  <g class="a-float d3">
+    <circle class="f-panel s-dim" stroke-width="2" cx="200" cy="330" r="36"/>
+    <g class="a-pulse">
+      <path class="f-gemini" d="M200 306 C203 322 206 326 222 330 C206 334 203 338 200 354 C197 338 194 334 178 330 C194 326 197 322 200 306 Z"/>
+    </g>
+    <text class="t-label" x="252" y="335">Gemini</text>
+  </g>
+
+  <!-- Sparkles -->
+  <path class="f-gold a-pulse" d="M60 250 l4 10 l10 4 l-10 4 l-4 10 l-4 -10 l-10 -4 l10 -4 z"/>
+  <path class="f-acc a-pulse d2" d="M334 236 l3 7 l7 3 l-7 3 l-3 7 l-3 -7 l-7 -3 l7 -3 z"/>
+  <circle class="f-ink a-pulse d4" cx="352" cy="300" r="2.5"/>
+  <circle class="f-ink a-pulse d1" cx="46" cy="190" r="2"/>
 </svg>
