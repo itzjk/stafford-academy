@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "Stafford Academy",
   "version": "1.0.0",
-  "description": "Learn Python, AI, electronics and robotics one mission at a time: 22 free courses that run in your browser, no installs and no account.",
+  "description": "Learn Python, AI, electronics and robotics one mission at a time. 22 free courses in your browser, no installs, no account.",
   "icons": {
     "16": "icons/icon16.png",
     "48": "icons/icon48.png",
