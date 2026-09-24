@@ -46,6 +46,34 @@
     });
   };
 
+  // ---------- settings ----------
+  // Small values that belong to this computer only, like the AI key.
+
+  Academy.getSetting = function (key) {
+    return new Promise(function (resolve) {
+      if (!IN_EXTENSION || !chrome.storage) {
+        try { resolve(localStorage.getItem(key)); } catch (e) { resolve(null); }
+        return;
+      }
+      try { chrome.storage.local.get(key, function (r) { resolve(r && r[key] != null ? r[key] : null); }); }
+      catch (e) { resolve(null); }
+    });
+  };
+
+  Academy.setSetting = function (key, value) {
+    return new Promise(function (resolve) {
+      if (!IN_EXTENSION || !chrome.storage) {
+        try { if (value == null) localStorage.removeItem(key); else localStorage.setItem(key, value); } catch (e) {}
+        resolve(true);
+        return;
+      }
+      try {
+        if (value == null) chrome.storage.local.remove(key, function () { resolve(true); });
+        else { var o = {}; o[key] = value; chrome.storage.local.set(o, function () { resolve(true); }); }
+      } catch (e) { resolve(false); }
+    });
+  };
+
   Academy.levelFor = function (xp) {
     var level = 1, needed = 100, rest = Number(xp) || 0;
     while (rest >= needed) { rest -= needed; level++; needed = Math.round(needed * 1.35); }

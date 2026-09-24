@@ -1,7 +1,7 @@
 // Zerack, the academy mascot and the helper in the bottom right corner.
-// Everything works offline: answers come from the open mission (task, hint,
-// checker output) and from a built-in guide to Python errors, so it runs the
-// same on a school computer with no server and no account.
+// It answers with the best brain available: Chrome's on-device AI, then
+// Gemini if someone connected a key, then offline answers built from the open
+// mission (task, hint, checker output) and a guide to Python errors.
 (function (root) {
   'use strict';
 
@@ -69,7 +69,7 @@
     { re: /ValueError/, t: 'ValueError',
       d: 'The kind of value is right but its content is not. The classic one is `int("hello")`: that text is not a number. Check what is actually inside the variable with a `print` before the line that fails.' },
     { re: /IndexError/, t: 'IndexError',
-      d: 'You asked a list for a position that does not exist. Positions start at **0**, so a list of 3 items has positions 0, 1 and 2. The last one is always `len(options) - 1`, or simply `options[-1]`.' },
+      d: 'You asked a list for a position that does not exist. Positions start at **0**, so a list of 3 items has positions 0, 1 and 2. The last one is always `len(my_list) - 1`, or simply `my_list[-1]`.' },
     { re: /KeyError/, t: 'KeyError',
       d: 'You asked a dictionary for a key it does not have. Check the spelling and the capital letters of the key. If it might be missing, use `d.get("key")`, which gives `None` instead of crashing.' },
     { re: /ZeroDivisionError/, t: 'ZeroDivisionError',
@@ -88,14 +88,14 @@
 
   var TOPICS = [
     { k: /\bprint\b|imprim/, d: '`print(...)` sends something to the console. Text goes in quotes: `print("hi")`. Several values separated by commas get a space between them: `print("level", 3)` prints `level 3`.' },
-    { k: /f-?string|\bf"|formto|formt/, d: 'An f-string puts values inside text. Put an `f` before the quotes and the variable in braces: `name = "Ana"` then `print(f"hi {name}")` prints `hi Ana`.' },
+    { k: /f-?string|\bf"|formato|format/, d: 'An f-string puts values inside text. Put an `f` before the quotes and the variable in braces: `name = "Ana"` then `print(f"hi {name}")` prints `hi Ana`.' },
     { k: /variable|asign|assign/, d: 'A variable is a name that holds a value: `score = 10`. The name goes on the left, `=`, then the value. From then on `score` means 10. You can change it later: `score = score + 5`.' },
     { k: /string|texto|\btext\b|comillas|quote/, d: 'Text (a string) always goes between quotes: `"hello"` or `\'hello\'`. Without quotes Python thinks it is a variable name. Join texts with `+`: `"Py" + "thon"` gives `Python`.' },
     { k: /\binput\b|entrada|pregunt/, d: '`input("question")` waits for the user to type something and gives it back **as text**. If you need a number: `age = int(input("Age: "))`.' },
     { k: /\bif\b|\belse\b|elif|condici|condition/, d: 'An `if` runs lines only when something is true:\n\n```python\nif score >= 10:\n    print("pass")\nelse:\n    print("try again")\n```\n\nDo not forget the `:` and the 4 spaces inside.' },
     { k: /\bfor\b|bucle|loop|repet/, d: 'A `for` loop repeats lines once for each item:\n\n```python\nfor name in ["Ana", "Leo"]:\n    print("hi", name)\n```\n\n`range(5)` gives 0, 1, 2, 3, 4 if you need to count.' },
     { k: /\bwhile\b|mientras/, d: 'A `while` loop repeats while a condition is true. Make sure something inside changes, or it never stops:\n\n```python\nn = 3\nwhile n > 0:\n    print(n)\n    n = n - 1\n```' },
-    { k: /\blist|options|append|\[/, d: 'A list keeps several values in order: `nums = [4, 8, 15]`. `nums[0]` is the first one, `len(nums)` counts them, `nums.append(16)` adds one at the end.' },
+    { k: /\blist|lista|append|\[/, d: 'A list keeps several values in order: `nums = [4, 8, 15]`. `nums[0]` is the first one, `len(nums)` counts them, `nums.append(16)` adds one at the end.' },
     { k: /dict|diccionario|\bkey|clave/, d: 'A dictionary stores values by name: `player = {"name": "Ana", "xp": 40}`. Read one with `player["xp"]`, change it with `player["xp"] = 50`.' },
     { k: /\bdef\b|funci|function|return|retorn/, d: 'A function is a named block you can run many times:\n\n```python\ndef double(n):\n    return n * 2\n\nprint(double(4))\n```\n\n`return` sends the result back to whoever called it. `print` only shows it.' },
     { k: /indent|sangr|espacio|space|tab/, d: 'In Python the spaces at the start of a line are part of the code. The lines inside an `if`, `for` or `def` go 4 spaces in, all by the same amount. The Tab key in the editor puts them for you.' },
@@ -168,6 +168,8 @@
 
   // The keyword lists also match common Spanish words, so students who write
   // in Spanish still get the right answer.
+  var OFFLINE_FALLBACK = 'Without AI I only know this mission and the basics of Python. Try asking about an error, a hint, or a word like `print`, `if`, `for`, `list` or `def`.';
+
   function answer(question, ctx) {
     var q = String(question || '').toLowerCase();
     var m = ctx.lesson;
@@ -180,7 +182,7 @@
     for (var i = 0; i < TOPICS.length; i++) if (TOPICS[i].k.test(q)) return TOPICS[i].d;
     if (/hola|hi\b|hello|hey/.test(q)) return 'Hi! Ask me about your code, an error, or a Python word like `list`, `for` or `def`.';
     if (!m && ctx.course) return 'This course is **' + ctx.course.title + '**. Open the first mission you have not done yet and I will help you from there.';
-    return 'I am an offline helper, so I know this mission and the basics of Python. Try asking about an error, a hint, or a word like `print`, `if`, `for`, `list` or `def`.';
+    return OFFLINE_FALLBACK;
   }
 
   function explainTask(m) {
@@ -287,6 +289,110 @@
     });
   }
 
+  // ---------- Gemini, with a key pasted by the user ----------
+  // Any computer with internet can use this. The key is saved on this
+  // computer only (chrome.storage), never in the code. Questions sent this
+  // way go to Google, which the settings screen says before connecting.
+
+  var GEMINI_URL = 'https://generativelanguage.googleapis.com/v1beta/';
+  var KEY_SETTING = 'stafford.ai.key';
+  var MODEL_SETTING = 'stafford.ai.model';
+  var CLOUD_TIMEOUT_MS = 30000;
+  var cloud = { key: null, model: null };
+
+  function loadCloud() {
+    if (!A.getSetting) return Promise.resolve(cloud);
+    return Promise.all([A.getSetting(KEY_SETTING), A.getSetting(MODEL_SETTING)]).then(function (v) {
+      cloud.key = v[0] || null;
+      cloud.model = v[1] || null;
+      return cloud;
+    });
+  }
+
+  function geminiError(res) {
+    return res.json().catch(function () { return {}; }).then(function (j) {
+      var err = new Error((j && j.error && j.error.message) || ('HTTP ' + res.status));
+      err.kind = res.status === 429 ? 'limit' : (res.status === 400 || res.status === 401 || res.status === 403) ? 'key' : 'server';
+      throw err;
+    });
+  }
+
+  // Model names change over time, so the newest stable "flash" model is
+  // picked from the list the key can use instead of being hard-coded.
+  function pickModel(key) {
+    return fetch(GEMINI_URL + 'models?pageSize=1000', { headers: { 'x-goog-api-key': key } }).then(function (res) {
+      if (!res.ok) return geminiError(res);
+      return res.json();
+    }).then(function (j) {
+      var models = (j.models || []).filter(function (m) {
+        return (m.supportedGenerationMethods || []).indexOf('generateContent') >= 0 && /gemini-[\d.]+-flash/.test(m.name) &&
+          !/lite|image|tts|audio|live|embedding|exp|thinking/.test(m.name);
+      });
+      function version(m) { var v = /gemini-([\d.]+)/.exec(m.name); return v ? parseFloat(v[1]) : 0; }
+      models.sort(function (a, b) {
+        var preview = (/preview/.test(a.name) ? 1 : 0) - (/preview/.test(b.name) ? 1 : 0);
+        return preview || version(b) - version(a) || a.name.length - b.name.length;
+      });
+      if (!models.length) { var e = new Error('This key cannot use any Gemini Flash model.'); e.kind = 'key'; throw e; }
+      return models[0].name;
+    });
+  }
+
+  function connectCloud(key) {
+    key = String(key || '').trim();
+    return pickModel(key).then(function (model) {
+      cloud.key = key;
+      cloud.model = model;
+      return Promise.all([A.setSetting(KEY_SETTING, key), A.setSetting(MODEL_SETTING, model)]).then(function () { return model; });
+    });
+  }
+
+  function disconnectCloud() {
+    cloud.key = null;
+    cloud.model = null;
+    return Promise.all([A.setSetting(KEY_SETTING, null), A.setSetting(MODEL_SETTING, null)]);
+  }
+
+  // Streams the answer over server-sent events into onText.
+  function cloudAnswer(question, ctx, history, onText) {
+    var contents = history.slice(-8).map(function (m) {
+      return { role: m.who === 'me' ? 'user' : 'model', parts: [{ text: trim(m.text, 1200) }] };
+    });
+    var context = contextFor(ctx);
+    contents.push({ role: 'user', parts: [{ text: (context ? 'Context:\n' + context + '\n\n' : '') + question }] });
+    return fetch(GEMINI_URL + cloud.model + ':streamGenerateContent?alt=sse', {
+      method: 'POST',
+      headers: { 'content-type': 'application/json', 'x-goog-api-key': cloud.key },
+      body: JSON.stringify({
+        systemInstruction: { parts: [{ text: SYSTEM_PROMPT }] },
+        contents: contents,
+        generationConfig: { temperature: 0.6, maxOutputTokens: 2048 }
+      })
+    }).then(function (res) {
+      if (!res.ok) return geminiError(res);
+      var reader = res.body.getReader(), decoder = new TextDecoder(), buffer = '', text = '';
+      function pump() {
+        return reader.read().then(function (r) {
+          if (r.done) return text;
+          buffer += decoder.decode(r.value, { stream: true }).replace(/\r/g, '');
+          var events = buffer.split('\n\n');
+          buffer = events.pop();
+          events.forEach(function (ev) {
+            var data = ev.split('\n').filter(function (l) { return l.indexOf('data:') === 0; }).map(function (l) { return l.slice(5).trim(); }).join('');
+            if (!data) return;
+            try {
+              var parts = ((JSON.parse(data).candidates || [])[0] || {}).content;
+              (parts && parts.parts || []).forEach(function (p) { if (p.text && !p.thought) text += p.text; });
+            } catch (e) {}
+          });
+          if (text) onText(text);
+          return pump();
+        });
+      }
+      return pump();
+    });
+  }
+
   // ---------- the panel ----------
 
   function mount(options) {
@@ -320,17 +426,24 @@
     function offlineLabel() { return page === 'lesson' ? 'sees this mission · offline mode' : 'your helper · offline mode'; }
     var subtitle = node('small', null, offlineLabel());
     nameBox.appendChild(subtitle);
-    checkAi().then(function (s) {
-      if (s === 'available') subtitle.textContent = 'AI on · runs on this computer';
-      else if (s === 'downloadable' || s === 'downloading') subtitle.textContent = 'AI ready to download · free';
-    });
+    function statusLabel() {
+      if (ai.state === 'available') return 'AI on · runs on this computer';
+      if (cloud.key) return 'AI on · Gemini';
+      return offlineLabel();
+    }
+    function refreshStatus() { subtitle.textContent = statusLabel(); }
+    Promise.all([checkAi(), loadCloud()]).then(refreshStatus);
+    var gear = node('button', 'mc-icon mc-gear', '⚙');
+    gear.type = 'button';
+    gear.title = 'Connect AI';
+    gear.setAttribute('aria-label', 'Connect AI');
     var restart = node('button', 'mc-icon', '↺');
     restart.type = 'button';
     restart.title = 'Start over';
     var closeBtn = node('button', 'mc-icon', '×');
     closeBtn.type = 'button';
     closeBtn.title = 'Hide';
-    head.appendChild(face); head.appendChild(nameBox); head.appendChild(restart); head.appendChild(closeBtn);
+    head.appendChild(face); head.appendChild(nameBox); head.appendChild(gear); head.appendChild(restart); head.appendChild(closeBtn);
 
     var body = node('div', 'mc-body');
     var chips = node('div', 'mc-chips');
@@ -343,6 +456,82 @@
     send.type = 'submit';
     form.appendChild(input); form.appendChild(send);
     panel.appendChild(head); panel.appendChild(body); panel.appendChild(chips); panel.appendChild(form);
+
+    // The "Connect AI" screen replaces the chat until the user goes back.
+    var settings = node('div', 'mc-settings');
+    settings.hidden = true;
+    panel.appendChild(settings);
+
+    function paintSettings(message, isError) {
+      A.clear(settings);
+      settings.appendChild(node('h3', null, 'Connect AI'));
+      var state = node('p', 'mc-state');
+      if (ai.state === 'available') state.textContent = 'Chrome\'s built-in AI is on for this computer. It is free and private, so you do not need a key.';
+      else if (cloud.key) state.textContent = 'Connected to Gemini (' + String(cloud.model || '').replace('models/', '') + ') with the key ending in ' + cloud.key.slice(-4) + '.';
+      else state.textContent = 'Not connected. Zerack can explain errors, give hints and teach Python basics, but it cannot answer other questions yet.';
+      settings.appendChild(state);
+      settings.appendChild(renderInto(node('div', 'mc-help'),
+        'Paste a **free Gemini API key** and Zerack can answer any question. Get one at Google AI Studio. Google only gives keys to people 18 or older, so ask a teacher or a parent.\n\n' +
+        'The key is saved **only on this computer**. When it is used, your question and your code are sent to Google to get the answer.'));
+      var link = node('a', 'mc-link', 'Get a free key at aistudio.google.com ↗');
+      link.href = 'https://aistudio.google.com/apikey';
+      link.target = '_blank';
+      link.rel = 'noopener noreferrer';
+      settings.appendChild(link);
+      var keyForm = node('form', 'mc-form mc-key-form');
+      var keyInput = node('input', 'mc-input');
+      keyInput.type = 'password';
+      keyInput.autocomplete = 'off';
+      keyInput.placeholder = cloud.key ? 'Paste a new key to replace it' : 'Paste your Gemini API key';
+      keyInput.setAttribute('aria-label', 'Gemini API key');
+      var connect = node('button', 'mc-send', 'Connect');
+      connect.type = 'submit';
+      keyForm.appendChild(keyInput); keyForm.appendChild(connect);
+      settings.appendChild(keyForm);
+      var note = node('p', 'mc-note' + (isError ? ' is-error' : ''), message || '');
+      settings.appendChild(note);
+      keyForm.addEventListener('submit', function (e) {
+        e.preventDefault();
+        var key = keyInput.value.trim();
+        if (!key) return;
+        connect.disabled = true;
+        note.className = 'mc-note';
+        note.textContent = 'Checking the key...';
+        connectCloud(key).then(function () {
+          refreshStatus();
+          paintSettings('Connected. Go back to the chat and ask me anything.');
+        }, function (err) {
+          connect.disabled = false;
+          note.className = 'mc-note is-error';
+          note.textContent = err && err.kind === 'key' ? 'That key did not work. Check that you copied all of it.' : 'Could not reach Google right now. Check the internet connection and try again.';
+        });
+      });
+      var row = node('div', 'mc-settings-row');
+      var backBtn = node('button', 'mc-chip', '← Back to chat');
+      backBtn.type = 'button';
+      backBtn.addEventListener('click', function () { showSettings(false); });
+      row.appendChild(backBtn);
+      if (cloud.key) {
+        var remove = node('button', 'mc-chip mc-danger', 'Remove key');
+        remove.type = 'button';
+        remove.addEventListener('click', function () { disconnectCloud().then(function () { refreshStatus(); paintSettings('The key was removed from this computer.'); }); });
+        row.appendChild(remove);
+      }
+      settings.appendChild(row);
+      setTimeout(function () { keyInput.focus(); }, 60);
+    }
+
+    function renderInto(n, text) { renderText(n, text); return n; }
+
+    function showSettings(show) {
+      settings.hidden = !show;
+      body.hidden = show;
+      chips.hidden = show;
+      form.hidden = show;
+      gear.classList.toggle('is-on', show);
+      if (show) paintSettings(); else { paint(); input.focus(); }
+    }
+    gear.addEventListener('click', function () { showSettings(settings.hidden); });
 
     rootNode.appendChild(panel);
     rootNode.appendChild(bubble);
@@ -366,6 +555,12 @@
       thread.forEach(function (m) {
         var row = node('div', 'mc-msg ' + (m.who === 'me' ? 'mc-from-me' : 'mc-from-mascot'));
         renderText(row, m.text);
+        if (m.action === 'connect' && ai.state !== 'available' && (!cloud.key || m.keyError)) {
+          var cta = node('button', 'mc-connect', 'Connect AI');
+          cta.type = 'button';
+          cta.addEventListener('click', function () { showSettings(true); });
+          row.appendChild(cta);
+        }
         body.appendChild(row);
       });
       body.scrollTop = body.scrollHeight;
@@ -387,9 +582,16 @@
       // missing, the offline answer comes right away and the download starts
       // in the background, since this click is the user gesture it needs.
       if (!offlineOnly && (ai.state === 'downloadable' || ai.state === 'downloading')) startDownload();
-      var useAi = !offlineOnly && ai.state === 'available';
-      if (!useAi) {
-        thread.push({ who: 'mascot', text: answer(q, ctx) });
+      var engine = offlineOnly ? null : ai.state === 'available' ? 'device' : cloud.key ? 'cloud' : null;
+      if (!engine) {
+        var offline = answer(q, ctx);
+        // A question outside what Zerack knows offline: offer to connect AI
+        // right there, with a button that opens the key screen.
+        if (!offlineOnly && offline === OFFLINE_FALLBACK) {
+          thread.push({ who: 'mascot', text: 'I do not know that one yet. **Want me to answer anything you ask?** Connect AI and I can.', action: 'connect' });
+        } else {
+          thread.push({ who: 'mascot', text: offline });
+        }
         saveThread();
         paint();
         jump();
@@ -402,19 +604,27 @@
       paint();
       var answered = false;
       var tooSlow = new Promise(function (resolve, reject) {
-        setTimeout(function () { if (!answered) reject(new Error('timeout')); }, AI_TIMEOUT_MS);
+        setTimeout(function () { if (!answered) reject(new Error('timeout')); }, engine === 'cloud' ? CLOUD_TIMEOUT_MS : AI_TIMEOUT_MS);
       });
-      Promise.race([aiAnswer(q, ctx, history, function (text) {
-        if (thinking) { reply.text = text; paintLast(text); }
-      }), tooSlow]).then(function (text) {
+      var onText = function (text) { if (thinking) { reply.text = text; paintLast(text); } };
+      Promise.race([engine === 'cloud' ? cloudAnswer(q, ctx, history, onText) : aiAnswer(q, ctx, history, onText), tooSlow]).then(function (text) {
         answered = true;
         if (!text) reply.text = answer(q, ctx);
       }, function (err) {
         answered = true;
         // Too slow, failed or not allowed here: answer offline instead. A
         // timeout keeps the AI on for the next question; a real failure turns it off.
-        if (!err || err.message !== 'timeout') { ai.state = 'unavailable'; subtitle.textContent = offlineLabel(); }
-        reply.text = answer(q, ctx);
+        var why = '';
+        if (engine === 'cloud') {
+          if (err && err.kind === 'limit') why = 'The free AI limit is used up for now. Try again in a minute. Meanwhile, here is what I know:\n\n';
+          else if (err && err.kind === 'key') { why = 'The AI key stopped working. Connect again with a new key. Meanwhile, here is what I know:\n\n'; reply.action = 'connect'; reply.keyError = true; }
+          else if (err && err.message === 'timeout') why = 'The AI took too long to answer. Here is what I know:\n\n';
+          else why = 'I could not reach the AI (is the internet on?). Here is what I know:\n\n';
+        } else if (!err || err.message !== 'timeout') {
+          ai.state = 'unavailable';
+          refreshStatus();
+        }
+        reply.text = why + answer(q, ctx);
       }).then(function () {
         thinking = false;
         send.disabled = false;
@@ -428,14 +638,12 @@
     function startDownload() {
       if (downloading) return;
       downloading = true;
-      subtitle.textContent = 'downloading AI · offline mode for now';
+      if (!cloud.key) subtitle.textContent = 'downloading AI · offline mode for now';
       aiSession(function (loaded) {
-        subtitle.textContent = 'downloading AI ' + Math.round((loaded || 0) * 100) + '% · offline mode for now';
-      }).then(function () {
-        subtitle.textContent = 'AI on · runs on this computer';
-      }, function () {
+        if (!cloud.key) subtitle.textContent = 'downloading AI ' + Math.round((loaded || 0) * 100) + '% · offline mode for now';
+      }).then(refreshStatus, function () {
         ai.state = 'unavailable';
-        subtitle.textContent = offlineLabel();
+        refreshStatus();
       });
     }
 

@@ -11,7 +11,7 @@ Stafford Academy is a non-profit project. It was built so that students, and any
 - **Free, forever.** No payments, no subscriptions, no premium tier.
 - **No account.** Open it and start learning. Your progress is saved on your own computer.
 - **No installs.** Python runs directly in the browser, so it works on school and library computers too.
-- **Private by design.** No tracking and no analytics. Your code and your progress never leave your computer.
+- **Private by design.** No tracking and no analytics. Your code and your progress stay on your computer, unless you choose to connect Zerack to an online AI.
 - **Open source.** Anyone can read, use, share and improve the code under the MIT License.
 
 It is made for anyone who wants to find their way in the world of technology, whether they are writing their first line of code or building their first robot.
@@ -53,8 +53,11 @@ Every mission gives you:
 
 Zerack is the little robot in the corner of every page. It welcomes you to each classroom and cheers when you pass a mission. When your code fails, it explains the error in plain words.
 
-- **AI on your own computer.** In recent versions of Chrome, Zerack can answer free-form questions with Chrome's built-in AI (Gemini Nano). The model runs on the computer itself: it is free, needs no API key or account, and sends nothing over the internet.
-- **Works offline too.** On computers that cannot run the built-in AI, Zerack still explains Python errors, gives the mission hint, restates the task and answers questions about core Python concepts.
+Zerack uses the best AI available on each computer:
+
+1. **Chrome's built-in AI (Gemini Nano).** On computers that support it, the model runs on the computer itself. It is free, needs no key or account, and sends nothing over the internet.
+2. **Connect AI with a free Gemini key.** On any computer with internet, press **Connect AI** in Zerack's panel and paste a free API key from [Google AI Studio](https://aistudio.google.com/apikey). Google only issues keys to adults, so a teacher or parent sets it up once. The key is saved only on that computer and never in this repository. When it is used, the question and the student's code are sent to Google to get the answer.
+3. **Offline answers.** Without AI, Zerack still explains Python errors, gives the mission hint, restates the task and answers questions about core Python concepts.
 
 ## Getting started
 
