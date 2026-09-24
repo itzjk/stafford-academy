@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Mission · Stafford Academy</title>
+  <link rel="preload" href="fonts/SpaceGrotesk.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="stylesheet" href="academy.css" />
+  <link rel="stylesheet" href="mascot.css" />
+</head>
+<body>
+  <div class="sky" aria-hidden="true"><canvas id="stars"></canvas></div>
+
+  <header class="bar"><div class="bar-in">
+    <a class="brand" href="../index.html" title="Back to all courses"><img src="../icons/logo.svg" alt="" width="32" height="32"><span class="wordmark"><b>STAFFORD</b><small>ACADEMY</small></span></a>
+    <a class="back" id="backLink" href="../index.html">‹ Course</a>
+    <div class="bar-title"><b id="barTitle">MISSION</b><small id="barSubtitle">Loading</small></div>
+    <div class="bar-right">
+      <div class="xp"><div class="xp-track"><i class="xp-fill" id="barXpFill"></i></div><b id="barXpText">0 XP</b></div>
+      <span class="level" id="barLevel">LV 1</span>
+    </div>
+  </div></header>
+
+  <main class="wrap">
+    <div class="lesson-grid">
+      <section class="panel">
+        <div class="panel-head"><b>Briefing</b></div>
+        <div class="panel-body">
+          <p class="crumb" id="crumb"></p>
+          <h1 class="lesson-title" id="lessonTitle"></h1>
+          <p class="lesson-goal" id="lessonGoal"></p>
+          <div class="lesson-theory" id="lessonTheory"></div>
+          <div class="lesson-task">
+            <h3>Your task</h3>
+            <div id="lessonTask"></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel editor">
+        <div class="panel-head"><b id="editorLang">Editor</b></div>
+        <textarea class="code" id="code" spellcheck="false" aria-label="Your code"></textarea>
+        <div class="actions">
+          <button class="run" id="runBtn" type="button" title="Check my code (Ctrl or Cmd with Enter)">
+            <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+            Check my code
+          </button>
+          <button class="ghost" id="hintBtn" type="button">Hint</button>
+          <span class="spacer"></span>
+          <button class="ghost" id="resetBtn" type="button">Reset</button>
+          <button class="ghost" id="solutionBtn" type="button">Show solution</button>
+        </div>
+        <div class="hint" id="hint" hidden></div>
+        <div class="output is-idle" id="output">Write your code and press check.</div>
+      </section>
+    </div>
+
+    <div class="next" id="nextBox" hidden>
+      <span class="next-text"><b id="nextTitle"></b><small id="nextSubtitle"></small></span>
+      <a class="cta" id="nextBtn" href="#">
+        Next mission
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+    </div>
+  </main>
+
+  <script src="python-runner.js"></script>
+  <script src="common.js"></script>
+  <script src="mascot.js"></script>
+  <script src="lesson.js"></script>
+</body>
+</html>

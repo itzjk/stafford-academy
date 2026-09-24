@@ -1,0 +1,458 @@
+{
+  "academy": "Stafford Academy",
+  "motto": "Programming and engineering, one mission at a time.",
+  "areas": [
+    {
+      "id": "all",
+      "name": "All"
+    },
+    {
+      "id": "basics",
+      "name": "From scratch"
+    },
+    {
+      "id": "code",
+      "name": "Code"
+    },
+    {
+      "id": "hardware",
+      "name": "Hardware"
+    },
+    {
+      "id": "intelligence",
+      "name": "Intelligence"
+    },
+    {
+      "id": "systems",
+      "name": "Whole robots"
+    }
+  ],
+  "courses": [
+    {
+      "id": "programming",
+      "title": "Programming from Zero",
+      "world": "The Cold Start Room",
+      "mentor": "NULL-0",
+      "areas": [
+        "basics",
+        "code"
+      ],
+      "level": "BEGINNER",
+      "type": "PRACTICAL",
+      "hours": 26,
+      "accent": "#00dc82",
+      "language": "python",
+      "order": 0,
+      "lessons": 91,
+      "chapters": 10,
+      "summary": "Write, read and fix a real Python program. Start at the first line of code and finish building a tool you actually use.",
+      "preview": {
+        "code": "quota_left = 0\nfile_ready = True\nduration = 180\nthumbnail_ready = True\nif quota_left == 0:\n    print(\"no quota\")\nelif not file_ready:\n    print(\"no file\")\nelif duration < 60:\n    print(\"too short\")\nelif not thumbnail_ready:\n    print(\"no thumbnail\")\nelse:\n    print(\"uploading\")",
+        "output": "no quota",
+        "lesson": "g2-9"
+      }
+    },
+    {
+      "id": "python-robotics",
+      "title": "Python for Robotics",
+      "world": "Orbital Scriptorium",
+      "mentor": "SERPENT-3",
+      "areas": [
+        "basics",
+        "code"
+      ],
+      "level": "BEGINNER",
+      "type": "PRACTICAL",
+      "hours": 24,
+      "accent": "#00dc82",
+      "language": "python",
+      "order": 4,
+      "lessons": 84,
+      "chapters": 10,
+      "summary": "You go from your first line of Python to a working two dimensional robot simulator that drives, senses obstacles, follows waypoints and logs its own run. On the way you learn the exact Python a real robot needs: control flow, data structures, files, classes, exceptions, numpy vectors, serial ports and timed control loops.",
+      "preview": {
+        "code": "bumper_left = True\nbumper_right = False\nestop = False\n\nreverse = bumper_left or bumper_right\ncan_drive = not reverse and not estop\n\nif reverse:\n    print(\"reversing, bumper hit\")\n\nprint(f\"reverse={reverse} can_drive={can_drive}\")",
+        "output": "reversing, bumper hit\nreverse=True can_drive=False",
+        "lesson": "p1-4"
+      }
+    },
+    {
+      "id": "control",
+      "title": "Control Theory and PID",
+      "world": "The Balance Spire",
+      "mentor": "LAMBDA",
+      "areas": [
+        "intelligence",
+        "systems"
+      ],
+      "level": "INTERMEDIATE",
+      "type": "PRACTICAL",
+      "hours": 24,
+      "accent": "#ffd93d",
+      "language": "python",
+      "order": 7,
+      "lessons": 84,
+      "chapters": 10,
+      "summary": "You will build a PID controller from the error signal up, with anti windup, filtering, feedforward and cascades, and tune it with both hand methods and Ziegler-Nichols. By the end you can stabilise an inverted pendulum in code and say when a PID is the wrong tool.",
+      "preview": {
+        "code": "DUTY_PER_RPM = 1.0 / 200.0\n\ndef open_loop(setpoint_rpm):\n    duty = setpoint_rpm * DUTY_PER_RPM\n    if duty < 0.0:\n        duty = 0.0\n    if duty > 1.0:\n        duty = 1.0\n    return duty\n\nfor target in (0, 50, 150, 400):\n    print(target, open_loop(target))",
+        "output": "0 0.0\n50 0.25\n150 0.75\n400 1.0",
+        "lesson": "c0-1"
+      }
+    },
+    {
+      "id": "kinematics",
+      "title": "Kinematics and Dynamics",
+      "world": "The Joint Cathedral",
+      "mentor": "AXIS-6",
+      "areas": [
+        "systems"
+      ],
+      "level": "ADVANCED",
+      "type": "PRACTICAL",
+      "hours": 28,
+      "accent": "#a88fff",
+      "language": "python",
+      "order": 8,
+      "lessons": 85,
+      "chapters": 10,
+      "summary": "You will describe the pose of any rigid body with matrices and quaternions, and chain those poses into a full arm. By the end you can solve forward and inverse kinematics for a real manipulator, read its Jacobian for singularities, run odometry on a differential drive base and size the torque each joint needs.",
+      "preview": {
+        "code": "import numpy as np\n\ndef rotate2d(p, th):\n    x, y = p\n    c, s = np.cos(th), np.sin(th)\n    return np.array([x * c - y * s, x * s + y * c])\n\np = np.array([1.0, 0.0])\nfor deg in (0, 90, 180, 270):\n    r = rotate2d(p, np.radians(deg))\n    print(deg, \"deg ->\", np.round(r, 4))",
+        "output": "0 deg -> [1. 0.]\n90 deg -> [0. 1.]\n180 deg -> [-1.  0.]\n270 deg -> [-0. -1.]",
+        "lesson": "c1-1"
+      }
+    },
+    {
+      "id": "vision",
+      "title": "Computer Vision for Robots",
+      "world": "The Optic Belt",
+      "mentor": "IRIS-8",
+      "areas": [
+        "intelligence"
+      ],
+      "level": "INTERMEDIATE",
+      "type": "PRACTICAL",
+      "hours": 26,
+      "accent": "#4fc3ff",
+      "language": "python",
+      "order": 9,
+      "lessons": 87,
+      "chapters": 10,
+      "summary": "You will build every stage a robot needs to see: color segmentation, contours and centroids, edges and lines, feature matching, camera calibration, ArUco pose, stereo depth, optical flow and tracking. By the end you assemble a pick and place vision node that reports grasp poses in millimetres and refuses to guess when perception fails.",
+      "preview": {
+        "code": "import cv2\nimport numpy as np\n\nmask = np.zeros((100, 100), np.uint8)\nmask[30:70, 30:70] = 255\nmask[5, 5] = 255\n\nkernel = np.ones((3, 3), np.uint8)\neroded = cv2.erode(mask, kernel, iterations=2)\n\nprint(cv2.countNonZero(mask), cv2.countNonZero(eroded))",
+        "output": "1601 1296",
+        "lesson": "v3-2"
+      }
+    },
+    {
+      "id": "navigation",
+      "title": "Path Planning and Navigation",
+      "world": "The Wayfinder Grid",
+      "mentor": "VECTOR",
+      "areas": [
+        "intelligence",
+        "systems"
+      ],
+      "level": "ADVANCED",
+      "type": "PRACTICAL",
+      "hours": 26,
+      "accent": "#5ce1a6",
+      "language": "python",
+      "order": 10,
+      "lessons": 84,
+      "chapters": 10,
+      "summary": "You build a full navigation stack in Python: occupancy grids, configuration space, A star, D star Lite, RRT star, path smoothing, the dynamic window and pure pursuit. By the end you can take a raw lidar scan and a goal and produce the velocity command that drives a differential drive robot there safely.",
+      "preview": {
+        "code": "def f_score(g, h):\n    return g + h\n\ndef is_admissible(h_values, true_values, tol=1e-9):\n    for node, h in h_values.items():\n        if h > true_values.get(node, float(\"inf\")) + tol:\n            return False\n    return True\n\nH = {\"a\": 3.0, \"b\": 5.0, \"c\": 1.0}\nTRUE = {\"a\": 4.0, \"b\": 5.0, \"c\": 7.0}\nBAD = {\"a\": 9.0, \"b\": 5.0, \"c\": 1.0}\nprint(f_score(2.0, 3.0))\nprint(is_admissible(H, TRUE), is_admissible(BAD, TRUE))\nprint(is_admissible({n: 0.0 for n in TRUE}, TRUE))",
+        "output": "5.0\nTrue False\nTrue",
+        "lesson": "n4-1"
+      }
+    },
+    {
+      "id": "ros2",
+      "title": "ROS 2, the Robot Nervous System",
+      "world": "Node Nebula",
+      "mentor": "TOPIC-1",
+      "areas": [
+        "systems",
+        "code"
+      ],
+      "level": "ADVANCED",
+      "type": "PRACTICAL",
+      "hours": 30,
+      "accent": "#ff8f5a",
+      "language": "python",
+      "order": 11,
+      "lessons": 84,
+      "chapters": 10,
+      "summary": "Build a complete ROS 2 robot in Python, from a single node to a system of drivers, filters, behaviours and a supervisor that brings them up in order. You finish able to write nodes, topics, services, actions, parameters, QoS profiles, launch files, TF2 broadcasters and a URDF, and to debug the running graph with the command line tools and bags.",
+      "preview": {
+        "code": "INSPECT = {\n    'node': 'ros2 node list',\n    'topic': 'ros2 topic info',\n    'service': 'ros2 service list',\n    'action': 'ros2 action list',\n    'parameter': 'ros2 param list',\n    'interface': 'ros2 interface show',\n}\n\nprint(INSPECT.get('action', 'missing'))",
+        "output": "ros2 action list",
+        "lesson": "r3-6"
+      }
+    },
+    {
+      "id": "humanoids",
+      "title": "Humanoid Robotics",
+      "world": "Sunset Assembly",
+      "mentor": "ATLAS-0",
+      "areas": [
+        "systems"
+      ],
+      "level": "ADVANCED",
+      "type": "PRACTICAL",
+      "hours": 34,
+      "accent": "#ff5f9e",
+      "language": "python",
+      "order": 12,
+      "lessons": 84,
+      "chapters": 10,
+      "summary": "You will learn why walking on two legs is an unstable problem and how it is solved: centre of mass, support polygon, zero moment point and the divergent component of motion. By the end you can generate a full gait, recover from a push, fall and stand back up, and assemble the whole architecture of a humanoid layer by layer.",
+      "preview": {
+        "code": "G = 9.81\nCOM_HEIGHT = 0.85\nFOOT_BACK = -0.115\n\ndef zmp(x, x_ddot):\n    return x - (COM_HEIGHT / G) * x_ddot\n\ndef max_forward_acc(x):\n    return (x - FOOT_BACK) * G / COM_HEIGHT\n\nprint(\"zmp\", round(zmp(0.0, 1.0), 4))\nprint(\"max_acc\", round(max_forward_acc(0.0), 4))",
+        "output": "zmp -0.0866\nmax_acc 1.3272",
+        "lesson": "h3-2"
+      }
+    },
+    {
+      "id": "state-estimation",
+      "title": "State Estimation and Sensor Fusion",
+      "world": "The Guess Refinery",
+      "mentor": "SIGMA-4",
+      "areas": [
+        "code",
+        "intelligence"
+      ],
+      "level": "INTERMEDIATE",
+      "type": "PRACTICAL",
+      "hours": 26,
+      "accent": "#7ee0d0",
+      "language": "python",
+      "order": 13,
+      "lessons": 84,
+      "chapters": 10,
+      "summary": "You will turn noisy readings into a state estimate that carries its own uncertainty, from a running average up to Kalman, extended Kalman and particle filters fusing several sensors at once. By the end you can tell whether a filter is lying about its confidence and fix it.",
+      "preview": {
+        "code": "import numpy as np\n\nR = np.array([[0.012 ** 2]])\nx = np.array([[2.000], [0.900]])\nP = np.array([[0.010 ** 2, 0.0004], [0.0004, 0.050 ** 2]])\nH = np.array([[1.0, 0.0]])\n\ndef expected(x, P):\n    return H @ x, H @ P @ H.T + R\n\nz_hat, S = expected(x, P)\nprint(\"H shape\", H.shape, \"x shape\", x.shape)\nprint(\"predicted reading\", round(float(z_hat[0, 0]), 4))\nprint(\"innovation sigma\", round(float(S[0, 0]) ** 0.5, 5))\nprint(\"position sigma alone\", round(float(P[0, 0]) ** 0.5, 5))",
+        "output": "H shape (1, 2) x shape (2, 1)\npredicted reading 2.0\ninnovation sigma 0.01562\nposition sigma alone 0.01",
+        "lesson": "es4-1"
+      }
+    },
+    {
+      "id": "slam",
+      "title": "SLAM, Mapping While Moving",
+      "world": "The Cartographer Hold",
+      "mentor": "CARTA-9",
+      "areas": [
+        "intelligence",
+        "systems"
+      ],
+      "level": "ADVANCED",
+      "type": "PRACTICAL",
+      "hours": 30,
+      "accent": "#9fd356",
+      "language": "python",
+      "order": 14,
+      "lessons": 84,
+      "chapters": 10,
+      "summary": "You build a graph based SLAM system in Python: scan matching by correspondence and by grid correlation, scan odometry with keyframes, submaps that can be redrawn, loop closure detection with a geometric veto, and a Gauss Newton pose graph optimizer with a robust kernel. By the end you can take a stream of lidar scans and wheel odometry and produce a map whose loop closes and a trajectory whose error you can quote.",
+      "preview": {
+        "code": "import math\n\ndef wrap(a):\n    return math.atan2(math.sin(a), math.cos(a))\n\ndef compose(pose, delta):\n    x, y, t = pose\n    dx, dy, dt = delta\n    return (x + dx * math.cos(t) - dy * math.sin(t),\n            y + dx * math.sin(t) + dy * math.cos(t),\n            wrap(t + dt))\n\ntrack = (0.0, 0.0, 0.0)\n# ...",
+        "output": "step   x       y       theta\n1    0.4    0.0    0.6\n2    0.73    0.226    1.2\n3    0.875    0.599    1.8",
+        "lesson": "sl0-2"
+      }
+    },
+    {
+      "id": "manipulation",
+      "title": "Manipulation and Grasping",
+      "world": "The Grip Workshop",
+      "mentor": "PALM-3",
+      "areas": [
+        "systems"
+      ],
+      "level": "ADVANCED",
+      "type": "PRACTICAL",
+      "hours": 30,
+      "accent": "#ffa8c5",
+      "language": "python",
+      "order": 15,
+      "lessons": 84,
+      "chapters": 10,
+      "summary": "You will decide where a hand should touch an object, prove the grip can resist the forces the world pushes back with, and close the fingers with the force the part survives. By the end you can score candidate grasps, run a guarded approach, control contact force instead of position, and react to slip before the part is on the floor.",
+      "preview": {
+        "code": "import numpy as np\n\nN = np.array([-1.0, 0.0, 0.0])\nFORCES = [\n    np.array([-12.000, 0.000, 0.000]),\n    np.array([-6.000, 2.500, 9.000]),\n]\n\ndef normal_part(f, n):\n    return np.dot(f, n) * n\n\ndef tangent_part(f, n):\n    return f - normal_part(f, n)\n\nfor f in FORCES:\n    fn = normal_part(f, N)\n    ft = tangent_part(f, N)\n    print(\"force\", np.round(f, 2),\n          \"squeeze N\", round(float(np.linalg.norm(fn)), 3),\n          \"slide N\", round(float(np.linalg.norm(ft)), 3),\n          \"rebuilt\", bool(np.allclose(fn + ft, f)))",
+        "output": "force [-12.   0.   0.] squeeze N 12.0 slide N 0.0 rebuilt True\nforce [-6.   2.5  9. ] squeeze N 6.0 slide N 9.341 rebuilt True",
+        "lesson": "mn0-3"
+      }
+    },
+    {
+      "id": "embedded-linux",
+      "title": "Embedded Linux for Robots",
+      "world": "The Kernel Bay",
+      "mentor": "SHELL-7",
+      "areas": [
+        "code",
+        "systems"
+      ],
+      "level": "INTERMEDIATE",
+      "type": "PRACTICAL",
+      "hours": 26,
+      "accent": "#8bd3ff",
+      "language": "python",
+      "order": 17,
+      "lessons": 84,
+      "chapters": 10,
+      "summary": "You will drive real hardware from user space on a Linux board: GPIO and PWM through sysfs, character devices and ioctl, the device tree that describes the board, udev rules that give a port a name that never moves, and the permissions that let a robot run without ever being root. By the end you cross compile for the board, write its systemd units, read its boot second by second and produce a commissioning report that says whether the machine is ready to be a robot.",
+      "preview": {
+        "code": "NS_PER_SECOND = 1000000000\nNS_PER_MS = 1000000\n\ndef period_ns(hz):\n    return NS_PER_SECOND // hz\n\ndef duty_ns(pulse_ms):\n    return int(pulse_ms * NS_PER_MS)\n\nfor hz in (50, 400):\n    print(hz, \"Hz -> period\", period_ns(hz), \"ns\")\nfor pulse_ms in (1.0, 1.5, 2.0):\n    print(pulse_ms, \"ms -> duty\", duty_ns(pulse_ms), \"ns\")",
+        "output": "50 Hz -> period 20000000 ns\n400 Hz -> period 2500000 ns\n1.0 ms -> duty 1000000 ns\n1.5 ms -> duty 1500000 ns\n2.0 ms -> duty 2000000 ns",
+        "lesson": "lx1-7"
+      }
+    },
+    {
+      "id": "power",
+      "title": "Power, Batteries and Charging",
+      "world": "The Charge Cellar",
+      "mentor": "CELL-8",
+      "areas": [
+        "basics",
+        "hardware"
+      ],
+      "level": "BEGINNER",
+      "type": "PRACTICAL",
+      "hours": 18,
+      "accent": "#f2545b",
+      "language": "python",
+      "order": 19,
+      "lessons": 84,
+      "chapters": 10,
+      "summary": "You finish able to size a battery pack from a mission, add up every consumer on a robot, predict the voltage sag at peak current and say how long the machine really runs. You also build the charging, gauging and protection logic that keeps that pack alive for hundreds of cycles.",
+      "preview": {
+        "code": "LOADS = (\n    (\"Raspberry Pi 4 idle\", 5.0, 700.0),\n    (\"RPLIDAR A1 spinning\", 5.0, 400.0),\n    (\"MG996R servo holding\", 6.0, 900.0),\n)\n\ndef power_w(volts, milliamps):\n    return volts * (milliamps / 1000.0)\n\nfor name, volts, milliamps in LOADS:\n    print(name, round(power_w(volts, milliamps), 3), \"W\")",
+        "output": "Raspberry Pi 4 idle 3.5 W\nRPLIDAR A1 spinning 2.0 W\nMG996R servo holding 5.4 W",
+        "lesson": "en0-1"
+      }
+    },
+    {
+      "id": "dsp",
+      "title": "Signals, Noise and Filtering",
+      "world": "The Filter Room",
+      "mentor": "BAND-2",
+      "areas": [
+        "code",
+        "intelligence"
+      ],
+      "level": "INTERMEDIATE",
+      "type": "PRACTICAL",
+      "hours": 24,
+      "accent": "#b07cff",
+      "language": "python",
+      "order": 20,
+      "lessons": 84,
+      "chapters": 10,
+      "summary": "You will take a raw sensor stream and turn it into a decision: sample it without lying about its frequencies, measure its noise, design FIR and IIR filters by hand, read its spectrum with the right window, and pull a delay or a slope out of it. By the end you can diagnose a vibration channel from a real robot arm and say which part of it is signal.",
+      "preview": {
+        "code": "import numpy as np\n\ndef split_dc(x):\n    level = x.mean()\n    return level, x - level\n\ndef rms(x):\n    return float(np.sqrt(np.mean(x * x)))\n\nAMP = 2.0\nt = np.arange(400) / 400.0\nwave = 1.5 + AMP * np.sin(2.0 * np.pi * 13.0 * t)\nlevel, ac = split_dc(wave)\nprint(f\"amplitude {AMP:.4f}\")\nprint(f\"rms of the ac part {rms(ac):.4f}\")\nprint(f\"amplitude over root two {AMP / np.sqrt(2.0):.4f}\")\nprint(f\"rms with the offset left in {rms(wave):.4f}\")",
+        "output": "amplitude 2.0000\nrms of the ac part 1.4142\namplitude over root two 1.4142\nrms with the offset left in 2.0616",
+        "lesson": "ds0-3"
+      }
+    },
+    {
+      "id": "machine-learning",
+      "title": "Machine Learning on Robot Data",
+      "world": "The Pattern Loft",
+      "mentor": "WEIGHT-6",
+      "areas": [
+        "intelligence"
+      ],
+      "level": "ADVANCED",
+      "type": "PRACTICAL",
+      "hours": 30,
+      "accent": "#46c9a0",
+      "language": "python",
+      "order": 21,
+      "lessons": 84,
+      "chapters": 10,
+      "summary": "You will turn raw robot logs into features, then build nearest neighbour, logistic regression and tree classifiers by hand with numpy, plus least squares regression and behaviour cloning from teleop demonstrations. By the end you ship a bearing fault detector whose accuracy was measured on sessions the model never saw, with a threshold chosen from the cost of each error.",
+      "preview": {
+        "code": "import numpy as np\n\nFAULT_FROM = 40.0\nFAULT_TO = 70.0\n\nstart = np.arange(0.0, 100.0, 2.5)\n\ninside = (start >= FAULT_FROM) & (start < FAULT_TO)\ny = inside.astype(int)\n\nprint(\"windows\", start.shape[0])\nprint(\"per class\", np.bincount(y, minlength=2))\nprint(\"first faulty window starts at\", start[y == 1][0])\nprint(\"last faulty window starts at\", start[y == 1][-1])",
+        "output": "windows 40\nper class [28 12]\nfirst faulty window starts at 40.0\nlast faulty window starts at 67.5",
+        "lesson": "ml0-3"
+      }
+    },
+    {
+      "id": "reinforcement-learning",
+      "title": "Reinforcement Learning for Control",
+      "world": "The Reward Arena",
+      "mentor": "POLICY-0",
+      "areas": [
+        "intelligence"
+      ],
+      "level": "ADVANCED",
+      "type": "PRACTICAL",
+      "hours": 26,
+      "accent": "#ffb443",
+      "language": "python",
+      "order": 22,
+      "lessons": 84,
+      "chapters": 10,
+      "summary": "You will build tabular reinforcement learning from the reward signal up: returns, discount, value and action value tables, policy and value iteration, Monte Carlo, TD, Q-learning and SARSA on a grid arena. By the end you can train a policy, prove it matches the planned optimum, and put a number on the episodes, the falls and the hours a real robot would have spent learning it.",
+      "preview": {
+        "code": "NEAR = [-1.0, 3.0]\nMAIN = [-1.0, -1.0, -1.0, -1.0, -1.0, -1.0, -1.0, 10.0]\n\ndef discounted(rewards, gamma):\n    g = 0.0\n    for r in reversed(rewards):\n        g = r + gamma * g\n    return g\n\nfor gamma in (1.0, 0.99, 0.9, 0.8):\n    a = discounted(NEAR, gamma)\n    b = discounted(MAIN, gamma)\n    winner = 'near charger' if a > b else 'main dock'\n# ...",
+        "output": "gamma 1.0 near 2.0 main 3.0 -> main dock\ngamma 0.99 near 1.97 main 2.527 -> main dock\ngamma 0.9 near 1.7 main -0.434 -> near charger\ngamma 0.8 near 1.4 main -1.854 -> near charger",
+        "lesson": "rl2-4"
+      }
+    },
+    {
+      "id": "drones",
+      "title": "Aerial Robots",
+      "world": "The Wind Gallery",
+      "mentor": "ROTOR-4",
+      "areas": [
+        "systems"
+      ],
+      "level": "ADVANCED",
+      "type": "PRACTICAL",
+      "hours": 30,
+      "accent": "#6ec6ff",
+      "language": "python",
+      "order": 23,
+      "lessons": 84,
+      "chapters": 10,
+      "summary": "You will build every layer that keeps a multirotor in the air: propeller thrust, the motor mixer, the rate and angle cascade, flight modes, position hold, return to home and the energy supervisor that decides when the flight is over. By the end you can fly a full mission in wind with a draining pack and tell, with numbers, the wind and the battery state at which the machine can no longer come back.",
+      "preview": {
+        "code": "PACK_AH = 5.2\nNOMINAL_VOLTAGE = 14.8\nPACK_WH = PACK_AH * NOMINAL_VOLTAGE\nUSABLE = 0.80\nHOVER_POWER = 146.15\n\ndef usable_energy():\n    return PACK_WH * USABLE\n\ndef hover_minutes(power):\n    return usable_energy() / power * 60.0\n\nprint(\"pack_wh\", round(PACK_WH, 2))\nprint(\"usable_wh\", round(usable_energy(), 2))\nprint(\"naive_minutes\", round(PACK_WH / HOVER_POWER * 60.0, 2))\nprint(\"honest_minutes\", round(hover_minutes(HOVER_POWER), 2))",
+        "output": "pack_wh 76.96\nusable_wh 61.57\nnaive_minutes 31.59\nhonest_minutes 25.28",
+        "lesson": "dr7-2"
+      }
+    },
+    {
+      "id": "simulation",
+      "title": "Building a Simulator",
+      "world": "The Mirror World",
+      "mentor": "PHYS-1",
+      "areas": [
+        "code",
+        "systems"
+      ],
+      "level": "INTERMEDIATE",
+      "type": "PRACTICAL",
+      "hours": 26,
+      "accent": "#d18ee2",
+      "language": "python",
+      "order": 24,
+      "lessons": 84,
+      "chapters": 10,
+      "summary": "You will build a physics simulator from the integration step up: Euler, midpoint and Runge-Kutta, collision detection, contact impulses, restitution and friction, all on a fixed timestep you control. By the end you can make a run bit for bit reproducible, record and replay it from a seed and an input tape, and measure in numbers how far your simulator sits from the machine it claims to mirror.",
+      "preview": {
+        "code": "LAMBDA = 100.0\nX0 = 1.0\nDURATION = 1.0\n\ndef decay(dt):\n    x = X0\n    for _ in range(int(round(DURATION / dt))):\n        x = x + (-LAMBDA * x) * dt\n    return x\n\nfor dt in (0.005, 0.019, 0.021, 0.03):\n    print(dt, \"%.4e\" % abs(decay(dt)))",
+        "output": "0.005 6.2230e-61\n0.019 3.7571e-03\n0.021 9.7017e+01\n0.03 8.5899e+09",
+        "lesson": "sm1-7"
+      }
+    }
+  ],
+  "total": 1523
+}

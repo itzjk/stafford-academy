@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Course · Stafford Academy</title>
+  <link rel="preload" href="fonts/SpaceGrotesk.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="stylesheet" href="academy.css" />
+  <link rel="stylesheet" href="mascot.css" />
+</head>
+<body>
+  <div class="sky" aria-hidden="true"><canvas id="stars"></canvas></div>
+
+  <header class="bar"><div class="bar-in">
+    <a class="brand" href="../index.html" title="Back to all courses"><img src="../icons/logo.svg" alt="" width="32" height="32"><span class="wordmark"><b>STAFFORD</b><small>ACADEMY</small></span></a>
+    <a class="back" href="../index.html">‹ All courses</a>
+    <div class="bar-title"><b id="barTitle">COURSE</b><small id="barSubtitle">Loading</small></div>
+    <div class="bar-right">
+      <div class="xp"><div class="xp-track"><i class="xp-fill" id="barXpFill"></i></div><b id="barXpText">0 XP</b></div>
+      <span class="level" id="barLevel">LV 1</span>
+    </div>
+  </div></header>
+
+  <main class="wrap">
+    <section class="course-head">
+      <div>
+        <p class="course-world" id="courseWorld"></p>
+        <h1 class="course-title" id="courseTitle"></h1>
+        <p class="course-summary" id="courseSummary"></p>
+        <div class="course-meta" id="courseMeta"></div>
+      </div>
+      <div class="mentor" id="mentorBox" hidden>
+        <span class="mentor-avatar" id="mentorAvatar"></span>
+        <span><b id="mentorName"></b><small id="mentorCharacter"></small></span>
+      </div>
+    </section>
+    <section class="track">
+      <div class="track-bar"><i id="courseTrack"></i></div>
+      <p class="track-text" id="courseTrackText"></p>
+    </section>
+    <div id="chapters"></div>
+  </main>
+
+  <script src="common.js"></script>
+  <script src="mascot.js"></script>
+  <script src="course.js"></script>
+</body>
+</html>

@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Stafford Academy</title>
+<link rel="stylesheet" href="academy/mascot.css">
+<style>
+@font-face{font-family:"SpaceGrotesk";src:url(academy/fonts/SpaceGrotesk.woff2) format("woff2");font-weight:300 800;font-display:swap}
+:root{--bg:#050608;--ink:#f3f4f8;--muted:#9aa0b4;--gold:#ffd43b;--sk-font:"SpaceGrotesk",system-ui,sans-serif;--sk-display:"SpaceGrotesk",system-ui,sans-serif;color-scheme:dark}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;overflow:hidden}
+body{background:var(--bg);color:var(--ink);font-family:var(--sk-font)}
+@keyframes enter{to{opacity:1;transform:none}}
+
+/* Background: gradient glow, faint grid and the animated star canvas */
+.sky{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden;background:radial-gradient(120% 70% at 80% -10%,rgba(55,118,171,.28),transparent 60%),radial-gradient(80% 60% at -10% 110%,rgba(106,63,168,.22),transparent 60%),var(--bg)}
+.sky::before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(245,245,245,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(245,245,245,.07) 1px,transparent 1px),linear-gradient(rgba(245,245,245,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(245,245,245,.04) 1px,transparent 1px);background-size:40px 40px,40px 40px,200px 200px,200px 200px;-webkit-mask-image:linear-gradient(transparent 0,#000 16%,#000 74%,transparent 100%);mask-image:linear-gradient(transparent 0,#000 16%,#000 74%,transparent 100%)}
+.sky canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+
+.brand{font:700 15px/1 var(--sk-display);letter-spacing:.3em;display:flex;align-items:center;gap:12px}
+.brand img{width:30px;height:30px;flex:none;filter:drop-shadow(0 0 10px rgba(125,238,255,.25))}
+.brand small{font:500 10px/1 var(--sk-font);letter-spacing:.34em;color:var(--muted);margin-left:14px}
+
+/* The scene: one course per screen, scroll to move between them */
+.scene{--c:#7deeff;position:fixed;inset:0;z-index:1;display:flex;flex-direction:column;padding:0 clamp(16px,5vw,64px);overflow:hidden}
+.scene-top{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:clamp(16px,4vh,32px) 0 0}
+.scene-center{font-size:12px;letter-spacing:.42em;color:#6f7689}
+.scene-count{font:600 14px/1 var(--sk-font);letter-spacing:.2em;color:#555c6e}
+.scene-count b{color:var(--ink)}
+.scene-ghost{position:absolute;left:clamp(0px,2vw,30px);top:50%;transform:translateY(-50%);font:700 min(34vw,70vh)/1 var(--sk-display);color:transparent;-webkit-text-stroke:1px rgba(255,255,255,.06);pointer-events:none;user-select:none}
+.scene-body{flex:1;min-height:0;display:grid;grid-template-columns:1.2fr .8fr;align-items:center;gap:24px;padding:2vh 0}
+.scene-text{max-width:680px}
+.scene-text.leaving{opacity:0;transform:translateY(-60px);transition:opacity .3s,transform .3s cubic-bezier(.5,0,.8,.4)}
+.scene-text.leaving-down{opacity:0;transform:translateY(60px);transition:opacity .3s,transform .3s cubic-bezier(.5,0,.8,.4)}
+.scene-text.entering>*{opacity:0;transform:translateY(22px);animation:enter .7s cubic-bezier(.2,.9,.3,1) forwards}
+.scene-text.entering-up>*{opacity:0;transform:translateY(-22px);animation:enter .7s cubic-bezier(.2,.9,.3,1) forwards}
+.scene-text>*:nth-child(2){animation-delay:.07s}.scene-text>*:nth-child(3){animation-delay:.14s}.scene-text>*:nth-child(4){animation-delay:.21s}.scene-text>*:nth-child(5){animation-delay:.28s}
+.scene-eyebrow{display:flex;align-items:center;gap:14px;margin:0 0 clamp(12px,3vh,26px);font-size:13px;font-weight:600;letter-spacing:.38em;text-transform:uppercase}
+.scene-eyebrow i{width:7px;height:7px;border-radius:50%;background:var(--c);box-shadow:0 0 12px var(--c);animation:pulse 1.6s ease-in-out infinite}
+@keyframes pulse{50%{opacity:.35}}
+.scene-eyebrow em{font-style:normal;font-size:11px;letter-spacing:.2em;color:var(--c);border:1.5px solid var(--c);border-radius:999px;padding:4px 10px}
+.scene h1{margin:0;font:700 clamp(2.2rem,min(7.4vw,11vh),6.2rem)/.98 var(--sk-display);letter-spacing:-.02em;background:linear-gradient(180deg,#fff 30%,#b9c0cf);-webkit-background-clip:text;background-clip:text;color:transparent}
+.scene-summary{color:#aeb4c3;font-size:clamp(.95rem,min(1.6vw,2.2vh),1.2rem);line-height:1.6;margin:clamp(12px,3vh,26px) 0 0;max-width:560px;display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden}
+.scene-tags{display:flex;flex-wrap:wrap;gap:10px;margin-top:clamp(14px,3vh,28px)}
+.scene-tags span{font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:#c3c8d6;border:1px solid rgba(255,255,255,.16);border-radius:999px;padding:9px 16px}
+.scene-cta{display:inline-flex;align-items:center;gap:18px;margin-top:clamp(16px,4.5vh,40px);padding:10px 10px 10px 30px;border:1px solid rgba(255,255,255,.22);border-radius:999px;color:var(--ink);text-decoration:none;font-size:14px;font-weight:600;letter-spacing:.3em;background:rgba(10,12,18,.55);backdrop-filter:blur(6px);transition:border-color .2s}
+.scene-cta span{width:46px;height:46px;border-radius:50%;display:grid;place-items:center;background:rgba(255,255,255,.08);letter-spacing:0;font-size:18px;transition:transform .2s,background .2s}
+.scene-cta:hover{border-color:var(--c)}
+.scene-cta:hover span{transform:translateX(4px);background:var(--c);color:#0b0d12}
+.scene-foot{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:0 120px clamp(16px,4vh,30px) 0}
+.scene-all{font-size:13px;font-weight:600;letter-spacing:.4em;color:#c3c8d6}
+.scene-all b{color:var(--c);margin:0 8px}
+.scene-hint{font-size:11px;letter-spacing:.4em;color:#555c6e}
+.scene-nav{display:flex;align-items:center;gap:10px}
+.scene-btn{width:48px;height:48px;border-radius:50%;border:1px solid rgba(255,255,255,.18);background:rgba(10,12,18,.55);color:var(--ink);font-size:17px;cursor:pointer;display:grid;place-items:center;transition:border-color .2s,opacity .2s}
+.scene-btn:hover{border-color:var(--c)}
+.scene-btn:disabled{opacity:.3;cursor:default}
+.scene-btn.down{animation:nudge 2.2s ease-in-out infinite}
+@keyframes nudge{50%{transform:translateY(5px)}}
+.scene-dots{position:absolute;right:clamp(12px,2.4vw,34px);top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:7px}
+.scene-dots button{width:7px;height:7px;padding:0;border-radius:999px;border:0;background:rgba(255,255,255,.22);cursor:pointer;transition:height .3s,background .3s}
+.scene-dots button.on{height:26px;background:var(--c)}
+
+/* Live code window: types a real snippet from the course, then shows what it prints */
+.stage{position:relative;justify-self:center;width:min(560px,42vw);display:grid;place-items:center}
+.code-window{position:relative;z-index:1;width:100%;background:rgba(9,12,20,.78);border:1px solid rgba(255,255,255,.12);border-radius:16px;box-shadow:0 30px 80px rgba(0,0,0,.6),0 0 0 1px rgba(0,0,0,.4),0 0 60px color-mix(in srgb,var(--c) 22%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);overflow:hidden;animation:rise 1s .25s both,hover 7s ease-in-out 1.3s infinite;transition:box-shadow .8s}
+@keyframes rise{from{opacity:0;transform:translateY(24px)}}
+@keyframes hover{0%,100%{transform:translateY(0) rotate(-.4deg)}50%{transform:translateY(-10px) rotate(.4deg)}}
+.cw-bar{display:flex;align-items:center;gap:8px;padding:12px 16px;border-bottom:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.03)}
+.cw-bar i{width:11px;height:11px;border-radius:50%;background:#ff5f57}.cw-bar i:nth-child(2){background:#febc2e}.cw-bar i:nth-child(3){background:#28c840}
+.cw-bar span{margin-left:10px;font:500 12.5px/1 ui-monospace,Menlo,monospace;color:#c3c8d6}
+.cw-bar em{margin-left:auto;font-style:normal;font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--c)}
+.cw-code{margin:0;padding:14px 0;height:min(44vh,360px);overflow:hidden;font:clamp(10.5px,.92vw,13px)/1.62 ui-monospace,"SF Mono",Menlo,monospace;color:#dfe6f3;counter-reset:ln}
+.cw-line{display:block;padding:0 16px 0 52px;position:relative;white-space:pre;min-height:1.62em}
+.cw-line::before{counter-increment:ln;content:counter(ln);position:absolute;left:0;width:36px;text-align:right;color:#4a5165}
+.cw-line.active{background:rgba(255,255,255,.035)}
+.cw-caret{display:inline-block;width:.6em;height:1.1em;vertical-align:-.18em;background:var(--c);animation:blink 1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+.tk-kw{color:#c792ea}.tk-str{color:#c3e88d}.tk-num{color:#f78c6c}.tk-com{color:#5f6b86;font-style:italic}.tk-fn{color:#82aaff}.tk-bi{color:#ffcb6b}
+.cw-console{border-top:1px solid rgba(255,255,255,.08);padding:12px 16px 14px;background:rgba(0,0,0,.28);min-height:112px}
+.cw-console b{display:flex;align-items:center;gap:8px;font:600 10.5px/1 var(--sk-font);letter-spacing:.24em;color:#6f7689;margin-bottom:8px}
+.cw-console b::before{content:"";width:7px;height:7px;border-radius:50%;background:#555c6e;transition:background .3s,box-shadow .3s}
+.cw-console.ran b::before{background:#28c840;box-shadow:0 0 10px #28c840}
+.cw-output{margin:0;font:12.5px/1.6 ui-monospace,Menlo,monospace;color:#9ff0c4;white-space:pre;overflow:hidden}
+.cw-output span{display:block;opacity:0;transform:translateX(-6px);animation:enter .35s forwards}
+
+/* Soft glow in the course color behind the window */
+.stage::before{content:"";position:absolute;inset:-18% -14%;z-index:0;background:radial-gradient(closest-side,color-mix(in srgb,var(--c) 30%,transparent),transparent 72%);filter:blur(10px);transition:background .8s;animation:breathe 6s ease-in-out infinite}
+@keyframes breathe{50%{opacity:.6;transform:scale(.94)}}
+.stage.changing .code-window{animation:swap .6s ease,hover 7s ease-in-out .6s infinite}
+@keyframes swap{40%{transform:scale(.96) translateY(8px);opacity:.6}}
+
+@media (max-width:760px){.scene-center,.scene-dots,.scene-hint,.stage{display:none}.scene-body{grid-template-columns:1fr;align-content:center}.scene-foot{padding-right:84px}.scene-all{letter-spacing:.2em}}
+@media (prefers-reduced-motion:reduce){.code-window,.cw-output span,.scene-text.entering>*,.scene-text.entering-up>*{animation:none;opacity:1;transform:none}.cw-caret{animation:none}.stage::before,.scene-btn.down,.scene-eyebrow i{animation:none}}
+</style></head><body>
+<div class="sky" aria-hidden="true"><canvas id="stars"></canvas></div>
+
+<main class="scene" id="scene" aria-roledescription="carousel" aria-label="Courses">
+  <div class="scene-top">
+    <span class="brand"><img src="icons/logo.svg" alt="" width="30" height="30"><span>STAFFORD<small>ACADEMY</small></span></span>
+    <span class="scene-center">CHOOSE YOUR COURSE</span>
+    <span class="scene-count"><b id="sceneIndex">01</b> / <span id="sceneTotal">18</span></span>
+  </div>
+  <div class="scene-ghost" id="sceneGhost" aria-hidden="true">01</div>
+  <div class="scene-body">
+    <div class="scene-text" id="sceneText" aria-live="polite">
+      <p class="scene-eyebrow"><i></i><span id="sceneWorld">THE COLD START ROOM</span><em id="sceneLevel">BEGINNER</em></p>
+      <h1 id="sceneTitle">Programming from Zero</h1>
+      <p class="scene-summary" id="sceneSummary">Write, read and fix a real Python program. Start at the first line of code and finish building a tool you actually use.</p>
+      <div class="scene-tags" id="sceneTags"></div>
+      <a class="scene-cta" id="sceneCta" href="academy/course.html?c=programming">OPEN THE CLASSROOM <span aria-hidden="true">→</span></a>
+    </div>
+    <div class="stage" id="stage" aria-hidden="true">
+      <div class="code-window">
+        <div class="cw-bar"><i></i><i></i><i></i><span id="cwFile">mission.py</span><em>real code from this course</em></div>
+        <pre class="cw-code" id="cwCode"></pre>
+        <div class="cw-console" id="cwConsole"><b>OUTPUT</b><pre class="cw-output" id="cwOutput"></pre></div>
+      </div>
+    </div>
+  </div>
+  <div class="scene-foot">
+    <span class="scene-all">ALL <b id="sceneAll">18</b> COURSES</span>
+    <span class="scene-hint">SCROLL TO EXPLORE</span>
+    <div class="scene-nav">
+      <button type="button" class="scene-btn" id="prevBtn" aria-label="Previous course">↑</button>
+      <button type="button" class="scene-btn down" id="nextBtn" aria-label="Next course">↓</button>
+    </div>
+  </div>
+  <nav class="scene-dots" id="sceneDots" aria-label="Jump to a course"></nav>
+</main>
+
+<script src="academy/common.js"></script>
+<script src="academy/mascot.js"></script>
+<script src="academy/home.js"></script>
+</body></html>

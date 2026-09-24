@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <title>Stafford Academy</title>
+  <defs>
+    <linearGradient id="metal" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset=".55" stop-color="#dfe6f2"/>
+      <stop offset="1" stop-color="#aab6cc"/>
+    </linearGradient>
+    <linearGradient id="visor" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#1b2540"/>
+      <stop offset="1" stop-color="#0a0f1d"/>
+    </linearGradient>
+  </defs>
+  <line x1="32" y1="13" x2="32" y2="6" stroke="#0d1424" stroke-width="3" stroke-linecap="round"/>
+  <circle cx="32" cy="6" r="4.6" fill="#ffd43b" stroke="#0d1424" stroke-width="2.2"/>
+  <rect x="5" y="13" width="54" height="44" rx="19" fill="url(#metal)" stroke="#0d1424" stroke-width="3"/>
+  <rect x="12" y="22" width="40" height="26" rx="12" fill="url(#visor)"/>
+  <ellipse cx="24.5" cy="34" rx="4.2" ry="5.2" fill="#7deeff"/>
+  <ellipse cx="39.5" cy="34" rx="4.2" ry="5.2" fill="#7deeff"/>
+  <path d="M16 27 q6 -3.5 13 -1.5" stroke="rgba(255,255,255,.35)" stroke-width="2.4" fill="none" stroke-linecap="round"/>
+</svg>
