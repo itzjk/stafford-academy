@@ -18,11 +18,12 @@ It is made for anyone who wants to find their way in the world of technology, wh
 
 ## What's inside
 
-**18 Python courses with 1,523 missions and about 480 hours of practice.** They go from your very first `print()` to robotics and artificial intelligence.
+**19 Python courses with 1,583 missions and about 500 hours of practice.** They go from your very first `print()` to robotics and artificial intelligence, including a course on using AI tools the way professional developers do.
 
 | Course | Level | Missions | Hours |
 | --- | --- | ---: | ---: |
 | Programming from Zero | Beginner | 91 | 26 |
+| AI for Developers | Beginner | 60 | 16 |
 | Python for Robotics | Beginner | 84 | 24 |
 | Control Theory and PID | Intermediate | 84 | 24 |
 | Kinematics and Dynamics | Advanced | 85 | 28 |
@@ -57,7 +58,7 @@ Zerack uses the best AI available on each computer:
 
 1. **Chrome's built-in AI (Gemini Nano).** On computers that support it, the model runs on the computer itself. It is free, needs no key or account, and sends nothing over the internet.
 2. **Connect AI with a free Gemini key.** On any computer with internet, press **Connect AI** in Zerack's panel and paste a free API key from [Google AI Studio](https://aistudio.google.com/apikey). Google only issues keys to adults, so a teacher or parent sets it up once. The key is saved only on that computer and never in this repository. When it is used, the question and the student's code are sent to Google to get the answer.
-3. **Offline answers.** Without AI, Zerack still explains Python errors, gives the mission hint, restates the task and answers questions about core Python concepts.
+3. **Offline answers.** Without AI, Zerack still explains Python errors, gives the mission hint and restates the task. It also answers questions about core Python concepts, and about any topic the courses teach by pointing to the mission that teaches it.
 
 ## Getting started
 
@@ -76,7 +77,7 @@ The first time you run Python it takes a few seconds to load. After that it is i
 Python is only the beginning. Coming next:
 
 - **More programming languages**, such as JavaScript, C and C++, Java and more.
-- **More artificial intelligence courses**, on top of the machine learning, reinforcement learning and computer vision courses already included.
+- **More artificial intelligence courses**, on top of AI for Developers and the machine learning, reinforcement learning and computer vision courses already included.
 - **Publication on the Chrome Web Store**, so installing takes one click.
 
 ## Project structure
@@ -97,13 +98,15 @@ academy/
   python-worker.js     The worker that hosts Pyodide
   academy.css          Styles for the course and mission pages
   mascot.css           Styles for Zerack
-  courses/             catalog.json plus one JSON file per course
+  courses/             catalog.json, one JSON file per course and search-index.json
   fonts/               Space Grotesk
 lib/pyodide/           Pyodide: Python compiled to WebAssembly
-icons/                 Extension icons
+icons/                 Extension icons and the logo
+tools/
+  build_search_index.py  Rebuilds Zerack's offline index of every mission
 ```
 
-Each course is a plain JSON file: `chapters → lessons`, and every lesson has a `theory`, a `task`, `starter` code, a `solution`, a `hint` and a `check`. To add or improve a mission, edit the JSON and reload the extension.
+Each course is a plain JSON file: `chapters → lessons`, and every lesson has a `theory`, a `task`, `starter` code, a `solution`, a `hint` and a `check`. To add or improve a mission, edit the JSON, run `python3 tools/build_search_index.py` so Zerack learns it too, and reload the extension.
 
 ## Contributing
 

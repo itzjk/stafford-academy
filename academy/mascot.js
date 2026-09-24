@@ -86,25 +86,73 @@
       d: 'Your code called `input()` more times than this mission gives it lines to read. Only ask for input where the task says so.' }
   ];
 
+  // Offline knowledge. Each topic lists the words that point to it, in
+  // English and in common Spanish, and the best-scoring topic answers.
   var TOPICS = [
+    // Python basics
     { k: /\bprint\b|imprim/, d: '`print(...)` sends something to the console. Text goes in quotes: `print("hi")`. Several values separated by commas get a space between them: `print("level", 3)` prints `level 3`.' },
-    { k: /f-?string|\bf"|formato|format/, d: 'An f-string puts values inside text. Put an `f` before the quotes and the variable in braces: `name = "Ana"` then `print(f"hi {name}")` prints `hi Ana`.' },
-    { k: /variable|asign|assign/, d: 'A variable is a name that holds a value: `score = 10`. The name goes on the left, `=`, then the value. From then on `score` means 10. You can change it later: `score = score + 5`.' },
-    { k: /string|texto|\btext\b|comillas|quote/, d: 'Text (a string) always goes between quotes: `"hello"` or `\'hello\'`. Without quotes Python thinks it is a variable name. Join texts with `+`: `"Py" + "thon"` gives `Python`.' },
-    { k: /\binput\b|entrada|pregunt/, d: '`input("question")` waits for the user to type something and gives it back **as text**. If you need a number: `age = int(input("Age: "))`.' },
-    { k: /\bif\b|\belse\b|elif|condici|condition/, d: 'An `if` runs lines only when something is true:\n\n```python\nif score >= 10:\n    print("pass")\nelse:\n    print("try again")\n```\n\nDo not forget the `:` and the 4 spaces inside.' },
-    { k: /\bfor\b|bucle|loop|repet/, d: 'A `for` loop repeats lines once for each item:\n\n```python\nfor name in ["Ana", "Leo"]:\n    print("hi", name)\n```\n\n`range(5)` gives 0, 1, 2, 3, 4 if you need to count.' },
-    { k: /\bwhile\b|mientras/, d: 'A `while` loop repeats while a condition is true. Make sure something inside changes, or it never stops:\n\n```python\nn = 3\nwhile n > 0:\n    print(n)\n    n = n - 1\n```' },
-    { k: /\blist|lista|append|\[/, d: 'A list keeps several values in order: `nums = [4, 8, 15]`. `nums[0]` is the first one, `len(nums)` counts them, `nums.append(16)` adds one at the end.' },
-    { k: /dict|diccionario|\bkey|clave/, d: 'A dictionary stores values by name: `player = {"name": "Ana", "xp": 40}`. Read one with `player["xp"]`, change it with `player["xp"] = 50`.' },
-    { k: /\bdef\b|funci|function|return|retorn/, d: 'A function is a named block you can run many times:\n\n```python\ndef double(n):\n    return n * 2\n\nprint(double(4))\n```\n\n`return` sends the result back to whoever called it. `print` only shows it.' },
-    { k: /indent|sangr|espacio|space|tab/, d: 'In Python the spaces at the start of a line are part of the code. The lines inside an `if`, `for` or `def` go 4 spaces in, all by the same amount. The Tab key in the editor puts them for you.' },
-    { k: /coment|comment|#/, d: 'Anything after `#` on a line is a comment: Python ignores it. Use it to leave notes for yourself.' },
-    { k: /import|modul|library|librer/, d: '`import math` brings in extra tools that come with Python. Then you use them with the module name: `math.sqrt(16)`.' },
-    { k: /int\b|float|number|n[uú]mero|decimal|round/, d: 'Whole numbers are `int` (`7`), numbers with decimals are `float` (`7.5`). `int("7")` turns text into a number, `round(3.14159, 2)` gives `3.14`.' },
+    { k: /f-?strings?\b|\bf"|formato|format/, d: 'An f-string puts values inside text. Put an `f` before the quotes and the variable in braces: `name = "Ana"` then `print(f"hi {name}")` prints `hi Ana`.' },
+    { k: /variables?\b|asign|assign/, d: 'A variable is a name that holds a value: `score = 10`. The name goes on the left, `=`, then the value. From then on `score` means 10. You can change it later: `score = score + 5`.' },
+    { k: /strings?\b|texto|\btext\b|comillas|quotes?\b/, d: 'Text (a string) always goes between quotes: `"hello"` or `\'hello\'`. Without quotes Python thinks it is a variable name. Join texts with `+`: `"Py" + "thon"` gives `Python`.' },
+    { k: /\.upper|\.lower|\.strip|\.split|\.join|\.replace|string method|may[uú]scul|min[uú]scul/, d: 'Strings have handy methods:\n\n```python\nname = "  Ana Lopez  "\nprint(name.strip())         # "Ana Lopez"\nprint(name.upper())         # "  ANA LOPEZ  "\nprint("a,b,c".split(","))   # [\'a\', \'b\', \'c\']\nprint("-".join(["a", "b"]))  # "a-b"\n```\n\nThey return a **new** string: the original does not change.' },
+    { k: /\binput\b|entrada del usuario/, d: '`input("question")` waits for the user to type something and gives it back **as text**. If you need a number: `age = int(input("Age: "))`.' },
+    { k: /if statement|\bif\b.*\belse\b|\belse\b|\belif\b|condicional|conditional/, d: 'An `if` runs lines only when something is true:\n\n```python\nif score >= 10:\n    print("pass")\nelse:\n    print("try again")\n```\n\nDo not forget the `:` and the 4 spaces inside.' },
+    { k: /==|comparar|comparison|compare values|boolean|\bbool\b|\btrue\b|\bfalse\b|verdadero|falso/, d: '`==` asks "are these equal?", while `=` stores a value. Comparisons give `True` or `False`, and you can combine them:\n\n```python\nage = 15\nprint(age >= 13 and age < 18)  # True\nprint(age == 20 or age == 15)  # True\nprint(not age > 10)            # False\n```' },
+    { k: /while loop|while true|\bwhile \w+ *[<>=!]|mientras|infinite loop|bucle infinito/, d: 'A `while` loop repeats while a condition is true. Make sure something inside changes, or it never stops:\n\n```python\nn = 3\nwhile n > 0:\n    print(n)\n    n = n - 1\n```\n\n`break` leaves a loop early.' },
+    { k: /for loop|for-loop|\bfor \w+ in\b|bucle|\bloops?\b|repet|ciclo/, d: 'A `for` loop repeats lines once for each item:\n\n```python\nfor name in ["Ana", "Leo"]:\n    print("hi", name)\n```\n\n`range(5)` gives 0, 1, 2, 3, 4 if you need to count.' },
+    { k: /\brange\b|rango/, d: '`range` makes a sequence of numbers: `range(5)` is 0 to 4, `range(2, 6)` is 2 to 5, and `range(0, 10, 2)` counts by twos. The last number is never included.' },
+    { k: /slic|\[\s*\d*\s*:|rebanad|cortar/, d: 'A slice takes a piece of a list or string: `items[1:3]` gives positions 1 and 2 (the stop is not included). `items[:2]` is the first two, `items[-2:]` the last two.' },
+    { k: /tuple|tupla/, d: 'A tuple is like a list that cannot change: `point = (3, 4)`. Read it with `point[0]`, or unpack it: `x, y = point`. Use tuples for small groups of values that belong together.' },
+    { k: /\ba set\b|\bset\(|\bsets\b|conjunto|duplicat|duplicad/, d: 'A set keeps each value only once: `set([1, 2, 2, 3])` is `{1, 2, 3}`. It is the quick way to remove duplicates or check `if x in seen:` very fast.' },
+    { k: /dict|diccionario/, d: 'A dictionary stores values by name: `player = {"name": "Ana", "xp": 40}`. Read one with `player["xp"]`, change it with `player["xp"] = 50`, and use `player.get("level", 1)` when the key might be missing.' },
+    { k: /\bdef\b|funci|function|par[aá]metro|parameter|argument/, d: 'A function is a named block you can run many times:\n\n```python\ndef double(n):\n    return n * 2\n\nprint(double(4))\n```\n\nThe names in the parentheses are **parameters**: they receive the values you pass in.' },
+    { k: /\breturn\b|retorn|devolver|devuelv/, d: '`return` sends a value back to whoever called the function, so you can store it: `total = add(2, 3)`. `print` only shows something on the screen. A function without `return` gives back `None`.' },
+    { k: /\bnone\b|\bnull\b/, d: '`None` means "no value". A function that has no `return` gives back `None`, and it is a common default: `result = None`, then check `if result is None:`.' },
+    { k: /indent|sangr|\btab\b|whitespace/, d: 'In Python the spaces at the start of a line are part of the code. The lines inside an `if`, `for` or `def` go 4 spaces in, all by the same amount. The Tab key in the editor puts them for you.' },
+    { k: /coment|comment|#/, d: 'Anything after `#` on a line is a comment: Python ignores it. Use it to leave notes for yourself and to explain **why** the code does something.' },
+    { k: /\bimport\b|\bmodules?\b|m[oó]dulo|library|librer/, d: '`import math` brings in extra tools that come with Python. Then you use them with the module name: `math.sqrt(16)`. In this academy the standard library works: `math`, `random`, `json`, `re` and more.' },
+    { k: /\bint\b|float|numbers?\b|n[uú]mero|decimal|\bround\b|redonde/, d: 'Whole numbers are `int` (`7`), numbers with decimals are `float` (`7.5`). `int("7")` turns text into a number, `round(3.14159, 2)` gives `3.14`. `//` divides and drops the decimals, `%` gives the remainder.' },
+    { k: /random|aleatori|azar/, d: '`import random`, then `random.randint(1, 6)` rolls a die and `random.choice(items)` picks one item. Call `random.seed(42)` first when you need the same "random" results every run, which makes testing possible.' },
+    { k: /\bjson\b/, d: 'JSON is text that holds data. `json.loads(text)` turns it into Python dicts and lists, and `json.dumps(data)` turns data back into text. It is how programs, and AI models, send structured answers.' },
+    { k: /try\s*:|try.?except|\bexcept\b|excepci|exception/, d: '`try` runs code that might fail, and `except` catches the failure instead of crashing:\n\n```python\ntry:\n    n = int("abc")\nexcept ValueError:\n    print("that is not a number")\n```\n\nCatch the specific error you expect, not every error.' },
+    { k: /\bclass(es)?\b|\bclase\b|\bself\b/, d: 'A class is a blueprint for objects that keep their own data:\n\n```python\nclass Robot:\n    def __init__(self, name):\n        self.name = name\n\n    def greet(self):\n        print("I am", self.name)\n\nRobot("Zerack").greet()\n```\n\n`self` is the object the method is working on.' },
+    { k: /comprehension|comprensi/, d: 'A list comprehension builds a list in one line: `squares = [n * n for n in range(5)]`. You can filter too: `[n for n in nums if n > 0]`. When it gets hard to read, use a normal `for` loop.' },
+    { k: /sort|ordenar|sorted|orden/, d: '`sorted(items)` returns a new sorted list; `items.sort()` sorts the list itself. Add `reverse=True` for largest first, or `key=len` to sort by length.' },
+    { k: /enumerate|zip/, d: '`enumerate` gives you the position and the item: `for i, name in enumerate(names):`. `zip` walks two lists together: `for name, score in zip(names, scores):`.' },
+    { k: /\blists?\b|lista|append|arreglo|array/, d: 'A list keeps several values in order: `nums = [4, 8, 15]`. `nums[0]` is the first one, `len(nums)` counts them, `nums.append(16)` adds one at the end.' },
+    // Fixing code
+    { k: /debug|depur|\bbugs?\b|\bfix\b|arregl|traceback|\bmy code\b.*\berror|falla/, d: 'To fix a bug: read the **last line** of the error first, it names the problem. Then look at the line number it points to. Add a `print()` just before that line to see what your variables really hold. Change one thing at a time and run again.' },
+    // Using the academy
     { k: /how long|how much time|what time|cu[aá]nto tiempo|tiempo|hours|horas/, d: 'It depends on the course: each one shows its hours on the home page. **Programming from Zero** takes about 26 hours. Twenty or thirty minutes a day, every day, works better than one long session a week. Finish one mission, then the next.' },
-    { k: /xp|level|nivel|progres|guard|save/, d: 'Each mission you pass gives XP and raises your level. Your progress is saved in this browser, on this computer.' }
+    { k: /\bxp\b|\blevels?\b|\bnivel|my progress|mi progreso|\bsaved?\b/, d: 'Each mission you pass gives XP and raises your level. Your progress is saved in this browser, on this computer.' },
+    { k: /where.*start|empez|comenz|first course|primer curso|begin|beginner|principiante/, d: 'Start with **Programming from Zero**: it assumes nothing. Then **AI for Developers** teaches you to use AI tools like a professional, and after that pick any course that sounds fun.' },
+    { k: /shortcut|atajo|ctrl|cmd|teclado|keyboard/, d: 'Press **Ctrl + Enter** (or **Cmd + Enter** on a Mac) to check your code. **Tab** indents the selected lines, **Shift + Tab** moves them back. **Esc** then Tab leaves the editor.' },
+    { k: /reset|reinici|borrar c[oó]digo|start over/, d: 'The **Reset** button under the editor brings back the starting code of the mission. Your XP stays.' },
+    { k: /hint|pista|stuck|atasc|help me|ay[uú]dame/, d: 'Open a mission and press **Hint** under the editor, or tap me inside the mission: I can see the task and your code there.' },
+    { k: /what is python|qu[eé] es python|why python|por qu[eé] python/, d: 'Python is a programming language that reads almost like English. It is used for websites, data, science, robots and AI, and it is one of the best first languages to learn.' },
+    { k: /what is programming|qu[eé] es programar|programaci[oó]n/, d: 'Programming is writing precise instructions for a computer. The computer does exactly what you write, no more and no less, which is why reading your own code carefully is the most important skill.' },
+    // AI
+    { k: /prompt/, d: 'A good prompt says **who** the AI should be, **what** you need, the **context**, the **limits** and the **format** you want back. Example: "You are a Python tutor. Explain why this loop never ends, in 3 short points, without giving me the fixed code."' },
+    { k: /cheat|trampa|copiar|copy/, d: 'Asking AI to **explain** is learning. Pasting its answer without understanding it is not, and it shows the first time the code breaks. Try first, ask for a hint, and make sure you could write it again yourself.' },
+    { k: /hallucin|alucin|\binvent/, d: 'A hallucination is when an AI makes something up with confidence, like a function that does not exist. Always run the code, and check names against the real documentation.' },
+    { k: /\bai\b|\bia\b|artificial intelligence|inteligencia artificial|chatgpt|gemini|claude|\bllms?\b|language model|modelo de lenguaje/, d: 'A language model predicts the next piece of text, over and over. That makes it great at explaining and drafting, and also able to be confidently wrong. Use it to **understand**, then check what it says by running and testing the code. The **AI for Developers** course teaches exactly this.' },
+    // Small talk
+    { k: /thank|gracias|thx/, d: 'You are welcome! Keep going, one mission at a time. 🚀', small: true },
+    { k: /who are you|qui[eé]n eres|your name|tu nombre|who made|qui[eé]n te (hizo|cre)/, d: 'I am **Zerack**, the helper robot of Stafford Academy, made by ZERACK. I welcome you to each classroom, explain errors and give hints.', small: true },
+    { k: /^(hi|hey|hello|hola|buenas|qu[eé] tal)\b/, d: 'Hi! Ask me about your code, an error, or a Python word like `list`, `for` or `def`.', small: true }
   ];
+
+  // Scores every topic by how many of its words the question contains.
+  // On a tie the earlier topic wins, so specific topics come before general ones.
+  function bestTopic(q) {
+    var best = null, bestScore = 0;
+    TOPICS.forEach(function (t) {
+      var hits = q.match(new RegExp(t.k.source, 'g'));
+      var score = hits ? hits.length : 0;
+      if (score > bestScore) { best = t; bestScore = score; }
+    });
+    return best ? { t: best, score: bestScore } : null;
+  }
 
   function errorKind(text) {
     for (var i = 0; i < ERRORS.length; i++) if (ERRORS[i].re.test(text)) return ERRORS[i];
@@ -170,24 +218,127 @@
   // in Spanish still get the right answer.
   var OFFLINE_FALLBACK = 'Without AI I only know this mission and the basics of Python. Try asking about an error, a hint, or a word like `print`, `if`, `for`, `list` or `def`.';
 
-  function answer(question, ctx) {
+  // Returns the offline answer and what kind it is: "mission" (about the open
+  // mission), "topic" (a curated Python or academy topic, with its score),
+  // "small" (greetings and thanks) or "fallback" (nothing matched).
+  function answerDetailed(question, ctx) {
     var q = String(question || '').toLowerCase();
     var m = ctx.lesson;
-    if (m && /error|fall|crash|traceback|wrong|mal|no funciona|not work|why|por ?qu/.test(q)) return explainError();
-    if (m && /hint|pista|ayuda|help|stuck|atasc|no s[eé]/.test(q)) return m.lesson.hint ? 'Hint: ' + m.lesson.hint : explainTask(m);
-    if (m && /task|tarea|what.*do|qu[eé] (hago|pide|tengo)|mission|misi[oó]n/.test(q)) return explainTask(m);
+    var failing = /is-bad/.test(screenOutput().cls);
+    if (m && /error|fall|crash|traceback|wrong|no funciona|not work/.test(q)) return { kind: 'mission', text: explainError() };
+    if (m && failing && /why|por ?qu/.test(q)) return { kind: 'mission', text: explainError() };
+    if (m && /hint|pista|ayuda|help|stuck|atasc|no s[eé]/.test(q)) return { kind: 'mission', text: m.lesson.hint ? 'Hint: ' + m.lesson.hint : explainTask(m) };
+    if (m && /task|tarea|what.*do|qu[eé] (hago|pide|tengo)|mission|misi[oó]n/.test(q)) return { kind: 'mission', text: explainTask(m) };
     if (m && /solution|soluci|answer|respuesta/.test(q)) {
-      return 'The **Show solution** button is under the editor. Try the hint first: you learn much more if the last step is yours. If you still want it, open it, read it, then close it and write it again from memory.';
+      return { kind: 'mission', text: 'The **Show solution** button is under the editor. Try the hint first: you learn much more if the last step is yours. If you still want it, open it, read it, then close it and write it again from memory.' };
     }
-    for (var i = 0; i < TOPICS.length; i++) if (TOPICS[i].k.test(q)) return TOPICS[i].d;
-    if (/hola|hi\b|hello|hey/.test(q)) return 'Hi! Ask me about your code, an error, or a Python word like `list`, `for` or `def`.';
-    if (!m && ctx.course) return 'This course is **' + ctx.course.title + '**. Open the first mission you have not done yet and I will help you from there.';
-    return OFFLINE_FALLBACK;
+    var topic = bestTopic(q);
+    if (topic) return { kind: topic.t.small ? 'small' : 'topic', text: topic.t.d, score: topic.score };
+    return { kind: 'fallback', text: OFFLINE_FALLBACK };
   }
+
+  function answer(question, ctx) { return answerDetailed(question, ctx).text; }
 
   function explainTask(m) {
     var l = m.lesson;
     return '**What this mission asks:** ' + (l.task || '') + (l.goal ? '\n\n**What you will be able to do after:** ' + l.goal : '');
+  }
+
+  // ---------- everything the courses teach ----------
+  // tools/build_search_index.py stores every mission's title, goal, summary
+  // and keywords. A question about any topic a course teaches finds the
+  // mission that teaches it, even with no AI at all.
+
+  var INDEX_URL = (/\/academy\//.test(location.pathname) ? '' : 'academy/') + 'courses/search-index.json';
+  var index = null, indexLoading = null;
+
+  var SEARCH_STOPWORDS = ('a about above after again against all also am an and any are as at be because been before being below between both but by ' +
+    'can could did do does doing done down during each else even every few for from further get gets got had has have having he her ' +
+    'here hers him his how i if in into is it its itself just keep know let like make makes many may me more most much must my ' +
+    'new no nor not now of off on once one only or other our out over own same she should so some such than that the their them ' +
+    'then there these they this those through to too two under until up us use used uses using very want was way we were what ' +
+    'when where which while who whom why will with would you your yours yourself first next last each back right left still ' +
+    'line lines code thing things part number numbers time run runs print prints call calls mission task write ' +
+    'explain tell show learn work works mean means').split(' ');
+  var STOP = {};
+  SEARCH_STOPWORDS.forEach(function (w) { STOP[w] = 1; });
+
+  // Common Spanish words mapped to the English the courses are written in.
+  var SPANISH = {
+    lista: 'list', listas: 'list', bucle: 'loop', funcion: 'function', 'función': 'function', filtro: 'filter', ruido: 'noise',
+    'señal': 'signal', senal: 'signal', 'cámara': 'camera', camara: 'camera', 'visión': 'vision', vision: 'vision', mapa: 'map',
+    ruta: 'path', camino: 'path', 'batería': 'battery', bateria: 'battery', velocidad: 'velocity', 'aceleración': 'acceleration',
+    aprendizaje: 'learning', neuronal: 'neural', dron: 'drone', drones: 'drone', 'simulación': 'simulation', simulacion: 'simulation',
+    brazo: 'arm', pinza: 'gripper', 'ángulo': 'angle', angulo: 'angle', matriz: 'matrix', motor: 'motor', sensor: 'sensor',
+    rueda: 'wheel', ruedas: 'wheel', 'energía': 'power', energia: 'power', voltaje: 'voltage', corriente: 'current',
+    'posición': 'position', posicion: 'position', 'rotación': 'rotation', rotacion: 'rotation', fuerza: 'force',
+    'recompensa': 'reward', 'política': 'policy', politica: 'policy', 'estimación': 'estimation', estimacion: 'estimation',
+    'navegación': 'navigation', navegacion: 'navigation', 'obstáculo': 'obstacle', obstaculo: 'obstacle', nodo: 'node'
+  };
+
+  function stemWord(w) {
+    var rules = [['ies', 'y'], ['ing', ''], ['ed', ''], ['es', ''], ['s', '']];
+    for (var i = 0; i < rules.length; i++) {
+      var suf = rules[i][0];
+      if (w.length - suf.length >= 3 && w.slice(-suf.length) === suf) return w.slice(0, -suf.length) + rules[i][1];
+    }
+    return w;
+  }
+
+  function queryWords(q) {
+    return (String(q).toLowerCase().match(/[a-záéíóúñ][a-z0-9_áéíóúñ]{2,}/g) || [])
+      .map(function (w) { return SPANISH[w] || w; })
+      .filter(function (w) { return !STOP[w] && /^[a-z0-9_]+$/.test(w); })
+      .map(stemWord);
+  }
+
+  function loadIndex() {
+    if (index) return Promise.resolve(index);
+    if (!indexLoading) {
+      indexLoading = fetch(INDEX_URL).then(function (r) { return r.json(); }).then(function (j) { index = j; return j; }, function () { indexLoading = null; return null; });
+    }
+    return indexLoading;
+  }
+
+  // Best matching mission: the sum of the question words' keyword weights,
+  // plus a bonus when a word is in the mission title.
+  function searchLessons(q) {
+    var words = queryWords(q);
+    if (!words.length) return Promise.resolve(null);
+    return loadIndex().then(function (idx) {
+      if (!idx) return null;
+      // The mission that covers the most words of the question wins, and
+      // the keyword weights break ties.
+      var best = null;
+      idx.lessons.forEach(function (l) {
+        var score = 0, matched = 0, title = l.t.toLowerCase();
+        words.forEach(function (w) {
+          if (!l.k[w]) return;
+          matched++;
+          score += l.k[w];
+          if (title.indexOf(w) >= 0) score += 0.4;
+        });
+        if (!best || matched > best.matched || (matched === best.matched && score > best.score)) best = { lesson: l, score: score, matched: matched };
+      });
+      // One or two words must all match; longer questions need at least two,
+      // so "who won the world cup" does not land on a robot holding a cup.
+      var needed = words.length <= 2 ? words.length : 2;
+      if (!best || best.matched < needed || best.score < 0.4) return null;
+      best.courseTitle = idx.courses[best.lesson.c] || best.lesson.c;
+      return best;
+    });
+  }
+
+  function lessonUrl(courseId, lessonId) {
+    return (/\/academy\//.test(location.pathname) ? '' : 'academy/') + 'lesson.html?c=' + encodeURIComponent(courseId) + '&l=' + encodeURIComponent(lessonId);
+  }
+
+  function lessonAnswer(hit) {
+    var l = hit.lesson;
+    return {
+      text: 'This is taught in **' + l.t + '**, a mission of *' + hit.courseTitle + '*.\n\n' + l.g + '\n\n' + l.s,
+      link: lessonUrl(l.c, l.l)
+    };
   }
 
   // ---------- on-device AI ----------
@@ -555,6 +706,11 @@
       thread.forEach(function (m) {
         var row = node('div', 'mc-msg ' + (m.who === 'me' ? 'mc-from-me' : 'mc-from-mascot'));
         renderText(row, m.text);
+        if (m.link) {
+          var go = node('a', 'mc-connect mc-open', 'Open this mission →');
+          go.href = m.link;
+          row.appendChild(go);
+        }
         if (m.action === 'connect' && ai.state !== 'available' && (!cloud.key || m.keyError)) {
           var cta = node('button', 'mc-connect', 'Connect AI');
           cta.type = 'button';
@@ -584,17 +740,27 @@
       if (!offlineOnly && (ai.state === 'downloadable' || ai.state === 'downloading')) startDownload();
       var engine = offlineOnly ? null : ai.state === 'available' ? 'device' : cloud.key ? 'cloud' : null;
       if (!engine) {
-        var offline = answer(q, ctx);
-        // A question outside what Zerack knows offline: offer to connect AI
-        // right there, with a button that opens the key screen.
-        if (!offlineOnly && offline === OFFLINE_FALLBACK) {
-          thread.push({ who: 'mascot', text: 'I do not know that one yet. **Want me to answer anything you ask?** Connect AI and I can.', action: 'connect' });
-        } else {
-          thread.push({ who: 'mascot', text: offline });
+        var res = answerDetailed(q, ctx);
+        if (offlineOnly || res.kind === 'mission' || res.kind === 'small') {
+          finishOffline({ who: 'mascot', text: res.text });
+          return;
         }
-        saveThread();
-        paint();
-        jump();
+        // Search the missions of every course. A curated topic wins unless a
+        // mission matches clearly better; with nothing at all, offer AI.
+        thinking = true;
+        searchLessons(q).then(function (hit) {
+          var topicScore = res.kind === 'topic' ? res.score : 0;
+          if (hit && (topicScore === 0 || hit.score >= 1.2 + topicScore * 0.3 || (hit.matched > topicScore && hit.score >= 0.8))) {
+            var found = lessonAnswer(hit);
+            finishOffline({ who: 'mascot', text: found.text, link: found.link });
+          } else if (res.kind === 'topic') {
+            finishOffline({ who: 'mascot', text: res.text });
+          } else {
+            // A question outside what Zerack knows offline: offer to connect
+            // AI right there, with a button that opens the key screen.
+            finishOffline({ who: 'mascot', text: 'I do not know that one yet. **Want me to answer anything you ask?** Connect AI and I can.', action: 'connect' });
+          }
+        });
         return;
       }
       var reply = { who: 'mascot', text: 'Thinking...' };
@@ -645,6 +811,14 @@
         ai.state = 'unavailable';
         refreshStatus();
       });
+    }
+
+    function finishOffline(message) {
+      thinking = false;
+      thread.push(message);
+      saveThread();
+      paint();
+      jump();
     }
 
     function paintLast(text) {
@@ -756,5 +930,5 @@
     };
   }
 
-  root.Mascot = { mount: mount, answer: answer };
+  root.Mascot = { mount: mount, answer: answer, answerDetailed: answerDetailed, searchLessons: searchLessons };
 })(window);

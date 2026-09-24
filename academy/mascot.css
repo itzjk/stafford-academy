@@ -110,3 +110,6 @@
 .mc-danger { border-color: rgba(255,90,110,.4); background: rgba(255,90,110,.08); color: #ffb3bf; }
 .mc-danger:hover { background: rgba(255,90,110,.16); }
 .mc-body[hidden], .mc-chips[hidden], .mc-form[hidden] { display: none; }
+.mc-open { background: #7deeff; text-decoration: none; }
+.mc-open::before { content: none; }
+.mc-open:hover { background: #b5f5ff; }

@@ -452,7 +452,35 @@
         "output": "0.005 6.2230e-61\n0.019 3.7571e-03\n0.021 9.7017e+01\n0.03 8.5899e+09",
         "lesson": "sm1-7"
       }
+    },
+    {
+      "id": "ai-for-developers",
+      "title": "AI for Developers",
+      "world": "The Signal Deck",
+      "mentor": {
+        "name": "PROMPT-1",
+        "character": "Trusts a model only after the tests pass."
+      },
+      "summary": "Use AI tools the way professional developers do: understand how a model works, ask precise questions, read and test the code it writes, keep private data safe, and learn with it instead of copying from it. You finish by building your own study assistant.",
+      "level": "BEGINNER",
+      "type": "PRACTICAL",
+      "hours": 16,
+      "accent": "#b7a3f2",
+      "language": "python",
+      "areas": [
+        "basics",
+        "code",
+        "intelligence"
+      ],
+      "order": 1,
+      "lessons": 60,
+      "chapters": 8,
+      "preview": {
+        "code": "text = (\n    \"The test failed so the test was fixed \"\n    \"and the code ran and the test passed\"\n)\nwords = text.lower().split()\nafter = {}\nfor i in range(len(words) - 1):\n    if words[i] == \"the\":\n        nxt = words[i + 1]\n        after[nxt] = after.get(nxt, 0) + 1\nprint(after)",
+        "output": "{'test': 3, 'code': 1}",
+        "lesson": "ai0-3"
+      }
     }
   ],
-  "total": 1523
+  "total": 1583
 }
