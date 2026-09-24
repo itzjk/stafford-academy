@@ -1,0 +1,6 @@
+# Keep the extension ZIP made with git archive free of repository-only files.
+.github export-ignore
+tools export-ignore
+CONTRIBUTING.md export-ignore
+.gitattributes export-ignore
+.gitignore export-ignore

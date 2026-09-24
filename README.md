@@ -1,6 +1,15 @@
-# Stafford Academy
+<h1 align="center">Stafford Academy</h1>
 
-**Learn programming, AI, electronics and robotics one mission at a time. Free, open and with nothing in your way.**
+<p align="center"><strong>Learn programming, AI, electronics and robotics one mission at a time.<br>Free, open and with nothing in your way.</strong></p>
+
+<p align="center">
+  <a href="LICENSE"><img alt="MIT License" src="https://img.shields.io/badge/license-MIT-7deeff"></a>
+  <img alt="22 courses" src="https://img.shields.io/badge/courses-22-ffd43b">
+  <img alt="1,721 missions" src="https://img.shields.io/badge/missions-1%2C721-7aa2ff">
+  <a href="CONTRIBUTING.md"><img alt="Contributions welcome" src="https://img.shields.io/badge/contributions-welcome-34d399"></a>
+</p>
+
+<p align="center"><img src=".github/assets/demo.gif" alt="Stafford Academy: the home page with one course per screen, and missions graded instantly" width="800"></p>
 
 Stafford Academy is a free, open-source learning platform that runs as a Chrome extension. It teaches through short, hands-on missions: you read a little theory, then write real code, answer a question, solve a calculation or write a prompt, and get instant feedback, all inside your browser.
 
@@ -107,14 +116,21 @@ academy/
 lib/pyodide/           Pyodide: Python compiled to WebAssembly
 icons/                 Extension icons and the logo
 tools/
+  check_course.py        Checks every mission before it goes in (run it before a pull request)
   build_search_index.py  Rebuilds Zerack's offline index of every mission
 ```
 
-Each course is a plain JSON file: `chapters → lessons`, and every lesson has a `theory`, a `task`, a `hint` and a `check`. Code missions add `starter` code and a `solution`; missions without code use a `choice`, `number` or `prompt` check. To add or improve a mission, edit the JSON, run `python3 tools/build_search_index.py` so Zerack learns it too, and reload the extension.
+Each course is a plain JSON file: `chapters → lessons`, and every lesson has a `theory`, a `task`, a `hint` and a `check`. Code missions add `starter` code and a `solution`; missions without code use a `choice`, `number` or `prompt` check. To add or improve a mission, edit the JSON, run `python3 tools/check_course.py` to check it and `python3 tools/build_search_index.py` so Zerack learns it too, then reload the extension.
 
 ## Contributing
 
-Contributions are welcome: new missions, fixes to existing ones, translations, new courses or improvements to the app itself. Open an issue to talk about an idea, or send a pull request.
+Stafford Academy is built in the open, and we would love your help: new missions, fixes to existing ones, translations, whole new courses or improvements to the app itself. You do not need to be an expert, a clear explanation is as valuable as code.
+
+- Read the [contributing guide](CONTRIBUTING.md): how a course is made and how to check your work.
+- Pick a [good first issue](https://github.com/itzjk/stafford-academy/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22).
+- Share ideas and questions in [Discussions](https://github.com/itzjk/stafford-academy/discussions).
+
+If Stafford Academy helped you or your school, a ⭐ on the repository helps others find it.
 
 ## Credits
 
