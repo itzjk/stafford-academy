@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400">
+  <line class="s-dim" x1="76" y1="342" x2="324" y2="342" stroke-width="2"/>
+  <ellipse class="f-soft a-pulse" cx="221" cy="342" rx="54" ry="9"/>
+  <path class="s-acc" stroke-width="2" d="M168 350 V358 H272 V350"/>
+  <g class="s-line f-panel" stroke-width="3">
+    <rect x="-11" y="0" width="22" height="96" rx="11" transform="translate(182 234) rotate(19)"/>
+    <rect x="-11" y="0" width="22" height="96" rx="11" transform="translate(218 234) rotate(-19)"/>
+    <rect x="128" y="328" width="44" height="14" rx="7" transform="rotate(16 170 342)"/>
+    <rect x="228" y="328" width="44" height="14" rx="7"/>
+    <rect x="170" y="224" width="60" height="22" rx="11"/>
+    <rect x="190" y="128" width="20" height="20" rx="4"/>
+    <rect x="156" y="144" width="88" height="88" rx="22"/>
+  </g>
+  <circle class="f-dim" cx="167" cy="279" r="5"/>
+  <circle class="f-dim" cx="233" cy="279" r="5"/>
+  <circle class="s-acc" cx="200" cy="170" r="10" stroke-width="2"/>
+  <circle class="f-acc a-pulse d2" cx="200" cy="170" r="4"/>
+  <g class="a-swing">
+    <rect class="s-line f-panel" x="132" y="150" width="18" height="66" rx="9" stroke-width="3"/>
+    <circle class="s-acc f-soft" cx="141" cy="226" r="9" stroke-width="2.5"/>
+  </g>
+  <g class="a-swing d4">
+    <rect class="s-line f-panel" x="250" y="150" width="18" height="66" rx="9" stroke-width="3"/>
+    <circle class="s-acc f-soft" cx="259" cy="226" r="9" stroke-width="2.5"/>
+  </g>
+  <line class="s-line" x1="200" y1="64" x2="200" y2="47" stroke-width="3"/>
+  <circle class="f-gold a-pulse" cx="200" cy="41" r="6"/>
+  <rect class="f-dim" x="150" y="86" width="10" height="22" rx="4"/>
+  <rect class="f-dim" x="240" y="86" width="10" height="22" rx="4"/>
+  <rect class="s-line f-panel" x="158" y="64" width="84" height="66" rx="20" stroke-width="3"/>
+  <rect class="s-acc f-soft" x="170" y="79" width="60" height="30" rx="14" stroke-width="2"/>
+  <circle class="f-acc" cx="187" cy="94" r="5"/>
+  <circle class="f-acc" cx="213" cy="94" r="5"/>
+  <path class="s-line" stroke-width="2.5" d="M191 117 Q200 123 209 117"/>
+  <line class="s-gold a-dash" x1="200" y1="216" x2="200" y2="340" stroke-width="2.5"/>
+  <circle class="s-gold a-pulse" cx="200" cy="206" r="13" stroke-width="2"/>
+  <circle class="f-gold" cx="200" cy="206" r="6"/>
+</svg>

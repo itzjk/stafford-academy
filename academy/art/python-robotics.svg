@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400">
+<text class="t-label" x="44" y="56">sim.py</text>
+<rect class="f-panel s-dim" stroke-width="2" x="40" y="70" width="320" height="260" rx="18"/>
+<path class="s-dim" stroke-width="3" stroke-dasharray="0 40" d="M80 110H320M80 150H320M80 190H320M80 230H320M80 270H320"/>
+<rect class="f-panel s-line" stroke-width="3" x="230" y="196" width="70" height="54" rx="6"/>
+<path class="s-dim" stroke-width="2" d="M230 220L254 196M230 240L274 196M240 250L294 196M260 250L300 210M280 250L300 230"/>
+<circle class="f-panel s-line" stroke-width="3" cx="110" cy="130" r="24"/>
+<circle class="s-dim" stroke-width="2" cx="110" cy="130" r="12"/>
+<path class="s-line" stroke-width="4" stroke-dasharray="0 11" d="M140 214C145 180 165 168 190 165S235 150 250 140S290 108 312 106"/>
+<path class="s-acc a-dash" stroke-width="2" d="M140 250L116 153M140 250L230 212M140 250L230 238M140 250L358 290M140 250L42 292"/>
+<circle class="f-acc a-pulse" cx="116" cy="153" r="4.5"/>
+<circle class="f-acc a-pulse d1" cx="230" cy="212" r="4.5"/>
+<circle class="f-acc a-pulse d2" cx="230" cy="238" r="4.5"/>
+<circle class="f-acc a-pulse d3" cx="358" cy="290" r="4.5"/>
+<circle class="f-acc a-pulse d4" cx="42" cy="292" r="4.5"/>
+<circle class="s-gold a-pulse d1" stroke-width="2.5" cx="190" cy="165" r="7"/>
+<circle class="s-gold a-pulse d3" stroke-width="2.5" cx="250" cy="140" r="7"/>
+<circle class="s-gold a-pulse" stroke-width="2.5" cx="318" cy="104" r="13"/>
+<circle class="f-gold" cx="318" cy="104" r="5"/>
+<g class="f-dim"><rect x="104" y="232" width="12" height="18" rx="3"/><rect x="104" y="258" width="12" height="18" rx="3"/><rect x="164" y="232" width="12" height="18" rx="3"/><rect x="164" y="258" width="12" height="18" rx="3"/></g>
+<rect class="f-panel s-line" stroke-width="3" x="116" y="224" width="48" height="58" rx="11"/>
+<path class="s-acc" stroke-width="3" d="M131 234L140 228L149 234"/>
+<circle class="f-soft s-acc" stroke-width="2.5" cx="140" cy="254" r="11"/>
+<path class="s-line a-spin-fast" stroke-width="2.5" d="M140 247V261"/>
+</svg>

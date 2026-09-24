@@ -42,6 +42,44 @@
     if (mascot) mascot.welcome('Hi! 👋 Welcome to **Stafford Academy**.');
   });
 
+  // ---------- course figure ----------
+  // Courses about a topic rather than about code show an animated figure from
+  // academy/art/<course>.svg (the catalog marks them with "figure": true). The
+  // files are ours and use only classes, so they can be inlined and pick up
+  // the course color.
+
+  var figures = {};
+
+  function loadFigure(id) {
+    if (!figures[id]) {
+      figures[id] = fetch('academy/art/' + encodeURIComponent(id) + '.svg')
+        .then(function (r) { return r.ok ? r.text() : null; })
+        .then(function (t) { return t && t.indexOf('<svg') >= 0 ? t : null; }, function () { return null; });
+    }
+    return figures[id];
+  }
+
+  // Shows the figure when the course has one, the live code window otherwise.
+  function showVisual(course) {
+    var figure = $('figure'), win = $('codeWindow');
+    (course.figure ? loadFigure(course.id) : Promise.resolve(null)).then(function (svg) {
+      if ($('sceneTitle').textContent !== course.title) return;
+      if (svg) {
+        codeRun++;
+        figure.innerHTML = svg;
+        figure.hidden = false;
+        win.hidden = true;
+        $('orbit').hidden = false;
+      } else {
+        figure.hidden = true;
+        figure.innerHTML = '';
+        $('orbit').hidden = true;
+        win.hidden = false;
+        typeCode(course);
+      }
+    });
+  }
+
   // ---------- live code window ----------
 
   var KEYWORDS = /^(def|return|for|in|if|elif|else|while|import|from|as|class|and|or|not|is|lambda|with|try|except|finally|raise|pass|break|continue|yield|global|None|True|False)$/;
@@ -163,7 +201,7 @@
       $('sceneSummary').textContent = c.summary || '';
       var tags = $('sceneTags');
       A.clear(tags);
-      [c.language || 'python', (c.hours || 0) + ' hours', (c.lessons || 0) + ' missions', done ? done + ' done' : null]
+      [c.language === 'none' ? 'no code' : (c.language || 'python'), (c.hours || 0) + ' hours', (c.lessons || 0) + ' missions', done ? done + ' done' : null]
         .filter(Boolean).forEach(function (t) {
           var s = document.createElement('span');
           s.textContent = t;
@@ -178,7 +216,7 @@
       });
       $('prevBtn').disabled = i === 0;
       $('nextBtn').disabled = i === courses.length - 1;
-      typeCode(c);
+      showVisual(c);
     }
 
     function go(i) {

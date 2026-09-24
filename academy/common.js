@@ -397,26 +397,35 @@
     return frag;
   };
 
+  // Paragraphs are separated by blank lines. Inside a block, runs of "- "
+  // lines become a list even when they follow a paragraph line directly.
   Academy.textBlocks = function (text, frag) {
     String(text || '').split(/\n{2,}/).forEach(function (block) {
       var b = block.trim();
       if (!b) return;
-      var lines = b.split('\n');
-      if (lines.every(function (l) { return /^[-*]\s/.test(l.trim()) || !l.trim(); })) {
-        var ul = document.createElement('ul');
-        lines.forEach(function (l) {
-          var item = l.trim().replace(/^[-*]\s*/, '');
-          if (!item) return;
-          var li = document.createElement('li');
-          Academy.inline(li, item);
-          ul.appendChild(li);
-        });
-        frag.appendChild(ul);
-        return;
+      var para = [], ul = null;
+      function flushPara() {
+        if (!para.length) return;
+        var p = document.createElement('p');
+        Academy.inline(p, para.join(' '));
+        frag.appendChild(p);
+        para = [];
       }
-      var p = document.createElement('p');
-      Academy.inline(p, b);
-      frag.appendChild(p);
+      b.split('\n').forEach(function (l) {
+        var line = l.trim();
+        if (!line) return;
+        if (/^[-*]\s/.test(line)) {
+          flushPara();
+          if (!ul) { ul = document.createElement('ul'); frag.appendChild(ul); }
+          var li = document.createElement('li');
+          Academy.inline(li, line.replace(/^[-*]\s*/, ''));
+          ul.appendChild(li);
+        } else {
+          ul = null;
+          para.push(line);
+        }
+      });
+      flushPara();
     });
   };
 

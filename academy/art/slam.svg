@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400">
+  <path class="s-dim" stroke-width="2" stroke-dasharray="2 9" d="M60 70 H250 V130 H340 V330 H60 Z M60 200 H130 V250"/>
+  <path class="s-line a-draw" stroke-width="4" d="M140 70 H250 V130 H340 V300"/>
+  <rect class="s-line f-panel a-draw d2" x="272" y="240" width="36" height="36" rx="4" stroke-width="3"/>
+  <path class="s-dim" stroke-width="2" stroke-dasharray="4 7" d="M84 306 C120 302 148 286 168 262 S204 226 222 220"/>
+  <circle class="f-dim" cx="86" cy="305" r="4"/>
+  <circle class="f-dim" cx="112" cy="300" r="4"/>
+  <circle class="f-dim" cx="137" cy="290" r="4"/>
+  <circle class="f-dim" cx="158" cy="274" r="4"/>
+  <circle class="f-acc" cx="177" cy="254" r="4"/>
+  <circle class="f-acc" cx="198" cy="234" r="4"/>
+  <g class="a-spin">
+    <circle cx="230" cy="215" r="112" fill="none"/>
+    <path class="f-soft" d="M230 215 L249 105 A112 112 0 0 1 327 159 Z"/>
+    <path class="s-acc" stroke-width="2" d="M249 105 A112 112 0 0 1 327 159"/>
+    <line class="s-acc a-dash" x1="230" y1="215" x2="268" y2="110" stroke-width="2"/>
+    <line class="s-acc a-dash" x1="230" y1="215" x2="294" y2="123" stroke-width="2"/>
+    <line class="s-acc a-dash" x1="230" y1="215" x2="316" y2="143" stroke-width="2"/>
+  </g>
+  <circle class="f-acc a-pulse" cx="196" cy="70" r="4"/>
+  <circle class="f-acc a-pulse d1" cx="250" cy="102" r="4"/>
+  <circle class="f-acc a-pulse d2" cx="300" cy="130" r="4"/>
+  <circle class="f-acc a-pulse d3" cx="340" cy="182" r="4"/>
+  <circle class="f-acc a-pulse d4" cx="290" cy="240" r="4"/>
+  <ellipse class="s-acc a-pulse" cx="230" cy="215" rx="30" ry="24" stroke-width="1.5" stroke-dasharray="3 5"/>
+  <circle class="s-line f-panel" cx="230" cy="215" r="16" stroke-width="3"/>
+  <line class="s-acc" x1="230" y1="215" x2="241" y2="204" stroke-width="3"/>
+  <circle class="f-acc" cx="230" cy="215" r="5"/>
+</svg>

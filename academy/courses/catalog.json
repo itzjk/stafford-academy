@@ -50,7 +50,8 @@
         "code": "quota_left = 0\nfile_ready = True\nduration = 180\nthumbnail_ready = True\nif quota_left == 0:\n    print(\"no quota\")\nelif not file_ready:\n    print(\"no file\")\nelif duration < 60:\n    print(\"too short\")\nelif not thumbnail_ready:\n    print(\"no thumbnail\")\nelse:\n    print(\"uploading\")",
         "output": "no quota",
         "lesson": "g2-9"
-      }
+      },
+      "figure": false
     },
     {
       "id": "python-robotics",
@@ -74,7 +75,8 @@
         "code": "bumper_left = True\nbumper_right = False\nestop = False\n\nreverse = bumper_left or bumper_right\ncan_drive = not reverse and not estop\n\nif reverse:\n    print(\"reversing, bumper hit\")\n\nprint(f\"reverse={reverse} can_drive={can_drive}\")",
         "output": "reversing, bumper hit\nreverse=True can_drive=False",
         "lesson": "p1-4"
-      }
+      },
+      "figure": true
     },
     {
       "id": "control",
@@ -98,7 +100,8 @@
         "code": "DUTY_PER_RPM = 1.0 / 200.0\n\ndef open_loop(setpoint_rpm):\n    duty = setpoint_rpm * DUTY_PER_RPM\n    if duty < 0.0:\n        duty = 0.0\n    if duty > 1.0:\n        duty = 1.0\n    return duty\n\nfor target in (0, 50, 150, 400):\n    print(target, open_loop(target))",
         "output": "0 0.0\n50 0.25\n150 0.75\n400 1.0",
         "lesson": "c0-1"
-      }
+      },
+      "figure": true
     },
     {
       "id": "kinematics",
@@ -121,7 +124,8 @@
         "code": "import numpy as np\n\ndef rotate2d(p, th):\n    x, y = p\n    c, s = np.cos(th), np.sin(th)\n    return np.array([x * c - y * s, x * s + y * c])\n\np = np.array([1.0, 0.0])\nfor deg in (0, 90, 180, 270):\n    r = rotate2d(p, np.radians(deg))\n    print(deg, \"deg ->\", np.round(r, 4))",
         "output": "0 deg -> [1. 0.]\n90 deg -> [0. 1.]\n180 deg -> [-1.  0.]\n270 deg -> [-0. -1.]",
         "lesson": "c1-1"
-      }
+      },
+      "figure": true
     },
     {
       "id": "vision",
@@ -144,7 +148,8 @@
         "code": "import cv2\nimport numpy as np\n\nmask = np.zeros((100, 100), np.uint8)\nmask[30:70, 30:70] = 255\nmask[5, 5] = 255\n\nkernel = np.ones((3, 3), np.uint8)\neroded = cv2.erode(mask, kernel, iterations=2)\n\nprint(cv2.countNonZero(mask), cv2.countNonZero(eroded))",
         "output": "1601 1296",
         "lesson": "v3-2"
-      }
+      },
+      "figure": true
     },
     {
       "id": "navigation",
@@ -168,7 +173,8 @@
         "code": "def f_score(g, h):\n    return g + h\n\ndef is_admissible(h_values, true_values, tol=1e-9):\n    for node, h in h_values.items():\n        if h > true_values.get(node, float(\"inf\")) + tol:\n            return False\n    return True\n\nH = {\"a\": 3.0, \"b\": 5.0, \"c\": 1.0}\nTRUE = {\"a\": 4.0, \"b\": 5.0, \"c\": 7.0}\nBAD = {\"a\": 9.0, \"b\": 5.0, \"c\": 1.0}\nprint(f_score(2.0, 3.0))\nprint(is_admissible(H, TRUE), is_admissible(BAD, TRUE))\nprint(is_admissible({n: 0.0 for n in TRUE}, TRUE))",
         "output": "5.0\nTrue False\nTrue",
         "lesson": "n4-1"
-      }
+      },
+      "figure": true
     },
     {
       "id": "ros2",
@@ -192,7 +198,8 @@
         "code": "INSPECT = {\n    'node': 'ros2 node list',\n    'topic': 'ros2 topic info',\n    'service': 'ros2 service list',\n    'action': 'ros2 action list',\n    'parameter': 'ros2 param list',\n    'interface': 'ros2 interface show',\n}\n\nprint(INSPECT.get('action', 'missing'))",
         "output": "ros2 action list",
         "lesson": "r3-6"
-      }
+      },
+      "figure": true
     },
     {
       "id": "humanoids",
@@ -215,7 +222,8 @@
         "code": "G = 9.81\nCOM_HEIGHT = 0.85\nFOOT_BACK = -0.115\n\ndef zmp(x, x_ddot):\n    return x - (COM_HEIGHT / G) * x_ddot\n\ndef max_forward_acc(x):\n    return (x - FOOT_BACK) * G / COM_HEIGHT\n\nprint(\"zmp\", round(zmp(0.0, 1.0), 4))\nprint(\"max_acc\", round(max_forward_acc(0.0), 4))",
         "output": "zmp -0.0866\nmax_acc 1.3272",
         "lesson": "h3-2"
-      }
+      },
+      "figure": true
     },
     {
       "id": "state-estimation",
@@ -239,7 +247,8 @@
         "code": "import numpy as np\n\nR = np.array([[0.012 ** 2]])\nx = np.array([[2.000], [0.900]])\nP = np.array([[0.010 ** 2, 0.0004], [0.0004, 0.050 ** 2]])\nH = np.array([[1.0, 0.0]])\n\ndef expected(x, P):\n    return H @ x, H @ P @ H.T + R\n\nz_hat, S = expected(x, P)\nprint(\"H shape\", H.shape, \"x shape\", x.shape)\nprint(\"predicted reading\", round(float(z_hat[0, 0]), 4))\nprint(\"innovation sigma\", round(float(S[0, 0]) ** 0.5, 5))\nprint(\"position sigma alone\", round(float(P[0, 0]) ** 0.5, 5))",
         "output": "H shape (1, 2) x shape (2, 1)\npredicted reading 2.0\ninnovation sigma 0.01562\nposition sigma alone 0.01",
         "lesson": "es4-1"
-      }
+      },
+      "figure": true
     },
     {
       "id": "slam",
@@ -263,7 +272,8 @@
         "code": "import math\n\ndef wrap(a):\n    return math.atan2(math.sin(a), math.cos(a))\n\ndef compose(pose, delta):\n    x, y, t = pose\n    dx, dy, dt = delta\n    return (x + dx * math.cos(t) - dy * math.sin(t),\n            y + dx * math.sin(t) + dy * math.cos(t),\n            wrap(t + dt))\n\ntrack = (0.0, 0.0, 0.0)\n# ...",
         "output": "step   x       y       theta\n1    0.4    0.0    0.6\n2    0.73    0.226    1.2\n3    0.875    0.599    1.8",
         "lesson": "sl0-2"
-      }
+      },
+      "figure": true
     },
     {
       "id": "manipulation",
@@ -286,7 +296,8 @@
         "code": "import numpy as np\n\nN = np.array([-1.0, 0.0, 0.0])\nFORCES = [\n    np.array([-12.000, 0.000, 0.000]),\n    np.array([-6.000, 2.500, 9.000]),\n]\n\ndef normal_part(f, n):\n    return np.dot(f, n) * n\n\ndef tangent_part(f, n):\n    return f - normal_part(f, n)\n\nfor f in FORCES:\n    fn = normal_part(f, N)\n    ft = tangent_part(f, N)\n    print(\"force\", np.round(f, 2),\n          \"squeeze N\", round(float(np.linalg.norm(fn)), 3),\n          \"slide N\", round(float(np.linalg.norm(ft)), 3),\n          \"rebuilt\", bool(np.allclose(fn + ft, f)))",
         "output": "force [-12.   0.   0.] squeeze N 12.0 slide N 0.0 rebuilt True\nforce [-6.   2.5  9. ] squeeze N 6.0 slide N 9.341 rebuilt True",
         "lesson": "mn0-3"
-      }
+      },
+      "figure": true
     },
     {
       "id": "embedded-linux",
@@ -310,7 +321,8 @@
         "code": "NS_PER_SECOND = 1000000000\nNS_PER_MS = 1000000\n\ndef period_ns(hz):\n    return NS_PER_SECOND // hz\n\ndef duty_ns(pulse_ms):\n    return int(pulse_ms * NS_PER_MS)\n\nfor hz in (50, 400):\n    print(hz, \"Hz -> period\", period_ns(hz), \"ns\")\nfor pulse_ms in (1.0, 1.5, 2.0):\n    print(pulse_ms, \"ms -> duty\", duty_ns(pulse_ms), \"ns\")",
         "output": "50 Hz -> period 20000000 ns\n400 Hz -> period 2500000 ns\n1.0 ms -> duty 1000000 ns\n1.5 ms -> duty 1500000 ns\n2.0 ms -> duty 2000000 ns",
         "lesson": "lx1-7"
-      }
+      },
+      "figure": true
     },
     {
       "id": "power",
@@ -334,7 +346,8 @@
         "code": "LOADS = (\n    (\"Raspberry Pi 4 idle\", 5.0, 700.0),\n    (\"RPLIDAR A1 spinning\", 5.0, 400.0),\n    (\"MG996R servo holding\", 6.0, 900.0),\n)\n\ndef power_w(volts, milliamps):\n    return volts * (milliamps / 1000.0)\n\nfor name, volts, milliamps in LOADS:\n    print(name, round(power_w(volts, milliamps), 3), \"W\")",
         "output": "Raspberry Pi 4 idle 3.5 W\nRPLIDAR A1 spinning 2.0 W\nMG996R servo holding 5.4 W",
         "lesson": "en0-1"
-      }
+      },
+      "figure": true
     },
     {
       "id": "dsp",
@@ -358,7 +371,8 @@
         "code": "import numpy as np\n\ndef split_dc(x):\n    level = x.mean()\n    return level, x - level\n\ndef rms(x):\n    return float(np.sqrt(np.mean(x * x)))\n\nAMP = 2.0\nt = np.arange(400) / 400.0\nwave = 1.5 + AMP * np.sin(2.0 * np.pi * 13.0 * t)\nlevel, ac = split_dc(wave)\nprint(f\"amplitude {AMP:.4f}\")\nprint(f\"rms of the ac part {rms(ac):.4f}\")\nprint(f\"amplitude over root two {AMP / np.sqrt(2.0):.4f}\")\nprint(f\"rms with the offset left in {rms(wave):.4f}\")",
         "output": "amplitude 2.0000\nrms of the ac part 1.4142\namplitude over root two 1.4142\nrms with the offset left in 2.0616",
         "lesson": "ds0-3"
-      }
+      },
+      "figure": true
     },
     {
       "id": "machine-learning",
@@ -381,7 +395,8 @@
         "code": "import numpy as np\n\nFAULT_FROM = 40.0\nFAULT_TO = 70.0\n\nstart = np.arange(0.0, 100.0, 2.5)\n\ninside = (start >= FAULT_FROM) & (start < FAULT_TO)\ny = inside.astype(int)\n\nprint(\"windows\", start.shape[0])\nprint(\"per class\", np.bincount(y, minlength=2))\nprint(\"first faulty window starts at\", start[y == 1][0])\nprint(\"last faulty window starts at\", start[y == 1][-1])",
         "output": "windows 40\nper class [28 12]\nfirst faulty window starts at 40.0\nlast faulty window starts at 67.5",
         "lesson": "ml0-3"
-      }
+      },
+      "figure": true
     },
     {
       "id": "reinforcement-learning",
@@ -404,7 +419,8 @@
         "code": "NEAR = [-1.0, 3.0]\nMAIN = [-1.0, -1.0, -1.0, -1.0, -1.0, -1.0, -1.0, 10.0]\n\ndef discounted(rewards, gamma):\n    g = 0.0\n    for r in reversed(rewards):\n        g = r + gamma * g\n    return g\n\nfor gamma in (1.0, 0.99, 0.9, 0.8):\n    a = discounted(NEAR, gamma)\n    b = discounted(MAIN, gamma)\n    winner = 'near charger' if a > b else 'main dock'\n# ...",
         "output": "gamma 1.0 near 2.0 main 3.0 -> main dock\ngamma 0.99 near 1.97 main 2.527 -> main dock\ngamma 0.9 near 1.7 main -0.434 -> near charger\ngamma 0.8 near 1.4 main -1.854 -> near charger",
         "lesson": "rl2-4"
-      }
+      },
+      "figure": true
     },
     {
       "id": "drones",
@@ -427,7 +443,8 @@
         "code": "PACK_AH = 5.2\nNOMINAL_VOLTAGE = 14.8\nPACK_WH = PACK_AH * NOMINAL_VOLTAGE\nUSABLE = 0.80\nHOVER_POWER = 146.15\n\ndef usable_energy():\n    return PACK_WH * USABLE\n\ndef hover_minutes(power):\n    return usable_energy() / power * 60.0\n\nprint(\"pack_wh\", round(PACK_WH, 2))\nprint(\"usable_wh\", round(usable_energy(), 2))\nprint(\"naive_minutes\", round(PACK_WH / HOVER_POWER * 60.0, 2))\nprint(\"honest_minutes\", round(hover_minutes(HOVER_POWER), 2))",
         "output": "pack_wh 76.96\nusable_wh 61.57\nnaive_minutes 31.59\nhonest_minutes 25.28",
         "lesson": "dr7-2"
-      }
+      },
+      "figure": true
     },
     {
       "id": "simulation",
@@ -451,7 +468,8 @@
         "code": "LAMBDA = 100.0\nX0 = 1.0\nDURATION = 1.0\n\ndef decay(dt):\n    x = X0\n    for _ in range(int(round(DURATION / dt))):\n        x = x + (-LAMBDA * x) * dt\n    return x\n\nfor dt in (0.005, 0.019, 0.021, 0.03):\n    print(dt, \"%.4e\" % abs(decay(dt)))",
         "output": "0.005 6.2230e-61\n0.019 3.7571e-03\n0.021 9.7017e+01\n0.03 8.5899e+09",
         "lesson": "sm1-7"
-      }
+      },
+      "figure": true
     },
     {
       "id": "ai-for-developers",
@@ -479,8 +497,79 @@
         "code": "text = (\n    \"The test failed so the test was fixed \"\n    \"and the code ran and the test passed\"\n)\nwords = text.lower().split()\nafter = {}\nfor i in range(len(words) - 1):\n    if words[i] == \"the\":\n        nxt = words[i + 1]\n        after[nxt] = after.get(nxt, 0) + 1\nprint(after)",
         "output": "{'test': 3, 'code': 1}",
         "lesson": "ai0-3"
-      }
+      },
+      "figure": false
+    },
+    {
+      "id": "learn-ai",
+      "title": "Learn AI",
+      "world": "The Prompt Deck",
+      "mentor": {
+        "name": "ECHO-2",
+        "character": "Answers your questions with better questions."
+      },
+      "summary": "No code needed. Learn what AI assistants really are, how to talk to them, how to write great prompts, check their answers and stay safe, then use skills, tools and AI agents like a pro.",
+      "level": "BEGINNER",
+      "type": "NO CODE",
+      "hours": 8,
+      "accent": "#ff9ad5",
+      "language": "none",
+      "areas": [
+        "basics",
+        "intelligence"
+      ],
+      "order": 0.5,
+      "lessons": 50,
+      "chapters": 8,
+      "figure": true
+    },
+    {
+      "id": "electronics-basics",
+      "title": "Electronics Basics",
+      "world": "The Copper Bench",
+      "mentor": {
+        "name": "OHM-5",
+        "character": "Measures twice, powers on once."
+      },
+      "summary": "No code needed. Learn what every part in a circuit is for: voltage, current, resistors, LEDs, capacitors, transistors, sensors and motors, with real calculations and the safety habits of a workshop.",
+      "level": "BEGINNER",
+      "type": "NO CODE",
+      "hours": 7,
+      "accent": "#ffc857",
+      "language": "none",
+      "areas": [
+        "basics",
+        "hardware"
+      ],
+      "order": 2,
+      "lessons": 44,
+      "chapters": 7,
+      "figure": true
+    },
+    {
+      "id": "robotics-basics",
+      "title": "Robotics Basics",
+      "world": "The First Hangar",
+      "mentor": {
+        "name": "AXIS-3",
+        "character": "Takes every robot apart to show you how it works."
+      },
+      "summary": "No code needed. Discover what a robot is made of and what each part does: the body, the senses, the muscles, the brain and the power, then plan your first robot step by step.",
+      "level": "BEGINNER",
+      "type": "NO CODE",
+      "hours": 7,
+      "accent": "#36d7b7",
+      "language": "none",
+      "areas": [
+        "basics",
+        "hardware",
+        "systems"
+      ],
+      "order": 3,
+      "lessons": 44,
+      "chapters": 7,
+      "figure": true
     }
   ],
-  "total": 1583
+  "total": 1721
 }

@@ -31,7 +31,7 @@
     if (course.type) meta.appendChild(badge(course.type));
     if (course.level) meta.appendChild(badge(course.level));
     if (course.hours) meta.appendChild(badge(course.hours + ' h'));
-    if (course.language) meta.appendChild(badge(course.language));
+    if (course.language && course.language !== 'none') meta.appendChild(badge(course.language));
 
     var mentor = course.mentor || {};
     if (mentor.name) {

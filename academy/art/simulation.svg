@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400">
+<path class="s-line" stroke-width="3" d="M36,320 H364"/>
+<path class="s-dim" stroke-width="1.5" d="M56,323 L46,335 M78,323 L68,335 M100,323 L90,335 M122,323 L112,335 M144,323 L134,335 M166,323 L156,335 M188,323 L178,335 M210,323 L200,335 M232,323 L222,335 M254,323 L244,335 M276,323 L266,335 M298,323 L288,335 M320,323 L310,335 M342,323 L332,335"/>
+<path class="s-acc a-dash" stroke-width="2.5" d="M40,115.8 Q90,145 140,320 Q182.5,190 225,190 Q253.5,190 282,248.5"/>
+<circle class="s-dim" stroke-width="2" cx="62" cy="135.7" r="18"/>
+<circle class="s-dim" stroke-width="2" cx="102" cy="208.1" r="18"/>
+<ellipse class="s-dim" stroke-width="2" cx="140" cy="308" rx="22" ry="12"/>
+<path class="s-acc a-pulse" stroke-width="2.5" d="M114,314 L104,306 M166,314 L176,306 M140,294 V286"/>
+<rect class="f-panel s-line" stroke-width="2.5" x="298" y="256" width="64" height="64" rx="5"/>
+<rect class="f-soft s-acc" stroke-width="2.5" x="308" y="212" width="44" height="44" rx="4"/>
+<g class="a-float">
+<path class="s-line" stroke-width="3" d="M203.7,194.8 L237.3,152.5 M236.4,163.3 L237.3,152.5 L227,155.8"/>
+<path class="s-gold" stroke-width="3" d="M190,236 V280 M184,271 L190,280 L196,271"/>
+<circle class="f-acc" cx="190" cy="212" r="18"/>
+<circle class="f-ink" opacity=".55" cx="184" cy="206" r="4.5"/>
+<text class="t-label" x="245.3" y="156.5">v</text>
+<text class="t-label" x="200" y="276">g</text>
+</g>
+</svg>

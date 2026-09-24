@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400">
+<path class="s-dim" stroke-width="2" d="M60 320H200"/>
+<rect class="f-panel s-line" stroke-width="3" x="78" y="300" width="104" height="12" rx="4"/>
+<path class="f-panel s-line" stroke-width="3" d="M112 268H148L158 300H102Z"/>
+<path class="f-panel s-line" stroke-width="3" d="M140.2 266.2L190.2 146.2A11 11 0 0 1 169.8 137.8L119.8 257.8A11 11 0 0 1 140.2 266.2Z"/>
+<path class="f-panel s-line" stroke-width="3" d="M182.7 152.7L302.7 122.7A11 11 0 0 1 297.3 101.3L177.3 131.3A11 11 0 0 1 182.7 152.7Z"/>
+<path class="s-dim" stroke-width="2" stroke-dasharray="2 7" d="M261.8 265.3A158 158 0 0 0 338.2 265.3"/>
+<g class="a-swing"><rect class="f-panel s-line" stroke-width="3" x="291" y="112" width="18" height="88"/><rect class="f-panel s-line" stroke-width="3" x="279" y="196" width="42" height="9" rx="3"/><rect class="f-panel s-line" stroke-width="3" x="281" y="205" width="7" height="20" rx="2"/><rect class="f-panel s-line" stroke-width="3" x="312" y="205" width="7" height="20" rx="2"/><path class="s-acc" stroke-width="3" d="M300 232H332"/><path class="f-acc" d="M340 232L331 227V237Z"/><path class="s-gold" stroke-width="3" d="M300 232V262"/><path class="f-gold" d="M300 270L295 261H305Z"/><circle class="f-ink" cx="300" cy="232" r="4"/><path class="s-dim" opacity="0" d="M260 240H261"/></g>
+<circle class="f-panel s-acc" stroke-width="3" cx="130" cy="262" r="14"/>
+<circle class="f-acc" cx="130" cy="262" r="4.5"/>
+<circle class="f-panel s-acc" stroke-width="3" cx="180" cy="142" r="14"/>
+<circle class="f-acc" cx="180" cy="142" r="4.5"/>
+<circle class="f-panel s-acc" stroke-width="3" cx="300" cy="112" r="14"/>
+<circle class="f-acc" cx="300" cy="112" r="4.5"/>
+<path class="s-acc" stroke-width="3" d="M130 262H190"/>
+<path class="f-acc" d="M198 262L189 257V267Z"/>
+<path class="s-gold" stroke-width="3" d="M130 262V202"/>
+<path class="f-gold" d="M130 194L125 203H135Z"/>
+<path class="s-line a-dash" stroke-width="2" d="M170 262A40 40 0 0 0 145.4 225.1"/>
+<text class="t-label" x="204" y="267">x</text>
+<text class="t-label" x="112" y="206">y</text>
+<text class="t-label" x="170" y="240">θ</text>
+</svg>

@@ -1,0 +1,1069 @@
+{
+ "id": "robotics-basics",
+ "title": "Robotics Basics",
+ "world": "The First Hangar",
+ "mentor": {
+  "name": "AXIS-3",
+  "character": "Takes every robot apart to show you how it works."
+ },
+ "summary": "No code needed. Discover what a robot is made of and what each part does: the body, the senses, the muscles, the brain and the power, then plan your first robot step by step.",
+ "level": "BEGINNER",
+ "type": "NO CODE",
+ "hours": 7,
+ "accent": "#36d7b7",
+ "language": "none",
+ "areas": [
+  "basics",
+  "hardware",
+  "systems"
+ ],
+ "order": 3,
+ "chapters": [
+  {
+   "n": 0,
+   "title": "What Is a Robot?",
+   "lessons": [
+    {
+     "id": "rb0-1",
+     "title": "Sense, Think, Act",
+     "goal": "Name the three jobs every robot does, over and over.",
+     "theory": "A robot is a machine that does three jobs, again and again, many times every second.\n\n- **Sense**: it measures the world with sensors. A camera sees, a bumper feels a wall, a counter on each wheel measures how far it turned.\n- **Think**: a small computer reads those measurements and decides what to do next. This part is often called the controller.\n- **Act**: motors and other actuators move the robot, or move something in the world, such as wheels, an arm or a gripper.\n\nThen the loop starts again. The robot senses the result of what it just did and adjusts. This is the **sense, think, act loop**, and it is the heart of every robot, from a robot vacuum to a Mars rover.\n\nTake a robot vacuum. Its bumper hits a chair leg (sense). Its computer decides to back up and turn (think). Its wheel motors drive it away (act). A moment later it checks the bumper again.\n\nKeep this loop in mind for the whole course. Chapter 1 looks at the body, chapter 2 at the senses, chapter 3 at the muscles, and chapter 4 at the brain that ties them together. When you later write robot code in Python for Robotics, most programs you write will be one turn of this loop, repeated for as long as the robot runs.",
+     "task": "A lawn-mowing robot is cutting grass. A rain sensor on top detects water, and the robot drives back to its shelter. Which part of this is the **think** step?",
+     "hint": "Ask which part turns a measurement into a choice. Measuring is sensing, and moving is acting.",
+     "xp": 20,
+     "check": {
+      "type": "choice",
+      "options": [
+       "The rain sensor detecting water on its surface",
+       "The wheel motors driving the robot back to its shelter",
+       "The computer deciding that rain means it is time to go home",
+       "The spinning blades cutting the grass"
+      ],
+      "answer": 2,
+      "why": [
+       "Detecting water is measuring the world, so it is the sense step. The decision comes after it.",
+       "Turning the wheels changes the world, so it is the act step. It carries out a decision that was already made.",
+       "Right. Turning a measurement into a choice about what to do next is the think step.",
+       "Spinning blades change the world by cutting grass, so they are an act step, not a decision."
+      ],
+      "explain": "The sensor senses, the computer thinks and the motors act. The decision \"rain, so go home\" is the think step that links the other two."
+     }
+    },
+    {
+     "id": "rb0-2",
+     "title": "Robot or Not?",
+     "goal": "Use the sense, think, act test to tell a robot from a machine that only moves.",
+     "theory": "Lots of machines move, but not every machine is a robot. Engineers argue about the exact line, so in this course we use a simple test built on the loop from the last mission: a robot **senses** its surroundings, **decides** something by itself, and **acts** on the physical world.\n\nTry the test on a few machines.\n\n- A basic **toaster** heats bread for a set time and pops it up. It does not check the bread or change its plan. It only acts, so it is not a robot.\n- A **remote-control car** drives fast, but every decision comes from the person holding the controller. The car senses nothing and decides nothing. Not a robot.\n- A **robot vacuum** feels walls, measures how far it has gone and picks its own path around the room. It senses, decides and acts. A robot.\n- A **chatbot** can make decisions, but it has no body and moves nothing in the physical world. Not a robot, although it could become the brain of one.\n\nNotice that looks do not matter. A robot does not need a face, arms or legs. A plain box on wheels that avoids walls on its own is more of a robot than a metal figure that only plays a recording.\n\nThe question to ask is always the same: does it close the loop by itself? In other words, does what it senses change what it does?",
+     "task": "Which of these machines passes the robot test from this mission?",
+     "hint": "For each machine, ask whether anything it measures changes what it does.",
+     "xp": 20,
+     "check": {
+      "type": "choice",
+      "options": [
+       "A greenhouse window that measures the air temperature and opens itself when it gets too hot",
+       "A toy boat that turns only when you move the stick on its radio controller",
+       "A music box that plays the same tune every time you wind it up",
+       "A statue shaped like a person that turns its head and plays a recorded message every hour"
+      ],
+      "answer": 0,
+      "why": [
+       "Right. It senses the temperature, decides that it is too hot and acts by opening. It closes the loop by itself.",
+       "Every decision comes from the person with the controller, just like the remote-control car. The boat moves but decides nothing.",
+       "The music box only acts. It measures nothing, so nothing it senses can change what it does.",
+       "Looks do not matter. It runs on a timer and senses nothing, so it never changes what it does because of the world around it."
+      ],
+      "explain": "The window senses the temperature, decides it is too hot and acts by opening. It is a very simple robot, but it closes the loop on its own."
+     }
+    },
+    {
+     "id": "rb0-3",
+     "title": "Kinds of Robots",
+     "goal": "Recognise the main families of robots and match one to a job.",
+     "theory": "Robots come in many shapes, and the shape follows the job. Here are the main families you will meet.\n\n- **Robot arms** (also called manipulators) are bolted to one spot and move a tool through space. Factories use them to weld car bodies, paint and pack boxes.\n- **Mobile robots** move around on wheels or tracks: robot vacuums, warehouse robots that carry shelves, delivery robots on pavements.\n- **Drones** are flying robots. Most use four or more spinning propellers and can hover in place, which is great for filming, inspection and mapping.\n- **Humanoids** have a body shaped like a person, with two legs and two arms, so they can work in places built for people, with stairs and doorways. They are among the hardest robots to build and balance.\n- **Underwater robots** explore oceans, pipes and ship hulls. Radio signals barely travel through water, so some are steered through a long cable from a ship (these are called ROVs), while others travel on their own (called AUVs).\n- **Space robots** include the Mars rovers and the robot arm on the International Space Station, which grabs visiting cargo spacecraft.\n\nMany robots mix families. A mobile manipulator is an arm on a wheeled base, and a legged robot can carry an arm on its back.\n\nThe academy has courses for several of these: Kinematics and Dynamics and Manipulation and Grasping for arms, Aerial Robots for drones, and Humanoid Robotics for humanoids.",
+     "task": "A company needs a robot to inspect the inside of a long pipe on the sea floor, far from any ship, where no radio signal can reach it. Which kind of robot fits best?",
+     "hint": "Think about where the robot works and how anyone could talk to it there.",
+     "xp": 20,
+     "check": {
+      "type": "choice",
+      "options": [
+       "A drone with four propellers",
+       "An underwater vehicle steered by radio from the shore",
+       "A robot arm bolted to a factory floor",
+       "An autonomous underwater vehicle (AUV) that travels on its own"
+      ],
+      "answer": 3,
+      "why": [
+       "Drones are built to fly through air. Propellers made for air, and electronics open to the air, do not work under water.",
+       "Radio signals barely travel through water, so a robot deep under the sea cannot be steered by radio from far away.",
+       "An arm stays bolted to one spot. It cannot travel along a long pipe on the sea floor.",
+       "Right. With no ship nearby and no radio, the robot must find its own way, and that is what an AUV does."
+      ],
+      "explain": "Far from any ship and out of radio reach, nobody can steer the robot, so it has to travel on its own. That is exactly what an autonomous underwater vehicle does."
+     }
+    },
+    {
+     "id": "rb0-4",
+     "title": "From Remote Control to Fully Autonomous",
+     "goal": "Place a robot on the scale of autonomy, from remote control to full autonomy.",
+     "theory": "**Autonomy** means how much a robot decides by itself. It is not a yes or no question. It is a scale, and most real robots sit somewhere in the middle.\n\n- **Remote control** (also called teleoperation): a person makes every decision through a controller or a screen. Bomb-disposal robots and many surgical robots work like this. They carry cameras and sensors, but a human does the thinking.\n- **Assisted control**: the person gives the commands, and the robot helps with the details. A camera drone that holds its position in the wind while you steer it is a good example.\n- **Supervised autonomy**: the robot does the job by itself, while a person watches, sets goals and steps in when something goes wrong. Many warehouse robots and the Mars rovers work mostly like this.\n- **Full autonomy**: the robot handles the whole job with no person watching, even when surprises happen. This is the hardest level to reach safely.\n\nWhy not make everything fully autonomous? Because each step up the scale needs better sensors, better software and much more testing. Sometimes a human in charge is simply the safer choice.\n\nDistance can push a robot up the scale. A radio signal needs between about 3 and 22 minutes to travel from Earth to Mars, depending on where the two planets are. A driver on Earth could never steer around a rock in time, so Mars rovers plan short drives themselves, then wait for new goals.",
+     "task": "A farm robot drives along rows of crops by itself and pulls out weeds. A farmer checks on it from a tablet, chooses which field it works in and takes over when it gets stuck. Which level of autonomy is this?",
+     "hint": "Ask who makes the moment-to-moment decisions, and what the person's job is.",
+     "xp": 20,
+     "check": {
+      "type": "choice",
+      "options": [
+       "Remote control, because a person is involved",
+       "Supervised autonomy",
+       "Full autonomy, because it drives by itself",
+       "Assisted control"
+      ],
+      "answer": 1,
+      "why": [
+       "In remote control a person makes every decision. Here the robot drives and weeds by itself, and the farmer only sets goals and steps in.",
+       "Right. The robot does the work by itself, and a person watches, sets goals and steps in when needed.",
+       "Full autonomy means nobody needs to watch or step in. This farmer chooses the field and takes over when the robot gets stuck.",
+       "In assisted control the person gives the commands and the robot only helps with details. Here the robot makes the moment-to-moment decisions itself."
+      ],
+      "explain": "The robot makes its own moment-to-moment decisions while a person sets goals and steps in when something goes wrong. That is supervised autonomy."
+     }
+    },
+    {
+     "id": "rb0-5",
+     "title": "Where Robots Work",
+     "goal": "Recognise the jobs robots do well today, and the ones they still find hard.",
+     "theory": "Robots do best at jobs people describe with three words: **dull, dirty and dangerous**.\n\n- **Dull**: the same motion thousands of times a day, such as welding car bodies or packing boxes. A robot does not get bored or tired, and it repeats a motion very precisely.\n- **Dirty**: cleaning sewer pipes, spraying paint, working in dust or mud.\n- **Dangerous**: handling bombs, inspecting nuclear plants, searching collapsed buildings, exploring the deep sea and other planets.\n\nSome places where you find robots today:\n\n- **Factories**: arms that weld, paint, assemble and pack. Car factories are among the biggest users.\n- **Warehouses**: mobile robots that bring shelves to workers, and arms that pick items.\n- **Hospitals**: surgical robots that help a surgeon make small, steady movements, and robots that carry supplies down corridors.\n- **Farms**: robots that milk cows, pick fruit or remove weeds.\n- **Homes**: robot vacuums and lawn mowers.\n- **Exploration**: rovers, underwater vehicles and drones that go where people cannot easily go.\n\nRobots still struggle with jobs that change all the time and need judgement, a careful touch or kindness, such as folding a pile of mixed laundry or caring for a patient. For those jobs a robot usually helps a person instead of replacing them.\n\nAs you go through this course, notice how the right body, senses and muscles depend on the job.",
+     "task": "Which of these jobs is the best fit for a robot today?",
+     "hint": "Remember the three words from the briefing, and the kind of job robots still struggle with.",
+     "xp": 20,
+     "check": {
+      "type": "choice",
+      "options": [
+       "Comforting a scared child in a hospital waiting room",
+       "Sorting a messy pile of mixed laundry and folding each piece",
+       "Checking the inside of a nuclear reactor for cracks",
+       "Deciding which patients in a busy clinic a doctor should see first"
+      ],
+      "answer": 2,
+      "why": [
+       "This needs kindness and judgement that change with every child. Robots still struggle with that kind of job.",
+       "Every piece of laundry is a different floppy shape. A task that changes all the time and needs a careful touch is still very hard for robots.",
+       "Right. It is dangerous for people, and the robot only has to look and measure. Dangerous is one of the three Ds.",
+       "This needs judgement about people, and it is a decision rather than a physical job. Robots still struggle with it."
+      ],
+      "explain": "Inspecting a nuclear reactor is dangerous for people, and the robot only has to look and measure. Dangerous jobs are one of the three Ds where robots shine."
+     }
+    },
+    {
+     "id": "rb0-6",
+     "title": "Safety Around Robots",
+     "goal": "Learn the safety rules around robots and work out how far a robot moves before it can react.",
+     "theory": "Robots are strong and fast, and they do not know you are there unless a sensor tells them. So safety comes first, every time.\n\nRules people follow around robots:\n\n- Big **factory arms** work inside fences or behind light curtains, beams of light that stop the robot if someone walks through.\n- **Cobots** (collaborative robots) are built to work next to people. They move more slowly and stop when they feel an unexpected push.\n- Every robot should have an **emergency stop**: a big red button that cuts power to the motors at once. Find it before you switch a robot on.\n- Never reach into a powered robot's working space. Robots can start moving suddenly, for example when a program starts or a sensor gives a wrong reading.\n- Keep fingers away from gears, wheels and grippers. These **pinch points** can trap a finger.\n\nStopping is never instant. First the robot must notice the person and decide to stop. During that **reaction time** it keeps moving at full speed. Only then does braking begin, and braking adds even more distance. The distance covered during the reaction time is:\n\n`distance = speed × reaction time`\n\nFor example, a robot moving at 2 m/s with a reaction time of 0.5 s travels 2 × 0.5 = 1 m before it even starts to brake. This is why fast robots need sensors that see far ahead, and why slower robots are safer near people.",
+     "task": "A delivery robot drives along a pavement at 1.2 m/s. Its sensors and computer need 0.25 s to notice a person and start braking. How far does it travel during that reaction time, before braking even starts? Answer in centimetres (1 m = 100 cm).",
+     "hint": "Multiply the speed by the reaction time to get metres, then turn metres into centimetres.",
+     "xp": 35,
+     "check": {
+      "type": "number",
+      "answer": 30,
+      "unit": "cm",
+      "tolerance": 0.5,
+      "explain": "distance = speed × reaction time = 1.2 m/s × 0.25 s = 0.3 m. In centimetres: 0.3 × 100 = 30 cm. Braking then adds more distance on top of that."
+     }
+    }
+   ]
+  },
+  {
+   "n": 1,
+   "title": "The Body",
+   "lessons": [
+    {
+     "id": "rb1-1",
+     "title": "The Chassis",
+     "goal": "Know what a chassis does and how to keep a robot from tipping over.",
+     "theory": "The **chassis** is the robot's skeleton: the frame that everything else attaches to. Motors, wheels, battery, sensors and the computer all bolt onto it. A good chassis does three jobs.\n\n- It is **stiff**. If the frame bends, the wheels point in slightly different directions, sensors shift and measurements go wrong.\n- It is **light enough**. Every extra gram has to be carried by the motors and paid for with battery.\n- It keeps the robot **stable**. The **centre of gravity** is the point where the robot's weight balances. Keep it low and between the wheels, and the robot will not tip over on a slope or when it stops quickly.\n\nCommon chassis materials:\n\n- **Aluminium**: strong, stiff and light. Used in many competition and research robots.\n- **Plastic sheet** such as acrylic: cheap and easy to cut, but it can crack.\n- **3D-printed plastic**: any shape you can draw, good for prototypes and small robots.\n- **Wood or plywood**: cheap and easy to work with, great for a first robot.\n- **Carbon fibre**: very light and stiff, popular on drones, but more expensive.\n\nA simple trick for stability: put the heaviest part, usually the battery, as low as you can and near the middle. A tall robot with its battery on top tips over much more easily than the same robot with the battery at the bottom.",
+     "task": "Your wheeled robot keeps tipping forward when it brakes hard. Which change to the body helps most?",
+     "hint": "Think about where the centre of gravity should be on a robot that does not tip.",
+     "xp": 20,
+     "check": {
+      "type": "choice",
+      "options": [
+       "Move the battery to the top of the robot so the wheels press harder on the floor",
+       "Mount the battery lower and closer to the middle of the chassis",
+       "Build the chassis from a thinner, more flexible sheet",
+       "Add a tall sensor mast at the front of the robot"
+      ],
+      "answer": 1,
+      "why": [
+       "Weight up high raises the centre of gravity, so the robot tips over even more easily.",
+       "Right. The heaviest part low and central lowers the centre of gravity and keeps it between the wheels.",
+       "A flexible frame does not help stability. It bends, which knocks the wheels and sensors out of line.",
+       "A tall mast at the front adds weight high up and forward, which makes tipping forward worse."
+      ],
+      "explain": "Moving the heaviest part low and to the middle lowers the centre of gravity and keeps it between the wheels, so the robot resists tipping when it stops."
+     }
+    },
+    {
+     "id": "rb1-2",
+     "title": "Wheels, Tracks or Legs?",
+     "goal": "Choose between wheels, tracks and legs for the ground a robot must cross.",
+     "theory": "How a robot moves across the ground is called **locomotion**. There are three main choices, and each fits different ground.\n\n- **Wheels** are simple, cheap and efficient. On smooth floors and roads they use the least energy and are easy to control. They struggle with steps, deep mud, sand and big rocks.\n- **Tracks**, like a tank or a digger, are loops of belt running around several wheels. They spread the robot's weight over a big area, so it does not sink into mud, snow or sand, and they grip well on rubble and slopes. The price: they turn by skidding, which wastes energy and wears the tracks, and they are heavier and slower.\n- **Legs** can step over obstacles, climb stairs and walk on very rough ground where wheels and tracks get stuck. They are also the hardest to build and control, because the robot must keep its balance at every step, and they use a lot of energy.\n\nA good rule: choose the simplest option that handles the ground. If the floor is flat, wheels win. If the ground is soft or broken, consider tracks. Choose legs only when the robot must step over things, such as stairs or fallen trees.\n\nSome robots mix these ideas. The Mars rovers roll on six wheels with a special rocking suspension that lets them climb over rocks, and some legged robots have wheels on their feet.",
+     "task": "A rescue robot must cross a wide field of soft, deep mud to reach a flooded building. There are no stairs or walls to climb on the way. Which locomotion fits best?",
+     "hint": "Think about which option keeps a heavy robot from sinking into soft ground.",
+     "xp": 20,
+     "check": {
+      "type": "choice",
+      "options": [
+       "Legs, because they are the most advanced option",
+       "Small, narrow wheels, because wheels are the most efficient",
+       "Any of them, because locomotion does not depend on the ground",
+       "Tracks"
+      ],
+      "answer": 3,
+      "why": [
+       "Legs are for stepping over things like stairs. They are complex and use a lot of energy, and here there is nothing to step over.",
+       "Wheels are efficient on hard floors, but narrow wheels press deep into soft mud and get stuck.",
+       "The ground decides which locomotion works. Each option has ground it handles well and ground where it gets stuck.",
+       "Right. Tracks spread the weight over a big area so the robot does not sink, and they grip well on soft ground."
+      ],
+      "explain": "Tracks spread the robot's weight over a large area so it does not sink, and they grip well in mud. With nothing to climb, legs are not needed."
+     }
+    },
+    {
+     "id": "rb1-3",
+     "title": "Differential Drive",
+     "goal": "See how a two-wheeled robot steers, and work out how far its wheels roll when it spins in place.",
+     "theory": "The most common way to build a small wheeled robot is **differential drive**. It has two driven wheels, one on each side, each with its own motor. A free-rolling **caster** wheel or ball at the front or back stops it from tipping. There is no steering wheel. The robot steers by giving its two wheels different speeds.\n\n- Both wheels at the same speed forward: it drives straight.\n- Left wheel faster than the right: it curves to the right.\n- Right wheel faster than the left: it curves to the left.\n- Same speed, opposite directions: it **spins in place** around the point midway between the wheels.\n\nThe distance between the two wheels, measured between the middles of the tyres, is called the **track width**. When the robot spins in place, each wheel rolls around a circle whose diameter equals the track width. So for one full turn, each wheel rolls:\n\n`distance = π × track width`\n\nwith π ≈ 3.1416. A robot with a track width of 20 cm rolls each wheel about 3.1416 × 20 ≈ 62.8 cm to spin once all the way around.\n\nOne thing a differential drive cannot do is slide sideways. To move to the side, it must turn first. Robot vacuums, many warehouse robots and the TurtleBot research robot all use this layout. You will write its full equations in the Kinematics and Dynamics course.",
+     "task": "Your differential drive robot has a track width of 15 cm. It spins in place through one full turn. How far does each wheel roll? Answer in centimetres, rounded to one decimal place.",
+     "hint": "Each wheel travels around a circle as wide as the track width. Use the formula from the briefing.",
+     "xp": 25,
+     "check": {
+      "type": "number",
+      "answer": 47.1,
+      "unit": "cm",
+      "tolerance": 0.5,
+      "explain": "Spinning in place, each wheel rolls around a circle whose diameter is the track width. distance = π × track width = 3.1416 × 15 cm ≈ 47.12 cm, which rounds to 47.1 cm."
+     }
+    },
+    {
+     "id": "rb1-4",
+     "title": "Joints: Turning and Sliding",
+     "goal": "Tell a revolute joint from a prismatic joint.",
+     "theory": "A robot arm is a chain of stiff pieces called **links**, connected by **joints**. Each joint lets two links move against each other in one way. Two joint types cover almost every robot you will meet.\n\n- A **revolute joint** rotates, like a hinge or your elbow. Its position is an angle, in degrees. Robot arm shoulders, elbows and wrists are revolute joints, and so is a door hinge.\n- A **prismatic joint** slides in a straight line, like a drawer or a telescope. Its position is a distance, in millimetres or centimetres. A 3D printer head sliding along a rail and a forklift raising its forks both use prismatic joints.\n\nA simple way to tell them apart: if the part swings along an arc, the joint is revolute. If it moves straight in and out, or straight up and down, the joint is prismatic.\n\nEach joint is usually driven by its own motor. Motors spin, so a revolute joint can be driven by a motor through gears. A prismatic joint often uses a motor that turns a long screw or pulls a belt, which turns the spinning into straight-line motion. The motor spins either way; the joint type is about how the two links move.\n\nYour own shoulder can swing forward, swing sideways and twist. Engineers often copy it by placing two or three revolute joints close together. You will describe joints with math in Kinematics and Dynamics.",
+     "task": "A warehouse robot has a lift that raises a shelf straight up by 30 cm without tilting it. What type of joint is the lift?",
+     "hint": "Picture the path the shelf takes: an arc or a straight line?",
+     "xp": 20,
+     "check": {
+      "type": "choice",
+      "options": [
+       "Prismatic, because the shelf moves in a straight line",
+       "Revolute, because the lift is driven by a motor, and motors spin",
+       "Revolute, because its position is measured as a distance in centimetres",
+       "It is not a joint at all, because nothing rotates"
+      ],
+      "answer": 0,
+      "why": [
+       "Right. The shelf slides straight up without swinging, so the lift is a prismatic joint.",
+       "The motor inside may spin, but the joint type is about how the two parts move against each other. The shelf moves straight up, not along an arc.",
+       "A position measured as a distance belongs to a prismatic joint. A revolute joint is measured as an angle.",
+       "Joints do not have to rotate. A prismatic joint slides in a straight line, which is exactly what this lift does."
+      ],
+      "explain": "The shelf moves straight up without swinging along an arc, so the lift is a prismatic joint. Its position is a distance, here 30 cm."
+     }
+    },
+    {
+     "id": "rb1-5",
+     "title": "Degrees of Freedom",
+     "goal": "Count the degrees of freedom of a robot arm.",
+     "theory": "**Degrees of freedom** (DOF) count the independent ways something can move. Each one is a number you would need to say exactly where it is.\n\nA box lying on a flat floor has **3 DOF**: it can slide forward and back, slide left and right, and turn to face a new direction. An object floating freely in space, such as a drone, has **6 DOF**: three ways to move (forward, sideways, up) and three ways to rotate (roll, pitch and yaw).\n\nFor a robot arm, counting is easy: each revolute or prismatic joint adds exactly **1 DOF**. An arm with three revolute joints has 3 DOF, and adding a prismatic joint makes 4.\n\nWhy does the number matter? To put its tool at any position within reach and point it in any direction, an arm needs at least 6 DOF. That is why so many factory arms have exactly six joints. With fewer, some poses are impossible. A 4 DOF arm can still pick boxes off a table, but it cannot tilt a box to any angle you like.\n\nOne rule for counting arms in this course: count the joints that move the arm and its tool through space. Do **not** count the gripper opening and closing. Engineers usually treat the gripper as a separate part and list it on its own.\n\nDegrees of freedom come back in Kinematics and Dynamics, Manipulation and Grasping, and Aerial Robots.",
+     "task": "A robot arm stands on a straight rail and can slide along it. On the rail sits a base that turns left and right, then a shoulder, an elbow, a wrist that tilts up and down, a wrist that twists, and finally a gripper that opens and closes. Each joint moves in one way only. How many degrees of freedom does the arm have? Answer with a whole number.",
+     "hint": "List every joint that moves the arm through space and count 1 for each. Check the rule about the gripper.",
+     "xp": 25,
+     "check": {
+      "type": "number",
+      "answer": 6,
+      "unit": "DOF",
+      "tolerance": 0,
+      "explain": "Count one DOF per joint: rail slide (1) + base turn (1) + shoulder (1) + elbow (1) + wrist tilt (1) + wrist twist (1) = 6 DOF. The gripper opening and closing is not counted."
+     }
+    },
+    {
+     "id": "rb1-6",
+     "title": "End Effectors: Hands and Tools",
+     "goal": "Pick the right gripper or tool for an object and a job.",
+     "theory": "The part at the end of a robot arm that touches the world is the **end effector**. The arm brings it to the right place; the end effector does the actual job. Choosing it well matters as much as choosing the arm.\n\n- **Two-finger grippers** close on an object from both sides, like a pair of pliers. Simple and strong, good for boxes, blocks and parts with flat sides.\n- **Soft grippers** have fingers made of rubbery material that bend around an object. They can pick up fruit, eggs and odd shapes without crushing them.\n- **Suction cups** use a vacuum to hold an object from one side. They are fast and great for smooth, flat, sealed surfaces such as cardboard boxes, glass and phones. They fail on things that let air through, such as fabric or a net bag, and on rough or very curved surfaces.\n- **Magnetic grippers** hold iron and steel parts, and nothing else.\n- **Tools** replace the hand entirely: a welding torch, a paint spray gun, a screwdriver or a drill.\n\nSome factory robots use a **tool changer**, which lets the arm put down one end effector and pick up another in seconds.\n\nThe rule of thumb: look at the object first. What is it made of, what shape is it, how fragile is it, and what must happen to it? Then pick the end effector. You will study grasping in depth in Manipulation and Grasping.",
+     "task": "A robot on a packing line must pick up flat, sealed cardboard boxes from above, as fast as possible. Which end effector fits best?",
+     "hint": "Look at the object: its surface, its shape and the side the robot reaches it from.",
+     "xp": 20,
+     "check": {
+      "type": "choice",
+      "options": [
+       "A magnetic gripper",
+       "A soft gripper made for picking fruit",
+       "A suction cup",
+       "A welding torch"
+      ],
+      "answer": 2,
+      "why": [
+       "Magnets only hold iron and steel. Cardboard is not magnetic.",
+       "Soft grippers shine with fragile, odd shapes. Flat sealed boxes do not need that, and closing fingers around them is slower than grabbing them from above.",
+       "Right. Flat, smooth, sealed boxes are the ideal case for suction, and a cup grabs them from above in one quick move.",
+       "A welding torch is a tool that joins metal. It cannot hold anything."
+      ],
+      "explain": "Flat, smooth, sealed boxes are the ideal case for suction. A suction cup grabs them from above in one quick move."
+     }
+    }
+   ]
+  },
+  {
+   "n": 2,
+   "title": "The Senses",
+   "lessons": [
+    {
+     "id": "rb2-1",
+     "title": "Why Robots Need Senses",
+     "goal": "Know why robots need sensors, and tell internal sensors from external ones.",
+     "theory": "Without sensors a robot is blind. It can only follow a fixed plan, like the toaster in chapter 0, and it has no idea whether the plan is working. Sensors give the think step something to work with.\n\nRobot sensors fall into two groups.\n\n- **External sensors** measure the world around the robot: the distance to a wall, a camera picture, a bumper touching something, a GPS position.\n- **Internal sensors** measure the robot itself: how far each wheel has turned, how the body is tilted, how hot a motor is, how much charge is left in the battery.\n\nA robot needs both. The internal ones tell it what it is doing; the external ones tell it what is out there.\n\nSensors are never perfect. Every reading has a little **noise**, small random errors that make the number jump around. Most sensors also have a limited **range**, a smallest and largest distance they can measure, and a **rate**, how many readings they give per second. When you pick a sensor, you trade these against price, size and power.\n\nThat is why robots often carry several sensors that check each other. A camera can be confused by darkness, while an ultrasonic distance sensor does not care about light at all. Combining sensors is called **sensor fusion**, and it has a whole course of its own: State Estimation and Sensor Fusion. Cleaning up noisy readings is the heart of Signals, Noise and Filtering.",
+     "task": "Which of these is an **internal** sensor?",
+     "hint": "Ask whether the sensor measures the robot's own body or something outside it.",
+     "xp": 20,
+     "check": {
+      "type": "choice",
+      "options": [
+       "A camera that looks for people in front of the robot",
+       "A bumper switch that clicks when the robot touches a wall",
+       "A distance sensor pointing at the floor to spot the top of a staircase",
+       "A sensor that measures how much charge is left in the robot's battery"
+      ],
+      "answer": 3,
+      "why": [
+       "People in front of the robot are part of the world outside it, so the camera is an external sensor.",
+       "The bumper tells the robot about a wall, something outside it, so it is an external sensor.",
+       "A staircase is part of the world around the robot, so this distance sensor is external.",
+       "Right. The battery is part of the robot, so a sensor that measures its charge is an internal sensor."
+      ],
+      "explain": "The battery charge is a fact about the robot itself, not about the world around it. That makes this an internal sensor."
+     }
+    },
+    {
+     "id": "rb2-2",
+     "title": "Measuring Distance",
+     "goal": "Compare ultrasonic, infrared and lidar sensors, and turn an echo time into a distance.",
+     "theory": "Knowing how far away things are is one of the first things a robot needs. Three sensors do this job, and each has trade-offs.\n\n- **Ultrasonic** sensors send a short click of sound, too high for you to hear, and time how long the echo takes to come back. They are cheap and do not care about light or colour. But their beam is wide, so they cannot tell exactly where an object is, and soft things like curtains, or walls hit at a steep angle, can swallow or deflect the echo.\n- **Infrared** (IR) sensors send out invisible light and measure the reflection. They are small, cheap and fast, but most only reach a short range, strong sunlight can blind them, and dark or shiny surfaces can fool them.\n- **Lidar** sends pulses of laser light. It is precise and reaches far, and a spinning lidar measures distances all the way around the robot many times a second. It costs more and can be fooled by glass and mirrors.\n\nUltrasonic sensors need a simple calculation. Sound travels through air at about **343 m/s** at room temperature. The sound goes to the object and back, so it covers the distance twice:\n\n`distance = speed of sound × echo time ÷ 2`\n\nFor example, an echo time of 0.002 s gives 343 × 0.002 ÷ 2 = 0.343 m, or 34.3 cm. Many lidars use the same idea with light. You will meet lidar again in SLAM, Mapping While Moving.",
+     "task": "An ultrasonic sensor on your robot hears the echo 0.004 s after sending its click. Use a speed of sound of 343 m/s. How far away is the object? Answer in centimetres, rounded to one decimal place.",
+     "hint": "Multiply the speed of sound by the echo time, and remember that the sound made a round trip. Then turn metres into centimetres.",
+     "xp": 25,
+     "check": {
+      "type": "number",
+      "answer": 68.6,
+      "unit": "cm",
+      "tolerance": 0.7,
+      "explain": "distance = 343 m/s × 0.004 s ÷ 2 = 1.372 m ÷ 2 = 0.686 m. In centimetres: 0.686 × 100 = 68.6 cm. The ÷ 2 is there because the sound travels to the object and back."
+     }
+    },
+    {
+     "id": "rb2-3",
+     "title": "Cameras",
+     "goal": "Know what a camera tells a robot, and what it cannot tell on its own.",
+     "theory": "A **camera** gives a robot more information than any other sensor. One picture shows colours, shapes, text, faces, lines on the floor and signs on the wall. That richness is also the challenge: a picture is just a grid of millions of coloured dots called **pixels**, and the robot's computer has to work hard to turn those dots into meaning, such as \"there is a person ahead\".\n\nThings to know about cameras:\n\n- An ordinary camera does **not measure distance** directly. A big car far away and a toy car up close can look exactly the same size in a picture.\n- **Stereo cameras** use two lenses side by side, like your two eyes, and work out distance from the small differences between the two pictures. **Depth cameras** send out their own light to measure a distance for every pixel.\n- Cameras depend on **light**. In the dark, in glare, or when the sun shines straight into the lens, the picture can become useless.\n- Working through pictures takes a lot of computing power, far more than reading a single distance sensor.\n\nRobots use cameras to follow lines, read markers and codes, recognise objects, find people and check parts for faults on a factory line. The Computer Vision for Robots course teaches you to do this in Python, step by step.",
+     "task": "Your robot has one ordinary camera. It sees a red ball in the picture. What can it **not** tell from that single picture alone?",
+     "hint": "Think about a big thing far away and a small thing close up.",
+     "xp": 20,
+     "check": {
+      "type": "choice",
+      "options": [
+       "How far away the ball is",
+       "That the ball is red",
+       "Whether the ball is on the left or the right of the picture",
+       "That the object is round"
+      ],
+      "answer": 0,
+      "why": [
+       "Right. One ordinary camera does not measure distance: a big ball far away and a small ball up close can look the same.",
+       "Colour is exactly what a camera captures well. Every pixel records a colour.",
+       "Where something sits in the picture is right there in the pixels, so the camera can tell left from right.",
+       "Shape is visible in a picture. Finding round objects is a classic camera task."
+      ],
+      "explain": "An ordinary camera does not measure distance, because a big ball far away and a small ball up close can look the same. For distance, the robot needs a stereo or depth camera, or another sensor."
+     }
+    },
+    {
+     "id": "rb2-4",
+     "title": "The IMU: Tilt and Turning",
+     "goal": "Know what an accelerometer and a gyroscope measure, and turn a gyro reading into an angle.",
+     "theory": "An **IMU** (inertial measurement unit) is a small chip that feels how the robot moves, without looking at anything outside. Phones, drones, game controllers and balancing robots all have one. It combines two sensors.\n\n- An **accelerometer** measures acceleration: speeding up, slowing down and the pull of gravity. When the robot stands still, the only thing it feels is gravity pulling down, so it knows which way is down. That tells the robot how much it is **tilted**.\n- A **gyroscope** (gyro) measures how fast the robot is **turning**, in degrees per second. It says \"I am turning at 30 degrees per second\", not \"I am facing north\".\n\nTo know how far the robot has turned, you add up the turning over time. When the turning rate is steady:\n\n`angle turned = turning rate × time`\n\nA gyro reading 20 °/s for 3 s means the robot turned 20 × 3 = 60 degrees.\n\nThere is a catch: **drift**. Every gyro reading has a tiny error, and adding the readings up also adds up the errors. After a few minutes the angle can be several degrees wrong, even if the robot sat still. So robots correct the gyro with other sensors, such as the accelerometer for tilt or a compass for heading.\n\nDrones read their IMU hundreds or even thousands of times per second to stay level. You will combine IMU readings with other sensors in State Estimation and Sensor Fusion.",
+     "task": "A robot vacuum turns on the spot. Its gyroscope reads a steady 36 °/s for 2.5 s. How many degrees has it turned? Answer in degrees.",
+     "hint": "The gyro gives degrees per second. Multiply by the number of seconds.",
+     "xp": 25,
+     "check": {
+      "type": "number",
+      "answer": 90,
+      "unit": "°",
+      "tolerance": 1,
+      "explain": "angle turned = turning rate × time = 36 °/s × 2.5 s = 90°. The robot has made a quarter turn."
+     }
+    },
+    {
+     "id": "rb2-5",
+     "title": "Wheel Encoders and Odometry",
+     "goal": "Turn encoder ticks into wheel turns, and wheel turns into distance.",
+     "theory": "A **wheel encoder** is a sensor on a wheel or motor shaft that counts how far it turns. Inside, a disc with slots or magnets passes a detector, and every slot or magnet gives a small pulse called a **tick**. The encoder has a fixed number of ticks per turn, for example 500. Count the ticks and you know how many turns the wheel made:\n\n`turns = ticks counted ÷ ticks per turn`\n\nIn each full turn, the wheel rolls forward by its circumference, the distance around its edge. So:\n\n`distance = turns × π × diameter`\n\nwith π ≈ 3.1416. A wheel 10 cm across that turns 4 times rolls about 4 × 3.1416 × 10 ≈ 125.7 cm.\n\nUsing the turns of both wheels to work out where the robot has gone is called **odometry**. It is how a robot keeps track of its position with no outside help, like counting your steps with your eyes closed.\n\nLike the gyro, odometry drifts. If a wheel slips on a smooth floor or spins over a bump, or the tyre is slightly smaller than you think, the robot counts distance it did not really travel. Small errors add up, so after a long drive the robot can be quite far from where it thinks it is. Robots correct odometry with outside sensors such as lidar or cameras.\n\nYou will build odometry for a two-wheeled robot in Kinematics and Dynamics.",
+     "task": "Your robot's wheel has a diameter of 6.5 cm. Its encoder gives 500 ticks for each full turn of the wheel, and during a drive it counts 2,500 ticks. How far did the wheel roll? Answer in centimetres, rounded to one decimal place.",
+     "hint": "First turn the ticks into full wheel turns. Each turn then rolls one circumference, π × diameter.",
+     "xp": 30,
+     "check": {
+      "type": "number",
+      "answer": 102.1,
+      "unit": "cm",
+      "tolerance": 1.0,
+      "explain": "turns = 2,500 ÷ 500 = 5. distance = turns × π × diameter = 5 × 3.1416 × 6.5 cm ≈ 102.1 cm, just over a metre."
+     }
+    },
+    {
+     "id": "rb2-6",
+     "title": "Touch and Force",
+     "goal": "Tell a touch switch from a force sensor, and know when a robot needs each.",
+     "theory": "Sometimes the simplest way to know you have hit something is to feel it. Robots use two kinds of touch sensing.\n\n- A **bumper switch** or **limit switch** is either on or off. When something presses it, a contact closes and the computer sees a click. Robot vacuums have a bumper all around the front. 3D printers and robot arms use limit switches to find the end of a rail when they start up. A switch is cheap and reliable, but it only says \"touching\" or \"not touching\".\n- A **force sensor** measures **how hard** something is pressing, as a number. A **load cell**, the same part that sits inside a kitchen scale, bends very slightly under force and turns that bending into a reading. Thin force-sensing pads can be stuck onto gripper fingers.\n\nForce sensing lets a robot be gentle. A gripper with force sensors on its fingers can squeeze an egg just hard enough to lift it without cracking it, and squeeze a heavy tool harder so it does not slip. Cobots use force sensing in their joints to notice when they bump into a person, and stop.\n\nTouch has one obvious limit: the robot only learns about an object once it is already touching it. So touch is usually the last line of defence behind distance sensors and cameras, or a way to handle objects gently once they are in hand. You will use force in Manipulation and Grasping.",
+     "task": "A fruit-picking robot must grip ripe peaches firmly enough to pull them off the branch, but without bruising them. Which sensor on the gripper fingers helps most?",
+     "hint": "The robot needs a number for how hard it squeezes, not just a yes or no.",
+     "xp": 20,
+     "check": {
+      "type": "choice",
+      "options": [
+       "A limit switch that clicks when the fingers touch the peach",
+       "A force sensor that measures how hard the fingers press",
+       "An ultrasonic distance sensor pointed at the peach",
+       "A gyroscope inside the gripper"
+      ],
+      "answer": 1,
+      "why": [
+       "A switch only says touching or not touching. It cannot tell how hard the fingers are squeezing.",
+       "Right. Firm but gentle means knowing how hard you squeeze, as a number, and that is what a force sensor measures.",
+       "It can tell how far away the peach is, but once the fingers close it says nothing about how hard they squeeze.",
+       "A gyroscope measures how fast the gripper turns, not how hard it presses on the fruit."
+      ],
+      "explain": "To be firm but gentle, the robot must know how hard it is squeezing, as a number. That is exactly what a force sensor measures."
+     }
+    },
+    {
+     "id": "rb2-7",
+     "title": "GPS and Choosing the Right Sensor",
+     "goal": "Know where GPS works and where it fails, and choose a set of sensors for a real job.",
+     "theory": "**GPS** works by receiving radio signals from satellites high above Earth. From the timing of several signals, a receiver works out where it is. Outdoors under open sky, an ordinary receiver like the one in a phone is usually accurate to a few metres. Special **RTK GPS** receivers can reach a few centimetres, which is why farm robots and survey drones use them.\n\nGPS needs a clear view of the sky. Indoors, underground, under water and even in narrow streets between tall buildings, the signals are blocked or bounce off walls. An indoor robot must find its position another way: odometry, lidar or cameras matched against a map, or markers on the walls.\n\nTo choose sensors, ask four questions. What must the robot know? Where does it work: indoors, outdoors, in sun, dark or dust? How precise and how fast must readings be? And what can you afford in money, size, weight and battery?\n\nThis chapter's sensors in one line each:\n\n- Ultrasonic: cheap distance, wide beam.\n- Infrared: tiny, short range, trouble in sunlight.\n- Lidar: precise distance all around, costs more.\n- Camera: rich pictures, no direct distance, needs light.\n- IMU: tilt and turning, drifts.\n- Encoders: wheel distance, drift when wheels slip.\n- Touch and force: contact, and how hard.\n\nMost real robots combine several, so that one covers another's weakness. Path Planning and Navigation shows how a robot uses them to find its way.",
+     "task": "A robot must carry parcels around a large indoor warehouse and always know where it is on the warehouse map, to within a few centimetres. Which set of sensors fits best?",
+     "hint": "First cross out anything that needs a view of the sky. Then look for a pair where one sensor fixes the other's weakness.",
+     "xp": 45,
+     "check": {
+      "type": "choice",
+      "options": [
+       "An ordinary GPS receiver for position, plus a bumper switch for walls",
+       "An IMU on its own, adding up its turning over time",
+       "Wheel encoders for odometry, plus a lidar matched against the warehouse map",
+       "Ultrasonic sensors only, because they are the cheapest distance sensors"
+      ],
+      "answer": 2,
+      "why": [
+       "GPS signals are blocked indoors, and an ordinary receiver is only accurate to a few metres anyway. A bumper only notices a wall after hitting it.",
+       "An IMU gives tilt and turning, but it drifts. On its own, the robot's idea of where it is gets worse and worse.",
+       "Right. Encoders track every move, and the lidar fixes their drift by matching the walls it sees against the map.",
+       "Ultrasonic sensors give rough distances with a wide beam. They help avoid obstacles, but they cannot place the robot on a map to within centimetres."
+      ],
+      "explain": "Indoors, GPS does not work. Encoders track the robot from moment to moment, and the lidar corrects their drift by matching the walls it sees against the map."
+     }
+    }
+   ]
+  },
+  {
+   "n": 3,
+   "title": "The Muscles",
+   "lessons": [
+    {
+     "id": "rb3-1",
+     "title": "Actuators",
+     "goal": "Know what an actuator is and the main kinds robots use.",
+     "theory": "If sensors are a robot's senses, **actuators** are its muscles. An actuator turns energy into motion. It is the part of the robot that does the **act** step of the loop.\n\n- **Electric motors** turn electrical energy from a battery into rotation. They are by far the most common actuator in robots, because they are clean, quiet, easy to control and run straight from a battery.\n- **Pneumatic** actuators use compressed air to push a piston.\n- **Hydraulic** actuators use oil at high pressure to push a piston with huge force.\n- **Solenoids** snap a metal rod in or out when current flows through a coil. They have just two positions, in and out, which makes them handy for latches and locks.\n\nMotion comes in two basic kinds: **rotary** (turning, like a wheel or an elbow) and **linear** (moving in a straight line, like a piston pushing out). Electric motors are naturally rotary; pneumatic and hydraulic cylinders are naturally linear. Gears, screws and belts can turn one kind into the other.\n\nA battery is not an actuator: it stores energy but makes nothing move. The same goes for the computer, which decides, and the sensors, which measure.\n\nWhen you choose an actuator, ask: how much force do I need, how fast must it move, how precisely must it stop in the right place, and how much power, weight and money can I spend? The next missions answer these questions for the most common choices.",
+     "task": "Which of these parts of a robot is an actuator?",
+     "hint": "An actuator is the part that makes something move. Ask which item actually creates motion.",
+     "xp": 20,
+     "check": {
+      "type": "choice",
+      "options": [
+       "The motor that opens and closes the gripper",
+       "The encoder that counts how far the wheels turn",
+       "The battery that stores the robot's energy",
+       "The computer that decides when to grab"
+      ],
+      "answer": 0,
+      "why": [
+       "Right. The gripper motor turns electrical energy into motion, which is the act step.",
+       "An encoder measures motion instead of creating it, so it is a sensor.",
+       "The battery stores energy for the actuators, but it makes nothing move by itself.",
+       "The computer does the think step. It decides, but the motors do the moving."
+      ],
+      "explain": "The gripper motor turns electrical energy into motion, which is the act step. Encoders sense, the computer thinks, and the battery only stores energy."
+     }
+    },
+    {
+     "id": "rb3-2",
+     "title": "DC Motors, Servos and Steppers",
+     "goal": "Know what DC motors, servos and stepper motors are each best at.",
+     "theory": "Three kinds of electric motor do most of the work in small robots.\n\n- A **DC motor** spins continuously when you connect it to power. More voltage gives more speed, and swapping the two wires makes it spin the other way. It is cheap and can spin very fast, often thousands of **RPM** (revolutions per minute), but on its own it has no idea where its shaft is pointing. It is the classic choice for driving wheels, usually through a gearbox.\n- A **servo** (hobby servo) is a small box with a DC motor, a gearbox, a position sensor and a little control circuit inside. You send it a target angle; it turns to that angle and holds it. Most hobby servos turn only about 180 degrees. They are perfect for small arm joints, steering and camera mounts.\n- A **stepper motor** moves in small, exact steps, commonly 200 steps per full turn, which is 1.8 degrees per step. Send it 50 steps and it turns exactly a quarter turn, without a position sensor. It also holds its position firmly when stopped, which is why 3D printers use steppers. It needs a separate driver board and a controller that counts the steps, and if the load is too heavy it can **skip steps** without noticing.\n\nQuick guide: to spin, use a DC motor. To go to an angle and hold it, use a servo. For exact positions with no sensor, use a stepper.",
+     "task": "You are building a small camera mount that must point the camera to any angle between 0 and 180 degrees and hold it there. You want the simplest part, with position control already built in. Which actuator fits best?",
+     "hint": "Which motor is a complete package that you simply send an angle to?",
+     "xp": 20,
+     "check": {
+      "type": "choice",
+      "options": [
+       "A DC motor with no gearbox",
+       "A solenoid",
+       "A stepper motor with 200 steps per turn",
+       "A hobby servo"
+      ],
+      "answer": 3,
+      "why": [
+       "A bare DC motor spins continuously and has no idea where its shaft is pointing, so it cannot hold an angle by itself.",
+       "A solenoid has only two positions, in and out. It cannot point a camera at any angle in between.",
+       "A stepper can reach exact angles, but it needs a separate driver and a controller counting steps. That is not the simplest part with control built in.",
+       "Right. A servo has a motor, gearbox, position sensor and control circuit in one box, so you just send it an angle."
+      ],
+      "explain": "A servo has a motor, gearbox, position sensor and control circuit in one box. You send it an angle, and it turns there and holds it, which is exactly what a camera mount needs."
+     }
+    },
+    {
+     "id": "rb3-3",
+     "title": "Gears: Trading Speed for Torque",
+     "goal": "Use a gear ratio to work out the speed and torque at the output of a gear pair.",
+     "theory": "A small DC motor spins fast but weakly. A robot wheel or arm joint usually needs the opposite: slow and strong. **Gears** make that trade.\n\nThe strength of a turning motion is called **torque**, a turning force. It is measured in **newton-metres** (N·m). Opening a tight jar lid takes torque.\n\nWhen a small gear drives a bigger one, the big gear turns more slowly but with more torque. The **gear ratio** tells you by how much:\n\n`gear ratio = teeth on the driven gear ÷ teeth on the driving gear`\n\nThe driving gear sits on the motor; the driven gear is the one it turns. A 10-tooth gear on the motor driving a 40-tooth gear gives a ratio of 40 ÷ 10 = 4, written 4:1. Then, ignoring losses to friction:\n\n- `output speed = input speed ÷ ratio`\n- `output torque = input torque × ratio`\n\nWith that 4:1 pair, a motor spinning at 2,000 RPM with 0.1 N·m of torque gives 2,000 ÷ 4 = 500 RPM and 0.1 × 4 = 0.4 N·m at the output. You never get something for nothing: the speed goes down by exactly as many times as the torque goes up.\n\nA **gearbox** stacks several gear pairs in one case. A motor sold as \"50:1\" has a gearbox with a total ratio of 50. Real gears lose some energy to friction, so the real torque is a little lower than the ideal number. In this course we ignore those losses.",
+     "task": "A motor spins at 1,500 RPM and gives 0.4 N·m of torque. A 12-tooth gear on the motor drives a 60-tooth gear on the wheel. Ignoring losses, what torque does the wheel get? Answer in N·m.",
+     "hint": "Find the gear ratio from the teeth first: driven gear over driving gear. Torque is multiplied by the ratio.",
+     "xp": 30,
+     "check": {
+      "type": "number",
+      "answer": 2,
+      "unit": "N·m",
+      "tolerance": 0.02,
+      "explain": "gear ratio = 60 ÷ 12 = 5. output torque = 0.4 N·m × 5 = 2 N·m. The wheel also turns 5 times more slowly: 1,500 ÷ 5 = 300 RPM."
+     }
+    },
+    {
+     "id": "rb3-4",
+     "title": "From Motor RPM to Robot Speed",
+     "goal": "Turn a motor speed in RPM into a driving speed in metres per second.",
+     "theory": "Motors are rated in **RPM**, revolutions per minute. Your robot's speed is in metres per second. Here is how to get from one to the other.\n\nEvery time a wheel turns once, the robot rolls forward by one circumference, π × diameter, just as in odometry in chapter 2. A wheel turning at some RPM therefore rolls RPM × π × diameter every minute. A minute has 60 seconds, so:\n\n`speed = RPM × π × diameter ÷ 60`\n\nPut the diameter in metres and the speed comes out in metres per second (m/s).\n\nBe careful to use the RPM of the **wheel**, not of the motor. If there is a gearbox between them, first divide the motor RPM by the gear ratio, as in the last mission.\n\nExample: a wheel 0.1 m across turning at 60 RPM makes one turn per second, so it rolls π × 0.1 ≈ 0.314 m every second. The formula agrees: 60 × 3.1416 × 0.1 ÷ 60 ≈ 0.314 m/s.\n\nThis calculation helps you choose motors. If you want a robot to drive at 0.5 m/s with wheels of a given size, you can work out the wheel RPM you need, then pick a motor and gearbox that give it. A loaded motor runs a little slower than its rating, and in Control Theory and PID you will learn how a robot measures its real speed and corrects it.",
+     "task": "A DC motor spins at 6,000 RPM and drives a wheel through a 50:1 gearbox. The wheel has a diameter of 6.5 cm (0.065 m). How fast does the robot drive? Answer in metres per second, rounded to two decimal places.",
+     "hint": "First find the wheel's RPM after the gearbox. Then use the speed formula with the diameter in metres.",
+     "xp": 30,
+     "check": {
+      "type": "number",
+      "answer": 0.41,
+      "unit": "m/s",
+      "tolerance": 0.005,
+      "explain": "Wheel RPM = 6,000 ÷ 50 = 120 RPM. speed = 120 × 3.1416 × 0.065 m ÷ 60 ≈ 0.408 m/s, which rounds to 0.41 m/s."
+     }
+    },
+    {
+     "id": "rb3-5",
+     "title": "Motor Drivers",
+     "goal": "Know why a motor needs a motor driver between it and the microcontroller.",
+     "theory": "A robot's brain is often a **microcontroller**, a tiny computer on a single chip, like the one on an Arduino board. It controls things through its **pins**, which it can switch on and off. So why not wire a motor straight to a pin? Because the pin is far too weak.\n\n- A microcontroller pin can safely supply only a tiny current, around **20 milliamps** (0.02 A) on a typical Arduino. A small DC motor needs hundreds of milliamps, and often a few amps when it starts or gets stuck. Connecting it directly can damage the pin or the whole chip.\n- Motors also send **voltage spikes** back into the wires when they switch off, which can harm delicate electronics.\n- A single pin cannot reverse the direction of a motor.\n\nThe solution is a **motor driver**: a board between the microcontroller and the motor. The microcontroller sends small control signals, and the driver switches the big current from the battery through the motor. A driver lets you set:\n\n- The **direction**, using a circuit called an **H-bridge**, which can swap the way current flows through the motor.\n- The **speed**, by switching the power on and off very fast. The share of time it is on sets the average power. This is called **PWM** (pulse-width modulation).\n\nA driver cannot create extra power; it only passes on what the battery gives. Chapter 5 goes deeper into power and wiring.",
+     "task": "Why do you connect a DC motor to a motor driver instead of straight to a microcontroller pin?",
+     "hint": "Compare how much current a pin can give with how much a motor needs.",
+     "xp": 20,
+     "check": {
+      "type": "choice",
+      "options": [
+       "The pin gives too much current, which would make the motor spin too fast",
+       "The pin can only give a tiny current, far less than the motor needs",
+       "The driver makes the motor stronger than its battery could",
+       "A microcontroller cannot switch its pins on and off by itself"
+      ],
+      "answer": 1,
+      "why": [
+       "It is the other way round: a pin gives only a tiny current, far less than a motor needs.",
+       "Right. A pin gives about 20 mA, while a motor needs hundreds of milliamps or more, so the driver switches the big current from the battery.",
+       "A driver cannot create power. It only switches the power the battery provides.",
+       "Switching pins on and off is exactly what a microcontroller does. The problem is how much current a pin can supply."
+      ],
+      "explain": "A pin can give only about 20 mA, while a motor needs hundreds of milliamps or more. The motor driver takes the small signal from the pin and switches the large current from the battery."
+     }
+    },
+    {
+     "id": "rb3-6",
+     "title": "Air and Oil: Pneumatics and Hydraulics",
+     "goal": "Know when a robot uses compressed air or oil instead of an electric motor.",
+     "theory": "Electric motors are not the only muscles. Two others push with fluids.\n\n**Pneumatics** use compressed air. A compressor squeezes air into a tank, and valves let it into a **cylinder**, where it pushes a piston out fast. Pneumatic actuators are:\n\n- **Fast**, cheap and simple to switch between two positions: fully out or fully in.\n- **Springy**, because air squashes. That makes them hard to stop exactly halfway, but gentle when they bump into something.\n- **Clean**: a leak only lets out air. That is why food and packaging factories use pneumatic grippers and suction cups.\n\n**Hydraulics** use oil, pushed by a pump at very high pressure. Oil barely squashes, so a hydraulic cylinder is:\n\n- Enormously **strong** for its size. Excavators, cranes and heavy presses use hydraulics.\n- **Stiff and precise**, because the oil does not spring back.\n- **Heavy and messy**: it needs a pump, a tank of oil and strong hoses, and a leak sprays oil.\n\nThis chapter's muscles in one line each:\n\n- Electric motors: the default for most robots, easy to control, run from a battery.\n- Pneumatics: fast, light pushes and grips, where compressed air is available.\n- Hydraulics: very high forces in heavy machines.\n\nWhen a digger arm lifts a tonne of earth, that is hydraulics. When a factory gripper snaps shut with a hiss, that is pneumatics.",
+     "task": "A food factory needs a gripper that snaps quickly between fully open and fully closed, thousands of times a day, and must never drip oil onto the food. Which actuator fits best?",
+     "hint": "Look for the actuator that is fast, simple with two positions, and clean if it leaks.",
+     "xp": 45,
+     "check": {
+      "type": "choice",
+      "options": [
+       "A pneumatic cylinder",
+       "A hydraulic cylinder",
+       "A stepper motor that counts exact steps",
+       "A DC motor with no gearbox, spinning continuously"
+      ],
+      "answer": 0,
+      "why": [
+       "Right. Compressed air gives fast, cheap moves between two positions, and a leak only lets out clean air.",
+       "Hydraulics give huge force that a food gripper does not need, and a leak sprays oil, which is exactly what this factory must avoid.",
+       "A stepper shines at many exact positions. This job only needs two positions, fast, and compressed air does that more simply.",
+       "A bare DC motor spins fast but weakly and does not stop at open or closed by itself. The gripper needs a quick push between two positions."
+      ],
+      "explain": "Compressed air gives fast, cheap moves between two positions, and a leak only lets out clean air. That is why food and packaging factories use pneumatic grippers."
+     }
+    }
+   ]
+  },
+  {
+   "n": 4,
+   "title": "The Brain",
+   "lessons": [
+    {
+     "id": "rb4-1",
+     "title": "Two Kinds of Brain",
+     "goal": "Tell a microcontroller from a single-board computer and pick the right one for a job.",
+     "theory": "Every robot needs a brain: a small computer that reads the sensors and tells the motors what to do. Hobby robots use two kinds.\n\nA **microcontroller** is a whole tiny computer on one chip. The Arduino Uno is the classic example. It runs at 16 MHz, has only 2 KB of working memory and runs just one program, with no operating system. That sounds weak, but it has real strengths. It starts in under a second. It reacts with very steady timing, so it is great at reading a sensor every millisecond or sending exact pulses to a motor driver. And it uses very little power.\n\nA **single-board computer** (SBC) is a full computer on a card. The Raspberry Pi is the classic example. It has gigabytes of memory, a processor well over a hundred times faster, and it runs Linux, so it can handle cameras, Wi-Fi, maps and AI models. The price: it takes many seconds to boot, it needs more power, and Linux may pause your program for a moment while it does other work.\n\nA simple rule:\n\n- Simple sensors, motors, exact timing: **microcontroller**.\n- Cameras, heavy maths, AI, networking: **single-board computer**.\n\nMany real robots use both. The SBC does the thinking and sends short orders to a microcontroller, which drives the motors. In Embedded Linux for Robots you will drive real hardware from a Linux board like this one.",
+     "task": "Your team's robot must look through a camera, recognise which of five classmates is standing in front of it, and wave at that person. Which brain fits the **vision** part of this job best?",
+     "hint": "Ask what recognising a face needs most: steady timing, or lots of memory and computing power?",
+     "check": {
+      "type": "choice",
+      "options": [
+       "An Arduino Uno, because its steady timing lets it read the camera faster",
+       "A Raspberry Pi-class single-board computer, because recognising faces in camera images needs lots of memory, speed and Linux software",
+       "A microcontroller, because it uses less power and starts in under a second",
+       "Two Arduino Unos working together, which doubles the working memory to 4 KB"
+      ],
+      "answer": 1,
+      "why": [
+       "Steady timing is not the problem here. An Uno has 2 KB of working memory, and even a small 320 × 240 colour camera picture needs over a hundred times more than that, so it cannot even hold the image.",
+       "Right. Vision needs memory, processing speed and ready-made software for cameras and AI, and that is exactly what a single-board computer running Linux offers.",
+       "Both facts are true, but they are not what this job needs. Low power and fast start-up do not help if the chip cannot hold or process a camera image.",
+       "4 KB is still tiny. Even a small 320 × 240 colour camera picture needs more than fifty times that, and face recognition needs far more again."
+      ],
+      "explain": "Recognising faces means storing and crunching whole camera images with AI software, which needs a single-board computer. A microcontroller could still drive the waving arm, taking short orders from the SBC."
+     },
+     "xp": 20
+    },
+    {
+     "id": "rb4-2",
+     "title": "The Control Loop",
+     "goal": "Describe the sense, think, act cycle and spot what breaks it.",
+     "theory": "Every robot brain, big or small, runs the same cycle again and again, as long as the robot is switched on:\n\n- **Sense:** read the sensors.\n- **Think:** decide what to do with those readings.\n- **Act:** send commands to the motors.\n- **Repeat:** go back to the start.\n\nThis cycle is called the **control loop**. Here is one pass for a line-following robot: read the two floor sensors; if the left sensor sees the line, decide to steer left; set the motor speeds; start again.\n\nThe order matters. The robot should decide using fresh readings, so it senses first and acts last. And the loop never really ends: a robot that stops looping stops reacting.\n\nThink of the robot's view of the world as a string of snapshots, one per pass. Between two snapshots, the robot is blind. It keeps doing whatever it last decided. So the loop must never get stuck. If one step says \"wait two seconds\", the robot keeps driving for two seconds without looking. A good loop does a little work, quickly, and comes back around to look again.\n\nIn Python for Robotics you will write real timed control loops like this one, for a simulated robot that drives and senses obstacles.",
+     "task": "A student's obstacle-avoiding robot runs this loop:\n\n```text\n1. read the distance sensor\n2. if the distance is under 20 cm, decide to turn\n3. set the motor speeds\n4. wait 3 seconds\n5. go back to step 1\n```\n\nThe robot often crashes into boxes that appear in front of it. What is the most likely problem?",
+     "hint": "Picture what the robot can see during each step of the loop, and for how long.",
+     "check": {
+      "type": "choice",
+      "options": [
+       "The steps are in the wrong order: it should set the motor speeds before reading the sensor",
+       "20 cm is too far; it should only turn when the distance is under 2 cm",
+       "The 3 second wait: the robot keeps driving but does not read the sensor, so it is blind most of the time",
+       "The loop repeats forever, which tires out the brain; it should run only once"
+      ],
+      "answer": 2,
+      "why": [
+       "Sense, think, act is the right order. Setting the motors first would mean acting on old readings, which makes things worse, not better.",
+       "A smaller distance gives the robot less room to turn, so it would crash more often, not less.",
+       "Right. During each 3 second wait, the robot keeps doing what it last decided and never looks. A box that appears in that time is not seen until it is too late.",
+       "A control loop is meant to run forever. A loop that runs once would read the sensor one time and then never react again."
+      ],
+      "explain": "The wait makes the robot blind for 3 seconds out of every pass. Remove it, and the loop comes back to read the sensor many times per second."
+     },
+     "xp": 20
+    },
+    {
+     "id": "rb4-3",
+     "title": "How Fast Is Your Loop?",
+     "goal": "Calculate a loop rate in hertz from the time one pass takes.",
+     "theory": "How often your control loop runs is called its **loop rate**. It is measured in **hertz (Hz)**, which means \"times per second\". A loop rate of 50 Hz means the robot senses, thinks and acts 50 times every second.\n\nThe time one pass takes is called the **period**. The rate and the period are two sides of the same coin:\n\n- rate in Hz = 1 ÷ period in seconds\n- or, with milliseconds: rate in Hz = 1000 ÷ period in ms\n\nExample: if one pass takes 10 ms, the loop rate is 1000 ÷ 10 = 100 Hz.\n\nWhy does it matter? Remember that the robot is blind between two passes. The distance it moves blind is its speed times the period (distance = speed × time). A robot driving at 1 m/s with a 100 Hz loop moves 1 cm between readings, which is fine. With a 5 Hz loop (200 ms per pass) it moves 20 cm between readings, and a sharp bend in a line could be gone before it looks again.\n\nA pass takes as long as all its steps added together: reading the sensors, deciding, and sending the commands. Small wheeled robots are usually happy at 50 to 100 Hz. Drones must steady themselves much faster, at hundreds of hertz or more.",
+     "task": "One pass of your robot's loop takes 4 ms to read the sensors, 2 ms to decide and 6 ms to send the motor commands, with no waiting. What is the loop rate? Answer in **Hz**, rounded to the nearest whole number.",
+     "hint": "First add the steps to get the period in milliseconds, then divide 1000 by it.",
+     "check": {
+      "type": "number",
+      "answer": 83,
+      "unit": "Hz",
+      "tolerance": 0.5,
+      "explain": "Period = 4 + 2 + 6 = 12 ms. Rate = 1000 ÷ 12 = 83.3 passes per second, which rounds to **83 Hz**. At 1 m/s the robot moves about 1.2 cm between readings."
+     },
+     "xp": 25
+    },
+    {
+     "id": "rb4-4",
+     "title": "Open Loop and Closed Loop",
+     "goal": "Explain why feedback matters, and measure what happens without it.",
+     "theory": "There are two ways to give a robot a job.\n\n**Open loop** means the robot follows a command without checking the result. \"Run both motors at 50% power for 4 seconds\" is open loop. A toaster is open loop too: it heats for a set time, whether the bread is pale or burnt. Open loop only works if the world behaves exactly as it did when you tested it. A weaker battery, a different floor, a slope or a heavier load all fool it, and it never notices.\n\n**Closed loop** means the robot uses **feedback**: a sensor measures the result, and the brain compares it with the goal. The difference is called the **error**:\n\n- error = goal − measurement\n\nThe brain then corrects to shrink the error, pass after pass. For example, **wheel encoders** are sensors that count how far each wheel has turned. With them, the robot can keep driving until it has really travelled 2 m, on any floor. A heating thermostat is closed loop too: it measures the room and switches the heater on or off to reach the temperature you set.\n\nOpen loop is fine for simple, low-stakes jobs. Most robot behaviour that must be accurate is closed loop, and the control loop you met earlier is where the feedback happens.",
+     "task": "In testing on a smooth floor, \"both motors at 50% power for 4 seconds\" moves your robot at 0.5 m per second, so it stops right on a mark 2.0 m away. You use the exact same open-loop command on thick carpet, where the robot only manages 0.35 m per second. How many metres short of the mark does it stop? Answer in **metres (m)**.",
+     "hint": "Work out how far it travels in the same 4 seconds on carpet, then compare that with 2.0 m.",
+     "check": {
+      "type": "number",
+      "answer": 0.6,
+      "unit": "m",
+      "tolerance": 0.01,
+      "explain": "On carpet: distance = speed × time = 0.35 m/s × 4 s = 1.4 m. Short by 2.0 m − 1.4 m = **0.6 m**. An open-loop robot cannot notice this. With wheel encoders (closed loop) it would keep driving until it had measured the full 2.0 m."
+     },
+     "xp": 25
+    },
+    {
+     "id": "rb4-5",
+     "title": "PID in Plain Words",
+     "goal": "Say what each of the three parts of PID reacts to, and which one fixes an error that will not go away.",
+     "theory": "A closed loop needs a rule that says how hard to correct. The most popular rule in robotics is called **PID**. It has three parts, and each one looks at the error in a different way:\n\n- **P, proportional:** reacts to the error **now**. A big error gives a big push; a small error gives a small push.\n- **I, integral:** reacts to **how long** the error has lasted. It keeps adding the error up over time, so a small error that refuses to go away builds a bigger and bigger push.\n- **D, derivative:** reacts to **how fast** the error is changing. If the robot is rushing towards the goal, D eases off early, like braking before a stop line, so the robot does not shoot past.\n\nThe robot adds the three pushes together to get one command for its motor.\n\nEach part fixes a typical problem. With P alone, a robot often stops just short of the goal: when the error gets small, the push gets too weak to beat friction. I fixes that slow, stubborn error. A strong P can also make the robot overshoot and wobble around the goal; D calms that down.\n\nHow strongly each part pushes is set by three numbers, and choosing them is called **tuning**. You will build a real PID controller, and tune it, in Control Theory and PID.",
+     "task": "Your robot arm uses only the P part to move a joint to 90°. It always stops at 87° and stays there: the 3° error makes a push that is too weak to beat the friction in the joint. Which change is built to fix exactly this?",
+     "hint": "The error here is small, but it never goes away. Which part of PID reacts to time?",
+     "check": {
+      "type": "choice",
+      "options": [
+       "Add a D part, because it reacts to how fast the error changes",
+       "Remove P and use only D, so the arm brakes smoothly",
+       "Nothing: a 3° error is too small for any controller to fix",
+       "Add an I part, because it adds up an error that lasts, so the push keeps growing until the arm reaches 90°"
+      ],
+      "answer": 3,
+      "why": [
+       "The arm is stuck, so the error is not changing at all. D reacts only to change, so here it gives no push.",
+       "D reacts only to change. A stuck arm has an error that does not change, so D alone would give no push, and without P nothing pulls the arm towards 90°.",
+       "Small, stubborn errors are exactly what one part of PID is made for. Read what I reacts to.",
+       "Right. The 3° error lasts and lasts, so the I part keeps adding it up. The push grows until it beats the friction and the arm reaches 90°."
+      ],
+      "explain": "The I part reacts to how long an error has lasted. A small error that never goes away keeps adding up, so the push grows until the arm finally moves to 90°."
+     },
+     "xp": 25
+    },
+    {
+     "id": "rb4-6",
+     "title": "State Machines",
+     "goal": "Follow a state machine through a series of events.",
+     "theory": "A robot does different things at different times: waiting, searching, working, stopping. A **state machine** is a tidy way to organise that.\n\n- The robot is always in exactly one **state**, and each state has its own simple behaviour.\n- **Events** are things the robot notices, like a button press or a sensor reading.\n- A **transition** is a rule: in this state, when this event happens, move to that state.\n\nHere is a line-following robot with four states:\n\n```text\nIDLE       --start button pressed-->       SEARCHING\nSEARCHING  --line seen-->                  FOLLOWING\nFOLLOWING  --line lost-->                  SEARCHING\nFOLLOWING  --obstacle closer than 15 cm--> STOPPED\nSTOPPED    --obstacle gone-->              FOLLOWING\nany state  --stop button pressed-->        IDLE\n```\n\nIn IDLE the motors are off and the robot waits. In SEARCHING it turns slowly to find the line. In FOLLOWING it runs its line-following loop. In STOPPED it waits, motors off, until the path is clear.\n\nOne important rule: if an event happens that has no transition from the current state, the robot simply **stays** where it is.\n\nWhy bother? Each state is small and easy to test on its own, and every surprise has a clear answer. You can draw the whole plan on paper before you build anything. Bigger robots in the ROS 2 and Humanoid Robotics courses use state machines too.",
+     "task": "Using the table above, the robot starts in IDLE. These events happen, in this order: start button pressed, line seen, obstacle closer than 15 cm, line lost, obstacle gone. Which state is the robot in at the end?",
+     "hint": "Take the events one by one, and only follow an arrow that starts from the state the robot is in at that moment.",
+     "check": {
+      "type": "choice",
+      "options": [
+       "IDLE",
+       "SEARCHING",
+       "FOLLOWING",
+       "STOPPED"
+      ],
+      "answer": 2,
+      "why": [
+       "Only the stop button leads back to IDLE, and nobody pressed it.",
+       "You get this if \"line lost\" moves the robot. But at that moment it is in STOPPED, which has no \"line lost\" arrow, so it stays in STOPPED.",
+       "Right. IDLE, then SEARCHING, then FOLLOWING, then STOPPED. \"Line lost\" has no arrow from STOPPED, so it is ignored. \"Obstacle gone\" then moves STOPPED to FOLLOWING.",
+       "It was in STOPPED after the obstacle, but the last event, \"obstacle gone\", moves it from STOPPED back to FOLLOWING."
+      ],
+      "explain": "IDLE to SEARCHING to FOLLOWING to STOPPED. \"Line lost\" is ignored because STOPPED has no arrow for it, and \"obstacle gone\" takes the robot back to FOLLOWING."
+     },
+     "xp": 25
+    },
+    {
+     "id": "rb4-7",
+     "title": "The Emergency Stop",
+     "goal": "Explain what a good emergency stop does and why it must not depend on the program.",
+     "theory": "Robots are strong, fast and sometimes wrong. A bug, a frozen program, a loose wire or a sensor fooled by sunlight can all send a robot where it should not go. That is why real robots have an **emergency stop**, or **e-stop**: a big red button that anyone nearby can hit to stop the robot at once.\n\nA good e-stop follows a few rules:\n\n- It **cuts power to the motors directly**, with a switch in the motor power wiring. It does not just ask the program to stop, because the program may be the very thing that has frozen.\n- It is **easy to see and reach**: big, red, on top of the robot or in the operator's hand.\n- It **latches**: once pressed, it stays pressed until someone deliberately twists or pulls it to reset it.\n- Resetting it does **not** restart the robot by itself. Someone must choose to start it again.\n- You **test it** before every run.\n\nA stop command in software is still useful, as an extra layer. In Python for Robotics your code checks an `estop` flag before driving. But the software stop is the second line of defence, never the only one.\n\nEven a small classroom robot should have a power switch you can reach quickly. The bigger and faster the robot, the more the e-stop matters.",
+     "task": "Which emergency stop design is safest for a 10 kg robot that drives around a school workshop?",
+     "hint": "Imagine the robot's program has frozen. Which design still stops the motors?",
+     "check": {
+      "type": "choice",
+      "options": [
+       "A big red latching button on the robot that opens a switch in the motor power wire, so the motors lose power even if the program has frozen",
+       "A key on the laptop that tells the robot's program to set the motor speeds to zero",
+       "A red button that stops the motors while you hold it down and lets them start again as soon as you let go",
+       "No button: careful programming means the robot will never need one"
+      ],
+      "answer": 0,
+      "why": [
+       "Right. It works in the wiring, so it stops the motors even when the software has crashed, and because it latches, the robot stays stopped until someone resets it on purpose.",
+       "This depends on the laptop, the radio link and the robot's program all working. If the program has frozen, nothing happens.",
+       "An e-stop must latch. If the motors restart the moment you let go, you have to keep holding the button while you deal with the problem.",
+       "Every program has bugs, and wires come loose. An e-stop is there for the problem nobody expected."
+      ],
+      "explain": "A latching button that cuts motor power in the wiring works even when the program has frozen, and the robot stays stopped until someone deliberately resets it."
+     },
+     "xp": 20
+    }
+   ]
+  },
+  {
+   "n": 5,
+   "title": "Power and Wiring",
+   "lessons": [
+    {
+     "id": "rb5-1",
+     "title": "Battery Numbers",
+     "goal": "Read a battery's voltage and capacity, and work out the voltage of cells in series.",
+     "theory": "Every battery label has two important numbers.\n\n**Voltage**, in volts (V), is how hard the battery pushes current through a circuit. Motors and electronics are designed for a certain voltage, so it must match.\n\n**Capacity**, in milliamp-hours (mAh), is how much charge the battery stores. A 2000 mAh battery can give 2000 mA for one hour, or 1000 mA for two hours. More capacity means a longer run.\n\nBatteries are built from **cells**, and each type of cell has its own voltage:\n\n- Alkaline AA: 1.5 V\n- Rechargeable NiMH AA: 1.2 V\n- Lithium cell (Li-ion or LiPo): 3.7 V nominal, 4.2 V when full\n\n\"Nominal\" means the typical voltage while the cell is being used. A full cell is a little higher, a nearly empty one a little lower.\n\nHow you connect cells changes the numbers:\n\n- **In series**, end to end (+ to −): the voltages **add up**, and the capacity stays the same as one cell.\n- **In parallel**, side by side (+ to +): the capacities add up, and the voltage stays the same as one cell.\n\nLithium packs are named by how many cells sit in series. A \"2S\" pack has 2 cells in series: 2 × 3.7 = 7.4 V nominal. A \"3S\" pack is 11.1 V.",
+     "task": "Your robot's battery holder takes six rechargeable NiMH AA cells in series. Each cell is 1.2 V and 2000 mAh. What is the nominal voltage of the whole pack? Answer in **volts (V)**.",
+     "hint": "In series, which number adds up: the voltage or the capacity?",
+     "check": {
+      "type": "number",
+      "answer": 7.2,
+      "unit": "V",
+      "tolerance": 0.05,
+      "explain": "In series the voltages add up: 6 × 1.2 V = **7.2 V**. The capacity does not add up in series, so the pack is still 2000 mAh. This 7.2 V pack is a very common size for hobby robots and RC cars."
+     },
+     "xp": 20
+    },
+    {
+     "id": "rb5-2",
+     "title": "How Long Will It Run?",
+     "goal": "Estimate a robot's runtime from battery capacity and current draw, with a safety margin.",
+     "theory": "Once you know the capacity of the battery and how much current the robot draws, you can estimate how long it will run:\n\n- runtime in hours = capacity in mAh ÷ current draw in mA\n\nExample: a 2000 mAh battery powering a robot that draws 500 mA lasts 2000 ÷ 500 = 4 hours.\n\nWatch the units. Both numbers must be in milliamps. If the current is given in amps (A), multiply by 1000 first: 0.5 A = 500 mA. If you want minutes, multiply the hours by 60.\n\nThat formula gives the **ideal** runtime. Real life gives less, for several reasons:\n\n- Batteries lose capacity as they get older, and when they are cold.\n- High currents, like motors starting, squeeze out less than the label promises.\n- Lithium batteries are damaged if you drain them completely, so you stop well before empty.\n\nSo engineers plan with a **margin**. A common rule is to count on only about **80%** of the label capacity:\n\n- realistic runtime ≈ (capacity × 0.8) ÷ current draw\n\nUse the **average** current, measured while the robot does its real job. Motors draw far more when climbing a slope or pushing against a wall than when rolling on a flat floor. The Power, Batteries and Charging course takes this much further.",
+     "task": "Your robot draws an average of 0.8 A while it drives. Its battery is 2200 mAh, and you plan to use only 80% of it. How long can it drive? Answer in **minutes**, rounded to the nearest whole minute.",
+     "hint": "Turn amps into milliamps, take 80% of the capacity, divide, and then turn hours into minutes.",
+     "check": {
+      "type": "number",
+      "answer": 132,
+      "unit": "min",
+      "tolerance": 1,
+      "explain": "Current: 0.8 A = 800 mA. Usable capacity: 2200 mAh × 0.8 = 1760 mAh. Runtime: 1760 ÷ 800 = 2.2 hours. In minutes: 2.2 × 60 = **132 min**."
+     },
+     "xp": 25
+    },
+    {
+     "id": "rb5-3",
+     "title": "Different Parts, Different Voltages",
+     "goal": "Explain why a robot needs voltage regulators and how much heat a linear regulator wastes.",
+     "theory": "The parts of a robot rarely want the same voltage. Small DC gear motors often run on 6 to 12 V, because more voltage gives them more speed. A microcontroller or sensor wants a steady 5 V or 3.3 V, and a Raspberry Pi needs 5 V. Feed 7.4 V straight into a 5 V pin and you can destroy the board.\n\nA **voltage regulator** takes the battery's higher voltage and turns it into a steady lower one. There are two main kinds:\n\n- A **linear regulator**, like the classic 7805, is simple, cheap and electrically quiet. But it burns off the extra voltage as heat. The heat it makes, in watts, is: (voltage in − voltage out) × current in amps.\n- A **switching regulator**, often called a **buck converter**, switches the power on and off very fast and smooths it out. It usually wastes only 5 to 15% of the power and stays cool, so it is the better choice for big drops or big currents.\n\nThere is a second reason to give the brain its own steady supply. When motors start or get stuck, they pull a big current, and the battery voltage dips for a moment. A brain on the same wire can reset in the middle of a run. This is called a **brownout**. A regulator, capacitors, or even a separate battery for the brain keep its power steady.",
+     "task": "A 7805 linear regulator turns a 12 V battery into 5 V for a board that draws 0.5 A. How much power does the regulator turn into heat? Answer in **watts (W)**.",
+     "hint": "Find how many volts the regulator has to drop, then multiply by the current in amps.",
+     "check": {
+      "type": "number",
+      "answer": 3.5,
+      "unit": "W",
+      "tolerance": 0.05,
+      "explain": "Voltage dropped: 12 V − 5 V = 7 V. Heat: 7 V × 0.5 A = **3.5 W**. That is more heat than the board itself uses (5 V × 0.5 A = 2.5 W), enough to make a small regulator too hot to touch or make it shut down without a big heatsink. A buck converter at about 90% efficiency would waste only about 0.3 W."
+     },
+     "xp": 25
+    },
+    {
+     "id": "rb5-4",
+     "title": "Tidy Wires and Fuses",
+     "goal": "Wire a robot neatly and choose and place a fuse correctly.",
+     "theory": "Most robot faults are wiring faults: a wire pulled loose by a wheel, or a **short circuit**, where bare metal on the positive side touches the negative side. A short on a lithium battery can push tens of amps or more through a wire, make it glow hot, and start a fire.\n\nGood habits:\n\n- Red for positive, black for negative (ground). Always.\n- Thick wire for motor power, thin wire only for signals.\n- Tie wires down, keep them away from wheels and moving joints, and leave a little slack where parts move.\n- Cover bare metal with heat-shrink tubing.\n- Use connectors that only fit one way round, so a battery cannot be plugged in backwards.\n- Add a main power switch you can reach easily.\n\nA **fuse** is a thin strip of metal that melts and breaks the circuit when the current gets too high. Two rules make it work:\n\n- **Rating:** a bit above the most current the robot normally draws, so it does not blow in normal use, but below what the wire can safely carry, so it blows before the wire overheats.\n- **Position:** in the positive wire, as close to the battery as possible, so it protects all the wire after it.\n\nIf a fuse blows, find out why before you replace it. Never put in a bigger fuse, or a piece of wire, just to make the problem go away.",
+     "task": "Your robot draws at most 3.5 A, even when the motors start. Its main power wire can carry 10 A safely. Which fuse, in which place, is right?",
+     "hint": "Check both rules: the rating must sit between normal current and the wire's limit, and the position must protect the whole wire.",
+     "check": {
+      "type": "choice",
+      "options": [
+       "A 2 A fuse, next to the motors",
+       "A 5 A fuse in the positive wire, right next to the battery",
+       "A 30 A fuse in the positive wire, right next to the battery, so it never blows by mistake",
+       "A 5 A fuse in the positive wire, at the far end next to the motor driver"
+      ],
+      "answer": 1,
+      "why": [
+       "2 A is below the 3.5 A the robot normally draws, so it would blow every time the motors start. And next to the motors, it leaves the wire from the battery unprotected.",
+       "Right. 5 A is above the 3.5 A the robot normally needs and below the 10 A the wire can carry, and next to the battery it protects the whole wire.",
+       "The wire can only carry 10 A safely. A 30 A fuse would let the wire overheat long before the fuse melts, so it protects nothing.",
+       "The rating is right, but a short circuit anywhere between the battery and the fuse would bypass it. The fuse belongs next to the battery."
+      ],
+      "explain": "5 A sits between the robot's normal 3.5 A and the wire's 10 A limit, and placing it right at the battery's positive terminal protects every bit of wire after it."
+     },
+     "xp": 20
+    },
+    {
+     "id": "rb5-5",
+     "title": "A Common Ground",
+     "goal": "Explain why parts that share signals must share a ground.",
+     "theory": "Voltage is always measured **between two points**, a bit like height is measured from the floor. In a circuit, that floor is called **ground**: GND on the pin labels, 0 V, the negative side of the battery.\n\nWhen an Arduino sends a 5 V \"go\" signal to a motor driver, the driver checks one thing: is this signal wire 5 V above **my** ground? That works fine when both boards run from the same battery, because they stand on the same floor.\n\nMany robots use two batteries: one for the motors and one for the brain. Then there are two separate floors. If their grounds are not connected, the driver has nothing to measure the signal against. It may ignore the signal, or react to it at random.\n\nThe rule: every part that exchanges signals must share a **common ground**. Connect the GND of the brain, the motor driver and the sensors together.\n\nTwo warnings:\n\n- Join the **grounds** only. Never connect the positive wires of two different batteries together.\n- Never feed a higher voltage into a pin made for a lower one.\n\nTypical signs of a missing ground: motors that twitch for no reason, sensor readings that jump around, or a robot that only works when you touch it. When you see these, check the ground wire before you blame a part.",
+     "task": "An Arduino runs from a USB power bank. Its motor driver runs from a separate 7.4 V battery. Signal wires go from the Arduino's pins to the driver's inputs, but the motors twitch at random or ignore commands. What should you do first?",
+     "hint": "The two boards run from different batteries. What must they share for signals to make sense?",
+     "check": {
+      "type": "choice",
+      "options": [
+       "Connect the Arduino's GND to the motor driver's GND",
+       "Connect the 7.4 V battery's positive wire to the Arduino's 5 V pin, so both boards share power",
+       "Use longer signal wires, so the signal becomes stronger",
+       "Replace the motor driver, because it must be broken"
+      ],
+      "answer": 0,
+      "why": [
+       "Right. With the grounds joined, both boards measure voltage from the same floor, so the driver can read the Arduino's signals.",
+       "Never join the positives of two batteries, and never put 7.4 V into a 5 V pin: that can destroy the Arduino. Only the grounds should be joined.",
+       "A longer wire does not make a signal stronger. The problem is that the driver has no shared ground to measure the signal against.",
+       "Random twitching with two separate batteries is the classic sign of a missing ground. Check the wiring before you blame a part."
+      ],
+      "explain": "Signals are voltages measured from ground. Joining the grounds gives both boards the same reference, so the driver reads the Arduino's commands correctly."
+     },
+     "xp": 20
+    },
+    {
+     "id": "rb5-6",
+     "title": "Charging and Lithium Care",
+     "goal": "Charge, store and handle lithium batteries safely.",
+     "theory": "Lithium batteries (LiPo and Li-ion) pack a lot of energy into very little weight. That is why robots and drones use them, and it is also why they must be treated with respect. A damaged or misused lithium battery can swell, get very hot and catch fire.\n\nCharging:\n\n- Use only a charger made for that battery type and cell count. For LiPo packs, use a **balance charger** with the balance plug connected, so every cell ends at the same voltage, never above 4.2 V.\n- Charge on a non-flammable surface or in a LiPo safety bag, and never leave it charging unattended.\n- Let a hot battery cool down before you charge it.\n\nUsing and storing:\n\n- Do not drain it too far. Never let a cell drop below about 3.0 V; many people stop at 3.3 V to make the pack last longer. A cheap low-voltage alarm warns you.\n- For storage longer than a few days, leave the cells at about 3.8 V (many chargers have a \"storage\" mode), somewhere cool and dry.\n- Cover the terminals so they can never short.\n\nWarning signs: a pack that is **puffy** (swollen), dented, punctured or hot for no reason is damaged. Stop using it, do not charge it, keep it away from anything that burns, and take it to a battery recycling point. Never put it in the household bin.\n\nThe Power, Batteries and Charging course covers charging in depth.",
+     "task": "After a crash, you notice your robot's LiPo pack has become slightly puffy, although it still powers the robot. What should you do?",
+     "hint": "A puffy pack is one of the warning signs in the briefing. What does the briefing say to do with a damaged pack?",
+     "check": {
+      "type": "choice",
+      "options": [
+       "Charge it fully, so the cells can recover their shape",
+       "Keep using it, but only at half speed to go easy on it",
+       "Press it flat and wrap it tightly in tape",
+       "Stop using it: do not charge it, keep it away from anything that burns, and take it to a battery recycling point"
+      ],
+      "answer": 3,
+      "why": [
+       "Charging a damaged lithium pack is one of the most likely ways to start a fire. Swelling does not go away.",
+       "A swollen pack is damaged inside. Using it gently does not repair it, and it can still overheat and catch fire.",
+       "Pressing on a damaged cell can cause a short circuit inside it, which can start a fire.",
+       "Right. Swelling means the pack is damaged inside. The safe move is to stop using and charging it, store it where a fire could not spread, and recycle it properly."
+      ],
+      "explain": "A puffy LiPo is damaged, and charging or using it can start a fire. Retire it safely: no charging, nothing flammable nearby, and off to battery recycling."
+     },
+     "xp": 20
+    }
+   ]
+  },
+  {
+   "n": 6,
+   "title": "Building Your First Robot",
+   "lessons": [
+    {
+     "id": "rb6-1",
+     "title": "Choose Your First Project",
+     "goal": "Compare the two classic first robots and match each to its sensors.",
+     "theory": "Two projects are the classic first robots, and both are great.\n\nA **line follower** drives along a dark line on a light floor. Two or more **IR reflectance sensors** sit under the front, pointing down. Each one shines invisible infrared light at the floor and measures how much bounces back: the light floor reflects a lot, the dark line very little. The brain steers to keep the line between the sensors. This project teaches sensing and the control loop, and later PID, for fast and smooth following.\n\nAn **obstacle avoider** drives around a room and turns away before it hits things. It uses a forward-facing distance sensor. An **ultrasonic sensor** sends out a short burst of sound, too high for you to hear, and times the echo; a common one measures from about 2 cm to 4 m. Some avoiders use IR distance sensors instead. This project teaches distance sensing and simple state machines: driving, turning, driving again.\n\nBoth robots share the same base:\n\n- a chassis with two driven wheels and a free-rolling caster wheel\n- two DC gear motors and a motor driver\n- a microcontroller brain\n- a battery with a switch and a fuse\n\nPick the project that fits your space. A line follower needs a track, which can be black electrical tape on a light floor. An obstacle avoider needs a room with walls and boxes. Start simple, make it work, then improve it.",
+     "task": "You want your first robot to race around a track made of black electrical tape on a white floor. Which project and sensors match?",
+     "hint": "The tape is flat on the floor. Which sensor tells dark from light, rather than near from far?",
+     "check": {
+      "type": "choice",
+      "options": [
+       "An obstacle avoider with an ultrasonic sensor facing forward",
+       "A line follower with an ultrasonic sensor pointing down at the floor",
+       "A line follower with IR reflectance sensors pointing down at the floor",
+       "A line follower with a camera, run by an Arduino Uno"
+      ],
+      "answer": 2,
+      "why": [
+       "An ultrasonic sensor sees walls and boxes in front of the robot. Flat tape on the floor gives it nothing to detect.",
+       "An ultrasonic sensor measures distance. The tape and the floor are at the same distance, so it cannot tell them apart.",
+       "Right. IR reflectance sensors see the difference between light floor and dark tape, which is exactly what a line follower needs.",
+       "An Arduino Uno does not have nearly enough memory to handle camera images. Simple IR sensors do this job far more easily."
+      ],
+      "explain": "A tape track calls for a line follower, and IR reflectance sensors pointing at the floor tell the dark tape from the light floor."
+     },
+     "xp": 20
+    },
+    {
+     "id": "rb6-2",
+     "title": "Picking the Parts",
+     "goal": "Check a parts list against the job, part by part.",
+     "theory": "A parts list is where many first robots go wrong, before a single wire is connected. Go through it part by part and ask two questions: what does this part do, and do its numbers match the rest of the robot?\n\n- **Brain:** a microcontroller for simple sensors and motors; a single-board computer only if you need a camera or heavy computing.\n- **Motor driver:** a brain's pin can only give a tiny current (about 20 mA on an Arduino Uno), but a motor needs hundreds of milliamps or more. The motor driver handles that big current for the brain. Its current rating, per motor, must be above the most current a motor can draw, which is its **stall current**: the current it pulls when it is stuck and cannot turn.\n- **Motors:** their rated voltage should be close to the battery voltage.\n- **Sensors:** the right kind for the job, as in the last mission.\n- **Power:** a battery that suits the motors, a regulator to give the brain its steady 5 V, a switch and a fuse.\n\nStall current matters because a motor stalls every time it starts from rest, and whenever it gets stuck against a wall. A driver rated below that current overheats or shuts itself down, often in the middle of a run.\n\nTick each part off against the job and against the other parts, and write the key numbers next to it.",
+     "task": "You are building an obstacle avoider. Its motors are rated for 7.2 V, and each one can draw up to 1.5 A when stalled. Which parts list will work?",
+     "hint": "Check each list for one number that does not match: pin current, pin voltage or driver rating.",
+     "check": {
+      "type": "choice",
+      "options": [
+       "Arduino Uno with the motors wired straight to its pins, a forward-facing ultrasonic sensor, and a 7.2 V NiMH pack with a switch and a fuse",
+       "Raspberry Pi, a motor driver rated 2 A per motor, a forward-facing ultrasonic sensor, and a 7.2 V NiMH pack wired straight to the Pi's 5 V pin, with a switch and a fuse",
+       "Arduino Uno, a motor driver rated 0.5 A per motor, a forward-facing ultrasonic sensor, and a 7.2 V NiMH pack with a switch, a fuse and a 5 V regulator for the Arduino",
+       "Arduino Uno, a motor driver rated 2 A per motor, a forward-facing ultrasonic sensor, and a 7.2 V NiMH pack with a switch, a fuse and a 5 V regulator for the Arduino"
+      ],
+      "answer": 3,
+      "why": [
+       "An Arduino pin gives only about 20 mA, but each motor can draw up to 1.5 A. The robot needs a motor driver between the brain and the motors.",
+       "7.2 V straight into a 5 V pin can destroy the Pi. It needs a regulator. A Pi is also more brain than an obstacle avoider needs.",
+       "0.5 A is far below the motors' 1.5 A stall current, so the driver would overheat or shut down every time the motors start or get stuck.",
+       "Right. The driver's 2 A is above the 1.5 A stall current, the pack matches the 7.2 V motors, and the regulator gives the Arduino a steady 5 V."
+      ],
+      "explain": "Every number matches: the 2 A driver covers the motors' 1.5 A stall current, the 7.2 V pack suits the 7.2 V motors, and the regulator keeps the Arduino on a steady 5 V."
+     },
+     "xp": 25
+    },
+    {
+     "id": "rb6-3",
+     "title": "Build in the Right Order",
+     "goal": "Put the steps of a robot build in an order where each step can be checked before the next.",
+     "theory": "Build your robot in an order where every step can be checked before the next one hides it. Then, when something fails, only the newest step can be to blame.\n\nA good order:\n\n- **Plan:** sketch the robot, draw a wiring diagram and write the parts list.\n- **Chassis:** mount the motors, wheels and caster.\n- **Power:** add the battery, switch, fuse and regulator. Measure the voltages with a multimeter before connecting anything else.\n- **Brain:** connect it and load a tiny test program, like blinking an LED.\n- **Motors:** connect the motor driver and test each motor on its own.\n- **Sensors:** add them one at a time and check that their readings make sense.\n- **Behaviour:** only now write the full program, with its control loop and states.\n- **Tune:** test on the real track or in the real room, and improve.\n\nTwo habits help at every stage. Disconnect the battery while you change any wiring. And after each step, switch on and check that everything that worked before still works.\n\nYou can sketch your program early, and that is fine. But you cannot really test it until the hardware under it has been proven. If you try, bugs in the program and faults in the wiring get tangled together, and you cannot tell which is which.",
+     "task": "A friend has four build steps written on cards:\n\n```text\nP. Write the full robot program\nQ. Test each motor on its own\nR. Wire the battery, switch and fuse, and measure the voltages\nS. Mount the motors and wheels on the chassis\n```\n\nIn which order should they do them?",
+     "hint": "Each step should be testable using only the steps done before it. What does a motor test need to exist first?",
+     "check": {
+      "type": "choice",
+      "options": [
+       "S, R, Q, P",
+       "P, S, R, Q",
+       "R, S, P, Q",
+       "S, Q, R, P"
+      ],
+      "answer": 0,
+      "why": [
+       "Right. First the chassis, then proven power, then each motor tested, and only then the full program on hardware you trust.",
+       "You can sketch code early, but you cannot test the full program until the motors and power are proven. Bugs and wiring faults would get tangled together.",
+       "Wiring the power before the chassis leaves loose parts and live wires to work around, and writing the program before the motors are tested mixes program bugs with wiring faults.",
+       "You cannot test a motor before the battery, switch and fuse are wired: it would have no power."
+      ],
+      "explain": "Chassis, then power, then a test of each motor, then the full program. Each step is checked using only what was built before it."
+     },
+     "xp": 20
+    },
+    {
+     "id": "rb6-4",
+     "title": "Test One Part at a Time",
+     "goal": "Test parts separately and use your measurements to predict runtime.",
+     "theory": "Before you run the whole robot, give every part its own small test.\n\n- **Motors:** does each wheel turn the right way, at slow and fast speeds?\n- **Sensors:** show the readings while you move your hand or the line under the sensor. Write down typical numbers, like the reading over the floor and the reading over the tape.\n- **E-stop and switch:** do they really cut the power?\n\nKeep notes as you go. When a part passes, you know it works. When the whole robot later misbehaves, you can go back to the last thing that worked.\n\nWhile you test, measure how much **current** each part draws. You can use a multimeter set to measure current, or a small power meter between the battery and the robot. Your notes then become a **power budget**:\n\n- Add the currents of all the parts that run at the same time to get the total.\n- Check that the total is below what your fuse, regulator and motor driver can handle.\n- Use the total to predict the runtime with the formula from Power and Wiring: (capacity × 0.8) ÷ total current.\n\nMeasured numbers beat guesses from a product page. Real motors on a real chassis often draw more than the label says, because of friction, the weight of the robot and the floor.",
+     "task": "Your test notes, for everything running at once:\n\n```text\nArduino and sensors   60 mA\nMotor driver          40 mA\nLeft motor, driving  380 mA\nRight motor, driving 380 mA\n```\n\nThe battery is 2000 mAh, and you plan to use only 80% of it. How long can the robot drive? Answer in **minutes**, rounded to the nearest whole minute.",
+     "hint": "Add up all four currents first, then use the runtime formula with the 80% margin, and turn hours into minutes.",
+     "check": {
+      "type": "number",
+      "answer": 112,
+      "unit": "min",
+      "tolerance": 1,
+      "explain": "Total current: 60 + 40 + 380 + 380 = 860 mA. Usable capacity: 2000 mAh × 0.8 = 1600 mAh. Runtime: 1600 ÷ 860 = 1.86 hours. In minutes: 1.86 × 60 = 111.6, which rounds to **112 min**."
+     },
+     "xp": 30
+    },
+    {
+     "id": "rb6-5",
+     "title": "Debugging a Misbehaving Robot",
+     "goal": "Find the most likely cause of a robot fault from what you observe.",
+     "theory": "Every builder's first robot misbehaves. Debugging is detective work:\n\n- Describe exactly what you see, not what you think is wrong.\n- List the likely causes, and check the easiest and most likely one first.\n- Change **one** thing at a time, then test again.\n\nSome common symptoms and their usual causes:\n\n- **Spins on the spot** instead of driving straight: one wheel turns backwards. Most often, that motor's two wires are swapped at the driver. Swap them back, or reverse that motor's direction in the program.\n- **Drives in a wide curve:** one wheel is slower. Real motors are never identical, and a wheel may be rubbing. Closed-loop control with wheel encoders fixes this properly.\n- **Ignores obstacles:** first show the sensor readings while you move your hand in front of it. If they do not change, look for a loose or swapped wire, a missing common ground, or a sensor that faces the wrong way. If the readings are fine, look at the program: a slow loop, or a long wait, leaves the robot blind.\n- **Resets when the motors start:** a brownout. Give the brain a steadier supply.\n\nA quick trick for motor problems: lift the robot so its wheels spin freely in the air, and watch each wheel while you command it.",
+     "task": "You press start. Your robot should drive straight ahead, but it spins on the spot. You lift it and command \"both motors forward\": the left wheel turns forward and the right wheel turns backward, both at the same speed. What is the most likely cause?",
+     "hint": "The two wheels turn at the same speed but in opposite directions. What makes only one of them turn the wrong way?",
+     "check": {
+      "type": "choice",
+      "options": [
+       "The battery is nearly empty",
+       "The right motor's two wires are swapped at the motor driver",
+       "The ultrasonic sensor is facing the wrong way",
+       "The control loop is running too slowly"
+      ],
+      "answer": 1,
+      "why": [
+       "A weak battery would make both wheels slower. It would not make one of them turn backward.",
+       "Right. Swapped wires make a DC motor turn the other way. Swap that motor's two wires at the driver, or reverse its direction in the program.",
+       "Here you commanded both motors directly, with no sensor involved, and one wheel still turned the wrong way. The sensor cannot cause this.",
+       "A slow loop reacts late, but you gave a direct command and one wheel turned the wrong way. That is a wiring or direction problem, not a timing one."
+      ],
+      "explain": "When one wheel turns backward to a forward command, that motor's two wires are almost always swapped. Swap them at the driver, or reverse that motor in the program."
+     },
+     "xp": 25
+    },
+    {
+     "id": "rb6-6",
+     "title": "Capstone: The Design Review",
+     "goal": "Combine ideas from the whole course to judge a complete robot design, and see where to go next.",
+     "theory": "You now know what a robot is made of: body, senses, muscles, brain, power and wiring. Here is where the academy's Python courses take each idea further:\n\n- **Python for Robotics:** write real control loops, read sensors and build a robot simulator.\n- **Control Theory and PID:** build and tune your own PID controller.\n- **Kinematics and Dynamics:** the maths of how arms and wheeled robots move.\n- **Computer Vision for Robots:** teach a robot to see with a camera.\n- **Path Planning and Navigation:** find a route through a map.\n- **ROS 2, the Robot Nervous System:** the software that connects the parts of big robots.\n- **Aerial Robots:** drones.\n- **Power, Batteries and Charging** and **Embedded Linux for Robots:** go deeper into batteries and into Linux boards like the Raspberry Pi.\n\nBefore that, one last mission. Engineers hold a **design review**: before anyone builds, the team reads the plan and looks for the part that will fail. You will do the same now. Check each plan against what you have learned:\n\n- Is the brain right for the work it must do?\n- Does the robot use feedback where it needs to be accurate?\n- Do all parts that share signals share a ground?\n- Does the emergency stop work even if the program freezes?",
+     "task": "A team wants a robot that follows a person around the school hall using a camera. All four plans share wheel motors with encoders, a motor driver, a 3000 mAh battery, a fuse next to the battery, and a regulator that gives the brains a steady 5 V. At an average draw of 1.5 A, using 80% of the battery, every plan expects about 96 minutes of driving. Which plan passes the design review?",
+     "hint": "Check each plan against the four questions in the briefing. Only one passes all four.",
+     "check": {
+      "type": "choice",
+      "options": [
+       "An Arduino Uno finds the person in the camera image and runs a closed loop on the wheels using the encoders. All grounds are joined. A latching e-stop cuts motor power.",
+       "A Raspberry Pi finds the person in the camera image and sends speed orders to a microcontroller, which runs a closed loop on the wheels. All grounds are joined. The e-stop is a key on a laptop that tells the program to stop the motors.",
+       "A Raspberry Pi finds the person in the camera image and sends speed orders to a microcontroller, which runs a closed loop on the wheels. All grounds are joined. A latching e-stop cuts motor power.",
+       "A Raspberry Pi finds the person in the camera image and sends speed orders to a microcontroller, which runs a closed loop on the wheels. The motor battery's ground is kept apart from the brains' ground, to avoid noise. A latching e-stop cuts motor power."
+      ],
+      "answer": 2,
+      "why": [
+       "An Arduino Uno has only 2 KB of working memory, far too little to hold and search a camera image. Vision needs a single-board computer.",
+       "An e-stop that asks the program to stop does nothing if the program has frozen. It must cut the motor power in the wiring.",
+       "Right. The Pi does the vision, the microcontroller keeps the wheels on target with feedback, the shared ground lets their signals work, and the e-stop works even if the software freezes.",
+       "Without a common ground, the motor driver has nothing to measure the microcontroller's signals against, so the motors twitch or ignore commands."
+      ],
+      "explain": "This plan puts each job on the right brain, uses feedback on the wheels, shares one ground, and has an e-stop that cuts motor power in the wiring. The runtime checks out too: 3000 mAh × 0.8 = 2400 mAh, and 2400 ÷ 1500 mA = 1.6 hours = 96 minutes."
+     },
+     "xp": 60
+    }
+   ]
+  }
+ ]
+}

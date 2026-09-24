@@ -1,8 +1,8 @@
 # Stafford Academy
 
-**Learn to program one mission at a time. Free, open and with nothing in your way.**
+**Learn programming, AI, electronics and robotics one mission at a time. Free, open and with nothing in your way.**
 
-Stafford Academy is a free, open-source learning platform that runs as a Chrome extension. It teaches programming through short, hands-on missions: you read a little theory, write real code, and get instant feedback, all inside your browser.
+Stafford Academy is a free, open-source learning platform that runs as a Chrome extension. It teaches through short, hands-on missions: you read a little theory, then write real code, answer a question, solve a calculation or write a prompt, and get instant feedback, all inside your browser.
 
 ## Why it exists
 
@@ -18,12 +18,15 @@ It is made for anyone who wants to find their way in the world of technology, wh
 
 ## What's inside
 
-**19 Python courses with 1,583 missions and about 500 hours of practice.** They go from your very first `print()` to robotics and artificial intelligence, including a course on using AI tools the way professional developers do.
+**22 courses with 1,721 missions and about 520 hours of practice.** Three of them need no code at all: **Learn AI**, **Electronics Basics** and **Robotics Basics**. The other 19 teach Python, from your very first `print()` to robotics and artificial intelligence, including a course on using AI tools the way professional developers do.
 
 | Course | Level | Missions | Hours |
 | --- | --- | ---: | ---: |
 | Programming from Zero | Beginner | 91 | 26 |
+| Learn AI *(no code)* | Beginner | 50 | 8 |
 | AI for Developers | Beginner | 60 | 16 |
+| Electronics Basics *(no code)* | Beginner | 44 | 7 |
+| Robotics Basics *(no code)* | Beginner | 44 | 7 |
 | Python for Robotics | Beginner | 84 | 24 |
 | Control Theory and PID | Intermediate | 84 | 24 |
 | Kinematics and Dynamics | Advanced | 85 | 28 |
@@ -45,8 +48,8 @@ It is made for anyone who wants to find their way in the world of technology, wh
 Every mission gives you:
 
 - A short **briefing** with the theory you need and nothing more.
-- A **code editor** where you write the answer.
-- An **instant check**. Beginner missions run your Python for real and compare its output. The rest check that your code does what the task asks.
+- A **task** to solve: write code in the editor, pick the right answer, work out a calculation, or write a prompt for an AI.
+- An **instant check**. Beginner Python missions run your code for real and compare its output, the rest check that your code does what the task asks. Questions explain why each answer is right or wrong, and prompts are checked against a list of what a good prompt includes.
 - A **hint** when you are stuck, and the full solution if you really need it.
 - **XP and levels** that track how far you have come.
 
@@ -98,6 +101,7 @@ academy/
   python-worker.js     The worker that hosts Pyodide
   academy.css          Styles for the course and mission pages
   mascot.css           Styles for Zerack
+  art/                 Animated figures for the home page, one per course
   courses/             catalog.json, one JSON file per course and search-index.json
   fonts/               Space Grotesk
 lib/pyodide/           Pyodide: Python compiled to WebAssembly
@@ -106,7 +110,7 @@ tools/
   build_search_index.py  Rebuilds Zerack's offline index of every mission
 ```
 
-Each course is a plain JSON file: `chapters → lessons`, and every lesson has a `theory`, a `task`, `starter` code, a `solution`, a `hint` and a `check`. To add or improve a mission, edit the JSON, run `python3 tools/build_search_index.py` so Zerack learns it too, and reload the extension.
+Each course is a plain JSON file: `chapters → lessons`, and every lesson has a `theory`, a `task`, a `hint` and a `check`. Code missions add `starter` code and a `solution`; missions without code use a `choice`, `number` or `prompt` check. To add or improve a mission, edit the JSON, run `python3 tools/build_search_index.py` so Zerack learns it too, and reload the extension.
 
 ## Contributing
 

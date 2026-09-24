@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400">
+<g class="a-float">
+<path class="s-dim" stroke-width="2" d="M38,130 H66 M38,200 H66 M38,270 H66"/>
+<path class="s-dim" stroke-width="1.5" d="M90,130 L200,95 M90,130 L200,165 M90,130 L200,235 M90,130 L200,305 M90,200 L200,95 M90,200 L200,165 M90,200 L200,235 M90,200 L200,305 M90,270 L200,95 M90,270 L200,165 M90,270 L200,235 M90,270 L200,305 M200,95 L310,165 M200,95 L310,235 M200,165 L310,165 M200,165 L310,235 M200,235 L310,165 M200,235 L310,235 M200,305 L310,165 M200,305 L310,235"/>
+<path class="s-acc a-dash" stroke-width="2.5" d="M90,130 L200,165 M90,200 L200,165 M90,200 L200,235 M90,270 L200,235 M200,165 L310,165 M200,235 L310,165"/>
+<circle class="f-panel s-line" stroke-width="2.5" cx="90" cy="130" r="16"/>
+<circle class="f-panel s-line" stroke-width="2.5" cx="90" cy="200" r="16"/>
+<circle class="f-panel s-line" stroke-width="2.5" cx="90" cy="270" r="16"/>
+<circle class="f-panel s-dim" stroke-width="2.5" cx="200" cy="95" r="16"/>
+<circle class="f-panel s-acc" stroke-width="3" cx="200" cy="165" r="16"/>
+<circle class="f-acc a-pulse d1" cx="200" cy="165" r="7"/>
+<circle class="f-panel s-acc" stroke-width="3" cx="200" cy="235" r="16"/>
+<circle class="f-acc a-pulse d2" cx="200" cy="235" r="7"/>
+<circle class="f-panel s-dim" stroke-width="2.5" cx="200" cy="305" r="16"/>
+<circle class="s-acc a-pulse" stroke-width="2" cx="310" cy="165" r="25"/>
+<circle class="f-acc" cx="310" cy="165" r="16"/>
+<circle class="f-panel s-line" stroke-width="2.5" cx="310" cy="235" r="16"/>
+<path class="s-acc a-dash" stroke-width="3" d="M338,165 H370"/>
+<path class="s-acc" stroke-width="3" d="M365,170 L372,165 L365,160"/>
+</g>
+</svg>

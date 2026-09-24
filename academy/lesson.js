@@ -211,6 +211,85 @@
     });
   }
 
+  // ---------- missions without code ----------
+  // Three kinds of mission need no programming: "choice" (pick one answer,
+  // each option explains itself), "number" (a calculation with a unit and a
+  // tolerance) and "prompt" (write a prompt; a rubric checks what it says).
+
+  function missionKind(lesson) {
+    var t = lesson && lesson.check && lesson.check.type;
+    return t === 'choice' || t === 'number' || t === 'prompt' ? t : 'code';
+  }
+
+  function showRich(cls, title, text, lines) {
+    var out = A.el('output');
+    A.clear(out);
+    out.className = 'output ' + cls;
+    var b = document.createElement('b');
+    b.textContent = title;
+    out.appendChild(b);
+    if (lines && lines.length) {
+      var ul = document.createElement('ul');
+      ul.className = 'rubric';
+      lines.forEach(function (line) {
+        var li = document.createElement('li');
+        li.className = line.ok ? 'is-met' : 'is-missing';
+        li.textContent = line.text;
+        ul.appendChild(li);
+      });
+      out.appendChild(ul);
+    }
+    if (text) {
+      var note = document.createElement('div');
+      note.className = 'output-rich';
+      note.appendChild(A.markdown(text));
+      out.appendChild(note);
+    }
+    return out;
+  }
+
+  function gradeChoice(check, picked) {
+    if (picked == null) return { ok: false, title: 'Pick an answer first.', text: '' };
+    var why = (check.why || [])[picked] || '';
+    if (picked === check.answer) return { ok: true, title: 'Correct!', text: check.explain || why };
+    return { ok: false, title: 'Not quite.', text: why || 'Read the briefing again and try another option.' };
+  }
+
+  function parseNumber(text) {
+    var clean = String(text || '').trim().replace(/\s+/g, '').replace(/,(?=\d{1,2}$)/, '.').replace(/,/g, '');
+    if (!/^[-+]?(\d+\.?\d*|\.\d+)(e[-+]?\d+)?$/i.test(clean)) return null;
+    return parseFloat(clean);
+  }
+
+  function gradeNumber(check, text) {
+    var value = parseNumber(text);
+    if (value === null) return { ok: false, title: 'Type a number first.', text: 'Only the number goes in the box: the unit is already written next to it.' };
+    var tolerance = check.tolerance != null ? check.tolerance : Math.max(1e-9, Math.abs(check.answer) * 0.02);
+    if (Math.abs(value - check.answer) <= tolerance) return { ok: true, title: 'Correct!', text: check.explain || '' };
+    return { ok: false, title: 'Not quite.', text: 'Check each step of your calculation and the unit the question asks for.' };
+  }
+
+  function gradePrompt(check, text) {
+    // Phones and word processors type curly quotes; the rubric is written with straight ones.
+    text = String(text || '').replace(/[\u2018\u2019\u02bc]/g, "'").replace(/[\u201c\u201d]/g, '"');
+    var words = String(text || '').trim().split(/\s+/).filter(Boolean).length;
+    var lines = (check.rubric || []).map(function (item) {
+      var ok = (item.any || []).some(function (p) {
+        try { return new RegExp(p, 'i').test(text); } catch (e) { return false; }
+      });
+      return { ok: ok, text: item.label };
+    });
+    var minWords = check.minWords || 0;
+    if (minWords) lines.push({ ok: words >= minWords, text: 'At least ' + minWords + ' words (you have ' + words + ')' });
+    var ok = lines.every(function (x) { return x.ok; });
+    return {
+      ok: ok,
+      title: ok ? 'Great prompt! Every part is there.' : 'Almost. Add what is missing:',
+      text: ok ? (check.explain || '') : '',
+      lines: lines
+    };
+  }
+
   // ---------- editor ----------
 
   var INDENT = '    ';
@@ -336,12 +415,86 @@
     code.addEventListener('input', function () { saveDraft(code.value); });
     editorKeys(code);
 
-    A.el('hint').textContent = l.hint || 'No hint for this one.';
+    var hintBox = A.el('hint');
+    A.clear(hintBox);
+    A.inline(hintBox, l.hint || 'No hint for this one.');
 
     if (runsCode(l) && window.PythonRunner) window.PythonRunner.warmUp();
 
+    var kind = missionKind(l);
+    var picked = null;
+    if (kind !== 'code') setUpAnswer();
+
+    // Builds the answer area for a mission without code.
+    function setUpAnswer() {
+      var check = l.check;
+      if (kind === 'prompt') {
+        A.el('editorLang').textContent = 'YOUR PROMPT';
+        A.el('runLabel').textContent = 'Check my prompt';
+        code.classList.add('is-prose');
+        code.placeholder = 'Write your prompt here...';
+        code.setAttribute('aria-label', 'Your prompt');
+        showMessage('is-idle', '', ['Write your prompt and press check.']);
+        return;
+      }
+      code.hidden = true;
+      A.el('resetBtn').hidden = true;
+      A.el('runLabel').textContent = 'Check my answer';
+      if (kind === 'choice') {
+        A.el('editorLang').textContent = 'CHOOSE ONE';
+        var quiz = A.el('quiz');
+        quiz.hidden = false;
+        (check.options || []).forEach(function (text, i) {
+          var b = document.createElement('button');
+          b.type = 'button';
+          b.className = 'quiz-option';
+          b.setAttribute('role', 'radio');
+          b.setAttribute('aria-checked', 'false');
+          var letter = document.createElement('span');
+          letter.className = 'quiz-letter';
+          letter.textContent = String.fromCharCode(65 + i);
+          var label = document.createElement('span');
+          A.inline(label, text);
+          b.appendChild(letter);
+          b.appendChild(label);
+          b.addEventListener('click', function () {
+            picked = i;
+            Array.prototype.forEach.call(quiz.children, function (o, k) {
+              o.classList.toggle('is-picked', k === i);
+              o.classList.remove('is-right', 'is-wrong');
+              o.setAttribute('aria-checked', k === i ? 'true' : 'false');
+            });
+          });
+          quiz.appendChild(b);
+        });
+        showMessage('is-idle', '', ['Pick an answer and press check.']);
+      } else {
+        A.el('editorLang').textContent = 'CALCULATE';
+        A.el('numberBox').hidden = false;
+        A.el('numberUnit').textContent = check.unit || '';
+        A.el('numberInput').addEventListener('keydown', function (e) { if (e.key === 'Enter') A.el('runBtn').click(); });
+        showMessage('is-idle', '', ['Work it out, type the number and press check.']);
+      }
+    }
+
+    function checkAnswer() {
+      var check = l.check, res;
+      if (kind === 'choice') {
+        res = gradeChoice(check, picked);
+        if (picked != null) A.el('quiz').children[picked].classList.add(res.ok ? 'is-right' : 'is-wrong');
+      } else if (kind === 'number') {
+        res = gradeNumber(check, A.el('numberInput').value);
+      } else {
+        res = gradePrompt(check, code.value);
+      }
+      showRich(res.ok ? 'is-good' : 'is-bad', res.title, res.text, res.lines);
+      announceResult({ ok: res.ok, title: res.title });
+      if (res.ok) onPass();
+    }
+
     A.el('runBtn').addEventListener('click', function () {
       var button = A.el('runBtn');
+      if (kind !== 'code') { checkAnswer(); return; }
       if (!runsCode(l) || !window.PythonRunner) {
         var r = review(code.value, l, language);
         if (!r.ok) {
@@ -381,9 +534,20 @@
     });
 
     A.el('solutionBtn').addEventListener('click', function () {
+      if (kind === 'choice') {
+        var answer = l.check.answer;
+        A.el('quiz').children[answer].click();
+        showRich('is-idle', 'The answer is ' + String.fromCharCode(65 + answer) + '.', l.check.explain || '');
+        return;
+      }
+      if (kind === 'number') {
+        A.el('numberInput').value = String(l.check.answer);
+        showRich('is-idle', 'The answer is ' + l.check.answer + ' ' + (l.check.unit || '') + '.', l.check.explain || '');
+        return;
+      }
       code.value = l.solution || code.value;
       saveDraft(code.value);
-      showMessage('is-idle', 'Solution loaded.', ['Read it, then press check. It counts the same, but you learn less.']);
+      showMessage('is-idle', kind === 'prompt' ? 'Example prompt loaded.' : 'Solution loaded.', ['Read it, then press check. It counts the same, but you learn less.']);
     });
 
     if (state.alreadyDone) paintNext(false, 0);

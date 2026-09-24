@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400">
+<ellipse class="f-soft a-pulse" cx="200" cy="338" rx="84" ry="9"/>
+<g class="a-float">
+<path class="s-dim a-dash" stroke-width="2" d="M70,256 L64,300 M106,256 L112,300 M294,256 L288,300 M330,256 L336,300"/>
+<path class="s-line" stroke-width="5" d="M168,182 L125,166 M232,182 L275,166"/>
+<rect class="f-panel s-line" stroke-width="2" x="118" y="152" width="14" height="14" rx="3"/>
+<rect class="f-panel s-line" stroke-width="2" x="268" y="152" width="14" height="14" rx="3"/>
+<ellipse class="f-soft" cx="125" cy="150" rx="48" ry="11.5"/>
+<ellipse class="s-dim" stroke-width="1.5" cx="125" cy="150" rx="48" ry="11.5"/>
+<g transform="translate(125,150) scale(1,0.24)"><g class="a-spin-fast d1">
+<ellipse class="f-ink" opacity=".75" cx="-22" cy="0" rx="22" ry="5"/><ellipse class="f-ink" opacity=".75" cx="22" cy="0" rx="22" ry="5"/>
+</g></g>
+<ellipse class="f-acc" cx="125" cy="150" rx="5" ry="3"/>
+<ellipse class="f-soft" cx="275" cy="150" rx="48" ry="11.5"/>
+<ellipse class="s-dim" stroke-width="1.5" cx="275" cy="150" rx="48" ry="11.5"/>
+<g transform="translate(275,150) scale(1,0.24)"><g class="a-spin-fast d3">
+<ellipse class="f-ink" opacity=".75" cx="-22" cy="0" rx="22" ry="5"/><ellipse class="f-ink" opacity=".75" cx="22" cy="0" rx="22" ry="5"/>
+</g></g>
+<ellipse class="f-acc" cx="275" cy="150" rx="5" ry="3"/>
+<path class="s-line" stroke-width="2.5" d="M180,212 L170,256 M220,212 L230,256 M156,256 H184 M216,256 H244"/>
+<path class="s-line" stroke-width="5" d="M162,204 L88,230 M238,204 L312,230"/>
+<rect class="f-panel s-line" stroke-width="3" x="148" y="170" width="104" height="44" rx="20"/>
+<path class="f-soft s-acc" stroke-width="2.5" d="M166,172 Q200,146 234,172 Z"/>
+<path class="s-acc" stroke-width="3" d="M172,193 H228"/>
+<circle class="f-red a-blink" cx="160" cy="193" r="3.5"/>
+<circle class="f-acc a-blink d2" cx="240" cy="193" r="3.5"/>
+<path class="s-line" stroke-width="3" d="M200,214 V218"/>
+<circle class="f-panel s-line" stroke-width="2.5" cx="200" cy="230" r="12"/>
+<circle class="f-acc" cx="200" cy="230" r="5"/>
+<rect class="f-panel s-line" stroke-width="2" x="81" y="216" width="14" height="14" rx="3"/>
+<rect class="f-panel s-line" stroke-width="2" x="305" y="216" width="14" height="14" rx="3"/>
+<ellipse class="f-soft" cx="88" cy="214" rx="56" ry="13.4"/>
+<ellipse class="s-dim" stroke-width="1.5" cx="88" cy="214" rx="56" ry="13.4"/>
+<g transform="translate(88,214) scale(1,0.24)"><g class="a-spin-fast ">
+<ellipse class="f-ink" opacity=".75" cx="-26" cy="0" rx="26" ry="5"/><ellipse class="f-ink" opacity=".75" cx="26" cy="0" rx="26" ry="5"/>
+</g></g>
+<ellipse class="f-acc" cx="88" cy="214" rx="5" ry="3"/>
+<ellipse class="f-soft" cx="312" cy="214" rx="56" ry="13.4"/>
+<ellipse class="s-dim" stroke-width="1.5" cx="312" cy="214" rx="56" ry="13.4"/>
+<g transform="translate(312,214) scale(1,0.24)"><g class="a-spin-fast d2">
+<ellipse class="f-ink" opacity=".75" cx="-26" cy="0" rx="26" ry="5"/><ellipse class="f-ink" opacity=".75" cx="26" cy="0" rx="26" ry="5"/>
+</g></g>
+<ellipse class="f-acc" cx="312" cy="214" rx="5" ry="3"/>
+</g>
+</svg>

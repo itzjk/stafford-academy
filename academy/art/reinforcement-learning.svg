@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400">
+<rect class="f-panel" x="75" y="80" width="250" height="250" rx="14"/>
+<path class="s-dim" stroke-width="1.5" d="M125,80 V330 M175,80 V330 M225,80 V330 M275,80 V330 M75,130 H325 M75,180 H325 M75,230 H325 M75,280 H325"/>
+<rect class="f-soft" x="279" y="84" width="42" height="42" rx="8"/>
+<rect class="f-dim" x="130" y="135" width="40" height="40" rx="7"/>
+<rect class="f-dim" x="130" y="185" width="40" height="40" rx="7"/>
+<rect class="f-dim" x="130" y="285" width="40" height="40" rx="7"/>
+<rect class="f-dim" x="230" y="185" width="40" height="40" rx="7"/>
+<rect class="f-dim" x="230" y="235" width="40" height="40" rx="7"/>
+<rect class="s-line" stroke-width="2.5" x="75" y="80" width="250" height="250" rx="14"/>
+<path class="s-dim" stroke-width="2" d="M200,164 L200,146 M205,152 L200,146 L195,152 M250,164 L250,146 M255,152 L250,146 L245,152 M300,164 L300,146 M305,152 L300,146 L295,152 M200,214 L200,196 M205,202 L200,196 L195,202 M300,214 L300,196 M305,202 L300,196 L295,202 M141,255 L159,255 M153,260 L159,255 L153,250 M200,264 L200,246 M205,252 L200,246 L195,252 M300,264 L300,246 M305,252 L300,246 L295,252 M200,314 L200,296 M205,302 L200,296 L195,302 M241,305 L259,305 M253,310 L259,305 L253,300 M300,314 L300,296 M305,302 L300,296 L295,302"/>
+<path class="s-acc a-pulse d4" stroke-width="2.5" d="M91,105 L109,105 M103,110 L109,105 L103,100"/>
+<path class="s-acc a-pulse d1" stroke-width="2.5" d="M141,105 L159,105 M153,110 L159,105 L153,100"/>
+<path class="s-acc a-pulse d2" stroke-width="2.5" d="M191,105 L209,105 M203,110 L209,105 L203,100"/>
+<path class="s-acc a-pulse d3" stroke-width="2.5" d="M241,105 L259,105 M253,110 L259,105 L253,100"/>
+<path class="s-acc a-pulse d3" stroke-width="2.5" d="M100,164 L100,146 M105,152 L100,146 L95,152"/>
+<path class="s-acc a-pulse d2" stroke-width="2.5" d="M100,214 L100,196 M105,202 L100,196 L95,202"/>
+<path class="s-acc a-pulse d1" stroke-width="2.5" d="M100,264 L100,246 M105,252 L100,246 L95,252"/>
+<g class="a-spin"><polygon class="f-gold" points="300,90.5 304.1,100.8 315.2,101.6 306.7,108.7 309.4,119.4 300,113.5 290.6,119.4 293.3,108.7 284.8,101.6 295.9,100.8"/></g>
+<circle class="s-acc a-pulse" stroke-width="2" cx="100" cy="305" r="19"/>
+<circle class="f-acc" cx="100" cy="305" r="12"/>
+<g class="a-float"><g class="a-pulse d2">
+<path class="s-gold" stroke-width="3" d="M318,50 H332 M325,43 V57 M340,46 L345,42 V58"/>
+</g></g>
+</svg>

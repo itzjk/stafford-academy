@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400">
+  <circle class="f-soft a-pulse" cx="312" cy="215" r="50"/>
+  <circle class="f-soft a-pulse d1" cx="312" cy="215" r="30"/>
+  <path class="s-dim" stroke-width="4" d="M72 166 V134 Q72 120 86 120 H150 M234 120 H298 Q312 120 312 134 V202 M312 228 V298 Q312 312 298 312 H86 Q72 312 72 298 V256"/>
+  <path class="s-acc a-dash" stroke-width="4" d="M72 166 V134 Q72 120 86 120 H150"/>
+  <path class="s-acc a-dash" stroke-width="4" d="M234 120 H298 Q312 120 312 134 V202"/>
+  <path class="s-acc a-dash" stroke-width="4" d="M312 228 V298 Q312 312 298 312 H86 Q72 312 72 298 V256"/>
+  <rect class="f-soft" x="144" y="100" width="96" height="40" rx="20"/>
+  <path class="s-line" stroke-width="3" d="M150 120 H156 L162 108 L174 132 L186 108 L198 132 L210 108 L222 132 L228 120 H234"/>
+  <text class="t-label" x="192" y="86" text-anchor="middle">220Ω</text>
+  <rect class="f-ink" x="62" y="166" width="20" height="10" rx="3"/>
+  <rect class="s-line f-panel" x="48" y="176" width="48" height="80" rx="10" stroke-width="3"/>
+  <path class="s-line" stroke-width="3" d="M65 193 H79 M72 186 V200"/>
+  <rect class="f-acc" x="57" y="210" width="30" height="12" rx="3"/>
+  <rect class="f-acc" x="57" y="228" width="30" height="12" rx="3"/>
+  <path class="f-acc s-acc a-pulse d2" stroke-width="3" d="M296 202 H328 L312 228 Z"/>
+  <path class="s-line" stroke-width="4" d="M294 228 H330"/>
+  <g class="a-pulse">
+    <path class="s-acc" stroke-width="3" d="M334 204 L350 188 M343 188 H350 V195"/>
+    <path class="s-acc" stroke-width="3" d="M340 220 L356 204 M349 204 H356 V211"/>
+  </g>
+</svg>

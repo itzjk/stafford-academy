@@ -1,0 +1,1016 @@
+{
+ "id": "electronics-basics",
+ "title": "Electronics Basics",
+ "world": "The Copper Bench",
+ "mentor": {
+  "name": "OHM-5",
+  "character": "Measures twice, powers on once."
+ },
+ "summary": "No code needed. Learn what every part in a circuit is for: voltage, current, resistors, LEDs, capacitors, transistors, sensors and motors, with real calculations and the safety habits of a workshop.",
+ "level": "BEGINNER",
+ "type": "NO CODE",
+ "hours": 7,
+ "accent": "#ffc857",
+ "language": "none",
+ "areas": [
+  "basics",
+  "hardware"
+ ],
+ "order": 2,
+ "chapters": [
+  {
+   "n": 0,
+   "title": "Electricity in Plain Words",
+   "lessons": [
+    {
+     "id": "el0-1",
+     "title": "Push, Flow and Resistance",
+     "goal": "Tell voltage, current and resistance apart using a water-pipe picture.",
+     "theory": "Electricity is tiny charged particles, called electrons, moving through a material such as the copper inside a wire. Three ideas describe what they do, and a water pipe is a handy picture for all three.\n\n- **Voltage** is the push. Think of the water pressure made by a pump. A battery gives the push. You measure it in volts (V).\n- **Current** is the flow: how much charge passes a point every second. Think of how much water flows through the pipe. You measure it in amperes, or amps (A).\n- **Resistance** is how hard the path is. A narrow pipe holds water back; some materials hold current back. You measure it in ohms (Ω).\n\nMore push gives more flow. A harder path gives less flow. In the next chapter you will turn that sentence into a formula.\n\nThe water picture has limits. A wire is not hollow, and nothing spills out of a cut wire: when the path is broken, the current simply stops. Also, current is not used up along the way. The same current that leaves the battery comes back to it. What gets used is energy, which turns into light, heat or motion.\n\nBy tradition, circuit diagrams show current flowing out of the battery's + terminal and back into its − terminal. This course uses that direction too.",
+     "task": "In the water-pipe picture, which electrical quantity matches how much water flows through the pipe every second?",
+     "hint": "Match each word to one part of the picture: the pressure, the flow, or the narrowness of the pipe.",
+     "check": {
+      "type": "choice",
+      "options": [
+       "Voltage",
+       "Current",
+       "Resistance"
+      ],
+      "answer": 1,
+      "why": [
+       "Voltage is the push, like water pressure. Pressure makes the water move, but it is not the flow itself.",
+       "Right: current is how much charge passes a point every second, just like the amount of water flowing through a pipe.",
+       "Resistance is how hard the path is, like a narrow pipe. It reduces the flow; it is not the flow."
+      ],
+      "explain": "Current is the flow. Voltage pushes it and resistance holds it back, so the flow depends on both."
+     },
+     "xp": 15
+    },
+    {
+     "id": "el0-2",
+     "title": "The Closed Loop",
+     "goal": "Understand why current only flows around a complete path.",
+     "theory": "A circuit is a loop. Current leaves the battery's + terminal, travels through wires and parts, and comes back to the − terminal. The word circuit comes from a Latin word meaning \"going around\", and that is the key idea: the path must be complete.\n\nIf the loop is broken anywhere, the current stops everywhere in the loop at the same moment. It does not travel up to the gap and wait there. A lamp with only one wire attached gets no current at all, because current needs a way in and a way out.\n\nThis is exactly how a switch works. A switch is a gap you can open and close:\n\n- **Closed** switch: the loop is complete, current flows, the lamp lights.\n- **Open** switch: the loop is broken, nothing flows, the lamp is dark.\n\nCareful, this is the opposite of a door. An open door lets you through; an open switch lets nothing through. Engineers say \"open circuit\" for a broken loop and \"closed circuit\" for a complete one.\n\nWhen a simple circuit does not work, the most common cause is a broken loop: a loose wire, a wire in the wrong hole, a switch left open, or a part that has burnt out inside. So the first question to ask is always: is there a complete path from + all the way back to −?",
+     "task": "You build one loop with a battery, a switch and a lamp. The switch is closed, but the lamp stays dark. You find that one wire has come loose from the lamp. What is happening?",
+     "hint": "Think about what current needs in order to flow at all, and what one gap does to the whole loop.",
+     "check": {
+      "type": "choice",
+      "options": [
+       "Current flows up to the loose end and waits there, ready to jump across",
+       "The lamp gets current through the one wire still attached, just not enough to glow",
+       "No current flows anywhere in the loop, because the path is not complete",
+       "The switch must be broken, because a closed switch always lights the lamp"
+      ],
+      "answer": 2,
+      "why": [
+       "Current does not pile up at a gap. The moment the loop is broken, the flow stops everywhere, all around the loop.",
+       "A lamp needs current to go in one side and out the other. With only one wire attached there is no path through it, so there is no current at all.",
+       "Right: a circuit needs a complete loop. One loose wire breaks it, so the current stops everywhere, even in the parts still connected.",
+       "The switch is only one part of the loop. A closed switch cannot help when the loop is broken somewhere else, here at the lamp."
+      ],
+      "explain": "Current only flows around a complete loop. A single gap anywhere, an open switch or a loose wire, stops it everywhere."
+     },
+     "xp": 15
+    },
+    {
+     "id": "el0-3",
+     "title": "Units and Prefixes",
+     "goal": "Convert between amps and milliamps, and between ohms and kilohms.",
+     "theory": "Electronics uses very small and very large numbers. Instead of writing lots of zeros, you put a prefix in front of the unit:\n\n- `m` (milli) means one thousandth. 1 mA = 0.001 A, so 1 A = 1000 mA.\n- `k` (kilo) means one thousand. 1 kΩ = 1000 Ω.\n- `M` (mega) means one million. 1 MΩ = 1 000 000 Ω.\n- `µ` (micro) means one millionth. You will meet it with capacitors: 1 µF = 0.000001 F.\n\nSmall m and capital M are very different: mA is a tiny current, MΩ is a huge resistance.\n\nTo convert, multiply or divide by 1000, which moves the decimal point three places:\n\n- From A to mA, multiply by 1000: 0.02 A = 20 mA.\n- From mA to A, divide by 1000: 350 mA = 0.35 A.\n- From kΩ to Ω, multiply by 1000: 4.7 kΩ = 4700 Ω.\n- From Ω to kΩ, divide by 1000: 2200 Ω = 2.2 kΩ.\n\nA quick sense check helps: a milliamp is smaller than an amp, so the same current written in mA must be a bigger number.\n\nTo get a feel for sizes: a small LED uses about 5 to 20 mA, a phone charger gives 1 to 3 A, and the resistors in a beginner kit range from about 100 Ω to 1 MΩ. Formulas in the next chapter need plain units (V, A, Ω), so converting will become a habit.",
+     "task": "A small motor draws 0.075 A. How much is that in milliamps? Answer in mA.",
+     "hint": "Going from amps to milliamps makes the number bigger. How many milliamps are in one amp?",
+     "check": {
+      "type": "number",
+      "answer": 75,
+      "unit": "mA",
+      "tolerance": 1,
+      "explain": "1 A = 1000 mA, so multiply by 1000: 0.075 A × 1000 = 75 mA."
+     },
+     "xp": 20
+    },
+    {
+     "id": "el0-4",
+     "title": "Cells in Series",
+     "goal": "Work out the voltage of cells joined in a chain, and see why + and − marks matter.",
+     "theory": "Every battery has a voltage printed on it. A single AA cell gives about 1.5 V. A coin cell like the CR2032 gives 3 V. A USB port gives 5 V.\n\nStrictly, a \"battery\" is several cells joined together. When you connect cells in **series**, the + of one touching the − of the next in a single chain, their voltages add up:\n\n- two AA cells in series: 1.5 V + 1.5 V = 3 V\n- four AA cells in series: 4 × 1.5 V = 6 V\n- an ordinary rectangular 9 V battery contains six small 1.5 V cells in series\n\nBecause the cells form one chain, the same current flows through every cell.\n\nDirection matters. If one cell is put in the wrong way round, it pushes against the others, so its voltage is subtracted instead of added. Your circuit gets much less voltage than you expected, and the reversed cell can heat up or leak. That is why battery holders show + and − marks: always match them.\n\nA word on safety. Everything in this course uses low voltages from batteries or USB, around 12 V or less. The mains electricity from a wall socket (about 120 V or 230 V, depending on the country) can kill. Never open, touch or experiment with anything plugged into the wall.",
+     "task": "A battery holder takes four AA cells of 1.5 V each in series, but one of them was put in the wrong way round. What total voltage does the holder give? Answer in V.",
+     "hint": "The three cells that face the right way add their push. What does the reversed cell do to the total?",
+     "check": {
+      "type": "number",
+      "answer": 3,
+      "unit": "V",
+      "tolerance": 0.05,
+      "explain": "Three cells face the right way: 3 × 1.5 V = 4.5 V. The reversed cell pushes against them, so subtract it: 4.5 V − 1.5 V = 3 V."
+     },
+     "xp": 25
+    },
+    {
+     "id": "el0-5",
+     "title": "DC and AC",
+     "goal": "Tell direct current from alternating current and know where each comes from.",
+     "theory": "There are two kinds of current.\n\n- **DC**, direct current, always flows the same way, from + round to −, at a steady voltage. Batteries, USB ports and solar cells give DC.\n- **AC**, alternating current, keeps changing direction, back and forth, many times a second. The wall sockets in your home give AC: 50 times a second (50 Hz) in Europe and much of the world, 60 times a second (60 Hz) in North America. Hz, hertz, means \"times per second\".\n\nWhy two kinds? AC is easy to change to very high voltages for long power lines and back down again, so it suits the power grid. But the electronics inside phones, laptops and small projects need low-voltage DC.\n\nSo your charger, or power adapter, does two jobs: it lowers the voltage and turns AC into DC. Its label tells you so. On labels, a wavy line `~` means AC, and the input side lists the mains voltage and frequency. The output side shows the low DC voltage the device receives, often written with `DC` or a straight line.\n\nSafety first: the AC input of a charger is mains voltage, which can kill. Never open a charger, never connect your projects to a wall socket, and only power them from batteries, USB or a proper closed adapter. This course works with low-voltage DC only.",
+     "task": "A phone charger label reads: `Input: 100-240 V ~ 50/60 Hz` and `Output: 5 V DC 2 A`. What does the charger do?",
+     "hint": "Look at each side of the label separately: which side has the wavy line and the hertz, and which side reaches the phone?",
+     "check": {
+      "type": "choice",
+      "options": [
+       "It turns AC from the wall socket into low-voltage DC for the phone",
+       "It turns DC from the wall socket into AC for the phone",
+       "It passes 100 to 240 V straight to the phone, 50 or 60 times a second",
+       "It only lowers the voltage, so the phone also receives AC"
+      ],
+      "answer": 0,
+      "why": [
+       "Right: the input side is mains AC (the `~` and the hertz), and the output side is 5 V DC. Chargers and adapters do exactly this job.",
+       "Wall sockets give AC, not DC. The `~` and the `50/60 Hz` on the input side are the signs of alternating current.",
+       "That is the input side, what comes from the wall. The output side, the part that reaches the phone, says 5 V.",
+       "The output says DC. The charger lowers the voltage and also turns AC into DC, because the phone's electronics need a steady one-way current."
+      ],
+      "explain": "The input is mains AC, the output is low-voltage DC. A charger lowers the voltage and changes AC into DC in one box."
+     },
+     "xp": 15
+    },
+    {
+     "id": "el0-6",
+     "title": "Short Circuits",
+     "goal": "Recognise a short circuit, explain why it is dangerous and know what to do.",
+     "theory": "A **short circuit** is a path with almost no resistance straight from + to −. For example, a bare wire touching both battery terminals, or two wires touching that should not.\n\nResistance is what holds current back. Take it away and the supply pushes as much current as it possibly can. That huge current makes the wire and the battery hot within seconds. It can burn your fingers, melt the plastic on wires and even start a fire. Lithium batteries, like the ones in phones and power banks, can swell, burn or explode when shorted. Even a 9 V battery in a pocket with keys or coins can get hot.\n\nCurrent takes the easiest path. When a wire connects + to − past a lamp, almost all the current goes through the wire and almost none through the lamp. So the lamp goes dark while the wire heats up. A dark lamp does not mean nothing is flowing.\n\nGood habits:\n\n- Disconnect the power before you change any wiring.\n- Keep bare wire ends from touching each other.\n- Store batteries with their terminals covered, away from coins and keys.\n- If anything gets hot, smokes or smells burnt, disconnect the power at once.\n\nFuses help: a fuse is a thin wire made to melt and break the loop when the current is too high. A short in mains wiring is far more violent than in a battery circuit, which is one more reason to keep away from mains.",
+     "task": "While your circuit is powered, a bare wire accidentally connects the + and − terminals of the battery directly, bypassing the lamp. What happens?",
+     "hint": "Think about what resistance does to current, and which path the current prefers when it has two.",
+     "check": {
+      "type": "choice",
+      "options": [
+       "The lamp glows brighter, because it now gets extra current",
+       "Nothing, because a wire has no voltage of its own",
+       "The current drops to zero, because the lamp is no longer in the loop",
+       "A very large current flows through the wire, which heats up fast while the lamp goes dark"
+      ],
+      "answer": 3,
+      "why": [
+       "Current takes the easiest path. The wire bypasses the lamp, so almost no current goes through the lamp and it goes dark.",
+       "The battery still provides the push. With almost no resistance in the way, that push drives a very large current through the wire.",
+       "The loop is still complete: battery, wire, battery. It is simply a loop with almost no resistance, so the current becomes huge, not zero.",
+       "Right: a short circuit has almost no resistance, so the current is very large. The wire and battery heat up quickly while the bypassed lamp goes dark."
+      ],
+      "explain": "A short circuit is a complete loop with almost no resistance, so the current is very large and things heat up fast. Disconnect the power straight away."
+     },
+     "xp": 30
+    }
+   ]
+  },
+  {
+   "n": 1,
+   "title": "Ohm's Law and Power",
+   "lessons": [
+    {
+     "id": "el1-1",
+     "title": "Ohm's Law: Finding the Current",
+     "goal": "Use I = V / R to work out the current through a resistor.",
+     "theory": "In the first chapter you learned that more push gives more flow and a harder path gives less flow. **Ohm's law** puts that into one formula:\n\n```text\nV = I × R\n```\n\nV is the voltage in volts, I is the current in amps, and R is the resistance in ohms. You can rearrange it to find whichever one you do not know:\n\n- current: `I = V / R`\n- voltage: `V = I × R`\n- resistance: `R = V / I`\n\nA memory trick: draw a triangle with V at the top and I and R side by side at the bottom. Cover the one you want; what is left shows the formula. V over R means divide, I next to R means multiply.\n\nAlways use plain units, V, A and Ω, in the formula. Convert kΩ to Ω first. The current then comes out in amps, and you can convert it to mA by multiplying by 1000.\n\nExample: 5 V across a 1 kΩ resistor. 1 kΩ = 1000 Ω, so I = 5 / 1000 = 0.005 A, which is 5 mA.\n\nIn these exercises the resistor is the only part in the loop, and the wires count as zero resistance. That is close enough to reality for short wires.",
+     "task": "A 5 V supply is connected across a single 220 Ω resistor. How much current flows? Answer in mA, rounded to one decimal.",
+     "hint": "Divide the voltage by the resistance to get amps, then convert to milliamps.",
+     "check": {
+      "type": "number",
+      "answer": 22.7,
+      "unit": "mA",
+      "tolerance": 0.2,
+      "explain": "I = V / R = 5 V / 220 Ω = 0.02273 A. Multiply by 1000 to convert to milliamps: 0.02273 A × 1000 = 22.7 mA."
+     },
+     "xp": 20
+    },
+    {
+     "id": "el1-2",
+     "title": "Ohm's Law: Finding the Voltage",
+     "goal": "Use V = I × R to find the voltage across a resistor.",
+     "theory": "When current flows through a resistor, part of the push is used up in getting through it. That amount is called the **voltage across** the resistor, or the voltage drop. A multimeter measures it when you touch its two probes to the two ends of the resistor.\n\nOhm's law gives it directly:\n\n```text\nV = I × R\n```\n\nThe trap is the units. Currents in small circuits are usually given in mA, but the formula needs amps. Convert first by dividing by 1000.\n\nExample: 10 mA flows through a 330 Ω resistor.\n\n- 10 mA = 0.01 A\n- V = 0.01 A × 330 Ω = 3.3 V\n\nIf you forget to convert, you get 10 × 330 = 3300 V, which is clearly absurd for a small circuit. Always ask yourself whether the answer makes sense: in battery projects, voltages are a few volts, not thousands.\n\nThe voltage drop tells you something useful. More current through the same resistor means more voltage across it, and a bigger resistor with the same current also means more voltage across it. You will use this idea again for the voltage divider and for LEDs.",
+     "task": "A current of 20 mA flows through a 470 Ω resistor. What is the voltage across the resistor? Answer in V, rounded to one decimal.",
+     "hint": "Convert the current into amps before you multiply.",
+     "check": {
+      "type": "number",
+      "answer": 9.4,
+      "unit": "V",
+      "tolerance": 0.05,
+      "explain": "20 mA = 0.02 A. V = I × R = 0.02 A × 470 Ω = 9.4 V."
+     },
+     "xp": 20
+    },
+    {
+     "id": "el1-3",
+     "title": "Ohm's Law: Finding the Resistance",
+     "goal": "Use R = V / I to choose the resistance that gives the current you want.",
+     "theory": "Designing a circuit usually runs the other way round. You know the supply voltage and you know how much current you want. The question is which resistor to use:\n\n```text\nR = V / I\n```\n\nExample: a 5 V supply, and you want 10 mA.\n\n- 10 mA = 0.01 A\n- R = 5 V / 0.01 A = 500 Ω\n\nCheck it the other way: 5 V / 500 Ω = 0.01 A. It works.\n\nA handy shortcut, once you are comfortable: volts divided by milliamps gives kilohms. 5 V / 10 mA = 0.5 kΩ = 500 Ω. Use whichever way you find easier, but do not mix them up: volts divided by milliamps gives kilohms, not ohms.\n\nRemember what the result means. A bigger resistance gives a smaller current. If you want less current, you need more ohms; if you want more current, fewer ohms.\n\nThe value you calculate is the total resistance the loop needs. Real resistors come in standard values such as 470 Ω or 560 Ω rather than exactly 500 Ω. You will learn how to pick from those values in the Resistors chapter. For now, calculate the exact value.",
+     "task": "A 9 V battery must drive exactly 30 mA through a resistor, with nothing else in the loop. What resistance do you need? Answer in Ω.",
+     "hint": "Turn the milliamps into amps, then divide the voltage by the current.",
+     "check": {
+      "type": "number",
+      "answer": 300,
+      "unit": "Ω",
+      "tolerance": 3,
+      "explain": "30 mA = 0.03 A. R = V / I = 9 V / 0.03 A = 300 Ω."
+     },
+     "xp": 20
+    },
+    {
+     "id": "el1-4",
+     "title": "Thinking with Ohm's Law",
+     "goal": "Predict how the current changes when the voltage or the resistance changes, without a calculator.",
+     "theory": "You do not always need numbers. The formula `I = V / R` also tells you how things change:\n\n- Double the voltage, same resistance: the current doubles.\n- Double the resistance, same voltage: the current halves.\n- Halve the resistance, same voltage: the current doubles.\n\nIn other words, current rises with voltage and falls with resistance. This is the \"more push, more flow; harder path, less flow\" idea from the first chapter, now with a precise rule.\n\nExample: 9 V across 1 kΩ gives 9 mA. Change to 18 V and you get 18 mA. Keep 9 V and use 3 kΩ instead, and you get 3 mA.\n\nNotice what the battery sets. A battery gives a fixed voltage, not a fixed current. The current depends on what you connect to it: a large resistance draws a small current, a small resistance draws a large one. That is why a short circuit, with almost no resistance, draws a dangerously large current.\n\nThis kind of quick reasoning is how you check your calculations. If you make the resistance bigger and your answer for the current also gets bigger, something went wrong.\n\nOhm's law holds well for resistors. Some parts, like LEDs, do not follow it simply; you will see why in the chapter on diodes.",
+     "task": "A 9 V battery drives a current through a 1 kΩ resistor. You swap the resistor for a 2 kΩ one and keep the same battery. What happens to the current?",
+     "hint": "Look at where R sits in I = V / R, and what stays the same.",
+     "check": {
+      "type": "choice",
+      "options": [
+       "It doubles",
+       "It stays the same, because the battery is the same",
+       "It halves",
+       "It drops to zero, because 2 kΩ blocks the current"
+      ],
+      "answer": 2,
+      "why": [
+       "That would happen if you doubled the voltage. More resistance makes the path harder, so the current goes down, not up.",
+       "A battery sets the voltage, not the current. The current depends on both: I = V / R, and R has changed.",
+       "Right: the voltage stays at 9 V and the resistance doubles, so the current halves, from 9 mA to 4.5 mA.",
+       "A bigger resistance reduces the current but does not stop it: 9 V / 2 kΩ = 4.5 mA still flows."
+      ],
+      "explain": "With I = V / R and V fixed, doubling R halves I: 9 V / 1 kΩ = 9 mA becomes 9 V / 2 kΩ = 4.5 mA."
+     },
+     "xp": 20
+    },
+    {
+     "id": "el1-5",
+     "title": "Power: How Fast Energy Is Used",
+     "goal": "Calculate power with P = V × I.",
+     "theory": "Power is how fast energy is delivered, or how fast a part turns it into light, heat or motion. It is measured in watts (W):\n\n```text\nP = V × I\n```\n\nP is in watts, V in volts, I in amps. Small circuits often use milliwatts: 1 mW = 0.001 W, so 1 W = 1000 mW.\n\nExample: a USB port gives 5 V, and a device draws 0.5 A. P = 5 V × 0.5 A = 2.5 W.\n\nA useful shortcut: volts times milliamps gives milliwatts. 5 V × 20 mA = 100 mW, which is 0.1 W. It is the same calculation with the prefix carried along.\n\nWhy care about power?\n\n- Everything that uses power gets warm. A resistor turns all of its power into heat.\n- Parts have a **power rating**, the most they can safely handle. A typical small resistor is rated 0.25 W.\n- Power supplies have a limit too. A 5 V, 2 A adapter can deliver at most 5 × 2 = 10 W.\n\nTo compare the numbers: an LED indicator uses tens of milliwatts, a phone charges at about 5 to 30 W, and a kettle uses around 2000 W from mains electricity. That is why a kettle is not something to experiment with.",
+     "task": "A small circuit runs from a 3.3 V supply and draws 150 mA. How much power does it use? Answer in mW.",
+     "hint": "Multiply voltage by current. Keeping the current in mA gives an answer in mW.",
+     "check": {
+      "type": "number",
+      "answer": 495,
+      "unit": "mW",
+      "tolerance": 5,
+      "explain": "P = V × I = 3.3 V × 150 mA = 495 mW. In plain units: 3.3 V × 0.15 A = 0.495 W = 495 mW."
+     },
+     "xp": 20
+    },
+    {
+     "id": "el1-6",
+     "title": "Power in a Resistor",
+     "goal": "Combine Ohm's law and P = V × I to check whether a resistor will overheat.",
+     "theory": "Often you know the voltage across a resistor and its resistance, but not the current. You can still find its power in two steps:\n\n- first the current: `I = V / R`\n- then the power: `P = V × I`\n\nOr in one step, by combining them: `P = V × V / R`, often written V² / R.\n\nExample: 5 V across 100 Ω. I = 5 / 100 = 0.05 A, then P = 5 × 0.05 = 0.25 W. One step: 5 × 5 / 100 = 0.25 W. Same answer.\n\nNow compare the result with the resistor's power rating. The common small resistors in kits are rated 0.25 W (a quarter watt). Good designers stay well below the rating, often at half of it or less, because a resistor at its limit runs very hot.\n\nA resistor pushed past its rating gets too hot to touch, can turn brown, smell burnt, and finally break or even catch fire. So if a calculation gives more power than the rating, you need a bigger resistance, a resistor with a higher rating, or a different design.\n\nRound only at the end of a calculation. If you round the current too early, the final answer can drift.",
+     "task": "You connect a 220 Ω resistor directly across a 9 V battery. How much power does it turn into heat? Answer in W, rounded to two decimals.",
+     "hint": "Find the current first, then multiply by the voltage. Or use V × V / R in one step.",
+     "check": {
+      "type": "number",
+      "answer": 0.37,
+      "unit": "W",
+      "tolerance": 0.01,
+      "explain": "I = V / R = 9 V / 220 Ω = 0.0409 A. P = V × I = 9 V × 0.0409 A = 0.368 W, which rounds to 0.37 W (one step: 9 × 9 / 220 = 0.368 W). That is more than a 0.25 W resistor can handle, so it would overheat."
+     },
+     "xp": 30
+    },
+    {
+     "id": "el1-7",
+     "title": "Battery Life with mAh",
+     "goal": "Estimate how long a battery lasts from its mAh rating.",
+     "theory": "Batteries show their capacity in **mAh**, milliamp-hours. It tells you how much current the battery can give for how long.\n\nA 2000 mAh battery can give roughly:\n\n- 2000 mA for 1 hour\n- 200 mA for 10 hours\n- 20 mA for 100 hours\n\nSo the estimate is a simple division:\n\n```text\nhours = capacity (mAh) / current (mA)\n```\n\nExample: a 1000 mAh battery powering a circuit that draws 40 mA lasts about 1000 / 40 = 25 hours.\n\nTreat this as the best case. Real batteries give less when the current is high, when they are cold, and as they age. Their voltage also sinks as they empty, and some circuits stop working before the battery is completely flat. Plan for less than the calculation says.\n\nTypical capacities: an AA alkaline cell holds around 2000 to 2500 mAh at small currents, a 9 V battery around 500 mAh, and a phone battery 3000 to 5000 mAh.\n\nmAh does not include the voltage, so it only compares batteries with the same voltage. To compare different batteries, use energy in watt-hours: Wh = V × Ah. A 3.7 V, 2000 mAh cell holds 3.7 V × 2 Ah = 7.4 Wh.\n\nThis is the last mission of the chapter. You now have V = I × R, P = V × I, and battery life.",
+     "task": "A project draws 25 mA from a battery pack rated 2400 mAh. In the best case, how many hours can it run? Answer in hours.",
+     "hint": "Divide the capacity by the current, with both in milliamps.",
+     "check": {
+      "type": "number",
+      "answer": 96,
+      "unit": "h",
+      "tolerance": 1,
+      "explain": "hours = capacity / current = 2400 mAh / 25 mA = 96 hours. Real life will be somewhat less."
+     },
+     "xp": 40
+    }
+   ]
+  },
+  {
+   "n": 2,
+   "title": "Resistors",
+   "lessons": [
+    {
+     "id": "el2-1",
+     "title": "What a Resistor Is For",
+     "goal": "Know what a resistor does in a circuit and where its energy goes.",
+     "theory": "A resistor is a small part with a fixed resistance. It has two legs and no polarity: it works either way round. In diagrams it is drawn as a zigzag line or as a small rectangle.\n\nWhy would you ever want to make the path harder? Because many parts would take too much current on their own. An LED, for example, will draw so much current from a battery that it burns out in moments. A resistor in the same loop limits the current to a safe value. That is its most common job.\n\nResistors have other jobs too:\n\n- **Limiting current**, to protect LEDs and chip inputs.\n- **Dividing voltage**, to make a smaller voltage from a bigger one (later in this chapter).\n- **Setting a signal level**, so an input always reads a clear value (you will see this with switches and sensors).\n\nA resistor does not store energy. The energy it takes from the circuit becomes heat, straight away. That is why resistors have a power rating, and why a resistor that is too small for its job gets hot, as you calculated in the last chapter.\n\nIt also only takes voltage away, never adds any. The voltage after a resistor is lower than before it, by exactly the voltage across it (V = I × R).",
+     "task": "A resistor limits the current in a loop. What happens to the energy it takes from the circuit?",
+     "hint": "Remember what you felt, or calculated, when a resistor had too much power to handle.",
+     "check": {
+      "type": "choice",
+      "options": [
+       "It stores the energy and releases it later, like a small battery",
+       "It sends the energy back to the battery, so nothing is wasted",
+       "It passes the energy on as extra voltage for the next part",
+       "It turns the energy into heat"
+      ],
+      "answer": 3,
+      "why": [
+       "Storing energy is what batteries and capacitors do. A resistor stores nothing; while current flows, it turns energy into heat.",
+       "Energy taken by a resistor never comes back to the battery. That is why limiting current with a resistor always wastes a little power.",
+       "A resistor only takes voltage away, it never adds any. The part after it gets less voltage, not more.",
+       "Right: a resistor turns the energy it takes into heat, straight away. That is why it has a power rating."
+      ],
+      "explain": "A resistor turns all the energy it takes into heat. It stores nothing and adds no voltage."
+     },
+     "xp": 15
+    },
+    {
+     "id": "el2-2",
+     "title": "Reading the Color Code",
+     "goal": "Read a resistor's value from its four colored bands.",
+     "theory": "Small resistors are too tiny for printed numbers, so they carry colored bands. Each color stands for a digit:\n\n- black 0, brown 1, red 2, orange 3, yellow 4\n- green 5, blue 6, violet 7, grey 8, white 9\n\nOn a common 4-band resistor:\n\n- band 1 is the first digit\n- band 2 is the second digit\n- band 3 is the **multiplier**: how many zeros to add after the two digits\n- band 4 is the **tolerance**: gold means ±5%, silver ±10%\n\nStart reading from the end opposite the gold or silver band.\n\nExample: brown, black, red, gold. Brown = 1, black = 0, red = add 2 zeros. That gives 1 then 0 then 00, so 1000 Ω, which is 1 kΩ, within ±5%.\n\nAnother: red, red, brown, gold. Red = 2, red = 2, brown = add 1 zero: 220 Ω.\n\nA black third band adds no zeros: brown, black, black is just 10 Ω.\n\nTolerance means the real value may differ a little. A 1 kΩ resistor with ±5% may measure anywhere from 950 Ω to 1050 Ω, and that is normal.\n\nIf the colors are hard to tell apart, for example red and orange under yellow light, measure the resistor with a multimeter. You will learn how in the Tools and Safety chapter.",
+     "task": "A resistor has the bands yellow, violet, brown, gold. What is its value?",
+     "hint": "Turn the first two bands into digits, then let the third band tell you how many zeros follow.",
+     "check": {
+      "type": "choice",
+      "options": [
+       "47 Ω",
+       "470 Ω",
+       "4.7 kΩ",
+       "47 kΩ"
+      ],
+      "answer": 1,
+      "why": [
+       "47 Ω would need a black third band, which adds no zeros. Here the third band is brown, so one zero follows.",
+       "Right: yellow = 4, violet = 7, brown = add one zero. That is 470 Ω, and the gold band means ±5%.",
+       "4.7 kΩ is 4700 Ω, which needs two zeros, so a red third band. Brown adds only one zero.",
+       "47 kΩ is 47 000 Ω, which needs three zeros, so an orange third band. Brown adds only one zero."
+      ],
+      "explain": "Yellow (4), violet (7), then brown adds one zero: 470 Ω, ±5% from the gold band."
+     },
+     "xp": 20
+    },
+    {
+     "id": "el2-3",
+     "title": "Resistors in Series",
+     "goal": "Add up resistors connected one after another.",
+     "theory": "Resistors are **in series** when they sit one after another in a single path, like beads on a string. The current has only one way to go, so the same current flows through each of them.\n\nEach resistor makes the path a bit harder, so their resistances simply add up:\n\n```text\nR_total = R1 + R2 + R3 + ...\n```\n\nExample: a 1 kΩ and a 2.2 kΩ resistor in series make 1 kΩ + 2.2 kΩ = 3.2 kΩ.\n\nBefore you add, put every value in the same unit. Mixing 220 Ω and 1 kΩ is a classic mistake: 220 + 1 is not 221. Convert 1 kΩ to 1000 Ω first, then add.\n\nTwo quick checks:\n\n- The total is always bigger than the biggest single resistor.\n- Series is a handy way to build a value you do not have. No 440 Ω in your kit? Two 220 Ω in series make 440 Ω.\n\nBecause the same current flows through every resistor in series, each one takes a share of the voltage, V = I × R. The bigger resistor takes the bigger share, and all the shares add up to the supply voltage. That idea is the voltage divider, coming up in two missions.",
+     "task": "You connect a 220 Ω, a 330 Ω and a 1 kΩ resistor in series. What is the total resistance? Answer in Ω.",
+     "hint": "Put all three values in ohms first, then add them.",
+     "check": {
+      "type": "number",
+      "answer": 1550,
+      "unit": "Ω",
+      "tolerance": 10,
+      "explain": "Convert: 1 kΩ = 1000 Ω. Then add: 220 Ω + 330 Ω + 1000 Ω = 1550 Ω."
+     },
+     "xp": 20
+    },
+    {
+     "id": "el2-4",
+     "title": "Resistors in Parallel",
+     "goal": "Work out the total of two resistors connected side by side.",
+     "theory": "Resistors are **in parallel** when they sit side by side, with both their ends joined together. The current now has more than one path. It splits between them and joins up again afterwards. Every resistor in parallel gets the same voltage across it.\n\nMore paths make it easier for current to flow, so the total resistance goes **down**. It is always smaller than the smallest single resistor.\n\nFor two resistors, use \"product over sum\":\n\n```text\nR_total = (R1 × R2) / (R1 + R2)\n```\n\nExample: 1 kΩ and 4.7 kΩ in parallel. (1000 × 4700) / (1000 + 4700) = 4 700 000 / 5700 = 824.6 Ω, smaller than 1 kΩ as expected.\n\nTwo equal resistors in parallel give exactly half of one: two 1 kΩ make 500 Ω.\n\nFor three or more, the general rule is:\n\n```text\n1 / R_total = 1 / R1 + 1 / R2 + 1 / R3 + ...\n```\n\nAdd up the one-over values, then take one over the result.\n\nThe water picture works well here: two pipes side by side carry more water than one, so together they resist less.\n\nSeries versus parallel, in one line: series adds resistance, parallel reduces it.",
+     "task": "You connect a 330 Ω and a 220 Ω resistor in parallel. What is the total resistance? Answer in Ω.",
+     "hint": "Multiply the two values, divide by their sum, and check the result is smaller than both.",
+     "check": {
+      "type": "number",
+      "answer": 132,
+      "unit": "Ω",
+      "tolerance": 1,
+      "explain": "Product over sum: (330 × 220) / (330 + 220) = 72 600 / 550 = 132 Ω. It is smaller than 220 Ω, as a parallel total always is."
+     },
+     "xp": 25
+    },
+    {
+     "id": "el2-5",
+     "title": "The Voltage Divider",
+     "goal": "Calculate the output of a two-resistor voltage divider.",
+     "theory": "Put two resistors in series across a supply and they share its voltage, the bigger resistor taking the bigger share. The point between them gives you a smaller voltage than the supply. This is a **voltage divider**.\n\nCall the top resistor (connected to +) R1 and the bottom resistor (connected to −) R2. The − side of the supply is called **ground**, and counts as 0 V. The voltage at the middle point, measured from ground, is:\n\n```text\nVout = Vin × R2 / (R1 + R2)\n```\n\nWhy? The same current flows through both: I = Vin / (R1 + R2). The voltage across the bottom resistor is I × R2, which gives the formula.\n\nExamples:\n\n- Two equal resistors give exactly half: 5 V with 10 kΩ and 10 kΩ gives 2.5 V.\n- 5 V with R1 = 1 kΩ and R2 = 4 kΩ gives 5 × 4 / 5 = 4 V.\n\nAs long as R1 and R2 are in the same unit, the units cancel, so you do not need to convert kΩ.\n\nDividers are used to scale down signals, for example to read a 5 V signal with a 3.3 V chip, and with sensors that change their resistance.\n\nA limit to remember: a divider makes a signal, not a power supply. If you connect something that draws real current, like a motor or an LED, to the middle point, the output voltage drops.",
+     "task": "A 9 V battery feeds two resistors in series: R1 = 2.2 kΩ at the top (connected to +) and R2 = 3.3 kΩ at the bottom (connected to −). What voltage is at the middle point, measured from −? Answer in V.",
+     "hint": "Use the bottom resistor on top of the fraction and the sum of both underneath.",
+     "check": {
+      "type": "number",
+      "answer": 5.4,
+      "unit": "V",
+      "tolerance": 0.05,
+      "explain": "Vout = Vin × R2 / (R1 + R2) = 9 V × 3.3 kΩ / (2.2 kΩ + 3.3 kΩ) = 9 × 3.3 / 5.5 = 9 × 0.6 = 5.4 V."
+     },
+     "xp": 30
+    },
+    {
+     "id": "el2-6",
+     "title": "Choosing a Current-Limiting Resistor",
+     "goal": "Pick a real, standard resistor value that keeps the current under a limit.",
+     "theory": "Here is how you choose a resistor to limit current:\n\n- Work out the smallest resistance allowed with Ohm's law: `R = V / I`, using the highest current you allow.\n- Pick a real resistor that is at least that big.\n- Check its power: `P = V × I` must stay well under its rating.\n\nResistors are made in **standard values**, not every number. The most common set, called E12, repeats these twelve numbers in every decade:\n\n- 10, 12, 15, 18, 22, 27, 33, 39, 47, 56, 68, 82\n\nSo you can buy 100, 120, 150, 180, 220 Ω and so on, or 1 kΩ, 1.2 kΩ, 1.5 kΩ, but not exactly 200 Ω or 500 Ω.\n\nWhen your calculation lands between two standard values, **round up** to the next bigger one. More resistance means a little less current, which keeps you on the safe side of the limit. Rounding down, even to a closer value, lets more current flow than you allowed.\n\nBut do not overshoot by a lot. Ten times the resistance gives a tenth of the current, and a part that needs its current will then barely work, or not at all.\n\nExample: 9 V and at most 20 mA. R = 9 / 0.02 = 450 Ω. The next standard value up is 470 Ω, giving 9 / 470 = 19.1 mA. Power: 9 × 0.0191 = 0.17 W, fine for a 0.25 W resistor.",
+     "task": "You want a current close to, but never above, 25 mA from a 5 V supply, using one resistor as the only thing in the loop. Ohm's law gives R = 5 V / 0.025 A = 200 Ω. Your kit has 150 Ω, 180 Ω, 220 Ω and 10 kΩ. Which do you pick?",
+     "hint": "Decide first whether you should go above or below 200 Ω, then look for the closest value on that side.",
+     "check": {
+      "type": "choice",
+      "options": [
+       "150 Ω",
+       "180 Ω",
+       "220 Ω",
+       "10 kΩ"
+      ],
+      "answer": 2,
+      "why": [
+       "Less resistance than 200 Ω lets more current through: 5 V / 150 Ω = 33 mA, well over the limit.",
+       "Close, but below 200 Ω: 5 V / 180 Ω = 27.8 mA, still over 25 mA. Round up, not to the nearest value.",
+       "Right: 220 Ω is the next standard value above 200 Ω. It gives 5 V / 220 Ω = 22.7 mA, close to the target and safely under the limit.",
+       "Safe, but far too much: 5 V / 10 000 Ω = 0.5 mA, nowhere near the 25 mA you want."
+      ],
+      "explain": "Round up to the next standard value: 220 Ω gives 22.7 mA, just under the 25 mA limit. Power check: 5 V × 0.0227 A = 0.11 W, fine for 0.25 W."
+     },
+     "xp": 40
+    }
+   ]
+  },
+  {
+   "n": 3,
+   "title": "Capacitors, Diodes and LEDs",
+   "lessons": [
+    {
+     "id": "el3-1",
+     "title": "Capacitors: Tiny Charge Tanks",
+     "goal": "Know what a capacitor stores, what smoothing and decoupling mean, and where a decoupling capacitor goes.",
+     "theory": "A **capacitor** stores electric charge, like a tiny tank that fills and empties very quickly. Inside, two metal plates are separated by a thin insulator.\n\nCapacity is measured in farads (F), but real ones are much smaller: µF (microfarads, millionths of a farad) and nF (nanofarads, 1000 times smaller again; 100 nF = 0.1 µF).\n\nOnce a capacitor is full, no steady current passes through it. So it is connected **across** the supply, from + to −, never in series with it.\n\nTwo common jobs:\n\n- **Smoothing.** A big capacitor, say 100 µF, across a supply fills up when the voltage is high and gives charge back when it dips, so ripples in the supply get smaller.\n- **Decoupling.** Chips draw current in quick bursts, and motors starting nearby cause dips and noise. A small 100 nF capacitor placed right next to a chip's power pins, from + to −, delivers those bursts through very short wires and keeps the chip's supply steady. Far away, it helps much less.\n\nWatch the polarity. Electrolytic capacitors, the can-shaped ones, have a + and a − leg, with a stripe marking the − side. The wrong way round, they can bulge or burst. Small ceramic capacitors have no polarity. Always use a voltage rating above your supply.\n\nBig capacitors can stay charged after the power is off. In mains devices they can hold a dangerous charge, one more reason never to open them.",
+     "task": "A microcontroller chip keeps resetting at random whenever a motor nearby starts. A friend suggests adding a 100 nF capacitor. Where should it go?",
+     "hint": "Think about how a capacitor must be connected to a supply, and why distance to the chip matters.",
+     "check": {
+      "type": "choice",
+      "options": [
+       "Between the chip's + and − power pins, as close to the chip as possible",
+       "In series with the chip's + wire, so all the chip's current passes through it",
+       "Anywhere on the board, since the position does not matter",
+       "Between + and − at the battery, as far from the chip as possible"
+      ],
+      "answer": 0,
+      "why": [
+       "Right: a decoupling capacitor goes across the supply, from + to −, right next to the chip, so it can deliver quick bursts of current through very short wires.",
+       "A capacitor lets no steady current through, so in series the chip would get no power at all. Decoupling capacitors go across the supply, from + to −.",
+       "Position matters. The capacitor has to be close to the chip so the path between them is short; far away, it helps much less.",
+       "Across the supply is right, but far away is wrong. The long wires between the capacitor and the chip let the dips and noise through again."
+      ],
+      "explain": "Decoupling capacitors go from + to − right beside the chip's power pins, where they can deliver its quick bursts of current."
+     },
+     "xp": 20
+    },
+    {
+     "id": "el3-2",
+     "title": "Diodes: One-Way Streets",
+     "goal": "Know how a diode behaves in each direction and how to tell its ends apart.",
+     "theory": "A **diode** lets current flow in one direction only, like a one-way valve in a water pipe.\n\nIts two ends have names:\n\n- the **anode**, where current goes in\n- the **cathode**, where current comes out\n\nOn the part, a stripe or band marks the cathode end. In diagrams, a diode is a triangle pointing at a bar: the triangle points the way current can flow, and the bar is the cathode.\n\n**Forward**: when the anode is more positive than the cathode, the diode conducts. It takes a small, roughly fixed voltage to do so, called the forward voltage: about 0.7 V for a common silicon diode such as the 1N4001 or 1N4148.\n\n**Reverse**: turned the other way, the diode blocks. Almost no current flows at all. It does not slow the current down or turn it around; it simply stops it.\n\nA common use is **reverse-polarity protection**. Put a diode in series with the + wire, stripe towards the circuit. With the battery the right way round, the diode conducts and the circuit works, losing only about 0.7 V. If someone puts the battery in backwards, the diode is reversed and blocks, so nothing flows and nothing is damaged.\n\nDiodes also turn AC into DC inside chargers, and protect circuits from coils, as you will see at the end of this chapter. Each diode has limits on current and reverse voltage; go past them and it fails.",
+     "task": "You add a diode in series with the + wire of a battery-powered project, with its stripe towards the circuit. Someone puts the battery in backwards. What happens?",
+     "hint": "Work out whether the diode faces forward or reverse once the battery is turned round.",
+     "check": {
+      "type": "choice",
+      "options": [
+       "The diode lets the reversed current through, but more slowly",
+       "The diode turns the current round, so the project runs normally",
+       "The diode creates a short circuit that drains the battery",
+       "The diode blocks the current, so nothing flows and the project is protected"
+      ],
+      "answer": 3,
+      "why": [
+       "A diode has no slow mode. In the reverse direction it blocks current almost completely.",
+       "A single diode cannot turn current round. It can only let it through or block it, and here it blocks.",
+       "A diode in series adds no path from + straight to −. Blocking means no current at all, so the battery is not drained.",
+       "Right: with the battery backwards, the diode is reversed, so it blocks. The project does not turn on, and nothing is damaged."
+      ],
+      "explain": "A reversed diode blocks. With the battery the right way round it conducts and costs about 0.7 V; the wrong way round it stops the current and protects the circuit."
+     },
+     "xp": 20
+    },
+    {
+     "id": "el3-3",
+     "title": "LEDs: Diodes That Glow",
+     "goal": "Connect an LED the right way round and know its forward voltage.",
+     "theory": "An **LED** is a light-emitting diode. Because it is a diode, it only works one way round: it lights when current flows from its anode to its cathode.\n\nTelling the legs apart on a new LED:\n\n- the **long leg** is the anode, which goes towards +\n- the **short leg** is the cathode, which goes towards −\n- the rim of the LED has a **flat edge** on the cathode side, handy when the legs have been cut\n\nPut in backwards, the LED simply stays dark, because it blocks like any diode. With its resistor in place and the low voltages in this course, that does not normally harm it; turn it round and it lights.\n\nWhen lit, an LED takes a roughly fixed voltage, its **forward voltage** (Vf). Typical values:\n\n- red: about 2 V\n- yellow and green: about 2 to 2.2 V\n- blue and white: about 3 to 3.3 V\n\nThe exact number is in the LED's datasheet.\n\nHere is the catch: an LED does not limit its own current. Above its forward voltage, the current shoots up, so an LED connected straight to a 5 V supply burns out in moments. That is why every LED needs a resistor in the same loop. Standard 5 mm LEDs are usually run at about 5 to 20 mA; more current means more light, up to the maximum in the datasheet.",
+     "task": "A red LED and a 220 Ω resistor are wired in one complete loop to a 5 V supply that works. The LED's short leg is on the + side. The LED stays dark. What is the most likely reason?",
+     "hint": "Recall which leg is the anode and which way a diode lets current through.",
+     "check": {
+      "type": "choice",
+      "options": [
+       "The LED is in backwards: the short leg is the cathode and must go towards −",
+       "The resistor is too small, so the LED gets too little current",
+       "LEDs need AC, and the supply gives DC",
+       "A red LED needs more than 5 V to light"
+      ],
+      "answer": 0,
+      "why": [
+       "Right: a diode only conducts from anode to cathode. The short leg is the cathode, so on the + side the LED is reversed and blocks. Turn it round.",
+       "A smaller resistor lets more current through, not less. With 5 V and 220 Ω, a red LED gets about 14 mA once it faces the right way.",
+       "LEDs are diodes, so they need current in one direction: DC is exactly what they want.",
+       "A red LED needs only about 2 V, well below 5 V. The voltage is not the problem."
+      ],
+      "explain": "The short leg is the cathode and must face −. With it on the + side, the LED is reversed and blocks, like any diode."
+     },
+     "xp": 20
+    },
+    {
+     "id": "el3-4",
+     "title": "Calculating an LED Resistor",
+     "goal": "Calculate the resistor that sets an LED's current.",
+     "theory": "The LED and its resistor are in series, so the same current flows through both. The LED takes its forward voltage; the resistor takes whatever is left of the supply:\n\n```text\nV_resistor = Vsupply − Vled\n```\n\nThen Ohm's law on the resistor gives the resistance for the current you want:\n\n```text\nR = (Vsupply − Vled) / I\n```\n\nStep by step:\n\n- Find the LED's forward voltage, from the datasheet or the typical values (red about 2 V, blue or white about 3 V).\n- Choose a current, usually 5 to 20 mA. Convert it to amps.\n- Subtract, then divide.\n- Round up to the next standard value, as you learned in the Resistors chapter.\n- Check the resistor's power: P = V_resistor × I.\n\nExample: 5 V supply, red LED at 2 V, 15 mA.\n\n- V_resistor = 5 − 2 = 3 V\n- R = 3 V / 0.015 A = 200 Ω\n- next standard value up: 220 Ω\n- power: 3 V × 0.015 A = 0.045 W, easy for a 0.25 W resistor\n\nA common mistake is to forget the LED and use R = Vsupply / I. That gives a resistor that is too big, so the LED ends up dimmer than you planned. The opposite mistake, leaving out the resistor altogether, destroys the LED.",
+     "task": "A red LED with a forward voltage of 2.0 V runs from a 9 V battery. You want 20 mA through it. What resistance does the calculation give, before rounding to a standard value? Answer in Ω.",
+     "hint": "First find the voltage left over for the resistor, then divide by the current in amps.",
+     "check": {
+      "type": "number",
+      "answer": 350,
+      "unit": "Ω",
+      "tolerance": 3,
+      "explain": "Voltage across the resistor: 9 V − 2 V = 7 V. 20 mA = 0.02 A. R = 7 V / 0.02 A = 350 Ω. In practice you would round up to the standard 390 Ω."
+     },
+     "xp": 25
+    },
+    {
+     "id": "el3-5",
+     "title": "Two LEDs in Series",
+     "goal": "Calculate the resistor for a chain of LEDs sharing one resistor.",
+     "theory": "You can chain several LEDs one after another with a single resistor. Because they are in series, the same current flows through every LED and the resistor. Their forward voltages add up, just like cells in series:\n\n```text\nR = (Vsupply − Vled1 − Vled2) / I\n```\n\nExample: two red LEDs, 2 V each, from a 9 V battery at 10 mA.\n\n- LEDs together: 2 V + 2 V = 4 V\n- left for the resistor: 9 V − 4 V = 5 V\n- R = 5 V / 0.01 A = 500 Ω, then round up to 560 Ω\n\nThe supply must be high enough. The LEDs' voltages together have to stay below the supply, with some voltage left for the resistor. Three white LEDs at 3.2 V each need 9.6 V, which is more than a 9 V battery gives, so they will not light at all. Leave a volt or two for the resistor; that keeps the current steady as the battery runs down.\n\nWhat about LEDs side by side, in parallel? Give each LED its own resistor. LEDs are never exactly alike, and when two share one resistor, the one with the lower forward voltage can hog most of the current.\n\nThe advantage of series is that one current and one resistor serve all the LEDs, which wastes less power in the resistor.",
+     "task": "Two red LEDs (2.0 V each) and one resistor are in series across a 9 V battery. You want 15 mA. What resistance does the calculation give, before rounding to a standard value? Answer in Ω, rounded to the nearest whole ohm.",
+     "hint": "Add up the two LED voltages, subtract them from the supply, then divide by the current in amps.",
+     "check": {
+      "type": "number",
+      "answer": 333,
+      "unit": "Ω",
+      "tolerance": 3,
+      "explain": "LEDs together: 2 V + 2 V = 4 V. Left for the resistor: 9 V − 4 V = 5 V. 15 mA = 0.015 A. R = 5 V / 0.015 A = 333.3 Ω, so 333 Ω. Rounding up to a standard value gives 390 Ω (330 Ω would be below the calculated value)."
+     },
+     "xp": 30
+    },
+    {
+     "id": "el3-6",
+     "title": "The Flyback Diode",
+     "goal": "Explain why a diode goes across a motor or relay coil, and which way round.",
+     "theory": "Motors, relays and solenoids all contain a **coil**: a long wire wound round and round. While current flows, the coil stores energy in its magnetic field.\n\nA coil resists sudden change. When you switch its current off, it tries to keep the current flowing, and to do that it produces a brief but very high voltage spike, often tens of volts or more, even in a 5 V circuit. That spike can destroy the transistor that switches the coil, or make nearby chips reset.\n\nThe fix is a **flyback diode**, connected across the coil and reversed:\n\n- the cathode (stripe) goes to the + side of the coil\n- the anode goes to the − side\n\nWhile the coil is powered, this diode is reversed to the supply, so it blocks and does nothing. The motor runs normally, because the diode sits beside it, not in its path.\n\nAt the moment you switch off, the coil's voltage flips the other way. Now the diode faces forward, so it conducts. The coil's current goes round in a small loop, through the coil and the diode, until its energy fades away as a little heat. No spike reaches the switch.\n\nA 1N4001 to 1N4007 is the usual choice for small motors and relays. Direction is critical: the wrong way round, the diode conducts as soon as the coil is powered, making a short circuit across the supply.\n\nYou will meet the transistors and relays that switch coils in the next chapter.",
+     "task": "A small DC motor is switched on and off by a transistor. Why do you put a diode across the motor, with its stripe towards the + side?",
+     "hint": "Think about what a coil does at the moment its current is switched off, and when the diode actually conducts.",
+     "check": {
+      "type": "choice",
+      "options": [
+       "To make the motor spin faster by adding the diode's voltage",
+       "To give the coil's switch-off voltage spike a safe path, protecting the transistor",
+       "To let current flow through the motor in both directions",
+       "To block the supply current from reaching the motor while it is switched on"
+      ],
+      "answer": 1,
+      "why": [
+       "A diode never adds voltage; it only lets current pass one way. While the motor runs, this diode does nothing at all.",
+       "Right: when the transistor switches off, the coil makes a high voltage spike. The diode conducts and lets that current circle safely through the coil until it fades, so the transistor is protected.",
+       "A diode never lets current through in both directions. Across the motor it sits reversed, so while the motor runs no current flows through it.",
+       "The diode is across the motor, not in series with it, so it cannot block the motor's current. It stays off while the motor runs."
+      ],
+      "explain": "A coil makes a high voltage spike when switched off. The flyback diode, reversed across the coil, conducts only then and lets the energy fade safely, protecting the switch."
+     },
+     "xp": 40
+    }
+   ]
+  },
+  {
+   "n": 4,
+   "title": "Switches, Transistors and Relays",
+   "lessons": [
+    {
+     "id": "el4-1",
+     "title": "Switches and Push Buttons",
+     "goal": "Tell a push button from a toggle switch, and normally open from normally closed.",
+     "theory": "A **switch** is a gap in a circuit that you can open and close on purpose. When the switch is **closed**, its metal contacts touch and current can flow around the loop. When it is **open**, there is a gap and no current flows at all. There is no in-between.\n\nSwitches come in two families:\n\n- A **toggle switch** or **slide switch** stays where you put it. Flick a light switch on and it stays on.\n- A **push button** (also called a momentary switch) only changes while you hold it. Let go and a spring pushes it back.\n\nPush buttons come in two types:\n\n- **Normally open (NO):** open at rest, closed only while you press it. A doorbell button works like this.\n- **Normally closed (NC):** closed at rest, open only while you press it.\n\n\"Normally\" means \"when nobody is touching it\". Most small buttons in kits are normally open.\n\nEvery switch has a **rating**, for example 12 V and 50 mA for a tiny button. A small button is made for signals, not for the current of a motor. Push a big current through it and the contacts spark and wear out. In the next missions you will meet parts that switch big currents for you.\n\nRobots use buttons as sensors too. A **bump switch** on the front tells the robot it hit something, and a **limit switch** tells an arm it has reached the end of its travel.",
+     "task": "A robot's front bumper uses a **normally open** push button. The robot is driving across an empty room and has not touched anything. What is the state of the button?",
+     "hint": "\"Normally\" means \"when nobody is touching it\". Is anything touching the bumper right now?",
+     "check": {
+      "type": "choice",
+      "options": [
+       "Closed: current flows through the button",
+       "Open: no current flows through the button",
+       "Half closed: a small current leaks through the button",
+       "Closed, because it stays in whatever state it was last pushed into"
+      ],
+      "answer": 1,
+      "why": [
+       "Closed at rest is how a normally closed button behaves. A normally open one closes only while something presses it, and nothing is pressing this one.",
+       "Right. Normally open means open when nobody touches it, so the loop has a gap and no current flows.",
+       "A switch has no in-between. Its contacts either touch (closed) or they do not (open).",
+       "That describes a toggle switch, which stays where you put it. A push button springs back as soon as it is released."
+      ],
+      "explain": "Normally open means open at rest. The bumper has not hit anything, so the button is open and no current flows. It closes only while the bumper is pressed against something."
+     },
+     "xp": 20
+    },
+    {
+     "id": "el4-2",
+     "title": "Pull-Up Resistors and Floating Inputs",
+     "goal": "Understand why an input pin needs a pull-up or a pull-down resistor.",
+     "theory": "A microcontroller (the small computer on a board such as an Arduino) reads each input pin as **HIGH** (near its supply voltage, say 5 V) or **LOW** (near 0 V).\n\nWire a push button from the pin to ground (0 V). Pressed, the pin is at 0 V and reads LOW. But released, the pin is connected to nothing at all. It is **floating**. A floating pin picks up electrical noise from nearby wires, and even from your hand, so it flips between HIGH and LOW at random.\n\nThe fix is a **pull-up resistor**, often 10 kΩ, from the pin to the supply:\n\n- **Released:** the button is open, so the resistor connects the pin to 5 V. The pin draws almost no current, so almost no voltage is lost across the resistor (V = I × R, and I is nearly 0). The pin reads HIGH.\n- **Pressed:** the button connects the pin straight to ground, so it reads LOW. A small current flows through the resistor: 5 V / 10 kΩ = 0.5 mA.\n\nWhy not a plain wire instead of the resistor? Then pressing the button would connect 5 V straight to ground: a short circuit.\n\nA **pull-down resistor** is the mirror image. The resistor goes from the pin to ground, and the button goes to the supply. Released reads LOW, pressed reads HIGH.\n\nMany microcontrollers also have built-in pull-up resistors that can be switched on.",
+     "task": "A push button connects an input pin to ground. A 10 kΩ pull-up resistor connects the same pin to 5 V. The button is **not** pressed. What does the pin read?",
+     "hint": "Follow each wire from the pin. With the button open, which connection is left?",
+     "check": {
+      "type": "choice",
+      "options": [
+       "LOW, because the resistor uses up all 5 V",
+       "It floats and flips between HIGH and LOW at random",
+       "HIGH, because the resistor connects the pin to 5 V",
+       "LOW, because the pin is connected to ground"
+      ],
+      "answer": 2,
+      "why": [
+       "The pin draws almost no current, and V = I × R with I close to 0 gives almost 0 V across the resistor. Nearly all 5 V reach the pin.",
+       "That is what happens with no resistor at all. The pull-up is there to give the released pin a definite level.",
+       "Right. With the button open, the pin's only connection is the resistor to 5 V, so it reads HIGH.",
+       "The pin reaches ground only through the button, and the button is open. The pin reads LOW only while the button is pressed."
+      ],
+      "explain": "With the button open, the pin's only connection is the 10 kΩ resistor to 5 V. Almost no current flows, so almost no voltage is lost in the resistor and the pin reads HIGH. Pressing the button pulls it LOW."
+     },
+     "xp": 25
+    },
+    {
+     "id": "el4-3",
+     "title": "The Transistor as a Switch",
+     "goal": "Use a small base current to switch a bigger load, and work out that base current.",
+     "theory": "A microcontroller pin can safely give only about **20 mA**. A small motor or a buzzer needs more, so you let the pin control a **transistor**, and the transistor switches the big current.\n\nThe common **NPN transistor** has three legs:\n\n- **Base:** the control input.\n- **Collector:** where the load's current comes in.\n- **Emitter:** where the current leaves, to ground.\n\nA small current flowing into the base and out of the emitter lets a much bigger current flow from collector to emitter. The ratio is called the **gain**, often about 100. With no base current, the transistor is off and the load gets nothing.\n\nTo use it as a switch, put the load between the positive supply and the collector, and connect the emitter to ground. The pin drives the base through a **base resistor**. The base-emitter junction acts like a diode: it takes about **0.7 V** before current flows. The rest of the pin's voltage drops across the base resistor, so:\n\n```text\nbase current = (pin voltage − 0.7 V) / base resistor\n```\n\nExample: a 3.3 V pin with a 2.2 kΩ resistor gives (3.3 − 0.7) / 2200 = 0.00118 A, about 1.2 mA.\n\nNever leave the base resistor out. Without it, the pin pushes as much current as it can into the base, which can damage both the pin and the transistor.\n\nA small transistor such as the 2N2222 handles a few hundred mA. For amps, you need the part in the next mission.",
+     "task": "A 5 V microcontroller pin drives the base of an NPN transistor through a 1 kΩ base resistor. Take the base-emitter drop as 0.7 V. What base current flows? Answer in mA, rounded to one decimal place.",
+     "hint": "First take away the 0.7 V the base needs, then use Ohm's law on the resistor. Remember that 1 kΩ is 1000 Ω.",
+     "check": {
+      "type": "number",
+      "answer": 4.3,
+      "unit": "mA",
+      "tolerance": 0.05,
+      "explain": "Voltage across the base resistor: 5 V − 0.7 V = 4.3 V. Current: 4.3 V / 1000 Ω = 0.0043 A = **4.3 mA**. That is well under the pin's 20 mA limit, and with a gain of about 100 it is enough to switch a load of a few hundred mA."
+     },
+     "xp": 30
+    },
+    {
+     "id": "el4-4",
+     "title": "The MOSFET: Switching Amps",
+     "goal": "See why a MOSFET switches motors and LED strips, and work out how warm it gets.",
+     "theory": "For loads of an amp or more, such as a motor, a pump or an LED strip, the usual switch is an **N-channel MOSFET**. Its legs are the **gate** (control), the **drain** (load current in) and the **source** (to ground).\n\nA MOSFET is controlled by **voltage**, not current. The gate is insulated, so almost no current flows into it. A few volts on the gate open a channel between drain and source; 0 V closes it.\n\nWhen fully on, the channel behaves like a very small resistor called **RDS(on)**, often a few hundredths of an ohm. Little resistance means little heat, so a MOSFET can switch several amps without a big heat sink. The heat is:\n\n```text\npower in the MOSFET = I × I × RDS(on)\n```\n\nExample: 2 A through 0.05 Ω gives 2 × 2 × 0.05 = 0.2 W. Only the tiny voltage across the channel counts, not the supply voltage, because almost all of the supply voltage sits across the load.\n\nWiring tips:\n\n- Put the load between the positive supply and the drain, and the source to ground.\n- Join the load supply's ground to the microcontroller's ground.\n- Add a resistor of about 10 kΩ from gate to ground (a pull-down) so the MOSFET stays off while the board starts up.\n- Choose a **logic-level** MOSFET. Some popular MOSFETs need about 10 V on the gate to turn fully on, which a 5 V or 3.3 V pin cannot give.",
+     "task": "A 12 V LED strip draws 3 A. It is switched by a MOSFET whose RDS(on) is 0.02 Ω. How much power turns into heat in the MOSFET? Answer in W, rounded to two decimal places.",
+     "hint": "Which voltage is really across the MOSFET? Use the formula from the briefing with the current and RDS(on).",
+     "check": {
+      "type": "number",
+      "answer": 0.18,
+      "unit": "W",
+      "tolerance": 0.005,
+      "explain": "Power in the MOSFET = I × I × RDS(on) = 3 A × 3 A × 0.02 Ω = **0.18 W**. The 12 V is not used: it sits across the LED strip, while only 3 A × 0.02 Ω = 0.06 V sits across the MOSFET. 0.18 W makes it no more than slightly warm."
+     },
+     "xp": 30
+    },
+    {
+     "id": "el4-5",
+     "title": "The Relay",
+     "goal": "Know when to use a relay, and wire its contacts the right way.",
+     "theory": "A **relay** is a switch moved by a magnet. It has two separate sides:\n\n- The **coil** side: pass current through a coil of wire and it becomes an electromagnet.\n- The **contact** side: the magnet pulls a metal arm, and the arm moves a contact called **COM** (common) from one contact to another.\n\nThe contact side has three terminals:\n\n- **NC** (normally closed): joined to COM while the coil is **off**.\n- **NO** (normally open): joined to COM only while the coil is **on**.\n- **COM**: the moving part, joined to one of the other two at a time. NO and NC are never joined to each other.\n\nThe two sides are not electrically connected. That is called **isolation**: the circuit you switch does not have to share a ground with your microcontroller, and it can be AC or DC. Relays click, switch slowly and wear out in time.\n\nA relay coil needs more current than a pin can give. A typical 5 V coil takes about 70 mA, so you drive it with a transistor, as in the transistor mission. The coil is a coil like any other, so it also needs the **flyback diode** you met with diodes, stripe towards +. Without it, the spike at switch-off can destroy the transistor.\n\nRelay modules are often labelled for 250 V. Ignore that: mains electricity can kill, and it is off limits in this course. Switch only low-voltage loads, such as a 12 V pump.",
+     "task": "A relay switches a 12 V pump. The pump must run **only while the relay's coil is powered**. Which two relay terminals go in the pump's loop?",
+     "hint": "Which terminal is joined to COM while the coil is on, and which while it is off?",
+     "check": {
+      "type": "choice",
+      "options": [
+       "COM and NO",
+       "COM and NC",
+       "NO and NC",
+       "The two coil terminals"
+      ],
+      "answer": 0,
+      "why": [
+       "Right. NO is joined to COM only while the coil is on, so the pump's loop is closed only then.",
+       "NC is joined to COM while the coil is off, so the pump would run all the time the relay is off and stop when it switches on. The opposite of what you want.",
+       "NO and NC are never joined to each other: COM moves between them. The pump's loop would never close.",
+       "The coil is the control side. The pump belongs on the isolated contact side, which is the whole point of a relay."
+      ],
+      "explain": "The arm connects COM to NO only while the coil is powered. Wire the pump's loop through COM and NO, and it runs exactly when the coil is on."
+     },
+     "xp": 30
+    },
+    {
+     "id": "el4-6",
+     "title": "Challenge: Choose the Switch",
+     "goal": "Pick a push button, a transistor, a MOSFET or a relay for a job.",
+     "theory": "You now know four ways to turn something on and off. Ask four questions to pick one.\n\n- **Who switches it?** If a person does, use a switch or a push button rated for the current.\n- **How much current?** Up to a few hundred mA (a buzzer, a few LEDs, a relay coil): a small NPN transistor. An amp or more (motors, pumps, LED strips): a logic-level MOSFET.\n- **How fast?** To dim an LED or change a motor's speed, a microcontroller switches the load on and off hundreds or thousands of times per second. The share of time it is on sets the brightness or speed. This is called **PWM**. Transistors and MOSFETs can do it. A relay cannot: it is far too slow, and its contacts would wear out quickly.\n- **Does it need isolation?** If the load must not share a ground with your board, or runs on AC, a relay keeps the two circuits apart.\n\nHere is the whole family at a glance:\n\n- **Push button or switch:** human input, small currents.\n- **NPN transistor:** small loads, cheap, needs a base resistor.\n- **MOSFET:** amps of DC, fast, stays cool, needs a logic-level gate.\n- **Relay:** isolated, AC or DC, slow, clicks, needs a transistor and a flyback diode.\n\nWhatever you pick, stay with low-voltage loads. Mains electricity is dangerous and off limits in this course.",
+     "task": "You want to dim a 12 V LED strip that draws 2 A by switching it on and off hundreds of times per second. Which part fits best?",
+     "hint": "Check two things for each option: can it carry 2 A, and can it switch hundreds of times per second?",
+     "check": {
+      "type": "choice",
+      "options": [
+       "A relay with a flyback diode",
+       "A push button rated for 12 V",
+       "A small NPN transistor rated for a few hundred mA",
+       "A logic-level N-channel MOSFET"
+      ],
+      "answer": 3,
+      "why": [
+       "A relay is far too slow for hundreds of switches per second, and its contacts would wear out quickly. Relays are for isolation, not speed.",
+       "Nobody can press a button hundreds of times per second, and a small button is not rated for 2 A.",
+       "It is fast enough, but 2 A is far more than a few hundred mA. It would overheat.",
+       "Right. A MOSFET switches amps of DC, is fast enough for PWM dimming, and stays cool thanks to its low RDS(on)."
+      ],
+      "explain": "2 A of DC switched hundreds of times per second calls for a logic-level MOSFET: it handles amps, switches fast and wastes little power as heat."
+     },
+     "xp": 50
+    }
+   ]
+  },
+  {
+   "n": 5,
+   "title": "Sensors and Motors",
+   "lessons": [
+    {
+     "id": "el5-1",
+     "title": "Sensors and Signals",
+     "goal": "Know what a sensor does, and tell an analog signal from a digital one.",
+     "theory": "A **sensor** turns something physical, such as heat, light, distance or movement, into an electrical signal that a microcontroller can read. Sensors are a robot's eyes, ears and sense of touch. An **actuator** does the opposite: it turns an electrical signal into action, such as a motor turning or a buzzer beeping. Sensors are **inputs**; actuators are **outputs**.\n\nSensor signals come in two kinds:\n\n- **Digital:** only two levels, HIGH or LOW, like yes or no. A push button is digital: pressed or not. So is a motion detector that only says \"someone is there\".\n- **Analog:** a voltage that can take any value in a range, for example anywhere from 0 V to 5 V, and changes smoothly. It says \"how much\", not just \"yes or no\".\n\nA good example of an analog sensor is a **potentiometer**: a knob with three legs. The outer legs go to 5 V and to ground. As you turn the knob, the voltage on the middle leg slides smoothly from 0 V to 5 V, so it tells you the knob's position.\n\nA microcontroller reads analog voltages on its analog pins with an **ADC** (analog-to-digital converter). The ADC turns the voltage into a number, for example 0 for 0 V up to 1023 for 5 V.\n\nSome sensors do that conversion themselves and send their readings as digital messages over a couple of wires. You will meet one in the motion mission.",
+     "task": "Which of these gives an **analog** signal?",
+     "hint": "Ask of each one: can it only say yes or no, or can it say how much?",
+     "check": {
+      "type": "choice",
+      "options": [
+       "A push button on a robot's bumper",
+       "A magnetic door switch that tells you if a door is shut",
+       "A motion detector that only says \"someone is there\" or \"nobody is there\"",
+       "The middle leg of a potentiometer used as a volume knob"
+      ],
+      "answer": 3,
+      "why": [
+       "A button is either pressed or not: two levels, so it is digital.",
+       "The door is shut or open, and the switch is closed or open. Two levels means digital.",
+       "Two possible answers, yes or no, is exactly what a digital signal is.",
+       "Right. The middle leg's voltage slides smoothly from 0 V to 5 V as you turn the knob, so it can take any value in between."
+      ],
+      "explain": "A potentiometer's middle leg gives any voltage between 0 V and 5 V, depending on the knob's position. That smooth range makes it analog. The other three only ever give two levels."
+     },
+     "xp": 20
+    },
+    {
+     "id": "el5-2",
+     "title": "Temperature and Light Sensors",
+     "goal": "Turn a light sensor's changing resistance into a voltage with a voltage divider.",
+     "theory": "Two common ways to sense temperature:\n\n- A **thermistor** is a resistor whose resistance changes with temperature. The common NTC type drops its resistance as it gets warmer.\n- A **temperature sensor chip** such as the TMP36 gives out a voltage instead: 0.5 V at 0 °C, plus 10 mV for every degree. At 25 °C it gives 0.75 V.\n\nTo sense light, the classic part is the **LDR** (light-dependent resistor). Its resistance **falls as the light gets brighter**: often hundreds of kΩ in the dark and a few kΩ in bright light.\n\nA microcontroller measures voltage, not resistance. So you use the **voltage divider** from the resistors chapter: the LDR and a fixed resistor in series between the supply and ground. The voltage at the middle point changes with the light:\n\n```text\nVout = Vin × R2 / (R1 + R2)\n```\n\nR1 is the top resistor (towards +), R2 the bottom one (towards ground), and Vout is measured from the middle point to ground.\n\nExample: a 5 V supply, the LDR as R1 and a 10 kΩ fixed resistor as R2. In bright light the LDR is 5 kΩ, so Vout = 5 × 10 / (5 + 10) = 3.33 V. In this layout, brighter light gives a higher voltage. Swap the two parts and brighter light gives a lower voltage instead.\n\nChoose a fixed resistor close to the LDR's resistance in the light you care about. Then small changes in light make big changes in voltage.",
+     "task": "A 5 V supply feeds a voltage divider: the LDR on top as R1, a 10 kΩ fixed resistor at the bottom as R2, and the output measured across the fixed resistor. In a dim room the LDR measures 40 kΩ. What is the output voltage? Answer in V, rounded to two decimal places.",
+     "hint": "The fixed resistor is R2. Both resistances go into the bottom of the fraction, and because both are in kΩ, the units cancel out.",
+     "check": {
+      "type": "number",
+      "answer": 1.0,
+      "unit": "V",
+      "tolerance": 0.01,
+      "explain": "Vout = Vin × R2 / (R1 + R2) = 5 V × 10 kΩ / (40 kΩ + 10 kΩ) = 50 / 50 = **1.00 V**. Less light means more LDR resistance on top, so the output drops (compare 3.33 V in bright light)."
+     },
+     "xp": 30
+    },
+    {
+     "id": "el5-3",
+     "title": "Distance Sensors: Ultrasonic and Infrared",
+     "goal": "Work out a distance from an echo, and know what can fool each distance sensor.",
+     "theory": "An **ultrasonic distance sensor**, such as the popular HC-SR04, works like a bat. It sends a short burst of sound too high for you to hear, then listens for the echo from the nearest object and times how long it takes.\n\nSound travels at about **343 m/s** in air at room temperature. The sound goes to the object **and back**, so you halve the trip:\n\n```text\ndistance = speed of sound × echo time / 2\n```\n\nExample: an echo after 2 ms (0.002 s) gives 343 × 0.002 / 2 = 0.343 m, which is 34.3 cm.\n\nThe HC-SR04 works from about 2 cm to 4 m. It struggles with soft things like curtains, which soak up sound, and with walls at a steep angle, which bounce the sound away.\n\nAn **infrared (IR) distance sensor** sends out invisible infrared light and measures what reflects back. Some work out the distance from the angle of the reflected light; others, called time-of-flight sensors, time the light itself. They are small and fast, but bright sunlight can blind them, and dark, shiny or glass surfaces can fool them.\n\nThe simplest IR modules give only a digital yes or no: \"something is close\". A small **IR reflectance sensor**, pointed at the floor from a few millimetres away, tells a light surface (lots of reflection) from a dark one (little reflection). Line-following robots use a row of these.",
+     "task": "An ultrasonic sensor hears the echo from a wall 3.5 ms after it sent the sound. Using 343 m/s for the speed of sound, how far away is the wall? Answer in cm, rounded to one decimal place.",
+     "hint": "Turn ms into seconds first, and remember that the sound made a round trip. 1 m is 100 cm.",
+     "check": {
+      "type": "number",
+      "answer": 60.0,
+      "unit": "cm",
+      "tolerance": 0.5,
+      "explain": "3.5 ms = 0.0035 s. In that time the sound travels 343 m/s × 0.0035 s = 1.2005 m, there and back. Halve it for one way: 0.60025 m = **60.0 cm**."
+     },
+     "xp": 30
+    },
+    {
+     "id": "el5-4",
+     "title": "Motion, Rotation and Touch",
+     "goal": "Match the IMU, the encoder and touch sensors to what each one measures.",
+     "theory": "An **IMU** (inertial measurement unit) is a small chip that senses how the robot moves. It usually holds two sensors and sends their readings as digital messages:\n\n- An **accelerometer** measures acceleration along three directions. Gravity counts too, so when the robot is still it tells you which way is down, and so how much the robot is tilted.\n- A **gyroscope** measures how fast the robot is turning, in degrees per second. Add up those readings over time and you know how far it has turned, although small errors add up and the answer slowly drifts.\n\nBalancing robots and drones depend on IMUs.\n\nAn **encoder** measures the rotation of a shaft, usually a motor or a wheel. It gives out a pulse for each small step of turning, for example 20 pulses per revolution. Count the pulses and you know how far the wheel has turned; see how fast they come and you know its speed. Multiply the turns by the wheel's circumference and you get the distance driven, as long as the wheel does not slip.\n\nFor touch:\n\n- A **capacitive touch sensor** notices your finger near a pad, like a phone screen. No pressing needed.\n- A **force-sensitive resistor** (FSR) drops its resistance as you press harder. It tells a light press from a firm one, but it is not precise enough to weigh things.\n- A **limit switch** is simply a push button that says when something has reached the end of its travel.",
+     "task": "Your robot must measure how far its left wheel has turned, so it can drive a set distance. Which sensor does this job?",
+     "hint": "Which sensor sits on the wheel's shaft and counts its turning?",
+     "check": {
+      "type": "choice",
+      "options": [
+       "A gyroscope",
+       "An encoder on the wheel",
+       "An accelerometer",
+       "A force-sensitive resistor"
+      ],
+      "answer": 1,
+      "why": [
+       "A gyroscope measures how fast the whole robot turns, not how far one wheel has rolled.",
+       "Right. The encoder gives a pulse for each small step the wheel turns. Count the pulses to get the turns and, with the wheel's circumference, the distance.",
+       "An accelerometer measures acceleration and tilt. Turning that into a distance means adding up its readings twice over, and the errors grow fast.",
+       "An FSR measures how hard something presses on it. It knows nothing about a wheel turning."
+      ],
+      "explain": "An encoder counts pulses as the wheel turns, for example 20 per revolution. Count them to get the turns, and multiply by the wheel's circumference to get the distance."
+     },
+     "xp": 25
+    },
+    {
+     "id": "el5-5",
+     "title": "Motors: DC, Servo and Stepper",
+     "goal": "Pick a DC motor, a servo or a stepper motor for a job.",
+     "theory": "Three kinds of motor do most of the work in small robots.\n\nA **DC motor** spins quickly and keeps spinning as long as it has power. Swap its two wires and it spins the other way, and PWM changes its speed. It has no idea where it is pointing, so add an encoder if you need to know. It usually comes with a gearbox that trades speed for strength. Good for: wheels, fans, pumps.\n\nA **servo** (hobby servo) is a DC motor, a gearbox, a position sensor and a control circuit in one box, with three wires: power, ground and signal. The signal tells it which **angle** to go to, usually between 0° and 180°, and it holds that angle even when pushed. It cannot spin round and round, apart from special continuous-rotation servos. Good for: steering, robot arms, grippers.\n\nA **stepper motor** turns in exact small **steps**, often 200 per revolution, which is 1.8° each. It can turn as many full turns as you like, and by counting steps you know its position without any sensor. It holds its position firmly, but it draws current even while standing still. It needs a stepper driver, and if it is overloaded it can skip steps without knowing. Good for: 3D printers, plotters, camera sliders.\n\nIn short:\n\n- Speed and endless spinning: DC motor.\n- An angle within half a turn: servo.\n- Exact positions over many turns: stepper.",
+     "task": "A camera slider moves a camera along a 1 m rail, pulled by a belt. The pulley must turn many full turns and stop at exact positions again and again, with no position sensor. Which motor fits best?",
+     "hint": "Two needs: many full turns, and exact positions without a sensor. Which motor gives both?",
+     "check": {
+      "type": "choice",
+      "options": [
+       "A hobby servo",
+       "A DC motor with no encoder",
+       "A stepper motor",
+       "A DC motor switched on for a fixed time for each move"
+      ],
+      "answer": 2,
+      "why": [
+       "A servo only turns to an angle within about half a turn, but this pulley has to turn many full turns.",
+       "A DC motor has no idea where it is pointing. Without an encoder it cannot stop at exact positions.",
+       "Right. A stepper turns in exact steps, for as many turns as needed, and counting the steps gives the position without a sensor.",
+       "A DC motor's speed changes with the battery and the load, so the same time does not give the same distance. The camera would stop in a slightly different place each time."
+      ],
+      "explain": "A stepper moves in exact steps (often 1.8° each) and can turn many full turns. Counting the steps tells you where the camera is, with no sensor needed."
+     },
+     "xp": 30
+    },
+    {
+     "id": "el5-6",
+     "title": "Why Motors Need a Driver",
+     "goal": "Work out a motor's stall current and see why a motor cannot run from a microcontroller pin.",
+     "theory": "Never connect a DC motor straight to a microcontroller pin. A pin can give about **20 mA** safely, and a motor needs far more.\n\nA motor is a coil of wire with some resistance, called the **winding resistance**. When the motor stands still, only that resistance limits the current. This is the **stall current**, and it flows every time the motor starts, or when it gets stuck:\n\n```text\nstall current = supply voltage / winding resistance\n```\n\nOnce spinning, the motor acts a bit like a generator and pushes back, so the running current is lower. But your circuit must survive the start.\n\nExample: a 3 V motor with a winding resistance of 2 Ω has a stall current of 3 / 2 = 1.5 A. That is 75 times the pin's 20 mA.\n\nA motor is also a coil, so it throws voltage spikes at switch-off and makes electrical noise. Wired to a pin, it would damage the microcontroller or make it reset.\n\nThe answer is a **motor driver**. It takes a small control signal from the pin and switches the big current from a separate battery, whose ground is joined to the board's ground. Most drivers use an **H-bridge**: four switches arranged so current can flow through the motor either way, for forward and reverse. Driver chips include protection against the motor's spikes. Check the driver's ratings: the running current must fit its continuous rating, and the stall current its peak rating.",
+     "task": "A 6 V hobby motor has a winding resistance of 2.5 Ω. What is its stall current? Answer in A, rounded to one decimal place.",
+     "hint": "When the motor stands still, only the winding resistance limits the current. Use Ohm's law.",
+     "check": {
+      "type": "number",
+      "answer": 2.4,
+      "unit": "A",
+      "tolerance": 0.05,
+      "explain": "Stall current = 6 V / 2.5 Ω = **2.4 A**. That is 2.4 / 0.02 = 120 times the 20 mA a pin can safely give, so the motor needs a driver whose peak rating covers at least 2.4 A."
+     },
+     "xp": 35
+    },
+    {
+     "id": "el5-7",
+     "title": "Challenge: Pick the Sensor",
+     "goal": "Choose the right sensor for a robot task by asking what it must detect, and where.",
+     "theory": "Picking a sensor is easier if you ask four questions.\n\n- **What must the robot know?** A distance, a brightness, a tilt, how far the wheels turned, or whether it touched something?\n- **Where is the thing you want to detect?** A sensor only notices what it is pointed at. A wall is ahead of the robot; a line is on the floor below it.\n- **Is yes or no enough, or do you need how much?** A bump switch gives yes or no. An ultrasonic sensor gives a distance.\n- **What could fool it?** Sunlight blinds IR sensors. Curtains soak up ultrasound. A gyroscope drifts. Wheels slip, and the encoders miss it.\n\nHere is how the sensors you have met match common jobs:\n\n- Stop before hitting a wall: an ultrasonic or IR distance sensor facing forward.\n- Follow a dark line on a light floor: IR reflectance sensors pointing down at the floor.\n- Know if the robot is tilting or falling over: an IMU.\n- Drive a set distance: encoders on the wheels.\n- Know it bumped into something: a bump switch.\n- Switch on headlights when it gets dark: an LDR.\n\nThe best robots often combine sensors, each for its own job. A robot vacuum can carry bump switches, wheel encoders, an IMU and several IR sensors.\n\nFor this chapter's final challenge, look for the sensor that notices the problem early enough for the robot to act.",
+     "task": "A robot vacuum must stop before it drives off the top step of a staircase. Which sensor, placed where, does this job best?",
+     "hint": "Use the second question from the briefing: where exactly is the thing the robot needs to detect?",
+     "check": {
+      "type": "choice",
+      "options": [
+       "An ultrasonic distance sensor at the front, facing forward",
+       "Encoders on both wheels",
+       "A downward-facing IR distance sensor at the front",
+       "A gyroscope inside the robot"
+      ],
+      "answer": 2,
+      "why": [
+       "Facing forward, it looks for walls. At the top of a staircase there is no wall ahead, only a missing floor below.",
+       "Encoders count wheel turns. A wheel rolling over the edge keeps turning, so they give no warning.",
+       "Right. Pointed at the floor, it normally sees the floor close by. When the floor suddenly seems far away, or reflects nothing, the robot stops before its wheels reach the edge.",
+       "A gyroscope notices the robot turning or tipping, but by then it is already falling down the stairs."
+      ],
+      "explain": "The danger is a missing floor just in front of the robot, so the sensor must point down there. A downward IR distance sensor sees the floor disappear before the wheels reach the edge. Real robot vacuums use exactly these, called cliff sensors."
+     },
+     "xp": 50
+    }
+   ]
+  },
+  {
+   "n": 6,
+   "title": "Tools and Safety",
+   "lessons": [
+    {
+     "id": "el6-1",
+     "title": "The Breadboard",
+     "goal": "Know which holes on a breadboard are connected, and avoid the classic mistakes.",
+     "theory": "A **breadboard** lets you build circuits without soldering. Under the holes, metal spring clips grip the legs of your parts and connect them.\n\nThe holes are connected in groups:\n\n- In the middle, each **row** of 5 holes is one connected strip. On most boards the columns are lettered a to e and f to j, and the rows are numbered. Holes 12a, 12b, 12c, 12d and 12e are all connected.\n- A **gap** runs down the centre. In row 12, holes a to e are **not** connected to holes f to j. A chip sits across the gap, so each of its legs gets its own strip.\n- Along the long edges run the **power rails**, marked + (often red) and − (often blue). Each rail is connected along its length.\n\nTwo parts are connected when they share a strip. To connect parts in series, the two legs of each part go in different rows, and the next part starts in the row where the last one ended.\n\nClassic mistakes:\n\n- Both legs of one part in the same row. The strip joins the legs, so the current goes around the part instead of through it.\n- On some long boards the power rails are split in the middle. Look for a break in the red and blue lines, or check with a multimeter.\n- The rails on the two sides of the board are not joined to each other. Add wires if you use both.",
+     "task": "You push a red LED into a breadboard with its long leg in hole 12a and its short leg in hole 12c. The rest of the circuit is fine. What happens?",
+     "hint": "Which holes on a breadboard are connected to each other?",
+     "check": {
+      "type": "choice",
+      "options": [
+       "It stays dark, because the row's strip joins its two legs together",
+       "It lights normally, because each leg is in its own hole",
+       "It lights dimly, because the strip adds some resistance",
+       "It burns out, because the strip puts the full battery voltage across it"
+      ],
+      "answer": 0,
+      "why": [
+       "Right. Holes 12a and 12c are on the same strip, so the current takes the easy path through the metal clip and none goes through the LED.",
+       "Each leg has its own hole, but both holes are in row 12, which is one connected strip. What matters is the strip, not the hole.",
+       "The clips are metal with almost no resistance. The LED is bypassed, not dimmed.",
+       "The strip joins the two legs, so there is almost 0 V between them. With no voltage across it, no current flows through the LED."
+      ],
+      "explain": "Holes a to e in one row share one metal strip. With both legs in row 12, the LED's legs are joined together, so the current flows through the strip and bypasses the LED. Move one leg to another row."
+     },
+     "xp": 20
+    },
+    {
+     "id": "el6-2",
+     "title": "The Multimeter",
+     "goal": "Measure voltage, current and resistance with a multimeter the right way.",
+     "theory": "A **multimeter** measures voltage, current and resistance. It has a dial, two probes (black and red) and a few sockets.\n\n- **Black probe:** always in the socket marked **COM**.\n- **Red probe:** in the socket marked **VΩ** for voltage and resistance, and in the socket marked **mA** (or **10A** for big currents) for current.\n\n**Voltage** (DC volts, marked V with a solid and a dashed line): voltage is measured **across** a part. With the circuit on, touch the probes to both ends of the part, so the meter sits **in parallel** with it.\n\n**Current** (A or mA): the current must flow **through** the meter. Switch off, break the loop at one point and put the meter in the gap, so it is **in series**. Then switch on and read. In current mode the meter is almost a plain wire. Never put it across a battery or a part in this mode: that makes a short circuit and blows the meter's fuse, or worse.\n\n**Resistance** (Ω): the meter sends its own tiny current, so the **power must be off**. Take the part out if you can, because other parts connected to it change the reading.\n\n**Continuity** (the beep): the meter beeps when two points are connected. Use it, power off, to check wires and rows.\n\nAfter measuring current, move the red probe back to the VΩ socket. Forgetting this blows fuses.\n\nYour multimeter is for low-voltage projects only. Never measure a wall socket or anything plugged into the mains.",
+     "task": "You want to measure how much current flows in your LED circuit. How do you connect the multimeter?",
+     "hint": "Voltage is measured across a part; current is measured through it. Which option makes the current flow through the meter?",
+     "check": {
+      "type": "choice",
+      "options": [
+       "With the circuit on, touch the probes across the LED, dial on DC volts",
+       "With the circuit on, touch the probes across the battery, dial on mA",
+       "With the circuit off, touch the probes across the LED, dial on Ω",
+       "Break the loop and put the meter in the gap, red probe in mA, dial on mA"
+      ],
+      "answer": 3,
+      "why": [
+       "That measures the voltage across the LED, not the current. Current has to flow through the meter.",
+       "In current mode the meter is almost a plain wire. Across the battery it makes a short circuit and blows the fuse.",
+       "That measures resistance, not current. With the power off, no current flows at all.",
+       "Right. The current has to flow through the meter, so the meter must become part of the loop, in series."
+      ],
+      "explain": "To measure current, the current has to flow through the meter. Break the loop, put the meter in the gap in series with the red probe in the mA socket and the dial on mA, then switch on and read."
+     },
+     "xp": 30
+    },
+    {
+     "id": "el6-3",
+     "title": "Reading a Schematic",
+     "goal": "Recognise the basic schematic symbols, and read which way an LED points.",
+     "theory": "A **schematic** is a map of a circuit. It shows what is connected to what, not where the parts sit on the board. Lines are wires.\n\nThe symbols you will meet most:\n\n- **Battery:** a long line and a short line side by side. The long line is **+**, the short line is **−**. Several pairs mean several cells.\n- **Resistor:** a zigzag line, or a small rectangle in European drawings. Its value is written beside it, such as 330 Ω.\n- **Diode:** a triangle pointing at a bar. Current flows the way the triangle points: into the wide end, the **anode**, and out through the bar, the **cathode**.\n- **LED:** a diode symbol with two small arrows pointing away from it, for the light it gives out.\n- **Switch:** a line with a gap and a short lever tilted up, drawn open.\n- **Ground:** three horizontal lines getting shorter, like an upside-down triangle. It is the 0 V point. All ground symbols in a drawing are connected, even without a line between them.\n\nTwo more rules:\n\n- A **dot** where wires meet means they are connected. Wires that cross **without** a dot are not connected.\n- On a real LED the anode is the long leg; the cathode is the short leg, next to a flat edge on the LED's rim.\n\nA simple LED circuit, following the loop:\n\n```text\nbattery + → switch → 330 Ω resistor → LED (anode → cathode) → battery −\n```",
+     "task": "In a schematic, an LED's triangle points to the right, at a bar. Which way does current flow through it, and which leg of the real LED is the bar?",
+     "hint": "Think of the triangle as an arrow. What is the bar called, and which leg is that?",
+     "check": {
+      "type": "choice",
+      "options": [
+       "Left to right; the bar is the cathode, the short leg",
+       "Right to left; the bar is the anode, the long leg",
+       "Left to right; the bar is the anode, the long leg",
+       "Either way; the symbol only shows where the LED sits"
+      ],
+      "answer": 0,
+      "why": [
+       "Right. Current flows the way the triangle points, into the bar. The bar is the cathode: the short leg next to the flat edge.",
+       "The triangle is an arrow for current, and here it points left to right. The bar marks the cathode, not the anode.",
+       "The direction is right, but the bar is the cathode (short leg). The anode is at the wide end of the triangle.",
+       "An LED is a diode, so current flows one way only, the way the triangle points. And a schematic shows connections, not where parts sit."
+      ],
+      "explain": "The triangle points the way current flows, from anode to cathode. The bar is the cathode, which is the LED's short leg next to the flat edge of its rim."
+     },
+     "xp": 25
+    },
+    {
+     "id": "el6-4",
+     "title": "Battery Safety",
+     "goal": "See why a short circuit is dangerous, and handle batteries safely.",
+     "theory": "Batteries store a lot of energy and can release it fast. Common types:\n\n- **Alkaline** cells, such as the AA (1.5 V) and the 9 V block.\n- **Lithium** cells, lithium-ion and LiPo: about **3.7 V** each, and 4.2 V when full. They store a lot of energy for their weight.\n\nA **short circuit** is a path from + to − with almost no resistance: a loose wire, a metal tool, or coins and keys in a pocket touching both ends. The only resistance left is the wire and the battery's own small **internal resistance**, so by Ohm's law:\n\n```text\nshort-circuit current = battery voltage / (internal resistance + wire resistance)\n```\n\nExample: a 1.5 V AA cell with 0.2 Ω in total gives 1.5 / 0.2 = 7.5 A. That current turns into heat. Lithium cells have a much lower internal resistance, so the current is far bigger. They can swell, burst or catch fire, and a lithium fire is very hard to put out.\n\nRules that keep you safe:\n\n- Never short a battery. Carry loose cells in a case, never loose in a pocket.\n- Check the **polarity** (+ and −) before you connect. Backwards, parts can die at once.\n- Never use a battery that is swollen, dented, leaking or hot. Stop, keep it away from anything that can burn, and tell an adult.\n- Charge lithium cells only with the right charger, on a surface that cannot burn, and never leave them charging unattended.",
+     "task": "A 3.7 V lithium cell is shorted by a piece of wire. The cell's internal resistance and the wire add up to 0.05 Ω. What current flows? Answer in A, rounded to a whole number.",
+     "hint": "Use Ohm's law with the total resistance of the loop: current equals voltage divided by resistance.",
+     "check": {
+      "type": "number",
+      "answer": 74,
+      "unit": "A",
+      "tolerance": 1,
+      "explain": "Current = 3.7 V / 0.05 Ω = **74 A**. That is thousands of times what an LED needs, and it makes about 3.7 V × 74 A ≈ 274 W of heat (P = V × I) in a thin wire and a small cell. That is why a short circuit can start a fire."
+     },
+     "xp": 35
+    },
+    {
+     "id": "el6-5",
+     "title": "Soldering and Workshop Safety",
+     "goal": "Learn the safety rules for soldering and for working at the bench.",
+     "theory": "**Soldering** joins parts for good with melted metal called solder. The tip of a soldering iron runs at about **350 °C**, hot enough to burn skin instantly and to melt plastic.\n\nThe iron:\n\n- Always put it back in its **stand**, even for a few seconds. Never lay it on the bench.\n- Hold it by the grip, like a pen. Treat the metal as hot even after switching off: it takes minutes to cool.\n- If it falls, **let it fall**. Step back and never try to catch it. Pick it up by the grip once it has landed.\n- Keep its cable, and all other cables, away from the hot tip.\n- Unplug it when you are done.\n\nFumes and solder:\n\n- The smoke comes from the flux inside the solder. Work with good ventilation or a fume extractor, and keep your face out of the smoke.\n- Some solder contains lead, so lead-free solder is better. Either way, do not eat at the bench, and wash your hands afterwards.\n\nEyes:\n\n- Wear **safety glasses**. Solder can spit, and the legs you clip off can fly into an eye. Hold a leg while you clip it.\n\nWorking on circuits:\n\n- Switch the power off before you change anything.\n- Only work on low-voltage circuits. Mains electricity from wall sockets can kill: never open anything that plugs into the wall.\n\nIf you burn yourself, cool the burn under cool running water for 20 minutes, and tell an adult.",
+     "task": "Your friend knocks a hot soldering iron off its stand, and it starts to fall off the bench. What should you do?",
+     "hint": "Think about which part of the iron your hand might grab while it is falling.",
+     "check": {
+      "type": "choice",
+      "options": [
+       "Catch it quickly, before it damages the floor",
+       "Let it fall, then pick it up by the grip",
+       "Catch it with a cloth so your hand is protected",
+       "Pull it back up by its cable before it lands"
+      ],
+      "answer": 1,
+      "why": [
+       "You might grab the 350 °C metal. A scorched floor is far better than a burnt hand.",
+       "Right. A falling iron is too hot and too fast to catch safely. Let it land, then pick it up by the grip.",
+       "A cloth does not protect you from 350 °C metal for long, and it could scorch or catch fire.",
+       "The iron swings on its cable, and the hot tip could hit you, the bench or the cable itself."
+      ],
+      "explain": "Never try to catch a falling soldering iron. Step back, let it land, and pick it up by the grip. Then check its cable for damage before you use it again."
+     },
+     "xp": 25
+    },
+    {
+     "id": "el6-6",
+     "title": "Challenge: The LED That Won't Light",
+     "goal": "Use your multimeter and a clear method to find out why an LED circuit does not work.",
+     "theory": "When a circuit does not work, do not pull it apart. Measure it.\n\nA useful fact: in a series loop, **if no current flows, a resistor has 0 V across it**, because V = I × R and I is 0. The whole supply voltage then appears across the **gap**: the one place that blocks the current. So with the meter on DC volts, look for the part with the full battery voltage across it. That is where the loop is broken.\n\nFor comparison, a working red LED circuit on 9 V has about 2 V across the LED and about 7 V across the resistor.\n\nA method, in order:\n\n- **Power:** measure the battery. A flat battery shows much less than its label says.\n- **Voltages:** measure across each part and compare with the working circuit above.\n- **Polarity:** is the LED's long leg (anode) towards +? An LED in backwards blocks all current.\n- **Breadboard:** are both legs of a part in one row? Is a rail split? Is a wire one row off?\n- **Values:** is the resistor the one you meant? 470 kΩ instead of 470 Ω lets through a thousand times less current, so the LED stays dark or barely glimmers. Most of the voltage then sits across the resistor.\n- **Continuity:** with the power off, use the beep to check wires and rows.\n\nChange one thing at a time, then measure again.\n\nFor this final challenge, trust the numbers, not a guess.",
+     "task": "Your circuit is a 9 V battery, a 470 Ω resistor and a red LED in one series loop on a breadboard. The LED is new and you tested it this morning, but now it stays dark. With the meter on DC volts you measure **9 V** across the battery, **0 V** across the resistor and **9 V** across the LED. What is the most likely cause?",
+     "hint": "0 V across the resistor tells you how much current flows. Then find the part with the full 9 V across it.",
+     "check": {
+      "type": "choice",
+      "options": [
+       "The battery is flat and gives no current",
+       "A wire is one row off, leaving a gap in the loop",
+       "The LED is in backwards, so it blocks the current",
+       "The resistor is 470 kΩ instead of 470 Ω"
+      ],
+      "answer": 2,
+      "why": [
+       "The battery shows its full 9 V, so it is fine.",
+       "That gap would block the current too, but then the 9 V would appear across the gap and the LED would show 0 V. Your meter shows 9 V across the LED, so the LED itself is the gap.",
+       "Right. 0 V across the resistor means no current flows, and the full 9 V across the LED means the LED is what blocks the loop. A new LED you tested this morning is almost certainly in backwards. Turn it round.",
+       "A 470 kΩ resistor still lets a tiny current through, so most of the 9 V would sit across the resistor, not 0 V."
+      ],
+      "explain": "0 V across the resistor means no current flows (V = I × R). The full 9 V sits across the LED, so the LED is the part blocking the loop. Since you know it works, it is in backwards: turn it so its long leg faces +."
+     },
+     "xp": 60
+    }
+   ]
+  }
+ ]
+}

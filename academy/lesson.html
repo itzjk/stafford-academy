@@ -40,10 +40,15 @@
       <section class="panel editor">
         <div class="panel-head"><b id="editorLang">Editor</b></div>
         <textarea class="code" id="code" spellcheck="false" aria-label="Your code"></textarea>
+        <div class="quiz" id="quiz" role="radiogroup" aria-label="Answer options" hidden></div>
+        <div class="number-box" id="numberBox" hidden>
+          <label for="numberInput">Your answer</label>
+          <div class="number-row"><input id="numberInput" type="text" inputmode="decimal" autocomplete="off" spellcheck="false" /><span id="numberUnit"></span></div>
+        </div>
         <div class="actions">
           <button class="run" id="runBtn" type="button" title="Check my code (Ctrl or Cmd with Enter)">
             <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
-            Check my code
+            <span id="runLabel">Check my code</span>
           </button>
           <button class="ghost" id="hintBtn" type="button">Hint</button>
           <span class="spacer"></span>

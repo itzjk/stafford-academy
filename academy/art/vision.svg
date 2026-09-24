@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400">
+<path class="s-dim a-dash" stroke-width="2" d="M168 116L104 146M168 284L104 254"/>
+<rect class="f-panel s-dim" stroke-width="2" x="168" y="96" width="196" height="208" rx="14"/>
+<path class="s-line" stroke-width="3" d="M180 124V110H194M338 110H352V124M352 276V290H338M194 290H180V276"/>
+<circle class="f-red a-blink" cx="336" cy="130" r="4.5"/>
+<g class="a-slide"><rect class="f-soft" x="252" y="108" width="14" height="184"/><path class="s-acc" stroke-width="2" d="M266 108V292"/></g>
+<circle class="f-soft s-line" stroke-width="2.5" cx="220" cy="166" r="21"/>
+<path class="f-panel s-line" stroke-width="2.5" d="M216 230L241 272H191Z"/>
+<path class="f-panel s-line" stroke-width="2.5" d="M276 214H316V254H276ZM276 214L286 204H326L316 214M326 204V244L316 254"/>
+<rect class="s-acc a-dash" stroke-width="2.5" x="190" y="136" width="60" height="60" rx="6"/>
+<rect class="s-acc a-dash d1" stroke-width="2.5" x="180" y="222" width="72" height="60" rx="6"/>
+<rect class="s-acc a-dash d2" stroke-width="2.5" x="264" y="194" width="74" height="72" rx="6"/>
+<text class="t-label" x="190" y="129">ball</text>
+<text class="t-label" x="310" y="187">box</text>
+<circle class="f-panel s-line" stroke-width="3" cx="100" cy="200" r="54"/>
+<circle class="s-dim" stroke-width="2" cx="100" cy="200" r="47"/>
+<circle class="f-soft s-acc" stroke-width="2.5" cx="100" cy="200" r="38"/>
+<path class="s-acc a-spin" stroke-width="2" d="M121.3 205.7L90.2 236.7M105.7 221.3L63.3 209.9M84.4 215.6L73.1 173.2M78.7 194.3L109.8 163.3M94.3 178.7L136.7 190.1M115.6 184.4L126.9 226.8"/>
+<circle class="f-panel" cx="100" cy="200" r="12"/>
+<circle class="f-ink" cx="95" cy="195" r="4"/>
+</svg>

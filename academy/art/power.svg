@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400">
+  <path class="s-dim" stroke-width="3" d="M288 306 H160 V246"/>
+  <path class="s-acc a-dash" stroke-width="3" d="M266 186 H318 V268"/>
+  <text class="t-label" x="278" y="176">12V</text>
+  <rect class="s-line f-panel" x="56" y="130" width="196" height="112" rx="18" stroke-width="4"/>
+  <rect class="f-ink" x="252" y="166" width="14" height="40" rx="4"/>
+  <rect class="f-acc a-pulse" x="72" y="146" width="36" height="80" rx="6"/>
+  <rect class="f-acc a-pulse d1" x="116" y="146" width="36" height="80" rx="6"/>
+  <rect class="f-acc a-pulse d2" x="160" y="146" width="36" height="80" rx="6"/>
+  <rect class="f-soft a-blink d3" x="204" y="146" width="36" height="80" rx="6"/>
+  <g class="a-float">
+    <circle class="s-gold f-panel" cx="154" cy="84" r="28" stroke-width="3"/>
+    <path class="f-gold" d="M160 64 L140 88 H152 L147 106 L168 80 H156 Z"/>
+  </g>
+  <circle class="s-line f-panel" cx="318" cy="302" r="34" stroke-width="3"/>
+  <g class="a-spin-fast">
+    <circle cx="318" cy="302" r="22" fill="none"/>
+    <path class="s-acc" stroke-width="3" d="M318 302 V282 M318 302 L335 312 M318 302 L301 312"/>
+  </g>
+  <circle class="f-ink" cx="318" cy="302" r="5"/>
+</svg>

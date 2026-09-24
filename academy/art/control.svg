@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400">
+<rect class="f-panel s-dim" stroke-width="2" x="30" y="60" width="290" height="216" rx="18"/>
+<path class="s-dim" stroke-width="2" d="M60 84V240H296"/>
+<rect class="f-soft" x="196" y="114" width="100" height="12" rx="6"/>
+<path class="s-line" stroke-width="2" stroke-dasharray="6 8" d="M60 120H296"/>
+<text class="t-label" x="224" y="104">setpoint</text>
+<path class="s-acc a-draw" stroke-width="4" d="M60 240H80L80 240L85 236.6L90 227.7L95 215L100 200.3L105 184.7L110 169.3L115 155L120 142.2L125 131.3L130 122.4L135 115.5L140 110.5L145 107.2L150 105.4L155 104.8L160 105.2L165 106.3L170 107.9L175 109.8L180 111.7L185 113.7L190 115.5L195 117.1L200 118.5L205 119.7L210 120.5L215 121.2L220 121.6L225 121.8L230 121.9L235 121.9L240 121.7L245 121.5L250 121.3L255 121.1L260 120.8L265 120.6L270 120.4L275 120.2L280 120L285 119.9L290 119.9"/>
+<circle class="f-acc a-pulse" cx="290" cy="119.9" r="6"/>
+<circle class="f-panel s-line" stroke-width="3" cx="318" cy="300" r="42"/>
+<path class="s-dim" stroke-width="2" d="M295.4 322.6L291.8 326.2M286.6 306.2L281.7 307.2M288.4 287.8L283.8 285.8M300.2 273.4L297.4 269.2M318 268L318 263M335.8 273.4L338.6 269.2M347.6 287.8L352.2 285.8M349.4 306.2L354.3 307.2M340.6 322.6L344.2 326.2"/>
+<circle class="f-soft s-acc" stroke-width="2.5" cx="318" cy="300" r="24"/>
+<g transform="rotate(180 318 300)"><g class="a-swing"><path class="s-line" stroke-width="3" d="M318 300V316"/><circle class="f-acc" cx="318" cy="318" r="4"/></g></g>
+<text class="t-label" x="309" y="364">Kp</text>
+</svg>

@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400">
+<path class="s-dim" stroke-width="2" d="M90 132C90 182 112 200 152 200M90 268C90 218 112 200 152 200M248 200C288 200 310 182 310 132M248 200C288 200 310 218 310 268"/>
+<path class="s-acc a-dash" stroke-width="4" d="M90 132C90 182 112 200 152 200"/>
+<path class="s-acc a-dash d2" stroke-width="4" d="M90 268C90 218 112 200 152 200"/>
+<path class="s-acc a-dash d1" stroke-width="4" d="M248 200C288 200 310 182 310 132"/>
+<path class="s-acc a-dash d3" stroke-width="4" d="M248 200C288 200 310 218 310 268"/>
+<rect class="f-panel s-line" stroke-width="3" x="44" y="80" width="92" height="52" rx="14"/>
+<circle class="f-acc a-pulse" cx="64" cy="106" r="5"/>
+<rect class="f-dim" x="78" y="97" width="42" height="7" rx="3.5"/>
+<rect class="f-dim" x="78" y="109" width="28" height="7" rx="3.5"/>
+<rect class="f-panel s-line" stroke-width="3" x="44" y="268" width="92" height="52" rx="14"/>
+<circle class="f-acc a-pulse d2" cx="64" cy="294" r="5"/>
+<rect class="f-dim" x="78" y="285" width="42" height="7" rx="3.5"/>
+<rect class="f-dim" x="78" y="297" width="28" height="7" rx="3.5"/>
+<rect class="f-panel s-line" stroke-width="3" x="264" y="80" width="92" height="52" rx="14"/>
+<circle class="f-acc a-pulse d1" cx="284" cy="106" r="5"/>
+<rect class="f-dim" x="298" y="97" width="42" height="7" rx="3.5"/>
+<rect class="f-dim" x="298" y="109" width="28" height="7" rx="3.5"/>
+<rect class="f-panel s-line" stroke-width="3" x="264" y="268" width="92" height="52" rx="14"/>
+<circle class="f-acc a-pulse d3" cx="284" cy="294" r="5"/>
+<rect class="f-dim" x="298" y="285" width="42" height="7" rx="3.5"/>
+<rect class="f-dim" x="298" y="297" width="28" height="7" rx="3.5"/>
+<rect class="f-panel s-acc" stroke-width="3" x="152" y="164" width="96" height="72" rx="18"/>
+<rect class="f-soft" x="158" y="170" width="84" height="60" rx="13"/>
+<circle class="f-acc a-pulse" cx="182" cy="182" r="5.5"/>
+<circle class="f-acc a-pulse d1" cx="200" cy="182" r="5.5"/>
+<circle class="f-acc a-pulse d2" cx="218" cy="182" r="5.5"/>
+<circle class="f-acc a-pulse d1" cx="182" cy="200" r="5.5"/>
+<circle class="f-acc a-pulse d2" cx="200" cy="200" r="5.5"/>
+<circle class="f-acc a-pulse d3" cx="218" cy="200" r="5.5"/>
+<circle class="f-acc a-pulse d2" cx="182" cy="218" r="5.5"/>
+<circle class="f-acc a-pulse d3" cx="200" cy="218" r="5.5"/>
+<circle class="f-acc a-pulse d4" cx="218" cy="218" r="5.5"/>
+<text class="t-label" x="40" y="206">/scan</text>
+<text class="t-label" x="312" y="206">/cmd_vel</text>
+</svg>

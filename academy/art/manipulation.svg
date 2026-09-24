@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400">
+  <line class="s-dim" x1="84" y1="246" x2="316" y2="246" stroke-width="2"/>
+  <ellipse class="f-soft" cx="200" cy="248" rx="64" ry="6"/>
+  <rect class="s-line f-soft" x="164" y="168" width="72" height="76" rx="6" stroke-width="3"/>
+  <path class="s-dim" stroke-width="2" d="M164 188 H236 M190 168 V188 M210 168 V188"/>
+  <path class="s-gold a-pulse" stroke-width="3" d="M170 213 H192 M185 206 L192 213 L185 220"/>
+  <path class="s-gold a-pulse" stroke-width="3" d="M230 213 H208 M215 206 L208 213 L215 220"/>
+  <g class="a-swing">
+    <path class="s-line f-panel" stroke-width="3" d="M110 110 H130 V164 L140 176 V232 Q140 240 132 240 H128 Q120 240 120 232 V184 L110 172 Z"/>
+    <rect class="f-acc" x="140" y="194" width="6" height="36" rx="3"/>
+  </g>
+  <g class="a-swing d4">
+    <path class="s-line f-panel" stroke-width="3" d="M290 110 H270 V164 L260 176 V232 Q260 240 268 240 H272 Q280 240 280 232 V184 L290 172 Z"/>
+    <rect class="f-acc" x="254" y="194" width="6" height="36" rx="3"/>
+  </g>
+  <path class="s-line f-panel" stroke-width="3" d="M152 82 H248 L302 112 Q306 120 298 120 H102 Q94 120 98 112 Z"/>
+  <line class="s-dim" x1="132" y1="108" x2="268" y2="108" stroke-width="2"/>
+  <circle class="f-ink" cx="120" cy="113" r="3.5"/>
+  <circle class="f-ink" cx="280" cy="113" r="3.5"/>
+  <rect class="s-line f-panel" x="182" y="24" width="36" height="58" rx="10" stroke-width="3"/>
+  <circle class="s-acc a-spin" cx="200" cy="50" r="11" stroke-width="3" stroke-dasharray="5 3.64"/>
+  <circle class="f-acc" cx="200" cy="50" r="3.5"/>
+</svg>

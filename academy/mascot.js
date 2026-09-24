@@ -125,7 +125,7 @@
     // Using the academy
     { k: /how long|how much time|what time|cu[aá]nto tiempo|tiempo|hours|horas/, d: 'It depends on the course: each one shows its hours on the home page. **Programming from Zero** takes about 26 hours. Twenty or thirty minutes a day, every day, works better than one long session a week. Finish one mission, then the next.' },
     { k: /\bxp\b|\blevels?\b|\bnivel|my progress|mi progreso|\bsaved?\b/, d: 'Each mission you pass gives XP and raises your level. Your progress is saved in this browser, on this computer.' },
-    { k: /where.*start|empez|comenz|first course|primer curso|begin|beginner|principiante/, d: 'Start with **Programming from Zero**: it assumes nothing. Then **AI for Developers** teaches you to use AI tools like a professional, and after that pick any course that sounds fun.' },
+    { k: /where.*start|empez|comenz|first course|primer curso|begin|beginner|principiante/, d: 'Start with **Programming from Zero** if you want to code: it assumes nothing. With no code at all, start with **Learn AI**, **Electronics Basics** or **Robotics Basics**. Then pick any course that sounds fun.' },
     { k: /shortcut|atajo|ctrl|cmd|teclado|keyboard/, d: 'Press **Ctrl + Enter** (or **Cmd + Enter** on a Mac) to check your code. **Tab** indents the selected lines, **Shift + Tab** moves them back. **Esc** then Tab leaves the editor.' },
     { k: /reset|reinici|borrar c[oó]digo|start over/, d: 'The **Reset** button under the editor brings back the starting code of the mission. Your XP stays.' },
     { k: /hint|pista|stuck|atasc|help me|ay[uú]dame/, d: 'Open a mission and press **Hint** under the editor, or tap me inside the mission: I can see the task and your code there.' },
@@ -135,7 +135,7 @@
     { k: /prompt/, d: 'A good prompt says **who** the AI should be, **what** you need, the **context**, the **limits** and the **format** you want back. Example: "You are a Python tutor. Explain why this loop never ends, in 3 short points, without giving me the fixed code."' },
     { k: /cheat|trampa|copiar|copy/, d: 'Asking AI to **explain** is learning. Pasting its answer without understanding it is not, and it shows the first time the code breaks. Try first, ask for a hint, and make sure you could write it again yourself.' },
     { k: /hallucin|alucin|\binvent/, d: 'A hallucination is when an AI makes something up with confidence, like a function that does not exist. Always run the code, and check names against the real documentation.' },
-    { k: /\bai\b|\bia\b|artificial intelligence|inteligencia artificial|chatgpt|gemini|claude|\bllms?\b|language model|modelo de lenguaje/, d: 'A language model predicts the next piece of text, over and over. That makes it great at explaining and drafting, and also able to be confidently wrong. Use it to **understand**, then check what it says by running and testing the code. The **AI for Developers** course teaches exactly this.' },
+    { k: /\bai\b|\bia\b|artificial intelligence|inteligencia artificial|chatgpt|gemini|claude|\bllms?\b|language model|modelo de lenguaje/, d: 'A language model predicts the next piece of text, over and over. That makes it great at explaining and drafting, and also able to be confidently wrong. Use it to **understand**, then check what it says by running and testing the code. The **Learn AI** course teaches exactly this, with no code.' },
     // Small talk
     { k: /thank|gracias|thx/, d: 'You are welcome! Keep going, one mission at a time. 🚀', small: true },
     { k: /who are you|qui[eé]n eres|your name|tu nombre|who made|qui[eé]n te (hizo|cre)/, d: 'I am **Zerack**, the helper robot of Stafford Academy, made by ZERACK. I welcome you to each classroom, explain errors and give hints.', small: true },
@@ -173,6 +173,17 @@
 
   function explainError() {
     var s = screenOutput();
+    // Missions without code: the explanation is already under the answer.
+    var m = currentLesson;
+    var kind = m && m.lesson.check && m.lesson.check.type;
+    if (kind === 'choice' || kind === 'number' || kind === 'prompt') {
+      if (!s.text || /is-idle/.test(s.cls)) return 'Answer first and press **Check**. Then I will look at it with you.';
+      if (/is-good/.test(s.cls)) return 'You got it right. Nice work!';
+      var tip = m.lesson.hint ? '\n\nHint: ' + m.lesson.hint : '';
+      if (kind === 'prompt') return 'Look at the list under your prompt: every ✗ is a part your prompt still needs. Add them one at a time and check again.' + tip;
+      if (kind === 'number') return 'Go step by step: write the formula, put in the numbers with their units, and only then calculate. Check that your answer uses the unit shown next to the box.' + tip;
+      return 'Read the explanation under your answer: it says why that option does not fit. Then read the briefing again and try another one.' + tip;
+    }
     if (!s.text || /is-idle/.test(s.cls)) {
       return 'Press **Check my code** first. When the screen answers, I will read it with you.';
     }
@@ -216,6 +227,8 @@
 
   // The keyword lists also match common Spanish words, so students who write
   // in Spanish still get the right answer.
+  var currentLesson = null;
+
   var OFFLINE_FALLBACK = 'Without AI I only know this mission and the basics of Python. Try asking about an error, a hint, or a word like `print`, `if`, `for`, `list` or `def`.';
 
   // Returns the offline answer and what kind it is: "mission" (about the open
@@ -406,8 +419,15 @@
       parts.push('Mission: ' + l.title);
       parts.push('Task: ' + trim(l.task, 700));
       if (l.hint) parts.push('Hint the mission offers: ' + trim(l.hint, 300));
-      var code = document.getElementById('code');
-      parts.push('Student code right now:\n' + (code && code.value.trim() ? trim(code.value, 1500) : '(empty)'));
+      var check = l.check || {};
+      if (check.type === 'choice') {
+        parts.push('It is a multiple-choice question. Options: ' + (check.options || []).map(function (o, i) { return String.fromCharCode(65 + i) + ') ' + o; }).join(' | '));
+      } else if (check.type === 'number') {
+        parts.push('It is a calculation; the answer is typed in ' + (check.unit || 'no unit') + '.');
+      } else {
+        var code = document.getElementById('code');
+        parts.push((check.type === 'prompt' ? 'Prompt the student has written so far:\n' : 'Student code right now:\n') + (code && code.value.trim() ? trim(code.value, 1500) : '(empty)'));
+      }
       var out = screenOutput();
       if (out.text && !/is-idle/.test(out.cls)) parts.push('What the checker answered:\n' + trim(out.text, 900));
     }
@@ -924,7 +944,7 @@
 
     return {
       setCourse: function (course) { ctx.course = course; quickButtons(); },
-      setLesson: function (m) { ctx.lesson = m; ctx.course = m && m.course; quickButtons(); },
+      setLesson: function (m) { ctx.lesson = m; ctx.course = m && m.course; currentLesson = m; quickButtons(); },
       welcome: function (text) { if (landed) say(text, 10000); else pending = text; },
       say: say
     };
