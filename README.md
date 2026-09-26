@@ -20,7 +20,7 @@ Stafford Academy is a non-profit project. It was built so that students, and any
 - **Free, forever.** No payments, no subscriptions, no premium tier.
 - **No account.** Open it and start learning. Your progress is saved on your own computer.
 - **No installs.** Python runs directly in the browser, so it works on school and library computers too.
-- **Private by design.** No tracking and no analytics. Your code and your progress stay on your computer, unless you choose to connect Zerack to an online AI.
+- **Private by design.** No tracking and no analytics. Your code and your progress stay on your computer, unless you choose to connect Zerack to an online AI. Read the [privacy policy](PRIVACY.md).
 - **Open source.** Anyone can read, use, share and improve the code under the MIT License.
 
 It is made for anyone who wants to find their way in the world of technology, whether they are writing their first line of code or building their first robot.
@@ -118,6 +118,7 @@ icons/                 Extension icons and the logo
 tools/
   check_course.py        Checks every mission before it goes in (run it before a pull request)
   build_search_index.py  Rebuilds Zerack's offline index of every mission
+  test_missions.mjs      Opens every mission in headless Chrome and checks the app accepts its solution
 ```
 
 Each course is a plain JSON file: `chapters → lessons`, and every lesson has a `theory`, a `task`, a `hint` and a `check`. Code missions add `starter` code and a `solution`; missions without code use a `choice`, `number` or `prompt` check. To add or improve a mission, edit the JSON, run `python3 tools/check_course.py` to check it and `python3 tools/build_search_index.py` so Zerack learns it too, then reload the extension.

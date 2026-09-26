@@ -58,9 +58,12 @@ Look at an existing course of the same kind and copy its shape.
 ```bash
 python3 tools/check_course.py                 # checks every course
 python3 tools/build_search_index.py           # lets Zerack answer questions about your missions
+node tools/test_missions.mjs my-course        # optional: checks the real app accepts each solution
 ```
 
 `check_course.py` runs every Python solution, checks every question and rubric, and makes sure the catalog counts match. Please make sure it prints `All good.`
+
+`test_missions.mjs` goes one step further: it opens each mission in a headless Chrome, shows the solution, presses **Check** and expects the app to accept it. It needs Node 22+ and Google Chrome (set `CHROME` to point to another binary).
 
 ## Pull requests
 
