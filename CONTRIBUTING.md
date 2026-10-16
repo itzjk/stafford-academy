@@ -61,7 +61,13 @@ python3 tools/build_search_index.py           # lets Zerack answer questions abo
 node tools/test_missions.mjs my-course        # optional: checks the real app accepts each solution
 ```
 
-`check_course.py` runs every Python solution, checks every question and rubric, and makes sure the catalog counts match. Please make sure it prints `All good.`
+`check_course.py` runs every Python solution, checks every question and rubric, makes sure the catalog counts match and that every course file is in the catalog. Please make sure it prints `All good.`
+
+If you change the tools themselves, run their tests too:
+
+```bash
+python3 -m unittest discover -s tools -p 'test_*.py'
+```
 
 `test_missions.mjs` goes one step further: it opens each mission in a headless Chrome, shows the solution, presses **Check** and expects the app to accept it. It needs Node 22+ and Google Chrome (set `CHROME` to point to another binary).
 

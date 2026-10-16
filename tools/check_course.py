@@ -9,15 +9,20 @@ that grades it:
   runs      the solution runs with python3 and prints check.expects exactly;
             the starter runs too (unless starterFails marks it as broken on
             purpose), and does not already print the answer
-  contains  every required fragment appears in the solution
-  regex     every pattern compiles and matches the solution
+  contains  every required fragment appears in the solution, and not all of
+            them are already in the starter
+  regex     every pattern compiles and matches the solution, and the starter
+            does not already match them all
   output    the expected text appears in the solution
   choice    3 or 4 options, a valid answer, and one "why" per option
   number    a numeric answer, a unit and a tolerance
   prompt    the model prompt and the alternative prompt pass the rubric,
             the weak prompt fails it on at least one item
 
-It also checks that the catalog's mission and chapter counts match the file.
+It also checks that the catalog's mission and chapter counts match the file,
+that every course file in academy/courses is in the catalog and that every
+course in the catalog has a file. A program that runs for more than 15 s is
+reported as a problem.
 Python missions run on your local python3; the academy runs Pyodide, so keep
 solutions to the standard library.
 """
@@ -31,6 +36,8 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 COURSES = ROOT / 'academy' / 'courses'
 BASE_FIELDS = ['id', 'title', 'goal', 'theory', 'task', 'hint', 'check', 'xp']
+NOT_COURSES = {'catalog.json', 'search-index.json'}
+RUN_TIMEOUT = 15
 
 
 def normalize_output(text):
@@ -44,9 +51,19 @@ def flatten(text):
 
 
 def run_python(code, stdin=''):
+    """Run code with python3. A program that never ends comes back with returncode None."""
     with tempfile.TemporaryDirectory() as folder:
-        return subprocess.run([sys.executable, '-c', code], input=stdin, capture_output=True,
-                              text=True, timeout=15, cwd=folder)
+        try:
+            return subprocess.run([sys.executable, '-c', code], input=stdin, capture_output=True,
+                                  text=True, timeout=RUN_TIMEOUT, cwd=folder)
+        except subprocess.TimeoutExpired:
+            return subprocess.CompletedProcess([sys.executable], None, '', '')
+
+
+def crash_reason(result):
+    if result.returncode is None:
+        return f'did not finish in {RUN_TIMEOUT} s'
+    return 'crashes: ' + (result.stderr.strip().splitlines() or ['?'])[-1]
 
 
 def passes_rubric(check, text):
@@ -65,19 +82,19 @@ def check_lesson(lesson, report):
 
     if kind == 'runs':
         result = run_python(solution, lesson.get('stdin', ''))
-        if result.returncode:
-            report('solution crashes: ' + (result.stderr.strip().splitlines() or ['?'])[-1])
+        if result.returncode != 0:
+            report('solution ' + crash_reason(result))
         elif 'expects' in check and normalize_output(result.stdout) != normalize_output(check['expects']):
             report('solution output differs from check.expects')
         starter = run_python(lesson.get('starter', ''), lesson.get('stdin', ''))
         if lesson.get('starterFails'):
             # A few missions start from broken code on purpose, to teach reading errors.
-            if not starter.returncode:
+            if starter.returncode == 0:
                 report('starterFails is set but the starter runs without an error')
             elif lesson.get('starterError') and lesson['starterError'] not in starter.stderr:
                 report(f'the starter should fail with {lesson["starterError"]!r}')
-        elif starter.returncode:
-            report('starter crashes: ' + (starter.stderr.strip().splitlines() or ['?'])[-1])
+        elif starter.returncode != 0:
+            report('starter ' + crash_reason(starter))
         elif 'expects' in check and normalize_output(starter.stdout) == normalize_output(check['expects']):
             report('starter already prints the expected output')
         for fragment in check.get('value') or []:
@@ -85,17 +102,27 @@ def check_lesson(lesson, report):
                 report(f'fragment {fragment!r} is not in the solution')
     elif kind == 'contains':
         values = check.get('value') or []
-        for fragment in values if isinstance(values, list) else [values]:
+        values = values if isinstance(values, list) else [values]
+        for fragment in values:
             if flatten(fragment) not in flatten(solution):
                 report(f'fragment {fragment!r} is not in the solution')
+        starter = lesson.get('starter', '')
+        if values and all(flatten(fragment) in flatten(starter) for fragment in values):
+            report('starter already contains every required fragment')
     elif kind == 'regex':
         values = check.get('value') or []
-        for pattern in values if isinstance(values, list) else [values]:
+        values = values if isinstance(values, list) else [values]
+        starter_matches = bool(values)
+        for pattern in values:
             try:
                 if not re.search(pattern, solution, re.M):
                     report(f'pattern {pattern!r} does not match the solution')
+                starter_matches = starter_matches and bool(re.search(pattern, lesson.get('starter', ''), re.M))
             except re.error as error:
                 report(f'pattern {pattern!r} does not compile: {error}')
+                starter_matches = False
+        if starter_matches:
+            report('starter already matches every pattern')
     elif kind == 'output':
         if str(check.get('value', '')).strip() not in solution:
             report('the expected output text is not in the solution')
@@ -163,12 +190,31 @@ def check_course(path, catalog_entry):
     return lessons, problems
 
 
-def main():
-    catalog = json.loads((COURSES / 'catalog.json').read_text())
+def is_course_file(path):
+    if path.name in NOT_COURSES:
+        return False
+    try:
+        return 'chapters' in json.loads(path.read_text())
+    except (OSError, ValueError):
+        return False
+
+
+def main(argv=None, courses=COURSES):
+    argv = sys.argv[1:] if argv is None else argv
+    catalog = json.loads((courses / 'catalog.json').read_text())
     entries = {c['id']: c for c in catalog['courses']}
-    paths = [Path(p) for p in sys.argv[1:]] or [COURSES / (c + '.json') for c in entries]
     total_problems = 0
+    if argv:
+        paths = [Path(p) for p in argv]
+    else:
+        paths = [courses / (c + '.json') for c in entries]
+        paths += sorted(p for p in courses.glob('*.json') if p.stem not in entries and is_course_file(p))
     for path in paths:
+        if not path.exists():
+            total_problems += 1
+            where = 'listed in catalog.json but there is' if path.stem in entries else 'there is'
+            print(f'{path.stem}: {where} no course file {path}')
+            continue
         lessons, problems = check_course(path, entries.get(path.stem))
         total_problems += len(problems)
         status = 'ok' if not problems else f'{len(problems)} problem(s)'
@@ -176,8 +222,8 @@ def main():
         for problem in problems:
             print('   ' + problem)
     print('All good.' if not total_problems else f'{total_problems} problem(s) found.')
-    sys.exit(1 if total_problems else 0)
+    return 1 if total_problems else 0
 
 
 if __name__ == '__main__':
-    main()
+    sys.exit(main())
