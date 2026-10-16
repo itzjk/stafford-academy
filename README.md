@@ -3,6 +3,7 @@
 <p align="center"><strong>Learn programming, AI, electronics and robotics one mission at a time.<br>Free, open and with nothing in your way.</strong></p>
 
 <p align="center">
+  <a href="https://github.com/itzjk/stafford-academy/actions/workflows/courses.yml"><img alt="Course checks" src="https://github.com/itzjk/stafford-academy/actions/workflows/courses.yml/badge.svg"></a>
   <a href="LICENSE"><img alt="MIT License" src="https://img.shields.io/badge/license-MIT-7deeff"></a>
   <img alt="22 courses" src="https://img.shields.io/badge/courses-22-ffd43b">
   <img alt="1,721 missions" src="https://img.shields.io/badge/missions-1%2C721-7aa2ff">

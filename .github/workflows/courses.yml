@@ -1,0 +1,21 @@
+name: courses
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          # The academy runs Pyodide with Python 3.14 (lib/pyodide/pyodide-lock.json).
+          python-version: "3.14"
+      - name: Tool tests
+        run: python -m unittest discover -s tools -p 'test_*.py' -v
+      - name: Every course
+        run: python tools/check_course.py
+      - name: Search index is up to date
+        run: python tools/build_search_index.py --check
