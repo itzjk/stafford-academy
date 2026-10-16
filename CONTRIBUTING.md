@@ -58,6 +58,7 @@ Look at an existing course of the same kind and copy its shape.
 ```bash
 python3 tools/check_course.py                 # checks every course
 python3 tools/build_search_index.py           # lets Zerack answer questions about your missions
+python3 tools/build_search_index.py --check   # fails if you forgot the line above
 node tools/test_missions.mjs my-course        # optional: checks the real app accepts each solution
 ```
 
