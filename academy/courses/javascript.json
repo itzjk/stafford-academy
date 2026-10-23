@@ -1,0 +1,1042 @@
+{
+ "id": "javascript",
+ "title": "JavaScript desde cero",
+ "world": "The Script Foundry",
+ "mentor": {
+  "name": "LOOP-7",
+  "character": "Shows you exactly what the browser sees and never pretends the console is a mystery."
+ },
+ "summary": "Start from a blank script tag and finish writing an interactive web page that fetches real data. On the way you learn variables, functions, arrays, objects, the DOM, events, fetch and async/await, one mission at a time.",
+ "level": "BEGINNER",
+ "type": "PRACTICAL",
+ "hours": 20,
+ "accent": "#f7df1e",
+ "language": "javascript",
+ "areas": [
+  "basics",
+  "code"
+ ],
+ "order": 0.8,
+ "chapters": [
+  {
+   "n": 0,
+   "title": "Variables and Data Types",
+   "lessons": [
+    {
+     "id": "js0-1",
+     "title": "Your first variable with let",
+     "goal": "Declare a variable with let and assign a string value to it.",
+     "theory": "JavaScript runs in every browser. You write code in a `<script>` tag or a `.js` file and the browser runs it top to bottom.\n\nThe most common way to create a variable is `let`:\n\n```javascript\nlet message = \"hello\";\nconsole.log(message);\n```\n\n`let` declares a new name. The `=` stores a value in it. `console.log` is JavaScript's version of print, it sends output to the browser console.\n\nStrings are text between single or double quotes. Both work. The semicolon at the end of a line is optional in modern JavaScript, but including it is a good habit.",
+     "task": "Declare a variable called `greeting` and assign the string `\"Hello, world!\"` to it. Do not print anything yet.",
+     "starter": "// write your code here",
+     "solution": "let greeting = \"Hello, world!\";",
+     "hint": "Start with `let`, then the name, then `=`, then the string in quotes.",
+     "check": {
+      "type": "contains",
+      "value": ["let greeting", "\"Hello, world!\""]
+     },
+     "xp": 20
+    },
+    {
+     "id": "js0-2",
+     "title": "const for values that never change",
+     "goal": "Use const to store a value that should not be reassigned.",
+     "theory": "`const` is like `let` but the name can never be pointed at a different value after the first assignment. If you try, JavaScript throws a `TypeError`.\n\n```javascript\nconst PI = 3.14159;\n```\n\nUsing `const` is the right default. Switch to `let` only when you know the value will need to change. This way anyone reading the code knows at a glance that a `const` name will hold the same value from that line on.\n\n`var` is the old way and has confusing scoping rules. Do not use it in new code.",
+     "task": "Declare a constant called `SITE_NAME` and assign the string `\"Stafford Academy\"` to it.",
+     "starter": "// write your code here",
+     "solution": "const SITE_NAME = \"Stafford Academy\";",
+     "hint": "Replace `let` with `const` and give it the right name and value.",
+     "check": {
+      "type": "contains",
+      "value": ["const SITE_NAME", "\"Stafford Academy\""]
+     },
+     "xp": 20
+    },
+    {
+     "id": "js0-3",
+     "title": "Numbers and arithmetic",
+     "goal": "Store two numbers and compute their product.",
+     "theory": "Numbers in JavaScript do not need quotes. `42` is a number, `\"42\"` is a string.\n\nThe arithmetic operators are `+`, `-`, `*`, `/` and `**` (power). Division always returns a decimal: `10 / 4` is `2.5`.\n\n```javascript\nlet price = 9.99;\nlet quantity = 3;\nlet total = price * quantity;\nconsole.log(total); // 29.97\n```\n\nJavaScript has only one number type, so there is no difference between integers and floats. Both are just `number`.",
+     "task": "Declare `width` as `8`, `height` as `5`, and `area` as their product. No output needed.",
+     "starter": "// write your code here",
+     "solution": "let width = 8;\nlet height = 5;\nlet area = width * height;",
+     "hint": "Three `let` declarations. The third one multiplies the first two with `*`.",
+     "check": {
+      "type": "contains",
+      "value": ["let width", "let height", "let area", "width * height"]
+     },
+     "xp": 20
+    },
+    {
+     "id": "js0-4",
+     "title": "Booleans: true and false",
+     "goal": "Declare a boolean variable and understand what it represents.",
+     "theory": "A **boolean** holds one of two values: `true` or `false`. No quotes.\n\n```javascript\nlet isOnline = true;\nlet hasErrors = false;\n```\n\nBooleans are the result of comparisons and are used to make decisions. `===` checks whether two values are equal. `!==` checks whether they differ. You will use them constantly in `if` statements.\n\nCapitalization matters: `True` or `TRUE` are not booleans, they are undefined names.",
+     "task": "Declare a variable `loggedIn` set to `true` and a variable `isAdmin` set to `false`.",
+     "starter": "// write your code here",
+     "solution": "let loggedIn = true;\nlet isAdmin = false;",
+     "hint": "Two lines, each starting with `let`. Booleans are lowercase and have no quotes.",
+     "check": {
+      "type": "contains",
+      "value": ["let loggedIn", "true", "let isAdmin", "false"]
+     },
+     "xp": 20
+    },
+    {
+     "id": "js0-5",
+     "title": "Template literals",
+     "goal": "Build a sentence that includes variable values using template literals.",
+     "theory": "A **template literal** is a string between backticks. Inside it, `${expression}` is replaced by the value of that expression:\n\n```javascript\nlet name = \"Ana\";\nlet score = 98;\nconsole.log(`${name} scored ${score} points`);\n// Ana scored 98 points\n```\n\nThis is the modern replacement for string concatenation with `+`. You can put any JavaScript expression inside `${}`, not just variable names.",
+     "task": "Given `let city = \"Madrid\"` and `let temp = 22`, log a template literal that produces the text `Madrid is 22 degrees`.",
+     "starter": "let city = \"Madrid\";\nlet temp = 22;",
+     "solution": "let city = \"Madrid\";\nlet temp = 22;\nconsole.log(`${city} is ${temp} degrees`);",
+     "hint": "Use backticks (not quotes) for the string, and wrap each variable in `${}`.",
+     "check": {
+      "type": "contains",
+      "value": ["`${city}", "${temp} degrees`"]
+     },
+     "xp": 20
+    }
+   ]
+  },
+  {
+   "n": 1,
+   "title": "Operators and Expressions",
+   "lessons": [
+    {
+     "id": "js1-1",
+     "title": "Comparison operators",
+     "goal": "Use === and !== to compare two values and store the result.",
+     "theory": "Comparison operators return `true` or `false`:\n\n| Operator | Meaning |\n|---|---|\n| `===` | strictly equal (same value and type) |\n| `!==` | strictly not equal |\n| `>` | greater than |\n| `<` | less than |\n| `>=` | greater than or equal |\n| `<=` | less than or equal |\n\nAlways prefer `===` over `==`. The double-equals `==` does type coercion and gives surprising results: `0 == false` is `true`, `0 === false` is `false`.",
+     "task": "Declare `let x = 10`. Then declare `let isPositive` and set it to the result of `x > 0`. Declare `let isTen` and set it to the result of `x === 10`.",
+     "starter": "let x = 10;",
+     "solution": "let x = 10;\nlet isPositive = x > 0;\nlet isTen = x === 10;",
+     "hint": "The right side of each assignment is just the comparison expression, no `if` needed.",
+     "check": {
+      "type": "contains",
+      "value": ["let isPositive", "x > 0", "let isTen", "x === 10"]
+     },
+     "xp": 20
+    },
+    {
+     "id": "js1-2",
+     "title": "Logical operators",
+     "goal": "Combine conditions with && and ||.",
+     "theory": "`&&` (AND) is `true` only when both sides are `true`.\n`||` (OR) is `true` when at least one side is `true`.\n`!` (NOT) flips a boolean.\n\n```javascript\nlet age = 20;\nlet hasTicket = true;\nlet canEnter = age >= 18 && hasTicket;\nconsole.log(canEnter); // true\n```\n\nJavaScript evaluates left to right and **short-circuits**: with `&&`, if the left side is `false`, the right side is never evaluated. With `||`, if the left side is `true`, the right side is skipped.",
+     "task": "Given `let hour = 14` and `let isWeekday = true`, declare `let officeOpen` set to `true` when `hour` is between 9 and 18 (inclusive) AND `isWeekday` is `true`.",
+     "starter": "let hour = 14;\nlet isWeekday = true;",
+     "solution": "let hour = 14;\nlet isWeekday = true;\nlet officeOpen = hour >= 9 && hour <= 18 && isWeekday;",
+     "hint": "Use `&&` to join all three conditions into one expression.",
+     "check": {
+      "type": "contains",
+      "value": ["let officeOpen", "hour >= 9", "hour <= 18", "isWeekday"]
+     },
+     "xp": 20
+    },
+    {
+     "id": "js1-3",
+     "title": "The typeof operator",
+     "goal": "Use typeof to find out what type a value has.",
+     "theory": "`typeof` is a unary operator that returns a string naming the type:\n\n```javascript\nconsole.log(typeof 42);        // \"number\"\nconsole.log(typeof \"hello\");   // \"string\"\nconsole.log(typeof true);      // \"boolean\"\nconsole.log(typeof undefined); // \"undefined\"\nconsole.log(typeof null);      // \"object\"  (historical quirk)\n```\n\nNote the historical bug: `typeof null` returns `\"object\"`, not `\"null\"`. Use `=== null` to test for null specifically.",
+     "task": "What does `typeof \"hello\"` return?",
+     "starter": "",
+     "solution": "string",
+     "hint": "The result is a lowercase string in double quotes.",
+     "check": {
+      "type": "choice",
+      "options": ["\"string\"", "\"text\"", "\"str\"", "\"object\""],
+      "answer": 0,
+      "why": ["Correct: typeof always returns a lowercase string, and strings are identified as \"string\".", "That is not a valid typeof result in JavaScript.", "That is Python's name for strings, not JavaScript's.", "object is returned for objects and null, not for plain strings."],
+      "explain": "typeof \"hello\" returns the string \"string\" in JavaScript."
+     },
+     "xp": 20
+    },
+    {
+     "id": "js1-4",
+     "title": "Arithmetic shorthand operators",
+     "goal": "Update a variable in place using +=, -= and *=.",
+     "theory": "Shorthand assignment operators combine arithmetic and assignment:\n\n```javascript\nlet score = 10;\nscore += 5;   // score = score + 5  →  15\nscore -= 3;   // score = score - 3  →  12\nscore *= 2;   // score = score * 2  →  24\nscore /= 4;   // score = score / 4  →  6\n```\n\nThere is also `++` (add 1) and `--` (subtract 1), though `+= 1` is clearer about intent.\n\nThese are purely shorthand. `x += 3` is completely identical to `x = x + 3`.",
+     "task": "Start with `let points = 100`. Subtract 20 using `-=`, then multiply by 2 using `*=`. No output needed.",
+     "starter": "let points = 100;",
+     "solution": "let points = 100;\npoints -= 20;\npoints *= 2;",
+     "hint": "Two lines after the declaration, each using a shorthand operator.",
+     "check": {
+      "type": "contains",
+      "value": ["points -= 20", "points *= 2"]
+     },
+     "xp": 20
+    },
+    {
+     "id": "js1-5",
+     "title": "The ternary operator",
+     "goal": "Write a compact conditional expression with the ternary operator.",
+     "theory": "The **ternary operator** is a one-line `if/else` that produces a value:\n\n```javascript\ncondition ? valueIfTrue : valueIfFalse\n```\n\nExample:\n\n```javascript\nlet age = 20;\nlet label = age >= 18 ? \"adult\" : \"minor\";\nconsole.log(label); // \"adult\"\n```\n\nUse it when both branches produce a simple value and the whole expression fits on one line. For anything more complex, a regular `if/else` reads better.",
+     "task": "Given `let score = 75`, declare `let result` using a ternary: if `score >= 60` set it to `\"pass\"`, otherwise `\"fail\"`.",
+     "starter": "let score = 75;",
+     "solution": "let score = 75;\nlet result = score >= 60 ? \"pass\" : \"fail\";",
+     "hint": "The ternary goes on the right of the `=`. Question mark separates condition from true-branch, colon separates the two branches.",
+     "check": {
+      "type": "contains",
+      "value": ["let result", "score >= 60 ?", "\"pass\"", "\"fail\""]
+     },
+     "xp": 20
+    }
+   ]
+  },
+  {
+   "n": 2,
+   "title": "Conditionals",
+   "lessons": [
+    {
+     "id": "js2-1",
+     "title": "if and else",
+     "goal": "Write an if/else block that takes one of two paths.",
+     "theory": "An `if` statement runs its block only when the condition is `true`. `else` runs when it is `false`:\n\n```javascript\nlet temperature = 15;\nif (temperature < 0) {\n  console.log(\"freezing\");\n} else {\n  console.log(\"not freezing\");\n}\n```\n\nThe curly braces `{}` define the block. Always include them, even for a single line. Omitting them causes subtle bugs when you later add a second line and forget the braces.\n\nThe condition must be inside parentheses: `if (condition)`.",
+     "task": "Given `let battery = 15`, log `\"low battery\"` if `battery < 20`, otherwise log `\"battery ok\"`.",
+     "starter": "let battery = 15;",
+     "solution": "let battery = 15;\nif (battery < 20) {\n  console.log(\"low battery\");\n} else {\n  console.log(\"battery ok\");\n}",
+     "hint": "The condition goes in parentheses after `if`. Both branches need curly braces.",
+     "check": {
+      "type": "contains",
+      "value": ["if (battery < 20)", "\"low battery\"", "else", "\"battery ok\""]
+     },
+     "xp": 20
+    },
+    {
+     "id": "js2-2",
+     "title": "else if for multiple branches",
+     "goal": "Chain else if to handle more than two cases.",
+     "theory": "`else if` adds more branches between the initial `if` and the final `else`. JavaScript checks them in order and runs the first one whose condition is `true`:\n\n```javascript\nlet grade = 72;\nif (grade >= 90) {\n  console.log(\"A\");\n} else if (grade >= 80) {\n  console.log(\"B\");\n} else if (grade >= 70) {\n  console.log(\"C\");\n} else {\n  console.log(\"F\");\n}\n```\n\nOnce a branch runs, the rest are skipped. Order matters: always put the most specific condition first.",
+     "task": "Given `let speed = 85`, log `\"too fast\"` if speed > 120, `\"fast\"` if speed > 90, `\"normal\"` otherwise.",
+     "starter": "let speed = 85;",
+     "solution": "let speed = 85;\nif (speed > 120) {\n  console.log(\"too fast\");\n} else if (speed > 90) {\n  console.log(\"fast\");\n} else {\n  console.log(\"normal\");\n}",
+     "hint": "Three branches: `if`, `else if`, and `else`. The conditions go in order from most restrictive to least.",
+     "check": {
+      "type": "contains",
+      "value": ["if (speed > 120)", "else if (speed > 90)", "\"too fast\"", "\"fast\"", "\"normal\""]
+     },
+     "xp": 20
+    },
+    {
+     "id": "js2-3",
+     "title": "switch for exact values",
+     "goal": "Use a switch statement to branch on a specific set of known values.",
+     "theory": "`switch` compares one expression against several fixed values:\n\n```javascript\nlet day = \"Monday\";\nswitch (day) {\n  case \"Saturday\":\n  case \"Sunday\":\n    console.log(\"weekend\");\n    break;\n  default:\n    console.log(\"weekday\");\n}\n```\n\nEach `case` is followed by its value and a colon. The `break` statement exits the switch after a match. Without `break`, execution **falls through** into the next case, which is almost always a bug. `default` runs when no case matches.",
+     "task": "Given `let color = \"red\"`, use a switch to log `\"stop\"` for `\"red\"`, `\"go\"` for `\"green\"`, and `\"caution\"` for any other value.",
+     "starter": "let color = \"red\";",
+     "solution": "let color = \"red\";\nswitch (color) {\n  case \"red\":\n    console.log(\"stop\");\n    break;\n  case \"green\":\n    console.log(\"go\");\n    break;\n  default:\n    console.log(\"caution\");\n}",
+     "hint": "Three sections: a `case \"red\"`, a `case \"green\"`, and a `default`. Each case ends with `break`.",
+     "check": {
+      "type": "contains",
+      "value": ["switch (color)", "case \"red\":", "\"stop\"", "case \"green\":", "\"go\"", "default:", "\"caution\""]
+     },
+     "xp": 20
+    },
+    {
+     "id": "js2-4",
+     "title": "Truthy and falsy values",
+     "goal": "Understand which values JavaScript treats as false in a boolean context.",
+     "theory": "JavaScript converts any value to boolean when it is used as a condition. The **falsy** values, those that act like `false`, are exactly:\n\n- `false`\n- `0`\n- `\"\"` (empty string)\n- `null`\n- `undefined`\n- `NaN`\n\nEverything else is **truthy**, including `\"0\"`, `[]`, and `{}`.\n\nThis means `if (username)` is a short way to check that `username` is neither empty nor null nor undefined. Be careful: it also rejects `0` and `false`, which may or may not be what you want.",
+     "task": "Which value is falsy in JavaScript?",
+     "starter": "",
+     "solution": "\"\"",
+     "hint": "An empty string has no characters, so JavaScript treats it as nothing.",
+     "check": {
+      "type": "choice",
+      "options": ["\"\"", "\"0\"", "[]", "{}"],
+      "answer": 0,
+      "why": ["Correct: an empty string is one of the six falsy values in JavaScript.", "The string \"0\" is a non-empty string, so it is truthy.", "An empty array is an object, and objects are always truthy in JavaScript.", "An empty object is also truthy, even with no properties."],
+      "explain": "The six falsy values are false, 0, \"\", null, undefined, and NaN. Everything else including \"0\", [], and {} is truthy."
+     },
+     "xp": 20
+    },
+    {
+     "id": "js2-5",
+     "title": "Nullish coalescing ??",
+     "goal": "Use ?? to provide a fallback only when a value is null or undefined.",
+     "theory": "The **nullish coalescing** operator `??` returns the right-hand side only if the left side is `null` or `undefined`. It ignores other falsy values like `0` or `\"\"`:\n\n```javascript\nlet username = null;\nlet display = username ?? \"Guest\";\nconsole.log(display); // \"Guest\"\n\nlet count = 0;\nlet shown = count ?? 10;\nconsole.log(shown); // 0  (because 0 is not null/undefined)\n```\n\nCompare this with `||`, which uses the fallback for any falsy value. When `0` or `\"\"` are valid values, `??` is the correct tool.",
+     "task": "Given `let userAge = null`, declare `let age` using `??` so it falls back to `18` when `userAge` is null.",
+     "starter": "let userAge = null;",
+     "solution": "let userAge = null;\nlet age = userAge ?? 18;",
+     "hint": "Use the `??` operator with `userAge` on the left and `18` on the right.",
+     "check": {
+      "type": "contains",
+      "value": ["let age", "userAge ?? 18"]
+     },
+     "xp": 20
+    }
+   ]
+  },
+  {
+   "n": 3,
+   "title": "Loops",
+   "lessons": [
+    {
+     "id": "js3-1",
+     "title": "The for loop",
+     "goal": "Use a for loop to repeat a block a fixed number of times.",
+     "theory": "A `for` loop has three parts in its header: initialize, condition, update:\n\n```javascript\nfor (let i = 0; i < 5; i++) {\n  console.log(i);\n}\n// prints 0 1 2 3 4\n```\n\n- `let i = 0` runs once before the loop starts.\n- `i < 5` is checked before every iteration. The loop stops when it is `false`.\n- `i++` runs after every iteration.\n\nThe loop variable `i` exists only inside the loop block.",
+     "task": "Write a for loop that logs the numbers 1 through 5, one per line.",
+     "starter": "// write your for loop here",
+     "solution": "for (let i = 1; i <= 5; i++) {\n  console.log(i);\n}",
+     "hint": "Start `i` at 1, check `i <= 5`, and increment with `i++`.",
+     "check": {
+      "type": "contains",
+      "value": ["for (let i", "i <= 5", "i++", "console.log(i)"]
+     },
+     "xp": 20
+    },
+    {
+     "id": "js3-2",
+     "title": "The while loop",
+     "goal": "Use a while loop when the number of iterations is not known up front.",
+     "theory": "A `while` loop runs as long as its condition is `true`:\n\n```javascript\nlet count = 3;\nwhile (count > 0) {\n  console.log(count);\n  count--;\n}\n// 3, 2, 1\n```\n\nYou are responsible for updating the variable inside the loop. Forget the update and you have an infinite loop that freezes the browser.\n\nUse `while` when the stopping condition depends on something that changes inside the loop, like reading user input or draining a queue.",
+     "task": "Start with `let n = 1`. Write a while loop that doubles `n` each iteration and stops (does not log the last value) once `n` reaches or exceeds 100. Log `n` at the start of each iteration.",
+     "starter": "let n = 1;",
+     "solution": "let n = 1;\nwhile (n < 100) {\n  console.log(n);\n  n *= 2;\n}",
+     "hint": "The condition is `n < 100`. Inside the loop: log first, then `n *= 2`.",
+     "check": {
+      "type": "contains",
+      "value": ["while (n < 100)", "console.log(n)", "n *= 2"]
+     },
+     "xp": 20
+    },
+    {
+     "id": "js3-3",
+     "title": "for...of over arrays",
+     "goal": "Iterate over an array's values with for...of.",
+     "theory": "`for...of` loops over the **values** of any iterable, including arrays:\n\n```javascript\nconst fruits = [\"apple\", \"banana\", \"cherry\"];\nfor (const fruit of fruits) {\n  console.log(fruit);\n}\n```\n\nThis is simpler than a counter-based `for` loop when you just need every element. Use `const` for the loop variable because you are not reassigning it, only receiving each value.\n\nDo not use `for...of` when you need the index; use `for` with a counter or `forEach` with a callback in that case.",
+     "task": "Given `const colors = [\"red\", \"green\", \"blue\"]`, write a for...of loop that logs each color.",
+     "starter": "const colors = [\"red\", \"green\", \"blue\"];",
+     "solution": "const colors = [\"red\", \"green\", \"blue\"];\nfor (const color of colors) {\n  console.log(color);\n}",
+     "hint": "The loop variable receives one color per iteration. Use `const` for it.",
+     "check": {
+      "type": "contains",
+      "value": ["for (const color of colors)", "console.log(color)"]
+     },
+     "xp": 20
+    },
+    {
+     "id": "js3-4",
+     "title": "break and continue",
+     "goal": "Use break to exit a loop early and continue to skip an iteration.",
+     "theory": "`break` immediately exits the loop, skipping the rest of that iteration and all future ones:\n\n```javascript\nfor (let i = 0; i < 10; i++) {\n  if (i === 5) break;\n  console.log(i); // 0 1 2 3 4\n}\n```\n\n`continue` skips the rest of the current iteration and jumps to the next one:\n\n```javascript\nfor (let i = 0; i < 6; i++) {\n  if (i === 3) continue;\n  console.log(i); // 0 1 2 4 5\n}\n```\n\nBoth work in `while` loops too.",
+     "task": "Write a for loop from 1 to 10 that logs only odd numbers (skip evens with `continue`) and stops after logging 7 (use `break` after logging 7).",
+     "starter": "// write your loop here",
+     "solution": "for (let i = 1; i <= 10; i++) {\n  if (i % 2 === 0) continue;\n  console.log(i);\n  if (i === 7) break;\n}",
+     "hint": "Use `i % 2 === 0` to detect even numbers. Place the `break` after the log so 7 is still printed.",
+     "check": {
+      "type": "contains",
+      "value": ["continue", "break", "i % 2 === 0"]
+     },
+     "xp": 20
+    }
+   ]
+  },
+  {
+   "n": 4,
+   "title": "Functions",
+   "lessons": [
+    {
+     "id": "js4-1",
+     "title": "Function declarations",
+     "goal": "Declare a function with parameters and call it.",
+     "theory": "A **function** is a reusable block of code with a name:\n\n```javascript\nfunction greet(name) {\n  console.log(`Hello, ${name}!`);\n}\ngreet(\"Ana\");  // Hello, Ana!\ngreet(\"Leo\");  // Hello, Leo!\n```\n\n- `function` is the keyword.\n- `greet` is the name.\n- `name` is a **parameter**: a placeholder filled in when the function is called.\n- The value passed when calling is an **argument**.\n\nA function declaration is **hoisted**: you can call it before the line where it is defined.",
+     "task": "Declare a function called `square` that takes a number parameter `n` and logs `n * n`. Then call it with the argument `7`.",
+     "starter": "// write your function here",
+     "solution": "function square(n) {\n  console.log(n * n);\n}\nsquare(7);",
+     "hint": "Declare first with `function square(n)`, body logs `n * n`, then call `square(7)` below.",
+     "check": {
+      "type": "contains",
+      "value": ["function square(n)", "n * n", "square(7)"]
+     },
+     "xp": 20
+    },
+    {
+     "id": "js4-2",
+     "title": "return values",
+     "goal": "Use return to send a value back from a function.",
+     "theory": "A function can **return** a value to the caller with the `return` keyword:\n\n```javascript\nfunction add(a, b) {\n  return a + b;\n}\nlet sum = add(3, 4);\nconsole.log(sum); // 7\n```\n\n`return` immediately stops the function and hands the value back. Code after `return` in the same block never runs.\n\nA function without a `return` statement (or with a bare `return`) gives back `undefined`. That is fine when the function's job is a side effect like logging.",
+     "task": "Write a function `multiply(a, b)` that returns `a * b`. Then declare `let result` equal to `multiply(6, 7)` and log it.",
+     "starter": "// write your function here",
+     "solution": "function multiply(a, b) {\n  return a * b;\n}\nlet result = multiply(6, 7);\nconsole.log(result);",
+     "hint": "The function uses `return`, not `console.log`. You log the result outside after calling the function.",
+     "check": {
+      "type": "contains",
+      "value": ["function multiply(a, b)", "return a * b", "multiply(6, 7)", "console.log(result)"]
+     },
+     "xp": 20
+    },
+    {
+     "id": "js4-3",
+     "title": "Function expressions and arrow functions",
+     "goal": "Write a function as a variable using an arrow function.",
+     "theory": "Functions can be stored in variables. The modern syntax is the **arrow function**:\n\n```javascript\nconst double = (n) => n * 2;\nconsole.log(double(5)); // 10\n```\n\nWhen the body is a single expression, the `{}` and `return` are implied. For multi-line bodies you need both:\n\n```javascript\nconst clamp = (value, min, max) => {\n  if (value < min) return min;\n  if (value > max) return max;\n  return value;\n};\n```\n\nArrow functions are not hoisted. You must declare them before calling them.",
+     "task": "Declare a const arrow function `cube` that takes `n` and returns `n ** 3`. Log `cube(4)`.",
+     "starter": "// write your arrow function here",
+     "solution": "const cube = (n) => n ** 3;\nconsole.log(cube(4));",
+     "hint": "Use `const cube = (n) => n ** 3;` then log the result of calling it.",
+     "check": {
+      "type": "contains",
+      "value": ["const cube", "=> n ** 3", "cube(4)"]
+     },
+     "xp": 20
+    },
+    {
+     "id": "js4-4",
+     "title": "Default parameters",
+     "goal": "Give a function parameter a default value used when no argument is passed.",
+     "theory": "You can specify a **default value** for a parameter by adding `= value` in the parameter list:\n\n```javascript\nfunction greet(name = \"stranger\") {\n  return `Hello, ${name}!`;\n}\nconsole.log(greet(\"Ana\"));  // Hello, Ana!\nconsole.log(greet());       // Hello, stranger!\n```\n\nThe default is used only when the argument is `undefined`, either because it was not passed or because `undefined` was passed explicitly.",
+     "task": "Write a function `power(base, exp = 2)` that returns `base ** exp`. Log `power(3)` and `power(3, 3)`.",
+     "starter": "// write your function here",
+     "solution": "function power(base, exp = 2) {\n  return base ** exp;\n}\nconsole.log(power(3));\nconsole.log(power(3, 3));",
+     "hint": "The default goes in the parameter list: `exp = 2`. Two separate log calls below the function.",
+     "check": {
+      "type": "contains",
+      "value": ["function power(base, exp = 2)", "return base ** exp", "power(3)", "power(3, 3)"]
+     },
+     "xp": 20
+    },
+    {
+     "id": "js4-5",
+     "title": "Scope: where a name lives",
+     "goal": "Understand that let and const are block-scoped.",
+     "theory": "`let` and `const` are **block-scoped**: they exist only inside the `{}` where they were declared and in any nested blocks inside that.\n\n```javascript\nfunction test() {\n  let x = 10;\n  if (true) {\n    let y = 20;  // only visible here\n    console.log(x + y); // 30\n  }\n  console.log(x); // 10\n  // console.log(y); // ReferenceError: y is not defined\n}\n```\n\nVariables declared outside all functions are **global** and visible everywhere, which is usually a bad idea. Keep variables as close to where they are used as possible.",
+     "task": "Where is a variable declared with `let` inside an `if` block accessible?",
+     "starter": "",
+     "solution": "Only inside that if block",
+     "hint": "Think about which curly braces enclose the declaration.",
+     "check": {
+      "type": "choice",
+      "options": ["Only inside the if block where it was declared", "Anywhere in the function that contains the if", "Anywhere in the file", "Only on the exact line where it is declared"],
+      "answer": 0,
+      "why": ["Correct: let is block-scoped, so it only exists within the {} of the block where it was declared.", "That would be true for var, but let is more restricted than that.", "Global scope only applies to variables declared outside any function or block.", "A variable is accessible from its declaration to the end of its enclosing block, not just that one line."],
+      "explain": "let and const are block-scoped: they live from their declaration to the closing } of the block they are in."
+     },
+     "xp": 20
+    }
+   ]
+  },
+  {
+   "n": 5,
+   "title": "Arrays and Array Methods",
+   "lessons": [
+    {
+     "id": "js5-1",
+     "title": "Creating and indexing arrays",
+     "goal": "Create an array and read elements by index.",
+     "theory": "An **array** is an ordered list of values:\n\n```javascript\nconst scores = [95, 82, 78, 91];\nconsole.log(scores[0]); // 95  (first element)\nconsole.log(scores[3]); // 91  (fourth element)\nconsole.log(scores.length); // 4\n```\n\nIndexes start at `0`. The last element is at index `length - 1`. Accessing an index that does not exist returns `undefined`, not an error.\n\nArrays can hold any mix of types, though in practice each array usually holds one type.",
+     "task": "Declare `const planets = [\"Mercury\", \"Venus\", \"Earth\", \"Mars\"]`. Log the first element and the length of the array.",
+     "starter": "const planets = [\"Mercury\", \"Venus\", \"Earth\", \"Mars\"];",
+     "solution": "const planets = [\"Mercury\", \"Venus\", \"Earth\", \"Mars\"];\nconsole.log(planets[0]);\nconsole.log(planets.length);",
+     "hint": "Access the first element with index 0. The length is a property, not a method, so no parentheses.",
+     "check": {
+      "type": "contains",
+      "value": ["planets[0]", "planets.length"]
+     },
+     "xp": 20
+    },
+    {
+     "id": "js5-2",
+     "title": "push, pop, shift, unshift",
+     "goal": "Add and remove elements at both ends of an array.",
+     "theory": "Four methods modify an array's length:\n\n```javascript\nconst list = [1, 2, 3];\nlist.push(4);      // add to end    → [1, 2, 3, 4]\nlist.pop();        // remove from end → [1, 2, 3]\nlist.unshift(0);   // add to start  → [0, 1, 2, 3]\nlist.shift();      // remove from start → [1, 2, 3]\n```\n\n`push` and `unshift` return the new length. `pop` and `shift` return the removed element.\n\nAll four mutate the array in place; they do not create a copy.",
+     "task": "Given `const queue = [\"a\", \"b\", \"c\"]`, add `\"d\"` to the end with `push`, then remove the first element with `shift`. Log the array after both operations.",
+     "starter": "const queue = [\"a\", \"b\", \"c\"];",
+     "solution": "const queue = [\"a\", \"b\", \"c\"];\nqueue.push(\"d\");\nqueue.shift();\nconsole.log(queue);",
+     "hint": "`push` and `shift` are called as `queue.push(...)` and `queue.shift()`. Log the whole array at the end.",
+     "check": {
+      "type": "contains",
+      "value": ["queue.push(\"d\")", "queue.shift()", "console.log(queue)"]
+     },
+     "xp": 20
+    },
+    {
+     "id": "js5-3",
+     "title": "map: transform every element",
+     "goal": "Use map to create a new array by applying a function to each element.",
+     "theory": "`map` calls a callback function for every element and returns a **new array** of the results. It never changes the original:\n\n```javascript\nconst numbers = [1, 2, 3, 4];\nconst doubled = numbers.map(n => n * 2);\nconsole.log(doubled); // [2, 4, 6, 8]\n```\n\nThe callback receives the element as its first argument. You can also receive the index as a second argument if you need it.\n\nBecause `map` returns an array, you can chain it with other array methods.",
+     "task": "Given `const temps = [0, 20, 37, 100]`, create a `const fahrenheit` array using `map` that converts each value with the formula `(c * 9/5) + 32`. Log `fahrenheit`.",
+     "starter": "const temps = [0, 20, 37, 100];",
+     "solution": "const temps = [0, 20, 37, 100];\nconst fahrenheit = temps.map(c => (c * 9/5) + 32);\nconsole.log(fahrenheit);",
+     "hint": "Use an arrow function inside `.map()`. The formula for each element goes in the arrow body.",
+     "check": {
+      "type": "contains",
+      "value": ["temps.map(", "c * 9/5", "+ 32", "const fahrenheit"]
+     },
+     "xp": 20
+    },
+    {
+     "id": "js5-4",
+     "title": "filter: keep matching elements",
+     "goal": "Use filter to create a new array with only the elements that pass a test.",
+     "theory": "`filter` calls its callback for each element and keeps only those for which the callback returns `true`:\n\n```javascript\nconst ages = [12, 25, 16, 30, 14];\nconst adults = ages.filter(age => age >= 18);\nconsole.log(adults); // [25, 30]\n```\n\nLike `map`, `filter` returns a new array and does not change the original. You can chain `filter` and `map` together:\n\n```javascript\nconst result = ages.filter(a => a >= 18).map(a => a * 2);\n```",
+     "task": "Given `const words = [\"cat\", \"elephant\", \"ox\", \"rhinoceros\", \"dog\"]`, use `filter` to create `const longWords` containing only words with more than 4 characters. Log `longWords`.",
+     "starter": "const words = [\"cat\", \"elephant\", \"ox\", \"rhinoceros\", \"dog\"];",
+     "solution": "const words = [\"cat\", \"elephant\", \"ox\", \"rhinoceros\", \"dog\"];\nconst longWords = words.filter(w => w.length > 4);\nconsole.log(longWords);",
+     "hint": "Each word has a `.length` property. The callback should return `true` when that length is greater than 4.",
+     "check": {
+      "type": "contains",
+      "value": ["words.filter(", "w.length > 4", "const longWords"]
+     },
+     "xp": 20
+    },
+    {
+     "id": "js5-5",
+     "title": "reduce: collapse an array to one value",
+     "goal": "Use reduce to compute a single value from an array.",
+     "theory": "`reduce` processes each element and accumulates a running result:\n\n```javascript\nconst numbers = [1, 2, 3, 4, 5];\nconst sum = numbers.reduce((acc, n) => acc + n, 0);\nconsole.log(sum); // 15\n```\n\nThe callback takes two arguments: `acc` (the accumulated value so far) and `n` (the current element). The second argument to `reduce` is the **initial value** of the accumulator. Always provide it explicitly.\n\nYou can reduce to numbers, strings, objects or arrays.",
+     "task": "Given `const prices = [9.99, 4.50, 12.00, 7.25]`, use `reduce` to compute the `total` of all prices. Log `total`.",
+     "starter": "const prices = [9.99, 4.50, 12.00, 7.25];",
+     "solution": "const prices = [9.99, 4.50, 12.00, 7.25];\nconst total = prices.reduce((acc, p) => acc + p, 0);\nconsole.log(total);",
+     "hint": "The initial value (second argument to reduce) should be `0`. The callback adds each price to the accumulator.",
+     "check": {
+      "type": "contains",
+      "value": ["prices.reduce(", "acc + p", ", 0)", "const total"]
+     },
+     "xp": 20
+    }
+   ]
+  },
+  {
+   "n": 6,
+   "title": "Objects and Destructuring",
+   "lessons": [
+    {
+     "id": "js6-1",
+     "title": "Creating and reading objects",
+     "goal": "Create an object literal and read its properties with dot notation.",
+     "theory": "An **object** is a collection of key-value pairs called **properties**:\n\n```javascript\nconst user = {\n  name: \"Ana\",\n  age: 28,\n  active: true\n};\nconsole.log(user.name);   // \"Ana\"\nconsole.log(user.age);    // 28\n```\n\nDot notation accesses a property by name. Bracket notation `user[\"name\"]` also works and is needed when the key is stored in a variable.\n\nObjects group related data together. You will use them constantly in real JavaScript.",
+     "task": "Create `const book` with properties `title` set to `\"Dune\"`, `author` set to `\"Frank Herbert\"`, and `pages` set to `896`. Log `book.title` and `book.pages`.",
+     "starter": "// write your code here",
+     "solution": "const book = {\n  title: \"Dune\",\n  author: \"Frank Herbert\",\n  pages: 896\n};\nconsole.log(book.title);\nconsole.log(book.pages);",
+     "hint": "Inside the `{}`, each property is `key: value` separated by commas.",
+     "check": {
+      "type": "contains",
+      "value": ["const book", "title: \"Dune\"", "author: \"Frank Herbert\"", "pages: 896", "book.title", "book.pages"]
+     },
+     "xp": 20
+    },
+    {
+     "id": "js6-2",
+     "title": "Adding and updating properties",
+     "goal": "Add a new property and change an existing one after creation.",
+     "theory": "You can add or overwrite properties on an object at any time using dot notation:\n\n```javascript\nconst car = { brand: \"Toyota\", year: 2018 };\ncar.color = \"blue\";   // add new property\ncar.year = 2020;       // update existing property\nconsole.log(car);\n// { brand: \"Toyota\", year: 2020, color: \"blue\" }\n```\n\nEven though `car` is `const`, you can change its properties. `const` only prevents reassigning `car` itself to a different value.",
+     "task": "Given `const person = { name: \"Leo\", age: 25 }`, change `age` to `26` and add a property `city` set to `\"Barcelona\"`. Log `person`.",
+     "starter": "const person = { name: \"Leo\", age: 25 };",
+     "solution": "const person = { name: \"Leo\", age: 25 };\nperson.age = 26;\nperson.city = \"Barcelona\";\nconsole.log(person);",
+     "hint": "Two lines after the declaration: one updates `.age`, one adds `.city`. Then log the whole object.",
+     "check": {
+      "type": "contains",
+      "value": ["person.age = 26", "person.city = \"Barcelona\"", "console.log(person)"]
+     },
+     "xp": 20
+    },
+    {
+     "id": "js6-3",
+     "title": "Object destructuring",
+     "goal": "Extract several properties into variables with destructuring syntax.",
+     "theory": "**Destructuring** pulls properties out of an object into named variables in one step:\n\n```javascript\nconst user = { name: \"Ana\", age: 28, city: \"Lima\" };\nconst { name, age } = user;\nconsole.log(name); // \"Ana\"\nconsole.log(age);  // 28\n```\n\nYou can rename while destructuring:\n\n```javascript\nconst { name: userName } = user;\nconsole.log(userName); // \"Ana\"\n```\n\nYou can also provide a default: `const { role = \"viewer\" } = user;`.",
+     "task": "Given `const product = { id: 42, name: \"Keyboard\", price: 79.99 }`, use destructuring to extract `name` and `price` into variables. Log both.",
+     "starter": "const product = { id: 42, name: \"Keyboard\", price: 79.99 };",
+     "solution": "const product = { id: 42, name: \"Keyboard\", price: 79.99 };\nconst { name, price } = product;\nconsole.log(name);\nconsole.log(price);",
+     "hint": "Use `const { name, price } = product;` on one line.",
+     "check": {
+      "type": "contains",
+      "value": ["const { name, price } = product", "console.log(name)", "console.log(price)"]
+     },
+     "xp": 20
+    },
+    {
+     "id": "js6-4",
+     "title": "Array destructuring and spread",
+     "goal": "Unpack array elements into variables and copy an array with spread.",
+     "theory": "Array destructuring unpacks by position:\n\n```javascript\nconst [first, second, ...rest] = [10, 20, 30, 40];\nconsole.log(first);  // 10\nconsole.log(second); // 20\nconsole.log(rest);   // [30, 40]\n```\n\nThe **spread operator** `...` expands an array into individual values, useful for copying or combining arrays:\n\n```javascript\nconst a = [1, 2];\nconst b = [3, 4];\nconst combined = [...a, ...b]; // [1, 2, 3, 4]\n```",
+     "task": "Given `const rgb = [255, 128, 0]`, use array destructuring to get `red`, `green`, and `blue`. Log `red`.",
+     "starter": "const rgb = [255, 128, 0];",
+     "solution": "const rgb = [255, 128, 0];\nconst [red, green, blue] = rgb;\nconsole.log(red);",
+     "hint": "Square brackets on the left of `=` destructure an array by position.",
+     "check": {
+      "type": "contains",
+      "value": ["const [red, green, blue] = rgb", "console.log(red)"]
+     },
+     "xp": 20
+    },
+    {
+     "id": "js6-5",
+     "title": "Methods inside objects",
+     "goal": "Add a function as a property of an object and call it.",
+     "theory": "A property whose value is a function is called a **method**:\n\n```javascript\nconst counter = {\n  count: 0,\n  increment() {\n    this.count += 1;\n  },\n  value() {\n    return this.count;\n  }\n};\ncounter.increment();\nconsole.log(counter.value()); // 1\n```\n\n`this` inside a method refers to the object the method belongs to. This is how the method reads and writes the object's own properties.\n\nIn arrow functions `this` is NOT the object — use regular function syntax for methods.",
+     "task": "Create an object `circle` with a property `radius` set to `5` and a method `area()` that returns `Math.PI * this.radius ** 2`. Log `circle.area()`.",
+     "starter": "// write your object here",
+     "solution": "const circle = {\n  radius: 5,\n  area() {\n    return Math.PI * this.radius ** 2;\n  }\n};\nconsole.log(circle.area());",
+     "hint": "The method uses `this.radius` to read the object's own property. Call it with `circle.area()`.",
+     "check": {
+      "type": "contains",
+      "value": ["radius: 5", "area()", "this.radius ** 2", "circle.area()"]
+     },
+     "xp": 20
+    }
+   ]
+  },
+  {
+   "n": 7,
+   "title": "DOM Basics",
+   "lessons": [
+    {
+     "id": "js7-1",
+     "title": "What the DOM is",
+     "goal": "Explain what the DOM is and why JavaScript uses it to change a web page.",
+     "theory": "When the browser loads an HTML file it builds a tree of objects in memory called the **Document Object Model (DOM)**. Every tag in the HTML becomes a **node** in the tree.\n\nJavaScript can read and change that tree at any time. When you change a node, the browser immediately updates the visible page. This is how modern web pages react without reloading.\n\n`document` is the global object that represents the whole page. You use its methods to find nodes and its properties to read page-level information.",
+     "task": "Which global object gives you access to the DOM in a browser?",
+     "starter": "",
+     "solution": "document",
+     "hint": "It is a single lowercase English word that refers to the whole page.",
+     "check": {
+      "type": "choice",
+      "options": ["document", "window.dom", "html", "page"],
+      "answer": 0,
+      "why": ["Correct: the global `document` object is the entry point to the DOM API.", "window.dom does not exist in the browser API.", "html is a tag name, not a JavaScript object.", "page is not a standard global in browsers."],
+      "explain": "The DOM is accessed through the global `document` object, which represents the loaded HTML page."
+     },
+     "xp": 20
+    },
+    {
+     "id": "js7-2",
+     "title": "querySelector",
+     "goal": "Use querySelector to find a single element by CSS selector.",
+     "theory": "`document.querySelector(selector)` returns the **first** element that matches a CSS selector, or `null` if nothing matches:\n\n```javascript\nconst heading = document.querySelector(\"h1\");\nconst btn = document.querySelector(\"#submit\");\nconst card = document.querySelector(\".card\");\n```\n\n- Tag name: `\"h1\"`\n- ID (unique): `\"#submit\"`\n- Class: `\".card\"`\n- You can also use any valid CSS selector: `\"nav a.active\"`\n\nAlways check the result before using it: if the selector matches nothing, the return value is `null` and calling a method on it crashes.",
+     "task": "Write a line that selects the element with id `\"title\"` and stores it in a `const` called `titleEl`.",
+     "starter": "// write your querySelector here",
+     "solution": "const titleEl = document.querySelector(\"#title\");",
+     "hint": "Use `\"#title\"` as the selector. The `#` prefix selects by id.",
+     "check": {
+      "type": "contains",
+      "value": ["const titleEl", "document.querySelector(\"#title\")"]
+     },
+     "xp": 20
+    },
+    {
+     "id": "js7-3",
+     "title": "querySelectorAll",
+     "goal": "Use querySelectorAll to get all matching elements and loop over them.",
+     "theory": "`document.querySelectorAll(selector)` returns a **NodeList** of all matching elements:\n\n```javascript\nconst items = document.querySelectorAll(\".item\");\nitems.forEach(item => {\n  console.log(item.textContent);\n});\n```\n\nA NodeList looks like an array and you can use `forEach` on it, but it is not an actual array. Convert it with `Array.from(items)` if you need `map`, `filter` or `reduce`.\n\n`getElementById(\"id\")` is an older, faster alternative when you only need to select by id.",
+     "task": "Write a line that selects all elements with class `\"card\"` and stores them in `const cards`. Then log `cards.length`.",
+     "starter": "// write your code here",
+     "solution": "const cards = document.querySelectorAll(\".card\");\nconsole.log(cards.length);",
+     "hint": "Use `\".card\"` (with a dot for class). The length is a property of the NodeList.",
+     "check": {
+      "type": "contains",
+      "value": ["document.querySelectorAll(\".card\")", "const cards", "cards.length"]
+     },
+     "xp": 20
+    },
+    {
+     "id": "js7-4",
+     "title": "Reading element properties",
+     "goal": "Read the textContent, id and className of a DOM element.",
+     "theory": "Every DOM element has properties that mirror its HTML attributes and content:\n\n```javascript\nconst el = document.querySelector(\"h1\");\nconsole.log(el.textContent); // the visible text\nconsole.log(el.id);          // the id attribute\nconsole.log(el.className);   // the class attribute (a string)\n```\n\n`textContent` includes the text of all descendant elements. It strips all tags, giving you plain text.\n\n`innerHTML` gives the full HTML markup inside the element. Use it only for reading; writing to `innerHTML` with untrusted data is a security risk (XSS).",
+     "task": "What property gives you the plain text content of an element, with all HTML tags stripped?",
+     "starter": "",
+     "solution": "textContent",
+     "hint": "It is a two-word property joined without a space, describing what kind of content it returns.",
+     "check": {
+      "type": "choice",
+      "options": ["textContent", "innerHTML", "innerText", "value"],
+      "answer": 0,
+      "why": ["Correct: textContent returns all text inside the element with HTML tags removed.", "innerHTML includes the HTML markup, not just text.", "innerText is similar but also reflects CSS styling and can be slower to read.", "value is used for form inputs like <input>, not for general elements."],
+      "explain": "textContent gives you the concatenated text of an element and all its descendants, with all HTML tags stripped out."
+     },
+     "xp": 20
+    }
+   ]
+  },
+  {
+   "n": 8,
+   "title": "DOM Manipulation",
+   "lessons": [
+    {
+     "id": "js8-1",
+     "title": "Changing text and HTML",
+     "goal": "Update an element's visible content using textContent and innerHTML.",
+     "theory": "Setting `textContent` replaces everything inside the element with plain text. Any HTML you write in the string is shown as literal characters, not rendered:\n\n```javascript\nconst h1 = document.querySelector(\"h1\");\nh1.textContent = \"New heading\";\n```\n\nSetting `innerHTML` replaces the content with HTML that the browser parses and renders:\n\n```javascript\nconst box = document.querySelector(\"#box\");\nbox.innerHTML = \"<strong>Bold text</strong>\";\n```\n\nOnly use `innerHTML` with strings you fully control. Never paste user input into `innerHTML`.",
+     "task": "Write code that selects the element with id `\"message\"` and sets its `textContent` to `\"Updated!\"`.",
+     "starter": "// write your code here",
+     "solution": "const message = document.querySelector(\"#message\");\nmessage.textContent = \"Updated!\";",
+     "hint": "Two lines: one `querySelector`, one assignment to `.textContent`.",
+     "check": {
+      "type": "contains",
+      "value": ["document.querySelector(\"#message\")", ".textContent = \"Updated!\""]
+     },
+     "xp": 20
+    },
+    {
+     "id": "js8-2",
+     "title": "Changing inline styles",
+     "goal": "Apply CSS properties to an element via its style object.",
+     "theory": "Every element has a `.style` object with one property per CSS rule, written in camelCase:\n\n```javascript\nconst box = document.querySelector(\"#box\");\nbox.style.color = \"red\";\nbox.style.fontSize = \"24px\";\nbox.style.backgroundColor = \"#f0f0f0\";\n```\n\nCSS property `background-color` becomes `backgroundColor` in JavaScript. Hyphenated names are always converted to camelCase.\n\nInline styles override stylesheet rules. For anything beyond a quick toggle, adding or removing CSS classes is a cleaner approach.",
+     "task": "Select the element with id `\"alert\"` and set its background color to `\"yellow\"` and its font size to `\"18px\"` using the `.style` object.",
+     "starter": "// write your code here",
+     "solution": "const alert = document.querySelector(\"#alert\");\nalert.style.backgroundColor = \"yellow\";\nalert.style.fontSize = \"18px\";",
+     "hint": "`background-color` becomes `.style.backgroundColor` in JavaScript (camelCase).",
+     "check": {
+      "type": "contains",
+      "value": ["document.querySelector(\"#alert\")", ".style.backgroundColor = \"yellow\"", ".style.fontSize = \"18px\""]
+     },
+     "xp": 20
+    },
+    {
+     "id": "js8-3",
+     "title": "Adding and removing CSS classes",
+     "goal": "Toggle element classes with classList.add, remove, and toggle.",
+     "theory": "The `.classList` property gives you methods to manage classes:\n\n```javascript\nconst btn = document.querySelector(\"#btn\");\nbtn.classList.add(\"active\");      // add a class\nbtn.classList.remove(\"disabled\"); // remove a class\nbtn.classList.toggle(\"hidden\");   // add if absent, remove if present\nbtn.classList.contains(\"active\"); // true or false\n```\n\nThis is the preferred way to change appearance: define states in CSS, then switch classes in JavaScript. It keeps style in CSS and behaviour in JS.",
+     "task": "Select `\"#nav\"` and add the class `\"visible\"` with `classList.add`. Then use `classList.toggle` to toggle the class `\"open\"`.",
+     "starter": "// write your code here",
+     "solution": "const nav = document.querySelector(\"#nav\");\nnav.classList.add(\"visible\");\nnav.classList.toggle(\"open\");",
+     "hint": "Three lines: select, add, toggle. Each method call is on the element.",
+     "check": {
+      "type": "contains",
+      "value": ["document.querySelector(\"#nav\")", ".classList.add(\"visible\")", ".classList.toggle(\"open\")"]
+     },
+     "xp": 20
+    },
+    {
+     "id": "js8-4",
+     "title": "Creating and inserting elements",
+     "goal": "Create a new DOM element in JavaScript and append it to the page.",
+     "theory": "`document.createElement(tagName)` creates a new element that is not yet on the page. You configure it, then attach it:\n\n```javascript\nconst li = document.createElement(\"li\");\nli.textContent = \"New item\";\ndocument.querySelector(\"ul\").appendChild(li);\n```\n\n`appendChild` adds the element as the last child of the target. `prepend` adds it first. `insertBefore` places it before a specific sibling.\n\nCreating elements this way is safer than `innerHTML` because the browser never parses them as HTML.",
+     "task": "Create a `<p>` element, set its `textContent` to `\"Hello from JS\"`, and append it to the element with id `\"container\"`.",
+     "starter": "// write your code here",
+     "solution": "const p = document.createElement(\"p\");\np.textContent = \"Hello from JS\";\ndocument.querySelector(\"#container\").appendChild(p);",
+     "hint": "Three steps: createElement, set textContent, then appendChild on the parent element.",
+     "check": {
+      "type": "contains",
+      "value": ["document.createElement(\"p\")", ".textContent = \"Hello from JS\"", "document.querySelector(\"#container\").appendChild(p)"]
+     },
+     "xp": 20
+    }
+   ]
+  },
+  {
+   "n": 9,
+   "title": "Events",
+   "lessons": [
+    {
+     "id": "js9-1",
+     "title": "addEventListener",
+     "goal": "Attach an event listener to a DOM element.",
+     "theory": "`addEventListener(eventName, callback)` tells an element to call a function when a specific event happens:\n\n```javascript\nconst btn = document.querySelector(\"#btn\");\nbtn.addEventListener(\"click\", () => {\n  console.log(\"clicked!\");\n});\n```\n\nThe callback is called an **event handler** or **listener**. It runs every time the event fires.\n\nCommon event names: `\"click\"`, `\"input\"`, `\"change\"`, `\"submit\"`, `\"keydown\"`, `\"mouseover\"`, `\"load\"`.\n\nYou can add multiple listeners to the same element for the same or different events.",
+     "task": "Select the element with id `\"myBtn\"` and add a click listener that logs `\"Button clicked\"`.",
+     "starter": "// write your code here",
+     "solution": "const myBtn = document.querySelector(\"#myBtn\");\nmyBtn.addEventListener(\"click\", () => {\n  console.log(\"Button clicked\");\n});",
+     "hint": "Two steps: select the button, then call `.addEventListener(\"click\", ...)` on it.",
+     "check": {
+      "type": "contains",
+      "value": ["document.querySelector(\"#myBtn\")", ".addEventListener(\"click\"", "\"Button clicked\""]
+     },
+     "xp": 20
+    },
+    {
+     "id": "js9-2",
+     "title": "The event object",
+     "goal": "Use the event object to read details about what triggered the event.",
+     "theory": "Every event handler receives an **event object** as its first argument. It holds details about what happened:\n\n```javascript\ndocument.addEventListener(\"keydown\", (event) => {\n  console.log(event.key);    // \"Enter\", \"a\", \"ArrowUp\" …\n  console.log(event.type);   // \"keydown\"\n});\n\nbtn.addEventListener(\"click\", (e) => {\n  console.log(e.target);     // the element that was clicked\n  console.log(e.clientX);    // horizontal position of the mouse\n});\n```\n\n`event.target` is particularly useful: it is the exact element that the user interacted with, even inside a complex tree.",
+     "task": "Add a click listener to `document.querySelector(\"#box\")`. Inside the handler, receive the event as `e` and log `e.target` and `e.type`.",
+     "starter": "// write your code here",
+     "solution": "document.querySelector(\"#box\").addEventListener(\"click\", (e) => {\n  console.log(e.target);\n  console.log(e.type);\n});",
+     "hint": "Name the callback parameter `e` and access its `.target` and `.type` properties.",
+     "check": {
+      "type": "contains",
+      "value": ["addEventListener(\"click\", (e)", "e.target", "e.type"]
+     },
+     "xp": 20
+    },
+    {
+     "id": "js9-3",
+     "title": "preventDefault",
+     "goal": "Stop the browser's default action for an event.",
+     "theory": "Some events have a **default action** built into the browser. A click on an `<a>` navigates to its `href`. Submitting a form reloads the page. You can prevent these with `event.preventDefault()`:\n\n```javascript\nconst form = document.querySelector(\"form\");\nform.addEventListener(\"submit\", (e) => {\n  e.preventDefault();          // stops the page reload\n  console.log(\"handling form in JS\");\n});\n```\n\nThis lets you handle the event entirely in JavaScript. You then decide what happens next.",
+     "task": "Add a `\"submit\"` listener to `document.querySelector(\"form\")`. Inside, call `e.preventDefault()` and log `\"form submitted\"`.",
+     "starter": "// write your code here",
+     "solution": "document.querySelector(\"form\").addEventListener(\"submit\", (e) => {\n  e.preventDefault();\n  console.log(\"form submitted\");\n});",
+     "hint": "The listener goes on the form element with `\"submit\"` as the event name. `e.preventDefault()` is the first line in the handler.",
+     "check": {
+      "type": "contains",
+      "value": ["addEventListener(\"submit\"", "e.preventDefault()", "\"form submitted\""]
+     },
+     "xp": 20
+    },
+    {
+     "id": "js9-4",
+     "title": "Event delegation",
+     "goal": "Handle events for many child elements by listening on their parent.",
+     "theory": "Events **bubble** up the DOM tree: a click on a child fires the click event on the child, then on its parent, then on its parent, and so on up to `document`.\n\n**Event delegation** takes advantage of this: instead of adding a listener to each child, you add one listener to a parent and check `event.target`:\n\n```javascript\nconst list = document.querySelector(\"ul\");\nlist.addEventListener(\"click\", (e) => {\n  if (e.target.tagName === \"LI\") {\n    console.log(\"clicked:\", e.target.textContent);\n  }\n});\n```\n\nThis works even for elements added after the listener was set up.",
+     "task": "What is the main advantage of event delegation over adding a listener to each list item?",
+     "starter": "",
+     "solution": "One listener handles all items, including dynamically added ones.",
+     "hint": "Think about what happens when you add new items to the list after the page loads.",
+     "check": {
+      "type": "choice",
+      "options": ["It uses one listener on the parent, which handles all current and future child items.", "It is faster because bubbling stops at the first listener it finds.", "It only works for click events.", "It prevents events from bubbling, so each item stays independent."],
+      "answer": 0,
+      "why": ["Correct: a single listener on the parent reacts to events from all descendants, even those added later.", "Bubbling does not stop automatically; you have to call stopPropagation for that.", "Event delegation works for any bubbling event, not just clicks.", "Event delegation relies on bubbling; it does not prevent it."],
+      "explain": "Event delegation attaches one listener to a parent element. Events from children bubble up and are handled there, so the code works for elements added at any time."
+     },
+     "xp": 20
+    }
+   ]
+  },
+  {
+   "n": 10,
+   "title": "Fetch and Promises",
+   "lessons": [
+    {
+     "id": "js10-1",
+     "title": "What a Promise is",
+     "goal": "Describe what a Promise represents and its three states.",
+     "theory": "A **Promise** is an object that represents a value not yet available. It is in one of three states:\n\n- **pending**: the operation is still running\n- **fulfilled**: the operation succeeded and a value is ready\n- **rejected**: the operation failed and an error reason is available\n\nOnce settled (fulfilled or rejected), a Promise's state never changes.\n\n```javascript\nconst p = new Promise((resolve, reject) => {\n  // async work here\n  resolve(\"done\");   // success\n  // reject(\"error\"); // failure\n});\n```\n\nYou almost never create Promises manually. You use them because `fetch` and other browser APIs return them.",
+     "task": "A Promise that has finished successfully is in which state?",
+     "starter": "",
+     "solution": "fulfilled",
+     "hint": "Three states: pending, fulfilled, rejected.",
+     "check": {
+      "type": "choice",
+      "options": ["fulfilled", "resolved", "done", "completed"],
+      "answer": 0,
+      "why": ["Correct: a Promise that finished successfully is in the fulfilled state.", "resolved is not an official Promise state, though it is sometimes used loosely.", "done is not a Promise state.", "completed is not a Promise state."],
+      "explain": "A Promise has three official states: pending (still running), fulfilled (succeeded) and rejected (failed)."
+     },
+     "xp": 20
+    },
+    {
+     "id": "js10-2",
+     "title": "fetch: loading data from a URL",
+     "goal": "Use fetch to request a URL and chain .then() to handle the response.",
+     "theory": "`fetch(url)` makes an HTTP GET request and returns a Promise that resolves with a **Response** object:\n\n```javascript\nfetch(\"https://api.example.com/users\")\n  .then(response => response.json())\n  .then(data => console.log(data))\n  .catch(error => console.error(error));\n```\n\n- `.then(response => response.json())` converts the response body from JSON text to a JavaScript object. This is itself async and returns another Promise.\n- The second `.then` receives the parsed data.\n- `.catch` handles any network error or JSON parse error.\n\nChaining `.then` calls is the old way of handling Promises. `async/await` is the modern way.",
+     "task": "Write a fetch call to `\"https://api.example.com/data\"`. Chain a `.then` that calls `response.json()` and a second `.then` that logs `data`. Add a `.catch` that logs the error.",
+     "starter": "// write your fetch call here",
+     "solution": "fetch(\"https://api.example.com/data\")\n  .then(response => response.json())\n  .then(data => console.log(data))\n  .catch(error => console.error(error));",
+     "hint": "Three chained calls: `.then(response => response.json())`, `.then(data => ...)`, `.catch(error => ...)`.",
+     "check": {
+      "type": "contains",
+      "value": ["fetch(\"https://api.example.com/data\")", "response.json()", ".then(data", "console.log(data)", ".catch("]
+     },
+     "xp": 20
+    },
+    {
+     "id": "js10-3",
+     "title": "Checking the response status",
+     "goal": "Check whether a fetch response was successful before using its data.",
+     "theory": "`fetch` only rejects on network failure (no internet, DNS error). A 404 or 500 response is still a **fulfilled** Promise with `response.ok === false`.\n\nAlways check `response.ok` before parsing:\n\n```javascript\nfetch(url)\n  .then(response => {\n    if (!response.ok) {\n      throw new Error(`HTTP error: ${response.status}`);\n    }\n    return response.json();\n  })\n  .then(data => console.log(data))\n  .catch(error => console.error(error));\n```\n\nThrowing inside `.then` causes the chain to jump straight to `.catch`.",
+     "task": "Inside a fetch `.then`, write the guard that throws an Error if `response.ok` is false. The error message should include `response.status`.",
+     "starter": "fetch(\"https://api.example.com/items\")\n  .then(response => {\n    // add the guard here\n    return response.json();\n  })\n  .then(data => console.log(data))\n  .catch(err => console.error(err));",
+     "solution": "fetch(\"https://api.example.com/items\")\n  .then(response => {\n    if (!response.ok) {\n      throw new Error(`HTTP error: ${response.status}`);\n    }\n    return response.json();\n  })\n  .then(data => console.log(data))\n  .catch(err => console.error(err));",
+     "hint": "The guard is a single `if` that checks `!response.ok` and throws a new Error.",
+     "check": {
+      "type": "contains",
+      "value": ["if (!response.ok)", "throw new Error", "response.status"]
+     },
+     "xp": 20
+    }
+   ]
+  },
+  {
+   "n": 11,
+   "title": "async and await",
+   "lessons": [
+    {
+     "id": "js11-1",
+     "title": "async functions",
+     "goal": "Mark a function async and understand what it always returns.",
+     "theory": "Adding `async` before a function makes it an **async function**. It always returns a Promise, even if you write `return 42`:\n\n```javascript\nasync function getScore() {\n  return 99;\n}\ngetScore().then(score => console.log(score)); // 99\n```\n\nYou can also write async arrow functions:\n\n```javascript\nconst loadUser = async (id) => {\n  // ...\n};\n```\n\nThe real power of `async` is that it lets you use `await` inside the function body.",
+     "task": "Write an async function called `fetchMessage` that returns the string `\"Hello async\"`. (No await needed yet.)",
+     "starter": "// write your async function here",
+     "solution": "async function fetchMessage() {\n  return \"Hello async\";\n}",
+     "hint": "Just add `async` before `function` and return the string.",
+     "check": {
+      "type": "contains",
+      "value": ["async function fetchMessage()", "return \"Hello async\""]
+     },
+     "xp": 20
+    },
+    {
+     "id": "js11-2",
+     "title": "await: pause until the Promise settles",
+     "goal": "Use await to pause an async function until a Promise resolves.",
+     "theory": "`await` can only be used inside an `async` function. It pauses the function until the Promise it is given settles, then hands back the resolved value:\n\n```javascript\nasync function loadUser() {\n  const response = await fetch(\"/api/user\");\n  const user = await response.json();\n  console.log(user.name);\n}\n```\n\nThis reads like synchronous code but does not block the browser. While `loadUser` is waiting, the browser can still handle other events.\n\nYou can only `await` a Promise. Awaiting a non-Promise value is fine but pointless.",
+     "task": "Write an async function `loadData` that awaits a `fetch` call to `\"/api/posts\"`, then awaits `response.json()`, and logs the result.",
+     "starter": "async function loadData() {\n  // write your awaits here\n}",
+     "solution": "async function loadData() {\n  const response = await fetch(\"/api/posts\");\n  const data = await response.json();\n  console.log(data);\n}",
+     "hint": "Two `await` lines inside the function: one for fetch, one for `.json()`.",
+     "check": {
+      "type": "contains",
+      "value": ["await fetch(\"/api/posts\")", "await response.json()", "console.log(data)"]
+     },
+     "xp": 20
+    },
+    {
+     "id": "js11-3",
+     "title": "try/catch with async/await",
+     "goal": "Handle errors from await using try/catch.",
+     "theory": "When an awaited Promise rejects, it throws an error inside the async function. Wrap the awaits in `try/catch` to handle it:\n\n```javascript\nasync function loadUser(id) {\n  try {\n    const response = await fetch(`/api/users/${id}`);\n    if (!response.ok) throw new Error(`Not found: ${response.status}`);\n    const user = await response.json();\n    console.log(user);\n  } catch (error) {\n    console.error(\"Failed:\", error.message);\n  }\n}\n```\n\nThis is cleaner than chaining `.catch`. One `try/catch` block handles network errors, non-OK statuses, and JSON parse errors together.",
+     "task": "Wrap the two awaits in `loadData` with a `try/catch`. In the catch block, log the error with `console.error`.",
+     "starter": "async function loadData() {\n  const response = await fetch(\"/api/posts\");\n  const data = await response.json();\n  console.log(data);\n}",
+     "solution": "async function loadData() {\n  try {\n    const response = await fetch(\"/api/posts\");\n    const data = await response.json();\n    console.log(data);\n  } catch (error) {\n    console.error(error);\n  }\n}",
+     "hint": "Everything inside the function goes inside `try {}`. The `catch` block receives an error variable.",
+     "check": {
+      "type": "contains",
+      "value": ["try {", "} catch (error)", "console.error(error)"]
+     },
+     "xp": 20
+    },
+    {
+     "id": "js11-4",
+     "title": "Promise.all: run requests in parallel",
+     "goal": "Use Promise.all to await multiple Promises at the same time.",
+     "theory": "When you have several independent async operations, awaiting them one by one wastes time because each waits for the previous to finish:\n\n```javascript\n// Slow: sequential\nconst a = await fetch(\"/a\");\nconst b = await fetch(\"/b\");\n```\n\n`Promise.all` runs them in parallel and waits until all are done:\n\n```javascript\nconst [resA, resB] = await Promise.all([\n  fetch(\"/a\"),\n  fetch(\"/b\")\n]);\n```\n\nIf any Promise rejects, `Promise.all` rejects immediately. Use `Promise.allSettled` if you want all results regardless of failure.",
+     "task": "Write an async function `loadBoth` that uses `Promise.all` to fetch both `\"/api/users\"` and `\"/api/posts\"` in parallel, then logs the two responses.",
+     "starter": "async function loadBoth() {\n  // use Promise.all here\n}",
+     "solution": "async function loadBoth() {\n  const [usersRes, postsRes] = await Promise.all([\n    fetch(\"/api/users\"),\n    fetch(\"/api/posts\")\n  ]);\n  console.log(usersRes, postsRes);\n}",
+     "hint": "Destructure the result of `await Promise.all([...])` into two variables.",
+     "check": {
+      "type": "contains",
+      "value": ["Promise.all([", "fetch(\"/api/users\")", "fetch(\"/api/posts\")"]
+     },
+     "xp": 20
+    }
+   ]
+  },
+  {
+   "n": 12,
+   "title": "Mini Project: Live Weather Card",
+   "lessons": [
+    {
+     "id": "js12-1",
+     "title": "Structuring the HTML",
+     "goal": "Set up the HTML skeleton for a weather card before writing any JavaScript.",
+     "theory": "Good JavaScript starts with good HTML. For a weather card you need:\n\n```html\n<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"UTF-8\">\n  <title>Weather</title>\n</head>\n<body>\n  <div id=\"weather-card\">\n    <h2 id=\"city-name\">–</h2>\n    <p id=\"description\">–</p>\n    <p id=\"temperature\">–</p>\n  </div>\n  <button id=\"load-btn\">Load weather</button>\n  <script src=\"app.js\"></script>\n</body>\n</html>\n```\n\nThe script tag is at the **bottom** of the body so the DOM elements exist by the time the JavaScript runs.",
+     "task": "Why is the `<script>` tag placed at the bottom of the `<body>` rather than in `<head>`?",
+     "starter": "",
+     "solution": "So that all DOM elements exist before the script tries to select them.",
+     "hint": "Think about what happens if JavaScript runs before the browser has parsed the HTML elements.",
+     "check": {
+      "type": "choice",
+      "options": ["So all HTML elements are already in the DOM when the script runs.", "So the page loads faster because scripts are bigger than HTML.", "Because the browser ignores script tags in the head.", "To prevent CSS from overriding JavaScript."],
+      "answer": 0,
+      "why": ["Correct: placing the script after the HTML means all elements are available when querySelector runs.", "Script placement at the bottom is about DOM availability, not file size.", "Browsers do parse and run scripts in the head; they just run before the body elements exist.", "CSS and JavaScript do not conflict based on where the script tag is placed."],
+      "explain": "JavaScript that queries the DOM must run after the browser has parsed those elements. Placing the script tag at the end of the body guarantees that."
+     },
+     "xp": 20
+    },
+    {
+     "id": "js12-2",
+     "title": "Selecting all the elements",
+     "goal": "Use querySelector to grab every element your script will need.",
+     "theory": "At the top of `app.js`, select every DOM element you will touch. This keeps selectors in one place and makes it obvious what the script depends on:\n\n```javascript\nconst cityEl = document.querySelector(\"#city-name\");\nconst descEl = document.querySelector(\"#description\");\nconst tempEl = document.querySelector(\"#temperature\");\nconst loadBtn = document.querySelector(\"#load-btn\");\n```\n\nAll four variables are `const` because you will not reassign the references, only update the elements' properties.",
+     "task": "Write the four `querySelector` lines that select `#city-name`, `#description`, `#temperature`, and `#load-btn` into `cityEl`, `descEl`, `tempEl`, and `loadBtn`.",
+     "starter": "// select your elements here",
+     "solution": "const cityEl = document.querySelector(\"#city-name\");\nconst descEl = document.querySelector(\"#description\");\nconst tempEl = document.querySelector(\"#temperature\");\nconst loadBtn = document.querySelector(\"#load-btn\");",
+     "hint": "Four lines, each `const varName = document.querySelector(\"#id\");`.",
+     "check": {
+      "type": "contains",
+      "value": ["document.querySelector(\"#city-name\")", "document.querySelector(\"#description\")", "document.querySelector(\"#temperature\")", "document.querySelector(\"#load-btn\")"]
+     },
+     "xp": 20
+    },
+    {
+     "id": "js12-3",
+     "title": "Writing the fetch function",
+     "goal": "Write an async function that fetches weather data and updates the DOM.",
+     "theory": "The function does four things: fetch, check status, parse JSON, update the DOM:\n\n```javascript\nasync function loadWeather() {\n  try {\n    const res = await fetch(\n      \"https://wttr.in/Madrid?format=j1\"\n    );\n    if (!res.ok) throw new Error(`HTTP ${res.status}`);\n    const data = await res.json();\n    const current = data.current_condition[0];\n    cityEl.textContent = \"Madrid\";\n    descEl.textContent = current.weatherDesc[0].value;\n    tempEl.textContent = `${current.temp_C} °C`;\n  } catch (err) {\n    cityEl.textContent = \"Error\";\n    descEl.textContent = err.message;\n  }\n}\n```\n\nThis is the complete fetch cycle: request, guard, parse, render, handle errors.",
+     "task": "Write an async function `loadWeather` that awaits `fetch(\"/api/weather\")`, throws if `!res.ok`, awaits `res.json()`, and sets `cityEl.textContent` to `data.city`.",
+     "starter": "// complete the function\nasync function loadWeather() {\n\n}",
+     "solution": "async function loadWeather() {\n  try {\n    const res = await fetch(\"/api/weather\");\n    if (!res.ok) throw new Error(`HTTP ${res.status}`);\n    const data = await res.json();\n    cityEl.textContent = data.city;\n  } catch (err) {\n    console.error(err);\n  }\n}",
+     "hint": "Four lines inside try: await fetch, the guard, await .json(), and the DOM update.",
+     "check": {
+      "type": "contains",
+      "value": ["async function loadWeather()", "await fetch(\"/api/weather\")", "if (!res.ok)", "await res.json()", "cityEl.textContent"]
+     },
+     "xp": 20
+    },
+    {
+     "id": "js12-4",
+     "title": "Wiring the button",
+     "goal": "Call the async function when the button is clicked.",
+     "theory": "Now connect the button to the function:\n\n```javascript\nloadBtn.addEventListener(\"click\", loadWeather);\n```\n\nBecause `loadWeather` is an async function, calling it returns a Promise. The browser does not do anything with that Promise automatically, so unhandled errors inside `loadWeather` might be silently swallowed. Make sure your `try/catch` is comprehensive.\n\nYou could also write it as:\n\n```javascript\nloadBtn.addEventListener(\"click\", () => loadWeather());\n```\n\nBoth are equivalent. The first form is shorter and preferred when the function signatures match.",
+     "task": "Add a click listener to `loadBtn` that calls `loadWeather` when clicked.",
+     "starter": "// wire the button\n// (assume loadBtn and loadWeather are already defined)",
+     "solution": "loadBtn.addEventListener(\"click\", loadWeather);",
+     "hint": "Pass `loadWeather` directly as the callback, without calling it immediately.",
+     "check": {
+      "type": "contains",
+      "value": ["loadBtn.addEventListener(\"click\", loadWeather)"]
+     },
+     "xp": 20
+    },
+    {
+     "id": "js12-5",
+     "title": "Disabling the button while loading",
+     "goal": "Prevent double submissions by disabling the button during the fetch.",
+     "theory": "If the user clicks the button twice before the first fetch finishes, two requests run in parallel. Prevent this by disabling the button at the start and re-enabling it at the end:\n\n```javascript\nasync function loadWeather() {\n  loadBtn.disabled = true;\n  try {\n    // ... fetch logic ...\n  } finally {\n    loadBtn.disabled = false;\n  }\n}\n```\n\n`finally` always runs, whether `try` succeeded or `catch` caught an error. This ensures the button is always re-enabled, even after a failure.",
+     "task": "Set `loadBtn.disabled = true` at the start of `loadWeather` and re-enable it in a `finally` block.",
+     "starter": "async function loadWeather() {\n  try {\n    const res = await fetch(\"/api/weather\");\n    const data = await res.json();\n    cityEl.textContent = data.city;\n  } catch (err) {\n    console.error(err);\n  }\n}",
+     "solution": "async function loadWeather() {\n  loadBtn.disabled = true;\n  try {\n    const res = await fetch(\"/api/weather\");\n    const data = await res.json();\n    cityEl.textContent = data.city;\n  } catch (err) {\n    console.error(err);\n  } finally {\n    loadBtn.disabled = false;\n  }\n}",
+     "hint": "One line before `try` sets disabled to true. A `finally` block after `catch` sets it back to false.",
+     "check": {
+      "type": "contains",
+      "value": ["loadBtn.disabled = true", "} finally {", "loadBtn.disabled = false"]
+     },
+     "xp": 20
+    },
+    {
+     "id": "js12-6",
+     "title": "Showing a loading state",
+     "goal": "Update the DOM to show loading text while the fetch runs.",
+     "theory": "Good UX tells the user something is happening. Set placeholder text before the fetch and replace it with real content when it arrives:\n\n```javascript\ncityEl.textContent = \"Loading...\";\ndescEl.textContent = \"\";\ntempEl.textContent = \"\";\nloadBtn.disabled = true;\ntry {\n  // fetch ...\n```\n\nThis is called **optimistic UI feedback**. The user sees the page react immediately, even if the network takes a second.\n\nThe same principle applies to spinners, progress bars and skeleton screens: show something the moment the user acts.",
+     "task": "Before the `try` block in `loadWeather`, set `cityEl.textContent` to `\"Loading...\"` and `loadBtn.disabled` to `true`.",
+     "starter": "async function loadWeather() {\n  loadBtn.disabled = true;\n  try {\n    const res = await fetch(\"/api/weather\");\n    const data = await res.json();\n    cityEl.textContent = data.city;\n  } catch (err) {\n    console.error(err);\n  } finally {\n    loadBtn.disabled = false;\n  }\n}",
+     "solution": "async function loadWeather() {\n  cityEl.textContent = \"Loading...\";\n  loadBtn.disabled = true;\n  try {\n    const res = await fetch(\"/api/weather\");\n    const data = await res.json();\n    cityEl.textContent = data.city;\n  } catch (err) {\n    console.error(err);\n  } finally {\n    loadBtn.disabled = false;\n  }\n}",
+     "hint": "Add `cityEl.textContent = \"Loading...\";` on a new first line inside `loadWeather`, before the existing `loadBtn.disabled` line.",
+     "check": {
+      "type": "contains",
+      "value": ["cityEl.textContent = \"Loading...\"", "loadBtn.disabled = true", "} finally {", "loadBtn.disabled = false"]
+     },
+     "xp": 20
+    },
+    {
+     "id": "js12-7",
+     "title": "Rendering a list from an array",
+     "goal": "Take an array from the API and build a list of DOM elements from it.",
+     "theory": "APIs often return arrays. To display them, create one element per item and append it:\n\n```javascript\nconst list = document.querySelector(\"#results\");\nlist.innerHTML = \"\"; // clear old items\ndata.items.forEach(item => {\n  const li = document.createElement(\"li\");\n  li.textContent = item.name;\n  list.appendChild(li);\n});\n```\n\nClearing `innerHTML` before appending avoids duplicates when the user clicks the button more than once.\n\nFor larger lists, build all elements first into a `DocumentFragment`, then append the fragment in one operation. That is faster because it causes only one browser reflow.",
+     "task": "Given `const list = document.querySelector(\"#list\")` and `const items = [\"Alpha\", \"Beta\", \"Gamma\"]`, clear the list and append one `<li>` per item.",
+     "starter": "const list = document.querySelector(\"#list\");\nconst items = [\"Alpha\", \"Beta\", \"Gamma\"];\n// clear and populate the list",
+     "solution": "const list = document.querySelector(\"#list\");\nconst items = [\"Alpha\", \"Beta\", \"Gamma\"];\nlist.innerHTML = \"\";\nitems.forEach(item => {\n  const li = document.createElement(\"li\");\n  li.textContent = item;\n  list.appendChild(li);\n});",
+     "hint": "Clear with `list.innerHTML = \"\"`. Then forEach: createElement, set textContent, appendChild.",
+     "check": {
+      "type": "contains",
+      "value": ["list.innerHTML = \"\"", "document.createElement(\"li\")", "li.textContent = item", "list.appendChild(li)"]
+     },
+     "xp": 20
+    },
+    {
+     "id": "js12-8",
+     "title": "Putting it all together",
+     "goal": "Describe the complete flow of a JavaScript mini project from button click to DOM update.",
+     "theory": "A complete interactive page follows this flow:\n\n1. The browser parses HTML and builds the DOM.\n2. The script tag at the bottom loads and runs.\n3. `querySelector` grabs the elements the script needs.\n4. An event listener is attached to the button.\n5. The user clicks the button.\n6. The listener calls the async fetch function.\n7. The function sets a loading state and disables the button.\n8. `fetch` sends the HTTP request and awaits the response.\n9. The response is checked and parsed.\n10. The DOM elements are updated with the data.\n11. The button is re-enabled in `finally`.\n\nThis pattern repeats in every web application. The names change, the shape stays the same.",
+     "task": "In which step does the user first see a change in the page after clicking the button?",
+     "starter": "",
+     "solution": "When the loading state is set, immediately on click.",
+     "hint": "The fetch has not even started yet at that point.",
+     "check": {
+      "type": "choice",
+      "options": ["When the loading state text is set, immediately after the click.", "When the fetch request is sent to the server.", "When the server sends back its response.", "When response.json() finishes parsing the body."],
+      "answer": 0,
+      "why": ["Correct: setting textContent to \"Loading...\" is synchronous and updates the DOM right away, before the fetch even starts.", "Sending the request is async and the user sees no visual change from it.", "The response arrives over the network, long after the first visual update.", "Parsing the JSON is also async and happens after the network round-trip."],
+      "explain": "The first visible change is the loading text set synchronously before the first await. The DOM updates immediately without waiting for the network."
+     },
+     "xp": 30
+    }
+   ]
+  }
+ ]
+}

@@ -569,7 +569,30 @@
       "lessons": 44,
       "chapters": 7,
       "figure": true
+    },
+    {
+      "id": "javascript",
+      "title": "JavaScript desde cero",
+      "world": "The Script Foundry",
+      "mentor": {
+        "name": "LOOP-7",
+        "character": "Shows you exactly what the browser sees and never pretends the console is a mystery."
+      },
+      "summary": "Start from a blank script tag and finish writing an interactive web page that fetches real data. On the way you learn variables, functions, arrays, objects, the DOM, events, fetch and async/await, one mission at a time.",
+      "level": "BEGINNER",
+      "type": "PRACTICAL",
+      "hours": 20,
+      "accent": "#f7df1e",
+      "language": "javascript",
+      "areas": [
+        "basics",
+        "code"
+      ],
+      "order": 0.8,
+      "lessons": 61,
+      "chapters": 13,
+      "figure": false
     }
   ],
-  "total": 1721
+  "total": 1782
 }
