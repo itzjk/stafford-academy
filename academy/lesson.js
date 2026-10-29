@@ -380,7 +380,7 @@
     if (A.reducedMotion()) return;
     var from = A.el('runBtn').getBoundingClientRect();
     var x = from.left + from.width / 2, y = from.top + from.height / 2;
-    var colors = [getComputedStyle(document.body).getPropertyValue('--course-accent').trim() || '#4fd8ff', '#ffd43b', '#ffffff', '#7deeff'];
+    var colors = ['#00f0ff', '#ffffff', '#7af7ff'];
     for (var i = 0; i < 34; i++) {
       var spark = document.createElement('i');
       spark.className = 'spark';
@@ -419,7 +419,6 @@
     var l = state.lesson, course = state.course;
     var language = l.language || course.language || 'python';
     document.title = l.title + ' · Zerack Academy';
-    document.body.style.setProperty('--course-accent', course.accent || '#4fd8ff');
 
     if (mascot) {
       mascot.setLesson({ course: course, chapter: state.chapter, lesson: l });

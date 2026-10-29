@@ -4,23 +4,23 @@
 <link rel="stylesheet" href="academy/mascot.css">
 <style>
 @font-face{font-family:"SpaceGrotesk";src:url(academy/fonts/SpaceGrotesk.woff2) format("woff2");font-weight:300 800;font-display:swap}
-:root{--bg:#050608;--ink:#f3f4f8;--muted:#9aa0b4;--gold:#ffd43b;--sk-font:"SpaceGrotesk",system-ui,sans-serif;--sk-display:"SpaceGrotesk",system-ui,sans-serif;color-scheme:dark}
+:root{--bg:#050608;--ink:#f3f4f8;--muted:#9aa0b4;--gold:#00f0ff;--sk-font:"SpaceGrotesk",system-ui,sans-serif;--sk-display:"SpaceGrotesk",system-ui,sans-serif;color-scheme:dark}
 *{box-sizing:border-box}
 html,body{margin:0;height:100%;overflow:hidden}
 body{background:var(--bg);color:var(--ink);font-family:var(--sk-font)}
 @keyframes enter{to{opacity:1;transform:none}}
 
 /* Background: gradient glow, faint grid and the animated star canvas */
-.sky{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden;background:radial-gradient(120% 70% at 80% -10%,rgba(55,118,171,.28),transparent 60%),radial-gradient(80% 60% at -10% 110%,rgba(106,63,168,.22),transparent 60%),var(--bg)}
+.sky{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden;background:radial-gradient(120% 70% at 80% -10%,rgba(0,240,255,.12),transparent 60%),radial-gradient(80% 60% at -10% 110%,rgba(255,255,255,.05),transparent 60%),var(--bg)}
 .sky::before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(245,245,245,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(245,245,245,.07) 1px,transparent 1px),linear-gradient(rgba(245,245,245,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(245,245,245,.04) 1px,transparent 1px);background-size:40px 40px,40px 40px,200px 200px,200px 200px;-webkit-mask-image:linear-gradient(transparent 0,#000 16%,#000 74%,transparent 100%);mask-image:linear-gradient(transparent 0,#000 16%,#000 74%,transparent 100%)}
 .sky canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
 
 .brand{font:700 15px/1 var(--sk-display);letter-spacing:.3em;display:flex;align-items:center;gap:12px}
-.brand img{width:30px;height:30px;flex:none;filter:drop-shadow(0 0 10px rgba(125,238,255,.25))}
+.brand img{width:30px;height:30px;flex:none;filter:drop-shadow(0 0 10px rgba(0,240,255,.25))}
 .brand small{font:500 10px/1 var(--sk-font);letter-spacing:.34em;color:var(--muted);margin-left:14px}
 
 /* The scene: one course per screen, scroll to move between them */
-.scene{--c:#7deeff;position:fixed;inset:0;z-index:1;display:flex;flex-direction:column;padding:0 clamp(16px,5vw,64px);overflow:hidden}
+.scene{--c:#00f0ff;position:fixed;inset:0;z-index:1;display:flex;flex-direction:column;padding:0 clamp(16px,5vw,64px);overflow:hidden}
 .scene-top{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:clamp(16px,4vh,32px) 0 0}
 .scene-center{font-size:12px;letter-spacing:.42em;color:#6f7689}
 .scene-count{font:600 14px/1 var(--sk-font);letter-spacing:.2em;color:#555c6e}
@@ -65,7 +65,7 @@ body{background:var(--bg);color:var(--ink);font-family:var(--sk-font)}
 @keyframes rise{from{opacity:0;transform:translateY(24px)}}
 @keyframes hover{0%,100%{transform:translateY(0) rotate(-.4deg)}50%{transform:translateY(-10px) rotate(.4deg)}}
 .cw-bar{display:flex;align-items:center;gap:8px;padding:12px 16px;border-bottom:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.03)}
-.cw-bar i{width:11px;height:11px;border-radius:50%;background:#ff5f57}.cw-bar i:nth-child(2){background:#febc2e}.cw-bar i:nth-child(3){background:#28c840}
+.cw-bar i{width:11px;height:11px;border-radius:50%;background:#3a3f4b}.cw-bar i:nth-child(2){background:#3a3f4b}.cw-bar i:nth-child(3){background:#00f0ff}
 .cw-bar span{margin-left:10px;font:500 12.5px/1 ui-monospace,Menlo,monospace;color:#c3c8d6}
 .cw-bar em{margin-left:auto;font-style:normal;font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--c)}
 .cw-code{margin:0;padding:14px 0;height:min(44vh,360px);overflow:hidden;font:clamp(10.5px,.92vw,13px)/1.62 ui-monospace,"SF Mono",Menlo,monospace;color:#dfe6f3;counter-reset:ln}
@@ -74,12 +74,12 @@ body{background:var(--bg);color:var(--ink);font-family:var(--sk-font)}
 .cw-line.active{background:rgba(255,255,255,.035)}
 .cw-caret{display:inline-block;width:.6em;height:1.1em;vertical-align:-.18em;background:var(--c);animation:blink 1s steps(1) infinite}
 @keyframes blink{50%{opacity:0}}
-.tk-kw{color:#c792ea}.tk-str{color:#c3e88d}.tk-num{color:#f78c6c}.tk-com{color:#5f6b86;font-style:italic}.tk-fn{color:#82aaff}.tk-bi{color:#ffcb6b}
+.tk-kw{color:#00f0ff}.tk-str{color:#b8fbff}.tk-num{color:#ffffff}.tk-com{color:#5f6b86;font-style:italic}.tk-fn{color:#7af7ff}.tk-bi{color:#e6fdff}
 .cw-console{border-top:1px solid rgba(255,255,255,.08);padding:12px 16px 14px;background:rgba(0,0,0,.28);min-height:112px}
 .cw-console b{display:flex;align-items:center;gap:8px;font:600 10.5px/1 var(--sk-font);letter-spacing:.24em;color:#6f7689;margin-bottom:8px}
 .cw-console b::before{content:"";width:7px;height:7px;border-radius:50%;background:#555c6e;transition:background .3s,box-shadow .3s}
-.cw-console.ran b::before{background:#28c840;box-shadow:0 0 10px #28c840}
-.cw-output{margin:0;font:12.5px/1.6 ui-monospace,Menlo,monospace;color:#9ff0c4;white-space:pre;overflow:hidden}
+.cw-console.ran b::before{background:#00f0ff;box-shadow:0 0 10px #00f0ff}
+.cw-output{margin:0;font:12.5px/1.6 ui-monospace,Menlo,monospace;color:#7af7ff;white-space:pre;overflow:hidden}
 .cw-output span{display:block;opacity:0;transform:translateX(-6px);animation:enter .35s forwards}
 
 /* Course figures: animated line art from academy/art/<course>.svg, colored by classes */
@@ -90,17 +90,17 @@ body{background:var(--bg);color:var(--ink);font-family:var(--sk-font)}
 .figure .s-line{stroke:#dfe6f3;fill:none}
 .figure .s-dim{stroke:rgba(223,230,243,.35);fill:none}
 .figure .s-acc{stroke:var(--c);fill:none}
-.figure .s-gold{stroke:#ffd43b;fill:none}
+.figure .s-gold{stroke:#00f0ff;fill:none}
 .figure .f-acc{fill:var(--c)}
 .figure .f-soft{fill:color-mix(in srgb,var(--c) 22%,transparent)}
 .figure .f-panel{fill:#0f1420}
 .figure .f-ink{fill:#dfe6f3}
 .figure .f-dim{fill:rgba(223,230,243,.35)}
-.figure .f-gold{fill:#ffd43b}
-.figure .f-blue{fill:#3776ab}
+.figure .f-gold{fill:#00f0ff}
+.figure .f-blue{fill:#0a5a66}
 .figure .f-red{fill:#ff5a6e}
 .figure .t-label{fill:#9aa0b4;font:600 13px ui-monospace,Menlo,monospace}
-.figure .s-claude{stroke:#d97757;fill:none}
+.figure .s-claude{stroke:#ffffff;fill:none}
 .figure .f-gemini{fill:#6f94ff}
 .figure [class*="a-"]{transform-box:fill-box;transform-origin:center}
 .figure .a-spin{animation:f-spin 12s linear infinite}
@@ -144,9 +144,9 @@ body{background:var(--bg);color:var(--ink);font-family:var(--sk-font)}
 
 /* The course's teacher floats in front of the figure or the code */
 .teach{position:absolute;z-index:3;left:-24%;bottom:-10%;display:flex;align-items:flex-end;gap:2px;pointer-events:none}
-.teach img{width:clamp(110px,11vw,170px);aspect-ratio:2/3;object-fit:contain;object-position:50% 100%;filter:drop-shadow(0 0 22px var(--t,#7deeff)) drop-shadow(0 18px 20px rgba(0,0,0,.6));animation:teach-float 3.6s ease-in-out infinite}
+.teach img{width:clamp(110px,11vw,170px);aspect-ratio:2/3;object-fit:contain;object-position:50% 100%;filter:drop-shadow(0 0 22px var(--t,#00f0ff)) drop-shadow(0 18px 20px rgba(0,0,0,.6));animation:teach-float 3.6s ease-in-out infinite}
 .teach span{display:grid;gap:4px;margin-bottom:22px;font:700 9.5px/1 var(--sk-font);letter-spacing:.24em;color:var(--muted)}
-.teach b{font:700 20px/1 var(--sk-display);letter-spacing:0;color:var(--t,#7deeff)}
+.teach b{font:700 20px/1 var(--sk-display);letter-spacing:0;color:var(--t,#00f0ff)}
 .teach.pop img{animation:teach-pop .7s cubic-bezier(.3,1.5,.5,1),teach-float 3.6s ease-in-out .7s infinite}
 @keyframes teach-float{0%,100%{transform:translateY(0) rotate(-1deg)}50%{transform:translateY(-12px) rotate(1.5deg)}}
 @keyframes teach-pop{from{transform:scale(.2) rotate(-20deg);opacity:0;filter:brightness(3)}}
@@ -187,8 +187,8 @@ body{background:var(--bg);color:var(--ink);font-family:var(--sk-font)}
             <path d="M0 -13 C5 -8 5 3 4 9 L-4 9 C-5 3 -5 -8 0 -13 Z" fill="#eef2fa"/>
             <path d="M0 -13 C3 -10 4 -8 4.3 -6 L-4.3 -6 C-4 -8 -3 -10 0 -13 Z" fill="var(--c)"/>
             <path d="M-4 3 L-8 11 L-3.5 9 Z M4 3 L8 11 L3.5 9 Z" fill="var(--c)"/>
-            <circle cx="0" cy="-1" r="2.2" fill="#3776ab"/>
-            <path d="M-3 9 Q0 19 3 9 Z" fill="#ffb347"/>
+            <circle cx="0" cy="-1" r="2.2" fill="#00f0ff"/>
+            <path d="M-3 9 Q0 19 3 9 Z" fill="#7af7ff"/>
           </g>
         </svg>
       </div>

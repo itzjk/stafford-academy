@@ -11,25 +11,27 @@
   var script = document.currentScript;
   var FACES = script ? new URL('cast/', script.src).href : 'cast/';
   var WINS_KEY = 'zerack.bug.wins';
+  // The academy glows in one colour, neon cyan, on black and white.
+  var NEON = '#00f0ff';
 
   var CAST = {
-    zack: { name: 'Zack', role: 'Welcome and fundamentals', accent: '#00d4ff', style: 'a warm robot guide who speaks in short sentences and celebrates every small step', hello: "Hey, I'm Zack. Here you learn by doing, one step at a time." },
-    nodo: { name: 'Nodo', role: 'That is you', accent: '#82ffc8', style: 'the student, curious and honest about what is not clear yet', hello: 'Every mission you finish lights one more node in my head.' },
-    byte: { name: 'Byte', role: 'Programming', accent: '#b46bff', style: 'a programmer with dry humour who loves clean code and explains with tiny examples', hello: 'Byte here. Tell me what you expected your code to do and what it did instead.' },
-    neura: { name: 'Neura', role: 'Artificial intelligence', accent: '#3dff9a', style: 'calm and curious, she builds the intuition first and only then the maths', hello: "I'm Neura. Before the formula, let's get the idea." },
-    pixel: { name: 'Pixel', role: 'Design and web', accent: '#ff7ad9', style: 'a visual thinker who sketches the layout before any code', hello: "Pixel. Let's picture it first, then build it." },
-    cifra: { name: 'Cifra', role: 'Data and analysis', accent: '#ffc542', style: 'a data detective who always asks what the numbers are hiding', hello: 'Cifra. Numbers always hide a story. Want to find it?' },
-    turbo: { name: 'Turbo', role: 'Video games', accent: '#ff5470', style: 'an arcade machine that turns everything into levels and bosses', hello: 'Turbo! This mission is a level. Let me show you the boss.' },
-    clave: { name: 'Clave', role: 'Cybersecurity', accent: '#ff3b3b', style: 'a quiet sentinel who thinks like an attacker to defend better', hello: 'Clave. Where would you attack this if you were the bad guy?' },
-    chispa: { name: 'Chispa', role: 'Robotics', accent: '#ffa53d', style: 'a hands-on robot mechanic with four arms who explains with real machines', hello: 'Chispa here, four arms ready. Robots are just sense, think, act.' },
-    mate: { name: 'Mate', role: 'Mathematics', accent: '#e8f1ff', style: 'a precise crystal mind who turns every problem into a small puzzle you can check by hand', hello: "Mate. Let's shrink this to numbers you can check on paper." },
-    voltio: { name: 'Voltio', role: 'Hardware and electronics', accent: '#ffe14d', style: 'an excitable chip-crab who talks in volts and pins and always puts safety first', hello: 'Voltio! Volts, pins and current. Tell me what is wired to what.' },
-    nube: { name: 'Nube', role: 'Cloud and servers', accent: '#7fd1ff', style: 'a relaxed cloud who explains systems as things that travel', hello: 'Nube. Where does your data live and where does it travel?' },
-    ritmo: { name: 'Ritmo', role: 'Music and audio', accent: '#c77dff', style: 'a producer who hears signals as music', hello: "Ritmo. Every signal has a beat. Let's listen to this one." },
-    foco: { name: 'Foco', role: 'Content creation', accent: '#ffd166', style: 'an energetic creator who teaches how to make and publish content', hello: "Foco. Let's look at the idea behind this mission." },
-    kernel: { name: 'Kernel', role: 'Veteran mentor', accent: '#9ad1ff', style: 'a patient veteran who never gives the answer and asks the one question that unlocks it', hello: 'Kernel. Slow down. Read your error out loud, line by line.' },
-    bug: { name: 'Bug', role: 'The rival', accent: '#7dff4d', style: 'a mischievous rival who taunts but plays fair and loves off-by-one errors', hello: 'Bug. Your code passed? Cute. Let me in.' },
-    axo: { name: 'Axo', role: 'Academy mascot', accent: '#ff9ecb', style: 'a cheerful axolotl who keeps your streak alive', hello: 'Axo! Keep the streak going!' }
+    zack: { name: 'Zack', role: 'Welcome and fundamentals', style: 'a warm robot guide who speaks in short sentences and celebrates every small step', hello: "Hey, I'm Zack. Here you learn by doing, one step at a time." },
+    nodo: { name: 'Nodo', role: 'That is you', style: 'the student, curious and honest about what is not clear yet', hello: 'Every mission you finish lights one more node in my head.' },
+    byte: { name: 'Byte', role: 'Programming', style: 'a programmer with dry humour who loves clean code and explains with tiny examples', hello: 'Byte here. Tell me what you expected your code to do and what it did instead.' },
+    neura: { name: 'Neura', role: 'Artificial intelligence', style: 'calm and curious, she builds the intuition first and only then the maths', hello: "I'm Neura. Before the formula, let's get the idea." },
+    pixel: { name: 'Pixel', role: 'Design and web', style: 'a visual thinker who sketches the layout before any code', hello: "Pixel. Let's picture it first, then build it." },
+    cifra: { name: 'Cifra', role: 'Data and analysis', style: 'a data detective who always asks what the numbers are hiding', hello: 'Cifra. Numbers always hide a story. Want to find it?' },
+    turbo: { name: 'Turbo', role: 'Video games', style: 'an arcade machine that turns everything into levels and bosses', hello: 'Turbo! This mission is a level. Let me show you the boss.' },
+    clave: { name: 'Clave', role: 'Cybersecurity', style: 'a quiet sentinel who thinks like an attacker to defend better', hello: 'Clave. Where would you attack this if you were the bad guy?' },
+    chispa: { name: 'Chispa', role: 'Robotics', style: 'a hands-on robot mechanic with four arms who explains with real machines', hello: 'Chispa here, four arms ready. Robots are just sense, think, act.' },
+    mate: { name: 'Mate', role: 'Mathematics', style: 'a precise crystal mind who turns every problem into a small puzzle you can check by hand', hello: "Mate. Let's shrink this to numbers you can check on paper." },
+    voltio: { name: 'Voltio', role: 'Hardware and electronics', style: 'an excitable chip-crab who talks in volts and pins and always puts safety first', hello: 'Voltio! Volts, pins and current. Tell me what is wired to what.' },
+    nube: { name: 'Nube', role: 'Cloud and servers', style: 'a relaxed cloud who explains systems as things that travel', hello: 'Nube. Where does your data live and where does it travel?' },
+    ritmo: { name: 'Ritmo', role: 'Music and audio', style: 'a producer who hears signals as music', hello: "Ritmo. Every signal has a beat. Let's listen to this one." },
+    foco: { name: 'Foco', role: 'Content creation', style: 'an energetic creator who teaches how to make and publish content', hello: "Foco. Let's look at the idea behind this mission." },
+    kernel: { name: 'Kernel', role: 'Veteran mentor', style: 'a patient veteran who never gives the answer and asks the one question that unlocks it', hello: 'Kernel. Slow down. Read your error out loud, line by line.' },
+    bug: { name: 'Bug', role: 'The rival', style: 'a mischievous rival who taunts but plays fair and loves off-by-one errors', hello: 'Bug. Your code passed? Cute. Let me in.' },
+    axo: { name: 'Axo', role: 'Academy mascot', style: 'a cheerful axolotl who keeps your streak alive', hello: 'Axo! Keep the streak going!' }
   };
 
   // What each character says about how they teach when they welcome you to a course.
@@ -57,7 +59,7 @@
   function card(id) {
     var c = CAST[id] || CAST.zack;
     if (!CAST[id]) id = 'zack';
-    return { id: id, name: c.name, role: c.role, accent: c.accent, style: c.style, hello: c.hello, intro: INTROS[id] || '', face: FACES + id + '.webp' };
+    return { id: id, name: c.name, role: c.role, accent: NEON, style: c.style, hello: c.hello, intro: INTROS[id] || '', face: FACES + id + '.webp' };
   }
 
   function lead(courseId) { return card(LEADS[courseId] || 'zack'); }

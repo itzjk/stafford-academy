@@ -11,7 +11,7 @@
 
   var A = root.Academy || {};
   var THREAD_KEY = 'zerack.mascot.thread.';
-  var ZACK = root.Cast ? root.Cast.card('zack') : { id: 'zack', name: 'Zack', role: 'Welcome and fundamentals', accent: '#00d4ff', style: '', hello: '', face: '' };
+  var ZACK = root.Cast ? root.Cast.card('zack') : { id: 'zack', name: 'Zack', role: 'Welcome and fundamentals', accent: '#00f0ff', style: '', hello: '', face: '' };
   var who = ZACK;
   var still = false;
   try { still = matchMedia('(prefers-reduced-motion: reduce)').matches; } catch (e) {}

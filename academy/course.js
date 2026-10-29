@@ -35,7 +35,6 @@
 
   function paintHeader(course) {
     document.title = course.title + ' · Zerack Academy';
-    document.body.style.setProperty('--course-accent', course.accent || '#4fd8ff');
     A.el('barTitle').textContent = String(course.title || '').toUpperCase();
     A.el('barSubtitle').textContent = course.world || '';
     A.el('courseWorld').textContent = course.world || '';

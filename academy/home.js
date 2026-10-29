@@ -192,7 +192,7 @@
 
     function paint(i) {
       var c = courses[i], done = doneIn(c);
-      scene.style.setProperty('--c', c.accent || '#7deeff');
+      scene.style.setProperty('--c', '#00f0ff');
       $('sceneIndex').textContent = pad(i + 1);
       $('sceneGhost').textContent = pad(i + 1);
       $('sceneWorld').textContent = c.world || '';

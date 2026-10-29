@@ -1,3 +1,5 @@
 .DS_Store
 .claude/
 *.zip
+# Python needs its standard library to run in the browser.
+!lib/pyodide/python_stdlib.zip
