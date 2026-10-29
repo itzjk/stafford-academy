@@ -1,0 +1,41 @@
+/* Personajes de ZERACK Academy: cara en el tutor, tarjeta del que habla y marcador del duelo con Bug. */
+.zt-bubble.zt-con-cara { width: 62px; height: 62px; padding: 0; overflow: hidden; border: 2px solid var(--pj-acc, #7fe3ff); box-shadow: 0 10px 30px rgba(0, 0, 0, .55), 0 0 18px color-mix(in srgb, var(--pj-acc, #7fe3ff) 45%, transparent); }
+.zt-bubble.zt-con-cara::after { border-color: var(--pj-acc, #7fe3ff); }
+.zt-face { width: 100%; height: 100%; object-fit: cover; object-position: 50% 22%; transform: scale(1.35); transform-origin: 50% 22%; display: block; }
+.zt-face-head { width: 30px; height: 30px; border-radius: 50%; object-fit: cover; object-position: 50% 22%; border: 1.5px solid var(--pj-acc, #7fe3ff); flex: 0 0 auto; }
+.zt-panel { border-top: 2px solid var(--pj-acc, transparent); }
+
+.pj-card {
+  position: fixed; right: 96px; bottom: 22px; z-index: 100001;
+  display: flex; gap: 12px; align-items: flex-start;
+  width: min(380px, calc(100vw - 120px)); padding: 12px 34px 12px 12px;
+  background: #11161f; color: #eaf1fb;
+  border: 1px solid color-mix(in srgb, var(--pj-acc, #7fe3ff) 55%, transparent); border-radius: 14px;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, .6), 0 0 24px color-mix(in srgb, var(--pj-acc, #7fe3ff) 20%, transparent);
+  animation: pj-entra .28s ease-out both;
+}
+.pj-cara { width: 58px; height: 58px; border-radius: 12px; object-fit: cover; object-position: 50% 22%; flex: 0 0 auto; border: 1px solid rgba(255, 255, 255, .12); }
+.pj-texto b { display: block; font: 700 14px/1.2 var(--sk-display, system-ui); color: var(--pj-acc, #7fe3ff); margin-bottom: 3px; }
+.pj-texto p { margin: 0; font-size: 13.5px; line-height: 1.45; color: #d7deea; }
+.pj-botones { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+.pj-btn { border: 1px solid rgba(255, 255, 255, .16); background: rgba(255, 255, 255, .04); color: #eaf1fb; border-radius: 9px; padding: 7px 12px; font: 600 12.5px/1 var(--sk-font, system-ui); cursor: pointer; }
+.pj-btn.is-main { background: var(--pj-acc, #7fe3ff); border-color: transparent; color: #0b0f16; }
+.pj-btn:hover { filter: brightness(1.1); }
+.pj-x { position: absolute; top: 6px; right: 8px; border: 0; background: none; color: #8b93a7; font-size: 18px; line-height: 1; cursor: pointer; }
+
+.pj-duelo {
+  position: fixed; left: 50%; top: 68px; transform: translateX(-50%); z-index: 100002;
+  display: flex; align-items: center; gap: 14px; padding: 10px 14px;
+  background: #0f1a0c; color: #dfffd2; border: 1px solid #7dff4d; border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, .55), 0 0 20px rgba(125, 255, 77, .25);
+  font-size: 13.5px; max-width: calc(100vw - 32px);
+}
+.pj-duelo b { font: 700 18px/1 var(--sk-mono, ui-monospace, monospace); color: #7dff4d; min-width: 46px; text-align: center; }
+body.pj-en-duelo #llCode { outline: 2px solid rgba(125, 255, 77, .55); }
+
+@keyframes pj-entra { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) { .pj-card { animation: none; } }
+@media (max-width: 560px) {
+  .pj-card { right: 12px; left: 12px; width: auto; bottom: 96px; }
+  .pj-duelo { flex-wrap: wrap; justify-content: center; }
+}

@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Mission · ZERACK Academy</title>
+  <link rel="preload" href="fonts/SpaceGrotesk.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="fonts/ClashDisplay-700.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="stylesheet" href="community.css?v=202609032148" />
+  <link rel="stylesheet" href="learn-community.css?v=202609032148" />
+  <link rel="stylesheet" href="academy.css?v=202609101720" />
+  <link rel="stylesheet" href="academy-pages.css?v=202609101807" />
+  <link rel="stylesheet" href="tutor.css?v=202610232030" />
+  <link rel="stylesheet" href="personajes.css?v=202610232030" />
+</head>
+<body data-academy="skool">
+  <svg id="zkSymbols" width="0" height="0" style="position:absolute" aria-hidden="true">
+    <symbol id="zk-mark" viewBox="0 0 100 100"><path fill-rule="evenodd" fill="currentColor" d="M85.74 43.52L95.8 44.88L95.8 55.12L85.74 56.48ZM85.02 59.67L93.5 65.25L89.04 74.49L79.39 71.35ZM77.36 73.91L82.56 82.62L74.55 89L67.21 81.99ZM64.28 83.4L65.18 93.52L55.2 95.8L51.62 86.29ZM48.38 86.29L44.8 95.8L34.82 93.52L35.72 83.4ZM32.79 81.99L25.45 89L17.44 82.62L22.64 73.91ZM20.61 71.35L10.96 74.49L6.5 65.25L14.98 59.67ZM14.26 56.48L4.2 55.12L4.2 44.88L14.26 43.52ZM14.98 40.33L6.5 34.75L10.96 25.51L20.61 28.65ZM22.64 26.09L17.44 17.38L25.45 11L32.79 18.01ZM35.72 16.6L34.82 6.48L44.8 4.2L48.38 13.71ZM51.62 13.71L55.2 4.2L65.18 6.48L64.28 16.6ZM67.21 18.01L74.55 11L82.56 17.38L77.36 26.09ZM79.39 28.65L89.04 25.51L93.5 34.75L85.02 40.33ZM11.91 50A38.09 38.09 0 1 0 88.09 50A38.09 38.09 0 1 0 11.91 50ZM16.99 50A33.01 33.01 0 1 0 83.01 50A33.01 33.01 0 1 0 16.99 50ZM33.2 50A16.8 16.8 0 1 0 66.8 50A16.8 16.8 0 1 0 33.2 50ZM50 39.06L56.25 50L50 60.94L43.75 50Z"/></symbol>
+  </svg>
+
+  <div class="sk-sky" aria-hidden="true"><canvas class="lx-stars" id="lxStars"></canvas></div>
+
+  <header class="lx-bar"><div class="lx-bar-in">
+    <a class="sk-brand" href="home.html" title="Back to the Studio"><span class="sk-logo"><svg class="zk-mark-flat" aria-hidden="true"><use href="#zk-mark"></use></svg></span><span class="sk-wordmark"><b>ZERACK</b><small>ACADEMY</small></span></a>
+    <a class="lx-back" id="llBack" href="learn.html#classroom">‹ Module</a>
+    <div class="lx-bar-title"><b id="llBarT">MISSION</b><small id="llBarS">Loading</small></div>
+    <div class="lx-bar-right">
+      <div class="lx-xp"><div class="lx-xp-track"><i class="lx-xp-fill" id="lxXpFill"></i></div><b id="lxXpTxt">0 XP</b></div>
+      <span class="lx-level" id="lxLevel">LV 1</span>
+    </div>
+  </div></header>
+
+  <main class="lx-wrap">
+    <div class="ll-shell">
+      <section class="ll-panel">
+        <div class="ll-panel-h"><b>Briefing</b></div>
+        <div class="ll-panel-b">
+          <p class="ll-crumb" id="llCrumb"></p>
+          <h1 class="ll-title" id="llTitle"></h1>
+          <p class="ll-goal" id="llGoal"></p>
+          <div class="ll-theory" id="llTheory"></div>
+          <div class="ll-task">
+            <h3>Your task</h3>
+            <p id="llTask"></p>
+          </div>
+        </div>
+      </section>
+
+      <section class="ll-panel ll-editor">
+        <div class="ll-panel-h"><b id="llLang">Editor</b></div>
+        <div class="ox-lectura" id="oxTiraEditor" aria-hidden="true"></div>
+        <textarea class="ll-code" id="llCode" spellcheck="false" aria-label="Your code"></textarea>
+        <div class="ll-actions">
+          <button class="ll-run" id="llRun" type="button" title="Check my code (Ctrl or Cmd with Enter)">
+            <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+            Check my code
+          </button>
+          <button class="ll-ghost" id="llHintBtn" type="button">Hint</button>
+          <span class="ll-spacer"></span>
+          <button class="ll-ghost" id="llReset" type="button">Reset</button>
+          <button class="ll-ghost" id="llSol" type="button">Show solution</button>
+        </div>
+        <div class="ll-hint" id="llHint" hidden></div>
+        <div id="oxSalidaFila">
+          <div class="ll-out is-idle" id="llOut">Write your code and press check.</div>
+          <div class="ox-medidor" id="oxMedidorSalida" aria-hidden="true"></div>
+        </div>
+      </section>
+    </div>
+
+    <div class="ll-next" id="llNext" hidden>
+      <span class="ll-next-txt"><b id="llNextT"></b><small id="llNextS"></small></span>
+      <a class="lx-cta" id="llNextBtn" href="#">
+        Next mission
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+    </div>
+  </main>
+
+  <script src="python-runner.js?v=202609101934"></script>
+  <script src="js-runner.js?v=202609101758"></script>
+  <script src="learn-app-comun.js?v=202609101807"></script>
+  <script src="learn-leccion.js?v=202609101849"></script>
+  <script src="personajes.js?v=202610232030"></script>
+  <script src="tutor.js?v=202610232030"></script>
+</body>
+</html>
