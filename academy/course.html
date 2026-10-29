@@ -22,28 +22,40 @@
   </div></header>
 
   <main class="wrap">
-    <section class="course-head">
-      <div>
+    <section class="c-hero">
+      <div class="c-hero-text">
         <p class="course-world" id="courseWorld"></p>
         <h1 class="course-title" id="courseTitle"></h1>
         <p class="course-summary" id="courseSummary"></p>
         <div class="course-meta" id="courseMeta"></div>
+        <div class="c-hero-actions">
+          <a class="c-go" id="continueBtn" href="#">
+            <span><small id="continueKicker">Start here</small><b id="continueTitle"></b></span>
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+          <button class="c-replay" id="replayIntro" type="button" hidden>Replay intro</button>
+        </div>
       </div>
-      <div class="mentor" id="mentorBox" hidden>
-        <span class="mentor-avatar" id="mentorAvatar"></span>
-        <span><b id="mentorName"></b><small id="mentorCharacter"></small></span>
+      <div class="c-hero-side">
+        <button class="c-teacher" id="teacher" type="button" hidden>
+          <span class="c-teacher-float"><img id="teacherImg" alt=""></span>
+          <svg class="c-platform" viewBox="0 0 300 80" aria-hidden="true">
+            <ellipse class="c-platform-glow" cx="150" cy="40" rx="140" ry="30"/>
+            <ellipse class="c-platform-track" cx="150" cy="40" rx="128" ry="26"/>
+            <ellipse class="c-platform-fill" id="platformFill" cx="150" cy="40" rx="128" ry="26" pathLength="100"/>
+          </svg>
+        </button>
+        <div class="c-teacher-tag" id="teacherTag" hidden><b id="teacherName"></b><small id="teacherRole"></small></div>
+        <p class="c-progress"><b id="coursePct">0%</b><span id="courseTrackText"></span></p>
       </div>
     </section>
-    <section class="track">
-      <div class="track-bar"><i id="courseTrack"></i></div>
-      <p class="track-text" id="courseTrackText"></p>
-    </section>
-    <div id="chapters"></div>
+    <div class="map" id="chapters"></div>
   </main>
 
   <script src="common.js"></script>
   <script src="cast.js"></script>
   <script src="mascot.js"></script>
+  <script src="stage.js"></script>
   <script src="course.js"></script>
 </body>
 </html>

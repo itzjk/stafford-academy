@@ -366,10 +366,53 @@
     var won = A.markDone(state.progress, courseId, lessonId, xp);
     // The home page reads this to offer "Continue where you left off".
     state.progress.last = { course: courseId, lesson: state.next ? state.next.id : lessonId, at: Date.now() };
+    celebrate(won ? xp : 0);
     A.saveProgress(state.progress).then(function () {
-      A.paintXp(state.progress);
+      // The XP bar fills once the +XP has flown up to it.
+      setTimeout(function () { A.paintXp(state.progress); }, won && !A.reducedMotion() ? 900 : 0);
       paintNext(won, won ? xp : 0);
     });
+  }
+
+  // A burst of sparks in the course colour from the Check button, and the XP
+  // flying up to the bar.
+  function celebrate(xp) {
+    if (A.reducedMotion()) return;
+    var from = A.el('runBtn').getBoundingClientRect();
+    var x = from.left + from.width / 2, y = from.top + from.height / 2;
+    var colors = [getComputedStyle(document.body).getPropertyValue('--course-accent').trim() || '#4fd8ff', '#ffd43b', '#ffffff', '#7deeff'];
+    for (var i = 0; i < 34; i++) {
+      var spark = document.createElement('i');
+      spark.className = 'spark';
+      spark.style.left = x + 'px';
+      spark.style.top = y + 'px';
+      spark.style.background = colors[i % colors.length];
+      document.body.appendChild(spark);
+      var angle = Math.random() * Math.PI * 2, dist = 70 + Math.random() * 150;
+      spark.animate([
+        { transform: 'translate(-50%, -50%) scale(1)', opacity: 1 },
+        { transform: 'translate(calc(-50% + ' + Math.cos(angle) * dist + 'px), calc(-50% + ' + (Math.sin(angle) * dist - 40) + 'px)) scale(.2) rotate(' + Math.round(Math.random() * 360) + 'deg)', opacity: 0 }
+      ], { duration: 700 + Math.random() * 500, easing: 'cubic-bezier(.2,.8,.3,1)', fill: 'forwards' }).onfinish = spark.remove.bind(spark);
+    }
+    if (!xp) return;
+    var to = A.el('barXpText').getBoundingClientRect();
+    var tag = document.createElement('b');
+    tag.className = 'xp-fly';
+    tag.textContent = '+' + xp + ' XP';
+    tag.style.left = x + 'px';
+    tag.style.top = y + 'px';
+    document.body.appendChild(tag);
+    tag.animate([
+      { transform: 'translate(-50%, -50%) scale(.6)', opacity: 0 },
+      { transform: 'translate(-50%, -160%) scale(1.3)', opacity: 1, offset: 0.3 },
+      { transform: 'translate(calc(-50% + ' + (to.left + to.width / 2 - x) + 'px), calc(-50% + ' + (to.top + to.height / 2 - y) + 'px)) scale(.5)', opacity: .2 }
+    ], { duration: 1000, easing: 'cubic-bezier(.5,0,.3,1)', fill: 'forwards' }).onfinish = function () {
+      tag.remove();
+      var bar = A.el('barXpText').parentNode;
+      bar.classList.remove('is-gain');
+      void bar.offsetWidth;
+      bar.classList.add('is-gain');
+    };
   }
 
   function start() {
@@ -380,9 +423,12 @@
 
     if (mascot) {
       mascot.setLesson({ course: course, chapter: state.chapter, lesson: l });
+      // The teacher briefs every mission as you walk in. The first time in a
+      // session they also say how they can help.
       var greeted = false;
       try { greeted = sessionStorage.getItem('zerack.mascot.greeted') === '1'; sessionStorage.setItem('zerack.mascot.greeted', '1'); } catch (e) {}
-      if (!greeted) mascot.welcome((mascot.character().hello || 'Hi! 👋') + ' I can see this mission. If your code fails, tap me and I will explain the error.');
+      mascot.welcome('**Mission ' + (state.index + 1) + ' of ' + state.total + ': ' + l.title + '.** ' + (l.goal || '') +
+        (greeted ? '' : '\n\nIf your code fails, tap me and I will explain the error.'));
     }
 
     A.el('backLink').href = 'course.html?c=' + encodeURIComponent(courseId);
@@ -593,6 +639,8 @@
     state.lesson = all[idx].lesson;
     state.chapter = all[idx].chapter;
     state.next = idx + 1 < all.length ? all[idx + 1].lesson : null;
+    state.index = idx;
+    state.total = all.length;
     state.alreadyDone = A.doneIn(state.progress, courseId).indexOf(lessonId) >= 0;
     start();
   });

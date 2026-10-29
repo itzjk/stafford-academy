@@ -65,7 +65,7 @@ Every mission gives you:
 
 ### Meet the teachers
 
-Every course has its own character, who waits in the corner of the page and gives the class: **Byte** teaches programming, **Voltio** electronics, **Chispa** robotics, **Mate** the courses heavy on maths and **Neura** AI and vision. **Zack** welcomes you on the home page. They cheer when you pass a mission and, when your code fails, explain the error in plain words and in their own style.
+Every course has its own character, who flies in when you open the course, talks you through what is coming and then gives the class: **Byte** teaches programming, **Voltio** electronics, **Chispa** robotics, **Mate** the courses heavy on maths and **Neura** AI and vision. **Zack** welcomes you on the home page. They cheer when you pass a mission and, when your code fails, explain the error in plain words and in their own style.
 
 - **Hand-off.** After two misses in a row, the teacher offers to call **Kernel**, the veteran mentor, or **Mate** in courses heavy on maths.
 - **Duel with Bug.** When you pass a code mission, **Bug**, the academy's rival, offers a duel: he breaks one line of your code and you have two minutes to find it. Your wins are kept on your computer.
@@ -110,7 +110,8 @@ academy/
   course.js            Course page logic
   lesson.js            Mission page logic and the answer checker
   cast.js              The teaching characters: who gives each course, the hand-off and the duel with Bug
-  cast/                One face per character
+  cast/                The characters, cut out so they float
+  stage.js             The entrance scene: the teacher flies in and talks you into the course
   mascot.js            The helper: welcome animations and the chat panel
   python-runner.js     Runs student code in a web worker with a time limit
   python-worker.js     The worker that hosts Pyodide

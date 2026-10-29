@@ -142,6 +142,20 @@ body{background:var(--bg);color:var(--ink);font-family:var(--sk-font)}
 .stage.changing .code-window{animation:swap .6s ease,hover 7s ease-in-out .6s infinite}
 @keyframes swap{40%{transform:scale(.96) translateY(8px);opacity:.6}}
 
+/* The course's teacher floats in front of the figure or the code */
+.teach{position:absolute;z-index:3;left:-24%;bottom:-10%;display:flex;align-items:flex-end;gap:2px;pointer-events:none}
+.teach img{width:clamp(110px,11vw,170px);aspect-ratio:2/3;object-fit:contain;object-position:50% 100%;filter:drop-shadow(0 0 22px var(--t,#7deeff)) drop-shadow(0 18px 20px rgba(0,0,0,.6));animation:teach-float 3.6s ease-in-out infinite}
+.teach span{display:grid;gap:4px;margin-bottom:22px;font:700 9.5px/1 var(--sk-font);letter-spacing:.24em;color:var(--muted)}
+.teach b{font:700 20px/1 var(--sk-display);letter-spacing:0;color:var(--t,#7deeff)}
+.teach.pop img{animation:teach-pop .7s cubic-bezier(.3,1.5,.5,1),teach-float 3.6s ease-in-out .7s infinite}
+@keyframes teach-float{0%,100%{transform:translateY(0) rotate(-1deg)}50%{transform:translateY(-12px) rotate(1.5deg)}}
+@keyframes teach-pop{from{transform:scale(.2) rotate(-20deg);opacity:0;filter:brightness(3)}}
+@view-transition{navigation:auto}
+::view-transition-old(root){animation:vt-out .28s ease both}
+::view-transition-new(root){animation:vt-in .38s cubic-bezier(.2,.9,.3,1) both}
+@keyframes vt-out{to{opacity:0;transform:translateY(-14px) scale(.99)}}
+@keyframes vt-in{from{opacity:0;transform:translateY(18px)}}
+@media (prefers-reduced-motion:reduce){.teach img,.teach.pop img,::view-transition-old(root),::view-transition-new(root){animation:none}}
 @media (max-width:760px){.scene-center,.scene-dots,.scene-hint,.stage{display:none}.scene-body{grid-template-columns:1fr;align-content:center}.scene-foot{padding-right:84px}.scene-all{letter-spacing:.2em}}
 @media (prefers-reduced-motion:reduce){.code-window,.figure,.cw-output span,.scene-text.entering>*,.scene-text.entering-up>*{animation:none;opacity:1;transform:none}.cw-caret{animation:none}.stage::before,.scene-btn.down,.scene-eyebrow i{animation:none}.figure [class*="a-"],.orbit .rocket,.orbit .star{animation:none}.figure .a-draw{stroke-dashoffset:0}}
 </style></head><body>
@@ -163,6 +177,7 @@ body{background:var(--bg);color:var(--ink);font-family:var(--sk-font)}
       <a class="scene-cta" id="sceneCta" href="academy/course.html?c=programming">OPEN THE CLASSROOM <span aria-hidden="true">→</span></a>
     </div>
     <div class="stage" id="stage" aria-hidden="true">
+      <div class="teach" id="teach" hidden><img id="teachImg" alt=""><span><small>YOUR TEACHER</small><b id="teachName"></b></span></div>
       <div class="figure" id="figure" hidden></div>
       <div class="orbit" id="orbit" hidden aria-hidden="true">
         <svg viewBox="0 0 500 500">

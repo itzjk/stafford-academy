@@ -32,6 +32,17 @@
     axo: { name: 'Axo', role: 'Academy mascot', accent: '#ff9ecb', style: 'a cheerful axolotl who keeps your streak alive', hello: 'Axo! Keep the streak going!' }
   };
 
+  // What each character says about how they teach when they welcome you to a course.
+  var INTROS = {
+    zack: 'Here you learn by doing, one small step at a time.',
+    byte: 'Clean code, tiny steps, and errors are just clues.',
+    neura: 'We build the intuition first. The maths comes after, and it will make sense.',
+    chispa: 'Robots are three things: sense, think, act. I have four arms ready to show you.',
+    mate: 'Every problem here shrinks to numbers you can check by hand.',
+    voltio: 'Volts, pins and current. And safety first, always.',
+    kernel: 'I have seen every language come and go. The habits are what last.'
+  };
+
   // Who gives each course. Courses that are not listed get Zack.
   var LEADS = {
     programming: 'byte', javascript: 'byte', 'python-robotics': 'byte', 'embedded-linux': 'byte',
@@ -46,7 +57,7 @@
   function card(id) {
     var c = CAST[id] || CAST.zack;
     if (!CAST[id]) id = 'zack';
-    return { id: id, name: c.name, role: c.role, accent: c.accent, style: c.style, hello: c.hello, face: FACES + id + '.jpg' };
+    return { id: id, name: c.name, role: c.role, accent: c.accent, style: c.style, hello: c.hello, intro: INTROS[id] || '', face: FACES + id + '.webp' };
   }
 
   function lead(courseId) { return card(LEADS[courseId] || 'zack'); }

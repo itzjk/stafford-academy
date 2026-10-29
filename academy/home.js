@@ -199,6 +199,19 @@
       $('sceneLevel').textContent = c.level || '';
       $('sceneTitle').textContent = c.title;
       $('sceneSummary').textContent = c.summary || '';
+      // The teacher of the course pops in next to its figure or code.
+      if (window.Cast) {
+        var who = window.Cast.lead(c.id), teach = $('teach');
+        teach.hidden = false;
+        teach.style.setProperty('--t', who.accent);
+        if ($('teachName').textContent !== who.name) {
+          $('teachImg').src = who.face;
+          $('teachName').textContent = who.name;
+          teach.classList.remove('pop');
+          void teach.offsetWidth;
+          teach.classList.add('pop');
+        }
+      }
       var tags = $('sceneTags');
       A.clear(tags);
       [c.language === 'none' ? 'no code' : (c.language || 'python'), (c.hours || 0) + ' hours', (c.lessons || 0) + ' missions', done ? done + ' done' : null]

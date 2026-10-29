@@ -21,6 +21,36 @@
     try { return matchMedia('(prefers-reduced-motion: reduce)').matches; } catch (e) { return false; }
   };
 
+  // Reveals the text already inside a node one letter at a time, the way the
+  // characters talk. Calls done at the end and returns a function that
+  // finishes the text at once.
+  Academy.typewrite = function (node, msPerLetter, done) {
+    var parts = [];
+    var walker = document.createTreeWalker(node, NodeFilter.SHOW_TEXT);
+    while (walker.nextNode()) parts.push({ n: walker.currentNode, t: walker.currentNode.nodeValue });
+    var total = parts.reduce(function (sum, p) { return sum + p.t.length; }, 0);
+    var shown = 0, timer = null;
+    function paint(count) {
+      parts.forEach(function (p) {
+        p.n.nodeValue = p.t.slice(0, Math.max(0, count));
+        count -= p.t.length;
+      });
+    }
+    function finish() {
+      clearInterval(timer);
+      paint(total);
+      if (done) { var d = done; done = null; d(); }
+    }
+    if (!total || Academy.reducedMotion()) { finish(); return finish; }
+    paint(0);
+    timer = setInterval(function () {
+      shown += 1;
+      paint(shown);
+      if (shown >= total) finish();
+    }, msPerLetter || 18);
+    return finish;
+  };
+
   // ---------- progress ----------
   // Shape: { xp, courses: { [courseId]: { done: [lessonId] } }, last: { course, lesson, at } }
 

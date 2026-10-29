@@ -555,9 +555,11 @@
     var rootNode = node('div', 'mc-root');
     var button = node('button', 'mc-bot');
     button.type = 'button';
+    var float = node('span', 'mc-float');
     var art = node('img', 'mc-art');
     art.alt = '';
-    button.appendChild(art);
+    float.appendChild(art);
+    button.appendChild(float);
 
     var bubble = node('div', 'mc-bubble');
     bubble.hidden = true;
@@ -582,8 +584,16 @@
 
     // Puts on the face, the name and the colour of whoever speaks now.
     function dress(next) {
+      var changed = who !== (next || ZACK) && art.src;
       who = next || ZACK;
       art.src = face.src = who.face;
+      bubble.setAttribute('data-name', who.name);
+      // A new speaker pops in with a flash instead of just swapping the picture.
+      if (changed && !still) {
+        art.classList.remove('is-swapping');
+        void art.offsetWidth;
+        art.classList.add('is-swapping');
+      }
       nameText.textContent = who.name;
       button.setAttribute('aria-label', 'Ask ' + who.name + ', your helper');
       button.title = 'Ask ' + who.name + ' · ' + who.role;
@@ -865,17 +875,22 @@
       if (open) { hideBubble(); paint(); setTimeout(function () { input.focus(); }, 60); }
     }
 
-    var bubbleTimer = null;
+    var bubbleTimer = null, finishTyping = null;
+    // The character talks: the words appear letter by letter, and the button,
+    // if there is one, shows up when they finish.
     function say(text, ms, action) {
       if (open) return;
+      if (finishTyping) finishTyping();
       A.clear ? A.clear(bubbleText) : (bubbleText.innerHTML = '');
       renderText(bubbleText, text);
-      if (action) {
+      finishTyping = (A.typewrite || function (n, s, d) { d(); })(bubbleText, 16, function () {
+        finishTyping = null;
+        if (!action) return;
         var b = node('button', 'mc-bubble-b', action.label);
         b.type = 'button';
         b.addEventListener('click', function (e) { e.stopPropagation(); action.run(); });
         bubbleText.appendChild(b);
-      }
+      });
       bubble.hidden = false;
       bubble.classList.remove('is-in');
       void bubble.offsetWidth;
@@ -883,7 +898,7 @@
       clearTimeout(bubbleTimer);
       if (ms) bubbleTimer = setTimeout(hideBubble, ms);
     }
-    function hideBubble() { bubble.hidden = true; clearTimeout(bubbleTimer); }
+    function hideBubble() { if (finishTyping) finishTyping(); bubble.hidden = true; clearTimeout(bubbleTimer); }
 
     function jump() {
       if (still) return;
@@ -899,7 +914,8 @@
     }
 
     button.addEventListener('click', function () { toggle(); });
-    bubble.addEventListener('click', function () { toggle(true); });
+    // A click on the bubble while it is still talking finishes the sentence first.
+    bubble.addEventListener('click', function () { if (finishTyping) finishTyping(); else toggle(true); });
     bubbleClose.addEventListener('click', function (e) { e.stopPropagation(); hideBubble(); });
     closeBtn.addEventListener('click', function () { toggle(false); });
     restart.addEventListener('click', function () { thread = []; saveThread(); paint(); input.focus(); });
@@ -929,15 +945,26 @@
     quickButtons();
 
     // The helper flies in when the page opens. The course arrives a moment
-    // later, so the welcome waits until the robot has landed.
+    // later, so the welcome waits until it has landed. A page with its own
+    // entrance (stage.js) holds the helper back and lands it when it is done.
     var landed = false, pending = null;
-    setTimeout(function () {
-      greet();
-      setTimeout(function () {
+    function arrive(instant) {
+      if (instant) {
+        button.classList.add('is-landed');
         landed = true;
         if (pending) { say(pending, 10000); pending = null; }
-      }, still ? 0 : 1100);
-    }, still ? 0 : 350);
+        return;
+      }
+      setTimeout(function () {
+        greet();
+        setTimeout(function () {
+          landed = true;
+          if (pending) { say(pending, 10000); pending = null; }
+        }, still ? 0 : 1100);
+      }, still ? 0 : 350);
+    }
+    if (options.hold) rootNode.classList.add('is-held');
+    else arrive();
 
     return {
       setCourse: function (course) { ctx.course = course; leadOf(course); quickButtons(); },
@@ -945,6 +972,12 @@
       setCharacter: function (c) { dress(c); if (open) paint(); },
       character: function () { return who; },
       open: function () { toggle(true); },
+      jump: jump,
+      // Where the character stands, so another scene can fly it there.
+      spot: function () { return button.getBoundingClientRect(); },
+      land: function () { rootNode.classList.remove('is-held'); arrive(true); },
+      // Hides the corner character while the page shows it somewhere else.
+      tuck: function (hide) { rootNode.classList.toggle('is-held', !!hide); if (hide) hideBubble(); },
       welcome: function (text) { if (landed) say(text, 10000); else pending = text; },
       say: say
     };
