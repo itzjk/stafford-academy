@@ -18,7 +18,7 @@
   }
 
   function paintHeader(course) {
-    document.title = course.title + ' · Stafford Academy';
+    document.title = course.title + ' · Zerack Academy';
     document.body.style.setProperty('--course-accent', course.accent || '#4fd8ff');
     A.el('barTitle').textContent = String(course.title || '').toUpperCase();
     A.el('barSubtitle').textContent = course.world || '';
@@ -128,7 +128,7 @@
       mascot.setCourse(course);
       mascot.welcome(done.length
         ? 'Hi, welcome back to **' + course.title + '**! 👋 You have done ' + done.length + ' of ' + all.length + ' missions. Let\'s keep going!'
-        : 'Hi! 👋 Welcome to **' + course.title + '**. ' + all.length + ' missions are waiting for you. Tap me whenever you get stuck.');
+        : 'Hi! 👋 I am **' + mascot.character().name + '** and I give **' + course.title + '**. ' + all.length + ' missions are waiting for you. Tap me whenever you get stuck.');
     }
   });
 })();

@@ -42,13 +42,13 @@
      "title": "const for values that never change",
      "goal": "Use const to store a value that should not be reassigned.",
      "theory": "`const` is like `let` but the name can never be pointed at a different value after the first assignment. If you try, JavaScript throws a `TypeError`.\n\n```javascript\nconst PI = 3.14159;\n```\n\nUsing `const` is the right default. Switch to `let` only when you know the value will need to change. This way anyone reading the code knows at a glance that a `const` name will hold the same value from that line on.\n\n`var` is the old way and has confusing scoping rules. Do not use it in new code.",
-     "task": "Declare a constant called `SITE_NAME` and assign the string `\"Stafford Academy\"` to it.",
+     "task": "Declare a constant called `SITE_NAME` and assign the string `\"Zerack Academy\"` to it.",
      "starter": "// write your code here",
-     "solution": "const SITE_NAME = \"Stafford Academy\";",
+     "solution": "const SITE_NAME = \"Zerack Academy\";",
      "hint": "Replace `let` with `const` and give it the right name and value.",
      "check": {
       "type": "contains",
-      "value": ["const SITE_NAME", "\"Stafford Academy\""]
+      "value": ["const SITE_NAME", "\"Zerack Academy\""]
      },
      "xp": 20
     },

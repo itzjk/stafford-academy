@@ -1,13 +1,13 @@
-# Contributing to Stafford Academy
+# Contributing to Zerack Academy
 
-Thank you for helping! Stafford Academy is a free, non-profit academy, and every mission, fix or idea makes it better for a student somewhere. You do not need to be an expert: a clear explanation or a well-made exercise is as valuable as code.
+Thank you for helping! Zerack Academy is a free, non-profit academy, and every mission, fix or idea makes it better for a student somewhere. You do not need to be an expert: a clear explanation or a well-made exercise is as valuable as code.
 
 ## Ways to help
 
 - **Improve a mission.** Fix a typo, a confusing explanation, a wrong answer or a check that rejects a correct answer.
 - **Add missions or a whole course.** Python courses, or courses with no code at all (multiple choice, calculations or prompt writing).
 - **Translate.** Help bring the academy to students in other languages.
-- **Improve the app.** The helper robot Zerack, the home page figures, accessibility, performance.
+- **Improve the app.** The helper and its cast of characters, the home page figures, accessibility, performance.
 - **Report a problem.** Open an issue, even if you do not know how to fix it.
 
 Looking for a first task? Check the issues labelled [good first issue](https://github.com/itzjk/stafford-academy/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22).
@@ -16,7 +16,7 @@ Looking for a first task? Check the issues labelled [good first issue](https://g
 
 1. Fork and clone the repository.
 2. Open `chrome://extensions`, turn on **Developer mode**, click **Load unpacked** and choose the repository folder.
-3. Click the Stafford Academy icon in the toolbar. After you edit a file, press the reload button on the extension card.
+3. Click the Zerack Academy icon in the toolbar. After you edit a file, press the reload button on the extension card.
 
 No build step and no dependencies: it is plain HTML, CSS and JavaScript, plus Python for the tools.
 
@@ -57,7 +57,7 @@ Look at an existing course of the same kind and copy its shape.
 
 ```bash
 python3 tools/check_course.py                 # checks every course
-python3 tools/build_search_index.py           # lets Zerack answer questions about your missions
+python3 tools/build_search_index.py           # lets the helper answer questions about your missions
 python3 tools/build_search_index.py --check   # fails if you forgot the line above
 node tools/test_missions.mjs my-course        # optional: checks the real app accepts each solution
 ```

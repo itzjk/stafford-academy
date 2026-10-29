@@ -375,14 +375,14 @@
   function start() {
     var l = state.lesson, course = state.course;
     var language = l.language || course.language || 'python';
-    document.title = l.title + ' · Stafford Academy';
+    document.title = l.title + ' · Zerack Academy';
     document.body.style.setProperty('--course-accent', course.accent || '#4fd8ff');
 
     if (mascot) {
       mascot.setLesson({ course: course, chapter: state.chapter, lesson: l });
       var greeted = false;
-      try { greeted = sessionStorage.getItem('stafford.mascot.greeted') === '1'; sessionStorage.setItem('stafford.mascot.greeted', '1'); } catch (e) {}
-      if (!greeted) mascot.welcome('Hi! 👋 I can see this mission. If your code fails, tap me and I will explain the error.');
+      try { greeted = sessionStorage.getItem('zerack.mascot.greeted') === '1'; sessionStorage.setItem('zerack.mascot.greeted', '1'); } catch (e) {}
+      if (!greeted) mascot.welcome((mascot.character().hello || 'Hi! 👋') + ' I can see this mission. If your code fails, tap me and I will explain the error.');
     }
 
     A.el('backLink').href = 'course.html?c=' + encodeURIComponent(courseId);
@@ -550,6 +550,21 @@
       showMessage('is-idle', kind === 'prompt' ? 'Example prompt loaded.' : 'Solution loaded.', ['Read it, then press check. It counts the same, but you learn less.']);
     });
 
+    // The course's character, the hand-off to Kernel or Mate and the duel with Bug.
+    if (window.Cast) {
+      window.Cast.lesson({
+        mascot: mascot,
+        courseId: courseId,
+        code: kind === 'code',
+        getCode: function () { return code.value; },
+        setCode: function (text, save) { code.value = text; if (save) saveDraft(text); },
+        passes: function (text) {
+          if (runsCode(l) && window.PythonRunner) return runAndCheck(text, l, language).then(function (r) { return !!r.ok; });
+          return Promise.resolve(review(text, l, language).ok);
+        }
+      });
+    }
+
     if (state.alreadyDone) paintNext(false, 0);
     A.paintXp(state.progress);
   }
@@ -557,7 +572,7 @@
   function fail(message) {
     A.el('lessonTitle').textContent = 'Mission not available';
     A.el('lessonGoal').textContent = message;
-    document.title = 'Mission not available · Stafford Academy';
+    document.title = 'Mission not available · Zerack Academy';
     A.el('barSubtitle').textContent = 'Nothing to show';
     A.el('editorLang').textContent = '';
   }

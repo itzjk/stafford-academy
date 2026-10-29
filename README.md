@@ -1,4 +1,4 @@
-<h1 align="center">Stafford Academy</h1>
+<h1 align="center">Zerack Academy</h1>
 
 <p align="center"><strong>Learn programming, AI, electronics and robotics one mission at a time.<br>Free, open and with nothing in your way.</strong></p>
 
@@ -10,18 +10,18 @@
   <a href="CONTRIBUTING.md"><img alt="Contributions welcome" src="https://img.shields.io/badge/contributions-welcome-34d399"></a>
 </p>
 
-<p align="center"><img src=".github/assets/demo.gif" alt="Stafford Academy: the home page with one course per screen, and missions graded instantly" width="800"></p>
+<p align="center"><img src=".github/assets/demo.gif" alt="Zerack Academy: the home page with one course per screen, and missions graded instantly" width="800"></p>
 
-Stafford Academy is a free, open-source learning platform that runs as a Chrome extension. It teaches through short, hands-on missions: you read a little theory, then write real code, answer a question, solve a calculation or write a prompt, and get instant feedback, all inside your browser.
+Zerack Academy is a free, open-source learning platform that runs as a Chrome extension. It teaches through short, hands-on missions: you read a little theory, then write real code, answer a question, solve a calculation or write a prompt, and get instant feedback, all inside your browser.
 
 ## Why it exists
 
-Stafford Academy is a non-profit project. It was built so that students, and anyone who wants to learn to code, can start without obstacles:
+Zerack Academy is a non-profit project. It was built so that students, and anyone who wants to learn to code, can start without obstacles:
 
 - **Free, forever.** No payments, no subscriptions, no premium tier.
 - **No account.** Open it and start learning. Your progress is saved on your own computer.
 - **No installs.** Python runs directly in the browser, so it works on school and library computers too.
-- **Private by design.** No tracking and no analytics. Your code and your progress stay on your computer, unless you choose to connect Zerack to an online AI. Read the [privacy policy](PRIVACY.md).
+- **Private by design.** No tracking and no analytics. Your code and your progress stay on your computer, unless you choose to connect the helper to an online AI. Read the [privacy policy](PRIVACY.md).
 - **Open source.** Anyone can read, use, share and improve the code under the MIT License.
 
 It is made for anyone who wants to find their way in the world of technology, whether they are writing their first line of code or building their first robot.
@@ -63,25 +63,28 @@ Every mission gives you:
 - A **hint** when you are stuck, and the full solution if you really need it.
 - **XP and levels** that track how far you have come.
 
-### Meet Zerack, your helper
+### Meet the teachers
 
-Zerack is the little robot in the corner of every page. It welcomes you to each classroom and cheers when you pass a mission. When your code fails, it explains the error in plain words.
+Every course has its own character, who waits in the corner of the page and gives the class: **Byte** teaches programming, **Voltio** electronics, **Chispa** robotics, **Mate** the courses heavy on maths and **Neura** AI and vision. **Zack** welcomes you on the home page. They cheer when you pass a mission and, when your code fails, explain the error in plain words and in their own style.
 
-Zerack uses the best AI available on each computer:
+- **Hand-off.** After two misses in a row, the teacher offers to call **Kernel**, the veteran mentor, or **Mate** in courses heavy on maths.
+- **Duel with Bug.** When you pass a code mission, **Bug**, the academy's rival, offers a duel: he breaks one line of your code and you have two minutes to find it. Your wins are kept on your computer.
+
+The helper uses the best AI available on each computer:
 
 1. **Chrome's built-in AI (Gemini Nano).** On computers that support it, the model runs on the computer itself. It is free, needs no key or account, and sends nothing over the internet.
-2. **Connect AI with a free Gemini key.** On any computer with internet, press **Connect AI** in Zerack's panel and paste a free API key from [Google AI Studio](https://aistudio.google.com/apikey). Google only issues keys to adults, so a teacher or parent sets it up once. The key is saved only on that computer and never in this repository. When it is used, the question and the student's code are sent to Google to get the answer.
-3. **Offline answers.** Without AI, Zerack still explains Python errors, gives the mission hint and restates the task. It also answers questions about core Python concepts, and about any topic the courses teach by pointing to the mission that teaches it.
+2. **Connect AI with a free Gemini key.** On any computer with internet, press **Connect AI** in the helper's panel and paste a free API key from [Google AI Studio](https://aistudio.google.com/apikey). Google only issues keys to adults, so a teacher or parent sets it up once. The key is saved only on that computer and never in this repository. When it is used, the question and the student's code are sent to Google to get the answer.
+3. **Offline answers.** Without AI, the helper still explains Python errors, gives the mission hint and restates the task. It also answers questions about core Python concepts, and about any topic the courses teach by pointing to the mission that teaches it.
 
 ## Getting started
 
-Stafford Academy is coming to the **Chrome Web Store**. Until then, you can load it by hand in a minute:
+Zerack Academy is coming to the **Chrome Web Store**. Until then, you can load it by hand in a minute:
 
 1. Download this repository (**Code → Download ZIP**) and unzip it.
 2. Open `chrome://extensions` in Chrome.
 3. Turn on **Developer mode** in the top right corner.
 4. Click **Load unpacked** and choose the unzipped folder, the one that contains `manifest.json`.
-5. Click the Stafford Academy icon in the toolbar to open the academy.
+5. Click the Zerack Academy icon in the toolbar to open the academy.
 
 The first time you run Python it takes a few seconds to load. After that it is instant.
 
@@ -106,11 +109,13 @@ academy/
   home.js              Home page scene and live code window
   course.js            Course page logic
   lesson.js            Mission page logic and the answer checker
-  mascot.js            Zerack: welcome animations and the helper panel
+  cast.js              The teaching characters: who gives each course, the hand-off and the duel with Bug
+  cast/                One face per character
+  mascot.js            The helper: welcome animations and the chat panel
   python-runner.js     Runs student code in a web worker with a time limit
   python-worker.js     The worker that hosts Pyodide
   academy.css          Styles for the course and mission pages
-  mascot.css           Styles for Zerack
+  mascot.css           Styles for the helper and the cast cards
   art/                 Animated figures for the home page, one per course
   courses/             catalog.json, one JSON file per course and search-index.json
   fonts/               Space Grotesk
@@ -118,21 +123,21 @@ lib/pyodide/           Pyodide: Python compiled to WebAssembly
 icons/                 Extension icons and the logo
 tools/
   check_course.py        Checks every mission before it goes in (run it before a pull request)
-  build_search_index.py  Rebuilds Zerack's offline index of every mission
+  build_search_index.py  Rebuilds the helper's offline index of every mission
   test_missions.mjs      Opens every mission in headless Chrome and checks the app accepts its solution
 ```
 
-Each course is a plain JSON file: `chapters → lessons`, and every lesson has a `theory`, a `task`, a `hint` and a `check`. Code missions add `starter` code and a `solution`; missions without code use a `choice`, `number` or `prompt` check. To add or improve a mission, edit the JSON, run `python3 tools/check_course.py` to check it and `python3 tools/build_search_index.py` so Zerack learns it too, then reload the extension.
+Each course is a plain JSON file: `chapters → lessons`, and every lesson has a `theory`, a `task`, a `hint` and a `check`. Code missions add `starter` code and a `solution`; missions without code use a `choice`, `number` or `prompt` check. To add or improve a mission, edit the JSON, run `python3 tools/check_course.py` to check it and `python3 tools/build_search_index.py` so the helper learns it too, then reload the extension.
 
 ## Contributing
 
-Stafford Academy is built in the open, and we would love your help: new missions, fixes to existing ones, translations, whole new courses or improvements to the app itself. You do not need to be an expert, a clear explanation is as valuable as code.
+Zerack Academy is built in the open, and we would love your help: new missions, fixes to existing ones, translations, whole new courses or improvements to the app itself. You do not need to be an expert, a clear explanation is as valuable as code.
 
 - Read the [contributing guide](CONTRIBUTING.md): how a course is made and how to check your work.
 - Pick a [good first issue](https://github.com/itzjk/stafford-academy/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22).
 - Share ideas and questions in [Discussions](https://github.com/itzjk/stafford-academy/discussions).
 
-If Stafford Academy helped you or your school, a ⭐ on the repository helps others find it.
+If Zerack Academy helped you or your school, a ⭐ on the repository helps others find it.
 
 ## Credits
 

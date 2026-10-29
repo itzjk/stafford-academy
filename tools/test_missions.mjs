@@ -31,7 +31,7 @@ const BASE = `http://127.0.0.1:${server.address().port}`;
 // ---------- a private headless Chrome ----------
 // Chrome picks a free debugging port and writes it into our own temporary
 // profile, so this can only connect to the browser it started.
-const profile = fs.mkdtempSync(path.join(os.tmpdir(), 'stafford-test-'));
+const profile = fs.mkdtempSync(path.join(os.tmpdir(), 'zerack-test-'));
 const chrome = spawn(CHROME, ['--headless=new', '--remote-debugging-port=0', `--user-data-dir=${profile}`,
   '--no-first-run', '--no-default-browser-check', '--mute-audio', 'about:blank'], { stdio: 'ignore' });
 

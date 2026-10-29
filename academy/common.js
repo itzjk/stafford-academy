@@ -4,6 +4,8 @@
   'use strict';
 
   var IN_EXTENSION = typeof chrome !== 'undefined' && chrome.runtime && chrome.runtime.id;
+  // Saved data keeps the 'stafford.' prefix from before the academy was
+  // called Zerack, so nobody loses their progress, drafts or AI key.
   var PROGRESS_KEY = 'stafford.progress';
 
   var Academy = {};
@@ -126,7 +128,7 @@
     var e = course && course.error;
     if (e === 'missing') return 'This course does not exist yet.';
     if (e === 'unreadable') return 'The course file is there but its contents could not be read.';
-    if (e === 'blocked') return 'The course file could not be read. Open the academy from the Stafford Academy button in the browser toolbar.';
+    if (e === 'blocked') return 'The course file could not be read. Open the academy from the Zerack Academy button in the browser toolbar.';
     return 'The course file loaded but it has no chapters in it.';
   };
 

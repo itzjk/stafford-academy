@@ -36,10 +36,10 @@
     if (mascot) {
       mascot.welcome(last && startAt >= 0 && courses[startAt].id === last
         ? 'Hi, welcome back! 👋 Ready to keep going with **' + courses[startAt].title + '**?'
-        : 'Hi! 👋 I am **Zerack**, welcome to **Stafford Academy**. Scroll to explore the courses. New to coding? Start with **Programming from Zero**.');
+        : 'Hi! 👋 I am **Zack**, welcome to **Zerack Academy**. Scroll to explore the courses. New to coding? Start with **Programming from Zero**.');
     }
   }).catch(function () {
-    if (mascot) mascot.welcome('Hi! 👋 Welcome to **Stafford Academy**.');
+    if (mascot) mascot.welcome('Hi! 👋 Welcome to **Zerack Academy**.');
   });
 
   // ---------- course figure ----------

@@ -1,5 +1,6 @@
-// Zerack, the academy mascot and the helper in the bottom right corner.
-// It answers with the best brain available: Chrome's on-device AI, then
+// The helper in the bottom right corner. It wears the face of the course's
+// character from cast.js (Zack outside a course) and answers in their style,
+// with the best brain available: Chrome's on-device AI, then
 // Gemini if someone connected a key, then offline answers built from the open
 // mission (task, hint, checker output) and a guide to Python errors.
 (function (root) {
@@ -9,37 +10,11 @@
   root.__mascot = true;
 
   var A = root.Academy || {};
-  var NAME = 'Zerack';
-  var THREAD_KEY = 'stafford.mascot.thread.';
+  var THREAD_KEY = 'zerack.mascot.thread.';
+  var ZACK = root.Cast ? root.Cast.card('zack') : { id: 'zack', name: 'Zack', role: 'Welcome and fundamentals', accent: '#00d4ff', style: '', hello: '', face: '' };
+  var who = ZACK;
   var still = false;
   try { still = matchMedia('(prefers-reduced-motion: reduce)').matches; } catch (e) {}
-
-  // ---------- the robot ----------
-
-  var ROBOT_SVG =
-    '<svg class="mc-svg" viewBox="0 0 120 160" aria-hidden="true">' +
-    '<defs>' +
-    '<linearGradient id="mcMetal" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffffff"/><stop offset=".55" stop-color="#dfe6f2"/><stop offset="1" stop-color="#aab6cc"/></linearGradient>' +
-    '<linearGradient id="mcVisor" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1b2540"/><stop offset="1" stop-color="#0a0f1d"/></linearGradient>' +
-    '<radialGradient id="mcFlame" cx=".5" cy=".2" r=".8"><stop offset="0" stop-color="#fff6c2"/><stop offset=".45" stop-color="#ffd43b"/><stop offset="1" stop-color="#ff6a2b" stop-opacity="0"/></radialGradient>' +
-    '</defs>' +
-    '<g class="mc-flame"><ellipse cx="46" cy="140" rx="7" ry="16" fill="url(#mcFlame)"/><ellipse cx="74" cy="140" rx="7" ry="16" fill="url(#mcFlame)"/></g>' +
-    '<rect x="38" y="112" width="16" height="14" rx="4" fill="#3776ab" stroke="#0d1424" stroke-width="2.5"/>' +
-    '<rect x="66" y="112" width="16" height="14" rx="4" fill="#3776ab" stroke="#0d1424" stroke-width="2.5"/>' +
-    '<g class="mc-arm-l"><rect x="16" y="80" width="14" height="30" rx="7" fill="url(#mcMetal)" stroke="#0d1424" stroke-width="2.5"/><circle cx="23" cy="112" r="6" fill="#ffd43b" stroke="#0d1424" stroke-width="2.5"/></g>' +
-    '<g class="mc-arm-r"><rect x="90" y="80" width="14" height="30" rx="7" fill="url(#mcMetal)" stroke="#0d1424" stroke-width="2.5"/><circle cx="97" cy="112" r="6" fill="#ffd43b" stroke="#0d1424" stroke-width="2.5"/></g>' +
-    '<rect x="28" y="74" width="64" height="44" rx="16" fill="url(#mcMetal)" stroke="#0d1424" stroke-width="2.8"/>' +
-    '<rect x="46" y="84" width="28" height="18" rx="6" fill="#0d1424"/>' +
-    '<rect class="mc-chest" x="50" y="88" width="20" height="10" rx="3" fill="#7deeff"/>' +
-    '<line x1="60" y1="20" x2="60" y2="8" stroke="#0d1424" stroke-width="3" stroke-linecap="round"/>' +
-    '<circle class="mc-antenna" cx="60" cy="7" r="5.5" fill="#ffd43b" stroke="#0d1424" stroke-width="2.5"/>' +
-    '<rect x="20" y="18" width="80" height="58" rx="26" fill="url(#mcMetal)" stroke="#0d1424" stroke-width="2.8"/>' +
-    '<rect x="30" y="30" width="60" height="34" rx="16" fill="url(#mcVisor)"/>' +
-    '<path d="M36 36 q10 -5 22 -2" stroke="rgba(255,255,255,.35)" stroke-width="3" fill="none" stroke-linecap="round"/>' +
-    '<g class="mc-eyes"><ellipse cx="48" cy="48" rx="5" ry="6.5" fill="#7deeff"/><ellipse cx="72" cy="48" rx="5" ry="6.5" fill="#7deeff"/></g>' +
-    '<path class="mc-mouth" d="M52 57 q8 6 16 0" stroke="#7deeff" stroke-width="2.6" fill="none" stroke-linecap="round"/>' +
-    '<circle cx="36" cy="58" r="3.5" fill="#ff8fa3" opacity=".55"/><circle cx="84" cy="58" r="3.5" fill="#ff8fa3" opacity=".55"/>' +
-    '</svg>';
 
   function node(tag, cls, txt) {
     var n = document.createElement(tag);
@@ -138,7 +113,7 @@
     { k: /\bai\b|\bia\b|artificial intelligence|inteligencia artificial|chatgpt|gemini|claude|\bllms?\b|language model|modelo de lenguaje/, d: 'A language model predicts the next piece of text, over and over. That makes it great at explaining and drafting, and also able to be confidently wrong. Use it to **understand**, then check what it says by running and testing the code. The **Learn AI** course teaches exactly this, with no code.' },
     // Small talk
     { k: /thank|gracias|thx/, d: 'You are welcome! Keep going, one mission at a time. 🚀', small: true },
-    { k: /who are you|qui[eé]n eres|your name|tu nombre|who made|qui[eé]n te (hizo|cre)/, d: 'I am **Zerack**, the helper robot of Stafford Academy, made by ZERACK. I welcome you to each classroom, explain errors and give hints.', small: true },
+    { k: /who are you|qui[eé]n eres|your name|tu nombre|who made|qui[eé]n te (hizo|cre)/, d: 'I am one of the teachers of **Zerack Academy**, made by ZERACK. Every course has its own character: we welcome you to each classroom, explain errors and give hints.', small: true },
     { k: /^(hi|hey|hello|hola|buenas|qu[eé] tal)\b/, d: 'Hi! Ask me about your code, an error, or a Python word like `list`, `for` or `def`.', small: true }
   ];
 
@@ -357,15 +332,22 @@
   // ---------- on-device AI ----------
   // Chrome ships a small model (Gemini Nano) that runs on the computer itself:
   // free, no API key, no account, and nothing leaves the machine. When the
-  // computer cannot run it, Zerack falls back to the offline answers above.
+  // computer cannot run it, the helper falls back to the offline answers above.
 
   var SYSTEM_PROMPT =
-    'You are Zerack, a friendly robot tutor inside Stafford Academy, a free app where students learn Python. ' +
+    'You are a friendly tutor inside Zerack Academy, a free app where students learn to code, AI, electronics and robotics. ' +
     'Explain things simply, like a patient teacher talking to a beginner. Keep answers short: at most about 120 words. ' +
     'Use Markdown: `inline code`, **bold** and ```python fenced blocks```. ' +
     'Never hand over the full solution to a mission. Guide with questions, hints and tiny examples instead, ' +
     'unless the student says they already tried and explicitly asks for the answer. ' +
     'Answer in the same language the student writes in.';
+
+  // Who is speaking changes with the course and with a hand-off, so the
+  // character goes with every question instead of into the system prompt.
+  function persona() {
+    return 'You are ' + who.name + ', the ' + who.role.toLowerCase() + ' character of Zerack Academy' +
+      (who.style ? ': ' + who.style : '') + '. Stay in character, but keep every rule above.';
+  }
 
   var ai = { state: 'unknown', base: null, creating: null };
   var AI_TIMEOUT_MS = 20000;
@@ -439,8 +421,8 @@
   function aiAnswer(question, ctx, history, onText, onProgress) {
     return aiSession(onProgress).then(function (base) {
       return base.clone().then(function (s) {
-        var recent = history.slice(-6).map(function (m) { return (m.who === 'me' ? 'Student: ' : 'Zerack: ') + trim(m.text, 400); }).join('\n');
-        var prompt = (contextFor(ctx) ? 'Context:\n' + contextFor(ctx) + '\n\n' : '') +
+        var recent = history.slice(-6).map(function (m) { return (m.who === 'me' ? 'Student: ' : who.name + ': ') + trim(m.text, 400); }).join('\n');
+        var prompt = persona() + '\n\n' + (contextFor(ctx) ? 'Context:\n' + contextFor(ctx) + '\n\n' : '') +
           (recent ? 'Conversation so far:\n' + recent + '\n\n' : '') +
           'Student: ' + question;
         var stream = s.promptStreaming(prompt);
@@ -535,7 +517,7 @@
       method: 'POST',
       headers: { 'content-type': 'application/json', 'x-goog-api-key': cloud.key },
       body: JSON.stringify({
-        systemInstruction: { parts: [{ text: SYSTEM_PROMPT }] },
+        systemInstruction: { parts: [{ text: SYSTEM_PROMPT + ' ' + persona() }] },
         contents: contents,
         generationConfig: { temperature: 0.6, maxOutputTokens: 2048 }
       })
@@ -573,9 +555,9 @@
     var rootNode = node('div', 'mc-root');
     var button = node('button', 'mc-bot');
     button.type = 'button';
-    button.setAttribute('aria-label', 'Ask ' + NAME + ', your helper');
-    button.title = 'Ask ' + NAME;
-    button.innerHTML = ROBOT_SVG;
+    var art = node('img', 'mc-art');
+    art.alt = '';
+    button.appendChild(art);
 
     var bubble = node('div', 'mc-bubble');
     bubble.hidden = true;
@@ -588,15 +570,26 @@
 
     var panel = node('section', 'mc-panel');
     panel.hidden = true;
-    panel.setAttribute('aria-label', NAME + ', your helper');
     var head = node('header', 'mc-head');
-    var face = node('span', 'mc-face');
-    face.innerHTML = ROBOT_SVG;
+    var face = node('img', 'mc-face');
+    face.alt = '';
     var nameBox = node('span', 'mc-name');
-    nameBox.appendChild(node('b', null, NAME));
+    var nameText = node('b');
+    nameBox.appendChild(nameText);
     function offlineLabel() { return page === 'lesson' ? 'sees this mission · offline mode' : 'your helper · offline mode'; }
     var subtitle = node('small', null, offlineLabel());
     nameBox.appendChild(subtitle);
+
+    // Puts on the face, the name and the colour of whoever speaks now.
+    function dress(next) {
+      who = next || ZACK;
+      art.src = face.src = who.face;
+      nameText.textContent = who.name;
+      button.setAttribute('aria-label', 'Ask ' + who.name + ', your helper');
+      button.title = 'Ask ' + who.name + ' · ' + who.role;
+      panel.setAttribute('aria-label', who.name + ', your helper');
+      rootNode.style.setProperty('--mc-acc', who.accent);
+    }
     function statusLabel() {
       if (ai.state === 'available') return 'AI on · runs on this computer';
       if (cloud.key) return 'AI on · Gemini';
@@ -639,10 +632,10 @@
       var state = node('p', 'mc-state');
       if (ai.state === 'available') state.textContent = 'Chrome\'s built-in AI is on for this computer. It is free and private, so you do not need a key.';
       else if (cloud.key) state.textContent = 'Connected to Gemini (' + String(cloud.model || '').replace('models/', '') + ') with the key ending in ' + cloud.key.slice(-4) + '.';
-      else state.textContent = 'Not connected. Zerack can explain errors, give hints and teach Python basics, but it cannot answer other questions yet.';
+      else state.textContent = 'Not connected. ' + who.name + ' can explain errors, give hints and teach Python basics, but it cannot answer other questions yet.';
       settings.appendChild(state);
       settings.appendChild(renderInto(node('div', 'mc-help'),
-        'Paste a **free Gemini API key** and Zerack can answer any question. Get one at Google AI Studio. Google only gives keys to people 18 or older, so ask a teacher or a parent.\n\n' +
+        'Paste a **free Gemini API key** and ' + who.name + ' can answer any question. Get one at Google AI Studio. Google only gives keys to people 18 or older, so ask a teacher or a parent.\n\n' +
         'The key is saved **only on this computer**. When it is used, your question and your code are sent to Google to get the answer.'));
       var link = node('a', 'mc-link', 'Get a free key at aistudio.google.com ↗');
       link.href = 'https://aistudio.google.com/apikey';
@@ -709,6 +702,7 @@
     rootNode.appendChild(button);
     document.body.appendChild(rootNode);
 
+    dress(ZACK);
     var ctx = { course: null, lesson: null };
     var threadKey = THREAD_KEY + page;
     var thread = [];
@@ -743,9 +737,10 @@
     }
 
     function panelGreeting() {
-      if (ctx.lesson) return 'I can see this mission, your code and what the checker answered. Tap a button or ask in your own words.';
-      if (ctx.course) return 'Hi! This is **' + ctx.course.title + '**. Ask me about any Python word, or open a mission and I will help you with it.';
-      return 'Hi! I am ' + NAME + '. Pick a course to start. If you are new, **Programming from Zero** is the first step.';
+      var hello = who.hello ? who.hello + ' ' : '';
+      if (ctx.lesson) return hello + 'I can see this mission, your code and what the checker answered. Tap a button or ask in your own words.';
+      if (ctx.course) return hello + 'This is **' + ctx.course.title + '**. Ask me about any Python word, or open a mission and I will help you with it.';
+      return 'Hi! I am **' + who.name + '**. Pick a course to start. If you are new, **Programming from Zero** is the first step.';
     }
 
     var thinking = false;
@@ -776,7 +771,7 @@
           } else if (res.kind === 'topic') {
             finishOffline({ who: 'mascot', text: res.text });
           } else {
-            // A question outside what Zerack knows offline: offer to connect
+            // A question outside what the helper knows offline: offer to connect
             // AI right there, with a button that opens the key screen.
             finishOffline({ who: 'mascot', text: 'I do not know that one yet. **Want me to answer anything you ask?** Connect AI and I can.', action: 'connect' });
           }
@@ -929,9 +924,11 @@
       }
     });
 
+    function leadOf(course) { if (root.Cast && course && course.id) dress(root.Cast.lead(course.id)); }
+
     quickButtons();
 
-    // The robot flies in when the page opens. The course arrives a moment
+    // The helper flies in when the page opens. The course arrives a moment
     // later, so the welcome waits until the robot has landed.
     var landed = false, pending = null;
     setTimeout(function () {
@@ -943,8 +940,11 @@
     }, still ? 0 : 350);
 
     return {
-      setCourse: function (course) { ctx.course = course; quickButtons(); },
-      setLesson: function (m) { ctx.lesson = m; ctx.course = m && m.course; currentLesson = m; quickButtons(); },
+      setCourse: function (course) { ctx.course = course; leadOf(course); quickButtons(); },
+      setLesson: function (m) { ctx.lesson = m; ctx.course = m && m.course; currentLesson = m; leadOf(ctx.course); quickButtons(); },
+      setCharacter: function (c) { dress(c); if (open) paint(); },
+      character: function () { return who; },
+      open: function () { toggle(true); },
       welcome: function (text) { if (landed) say(text, 10000); else pending = text; },
       say: say
     };

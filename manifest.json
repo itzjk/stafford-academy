@@ -1,6 +1,6 @@
 {
   "manifest_version": 3,
-  "name": "Stafford Academy",
+  "name": "Zerack Academy",
   "version": "1.0.0",
   "description": "Learn Python, AI, electronics and robotics one mission at a time. 22 free courses in your browser, no installs, no account.",
   "icons": {
@@ -9,7 +9,7 @@
     "128": "icons/icon128.png"
   },
   "action": {
-    "default_title": "Open Stafford Academy"
+    "default_title": "Open Zerack Academy"
   },
   "background": {
     "service_worker": "background.js"
