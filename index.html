@@ -25,6 +25,7 @@ body{background:var(--bg);color:var(--ink);font-family:var(--sk-font)}
 .scene-center{font-size:12px;letter-spacing:.42em;color:#6f7689}
 .scene-count{font:600 14px/1 var(--sk-font);letter-spacing:.2em;color:#555c6e}
 .scene-count b{color:var(--ink)}
+.scene-labs{display:flex;gap:10px}.scene-labs a{padding:8px 13px;border-radius:999px;border:1px solid rgba(0,240,255,.45);color:#00f0ff;font:700 11px/1 var(--sk-font);letter-spacing:.2em;box-shadow:0 0 16px rgba(0,240,255,.12)}.scene-labs a:hover{background:rgba(0,240,255,.1)}
 .scene-ghost{position:absolute;left:clamp(0px,2vw,30px);top:50%;transform:translateY(-50%);font:700 min(34vw,70vh)/1 var(--sk-display);color:transparent;-webkit-text-stroke:1px rgba(255,255,255,.06);pointer-events:none;user-select:none}
 .scene-body{flex:1;min-height:0;display:grid;grid-template-columns:1.2fr .8fr;align-items:center;gap:24px;padding:2vh 0}
 .scene-text{max-width:680px}
@@ -165,6 +166,7 @@ body{background:var(--bg);color:var(--ink);font-family:var(--sk-font)}
   <div class="scene-top">
     <span class="brand"><img src="icons/logo.svg" alt="" width="30" height="30"><span>ZERACK<small>ACADEMY</small></span></span>
     <span class="scene-center">CHOOSE YOUR COURSE</span>
+    <span class="scene-labs"><a href="academy/circuit.html">CIRCUIT LAB</a><a href="academy/arm.html">ARM LAB</a></span>
     <span class="scene-count"><b id="sceneIndex">01</b> / <span id="sceneTotal">22</span></span>
   </div>
   <div class="scene-ghost" id="sceneGhost" aria-hidden="true">01</div>

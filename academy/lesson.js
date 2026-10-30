@@ -645,7 +645,7 @@
       showMessage('is-idle', kind === 'prompt' ? 'Example prompt loaded.' : 'Solution loaded.', ['Read it, then press check. It counts the same, but you learn less.']);
     });
 
-    // The course's character, the hand-off to Kernel or Mate and the duel with Bug.
+    // The course's character, the hand-off to Kernel or Vector and the duel with Bug.
     if (window.Cast) {
       state.duel = window.Cast.lesson({
         mascot: mascot,

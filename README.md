@@ -65,9 +65,9 @@ Every mission gives you:
 
 ### Meet the teachers
 
-Every course has its own character, who flies in when you open the course, talks you through what is coming and then gives the class: **Byte** teaches programming, **Voltio** electronics, **Chispa** robotics, **Mate** the courses heavy on maths and **Neura** AI and vision. **Zack** welcomes you on the home page. They cheer when you pass a mission and, when your code fails, explain the error in plain words and in their own style.
+Every course has its own character, who flies in when you open the course, talks you through what is coming and then gives the class: **Byte** teaches programming, **Ohm** electronics, **Servo** robotics, **Vector** the courses heavy on maths and **Tensor** AI and vision. **Zack** welcomes you on the home page. They cheer when you pass a mission and, when your code fails, explain the error in plain words and in their own style.
 
-- **Hand-off.** After two misses in a row, the teacher offers to call **Kernel**, the veteran mentor, or **Mate** in courses heavy on maths.
+- **Hand-off.** After two misses in a row, the teacher offers to call **Kernel**, the veteran mentor, or **Vector** in courses heavy on maths.
 - **Duel with Bug.** When you pass a code mission, **Bug**, the academy's rival, offers a duel: he breaks one line of your code and you have two minutes to find it. Your wins are kept on your computer.
 
 The helper uses the best AI available on each computer:

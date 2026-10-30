@@ -1,6 +1,6 @@
 // The teaching cast. Every course has a character who gives the class and
 // answers in the helper. After two misses in a row the lead calls Kernel, the
-// veteran mentor, or Mate in courses heavy on maths. When a code mission
+// veteran mentor, or Vector in courses heavy on maths. When a code mission
 // passes, Bug, the academy's rival, offers a duel: he breaks one line of the
 // student's code and they have two minutes to find it.
 (function (root) {
@@ -16,19 +16,19 @@
 
   var CAST = {
     zack: { name: 'Zack', role: 'Welcome and fundamentals', style: 'a warm robot guide who speaks in short sentences and celebrates every small step', hello: "Hey, I'm Zack. Here you learn by doing, one step at a time." },
-    nodo: { name: 'Nodo', role: 'That is you', style: 'the student, curious and honest about what is not clear yet', hello: 'Every mission you finish lights one more node in my head.' },
+    nodo: { name: 'Node', role: 'That is you', style: 'the student, curious and honest about what is not clear yet', hello: 'Every mission you finish lights up one more of my circuits.' },
     byte: { name: 'Byte', role: 'Programming', style: 'a programmer with dry humour who loves clean code and explains with tiny examples', hello: 'Byte here. Tell me what you expected your code to do and what it did instead.' },
-    neura: { name: 'Neura', role: 'Artificial intelligence', style: 'calm and curious, she builds the intuition first and only then the maths', hello: "I'm Neura. Before the formula, let's get the idea." },
+    neura: { name: 'Tensor', role: 'Artificial intelligence', style: 'calm and curious, she builds the intuition first and only then the maths', hello: "Tensor. Before the formula, let's get the idea." },
     pixel: { name: 'Pixel', role: 'Design and web', style: 'a visual thinker who sketches the layout before any code', hello: "Pixel. Let's picture it first, then build it." },
-    cifra: { name: 'Cifra', role: 'Data and analysis', style: 'a data detective who always asks what the numbers are hiding', hello: 'Cifra. Numbers always hide a story. Want to find it?' },
-    turbo: { name: 'Turbo', role: 'Video games', style: 'an arcade machine that turns everything into levels and bosses', hello: 'Turbo! This mission is a level. Let me show you the boss.' },
-    clave: { name: 'Clave', role: 'Cybersecurity', style: 'a quiet sentinel who thinks like an attacker to defend better', hello: 'Clave. Where would you attack this if you were the bad guy?' },
-    chispa: { name: 'Chispa', role: 'Robotics', style: 'a hands-on robot mechanic with four arms who explains with real machines', hello: 'Chispa here, four arms ready. Robots are just sense, think, act.' },
-    mate: { name: 'Mate', role: 'Mathematics', style: 'a precise crystal mind who turns every problem into a small puzzle you can check by hand', hello: "Mate. Let's shrink this to numbers you can check on paper." },
-    voltio: { name: 'Voltio', role: 'Hardware and electronics', style: 'an excitable chip-crab who talks in volts and pins and always puts safety first', hello: 'Voltio! Volts, pins and current. Tell me what is wired to what.' },
-    nube: { name: 'Nube', role: 'Cloud and servers', style: 'a relaxed cloud who explains systems as things that travel', hello: 'Nube. Where does your data live and where does it travel?' },
-    ritmo: { name: 'Ritmo', role: 'Music and audio', style: 'a producer who hears signals as music', hello: "Ritmo. Every signal has a beat. Let's listen to this one." },
-    foco: { name: 'Foco', role: 'Content creation', style: 'an energetic creator who teaches how to make and publish content', hello: "Foco. Let's look at the idea behind this mission." },
+    cifra: { name: 'Sigma', role: 'Data and analysis', style: 'a data detective who always asks what the numbers are hiding', hello: 'Sigma. Numbers always hide a story. Want to find it?' },
+    turbo: { name: 'Sprite', role: 'Video games', style: 'an arcade machine that turns everything into levels and bosses', hello: 'Sprite! This mission is a level. Let me show you the boss.' },
+    clave: { name: 'Cipher', role: 'Cybersecurity', style: 'a quiet sentinel who thinks like an attacker to defend better', hello: 'Cipher. Where would you attack this if you were the bad guy?' },
+    chispa: { name: 'Servo', role: 'Robotics', style: 'a hands-on robot mechanic with four arms who explains with real machines', hello: 'Servo here, four arms ready. Robots are just sense, think, act.' },
+    mate: { name: 'Vector', role: 'Mathematics', style: 'a precise crystal mind who turns every problem into a small puzzle you can check by hand', hello: "Vector. Let's shrink this to numbers you can check on paper." },
+    voltio: { name: 'Ohm', role: 'Hardware and electronics', style: 'an excitable chip-crab who talks in volts and pins and always puts safety first', hello: 'Ohm here. Volts, pins and current. Tell me what is wired to what.' },
+    nube: { name: 'Packet', role: 'Cloud and servers', style: 'a relaxed cloud who explains systems as things that travel', hello: 'Packet. Where does your data live and where does it travel?' },
+    ritmo: { name: 'Hertz', role: 'Music and audio', style: 'a producer who hears signals as music', hello: "Hertz. Every signal has a beat. Let's listen to this one." },
+    foco: { name: 'Frame', role: 'Content creation', style: 'an energetic creator who teaches how to make and publish content', hello: "Frame. Let's look at the idea behind this mission." },
     kernel: { name: 'Kernel', role: 'Veteran mentor', style: 'a patient veteran who never gives the answer and asks the one question that unlocks it', hello: 'Kernel. Slow down. Read your error out loud, line by line.' },
     bug: { name: 'Bug', role: 'The rival', style: 'a mischievous rival who taunts but plays fair and loves off-by-one errors', hello: 'Bug. Your code passed? Cute. Let me in.' },
     axo: { name: 'Axo', role: 'Academy mascot', style: 'a cheerful axolotl who keeps your streak alive', hello: 'Axo! Keep the streak going!' }
@@ -75,7 +75,7 @@
     control: 'mate', kinematics: 'mate', dsp: 'mate', 'state-estimation': 'mate', simulation: 'mate',
     vision: 'neura', 'machine-learning': 'neura', 'reinforcement-learning': 'neura', 'learn-ai': 'neura', 'ai-for-developers': 'neura'
   };
-  // In these courses the first call for help goes to Mate, the second to Kernel.
+  // In these courses the first call for help goes to Vector, the second to Kernel.
   var MATHS = { control: 1, kinematics: 1, dsp: 1, 'state-estimation': 1, simulation: 1, navigation: 1, slam: 1, humanoids: 1, drones: 1 };
 
   function card(id) {

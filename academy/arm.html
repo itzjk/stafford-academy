@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Arm Lab · Zerack Academy</title>
+  <link rel="preload" href="fonts/SpaceGrotesk.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="stylesheet" href="academy.css" />
+  <link rel="stylesheet" href="mascot.css" />
+  <link rel="stylesheet" href="lab.css" />
+</head>
+<body class="lab-page">
+  <div class="sky" aria-hidden="true"><canvas id="stars"></canvas></div>
+
+  <header class="bar"><div class="bar-in">
+    <a class="brand" href="../index.html" title="Back to all courses"><img src="../icons/logo.svg" alt="" width="32" height="32"><span class="wordmark"><b>ZERACK</b><small>ACADEMY</small></span></a>
+    <a class="back" href="course.html?c=robotics-basics">‹ Robotics</a>
+    <div class="bar-title"><b>ARM LAB</b><small>Forward and inverse kinematics of a two-link arm</small></div>
+    <div class="bar-right"></div>
+  </div></header>
+
+  <main class="wrap lab">
+    <section class="panel lab-stage">
+      <div class="panel-head"><b>Workspace</b>
+        <div class="lab-presets" role="tablist" aria-label="Mode">
+          <button class="lab-chip" id="modeForward" type="button" role="tab" aria-selected="true">Forward</button>
+          <button class="lab-chip" id="modeInverse" type="button" role="tab" aria-selected="false">Inverse</button>
+        </div>
+      </div>
+      <div class="lab-canvas"><svg id="arm" class="arm-svg" viewBox="0 0 680 420" role="img" aria-label="Two-link robot arm"></svg></div>
+      <p class="lab-hint" id="hint">Move the angles with the sliders.</p>
+    </section>
+
+    <section class="panel lab-side">
+      <div class="panel-head"><b id="modeKicker">Forward kinematics</b></div>
+      <div class="panel-body">
+        <h1 class="lab-title" id="title"></h1>
+        <div class="lab-say">
+          <img class="lab-face" id="face" alt="">
+          <p id="say"></p>
+        </div>
+        <div class="lab-math" id="math"></div>
+        <div class="arm-sliders">
+          <label class="arm-slider" id="rowT1"><b>θ1</b><input id="t1" type="range" min="-10" max="190" step="1" value="40"><output id="t1Out"></output></label>
+          <label class="arm-slider" id="rowT2"><b>θ2</b><input id="t2" type="range" min="-160" max="160" step="1" value="60"><output id="t2Out"></output></label>
+          <label class="arm-slider"><b>L1</b><input id="l1" type="range" min="6" max="16" step="0.5" value="12"><output id="l1Out"></output></label>
+          <label class="arm-slider"><b>L2</b><input id="l2" type="range" min="4" max="14" step="0.5" value="9"><output id="l2Out"></output></label>
+        </div>
+        <button class="lab-reset" id="elbow" type="button" hidden>Switch to elbow down</button>
+      </div>
+    </section>
+  </main>
+
+  <script src="common.js"></script>
+  <script src="arcade.js"></script>
+  <script src="cast.js"></script>
+  <script src="arm-lab.js"></script>
+</body>
+</html>

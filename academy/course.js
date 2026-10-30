@@ -14,6 +14,9 @@
 
   var courseId = A.param('c');
   var MET_KEY = 'zerack.met.';
+  var CIRCUIT = { href: 'circuit.html', label: 'Open the Circuit Lab' };
+  var ARM = { href: 'arm.html', label: 'Open the Arm Lab' };
+  var LABS = { 'electronics-basics': CIRCUIT, power: CIRCUIT, 'embedded-linux': CIRCUIT, 'robotics-basics': ARM, kinematics: ARM, manipulation: ARM, humanoids: ARM, 'python-robotics': ARM };
   var SEEN_KEY = 'zerack.stage.';
 
   function badge(text) {
@@ -308,6 +311,16 @@
     var replay = A.el('replayIntro');
     replay.hidden = !who;
     replay.addEventListener('click', function () { playIntro(true); });
+
+    // Courses with a lab of their own link to it beside the start button.
+    var lab = LABS[courseId];
+    if (lab) {
+      var link = document.createElement('a');
+      link.className = 'c-lab';
+      link.href = lab.href;
+      link.textContent = lab.label;
+      replay.parentNode.appendChild(link);
+    }
 
     // The full welcome the first time; a short one when you come back in a
     // new session; none when you are just moving between this course's pages.

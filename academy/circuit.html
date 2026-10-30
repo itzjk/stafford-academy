@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Circuit Lab · Zerack Academy</title>
+  <link rel="preload" href="fonts/SpaceGrotesk.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="stylesheet" href="academy.css" />
+  <link rel="stylesheet" href="mascot.css" />
+  <link rel="stylesheet" href="lab.css" />
+</head>
+<body class="lab-page">
+  <div class="sky" aria-hidden="true"><canvas id="stars"></canvas></div>
+
+  <header class="bar"><div class="bar-in">
+    <a class="brand" href="../index.html" title="Back to all courses"><img src="../icons/logo.svg" alt="" width="32" height="32"><span class="wordmark"><b>ZERACK</b><small>ACADEMY</small></span></a>
+    <a class="back" id="backLink" href="course.html?c=electronics-basics">‹ Electronics</a>
+    <div class="bar-title"><b>CIRCUIT LAB</b><small>Nodal analysis, one step at a time</small></div>
+    <div class="bar-right"></div>
+  </div></header>
+
+  <main class="wrap lab">
+    <section class="panel lab-stage">
+      <div class="panel-head"><b>Schematic</b><div class="lab-presets" id="presets" role="tablist" aria-label="Circuits"></div></div>
+      <div class="lab-canvas"><svg id="schematic" viewBox="0 0 680 360" role="img" aria-label="Circuit schematic"></svg></div>
+      <p class="lab-hint" id="hint">Click any part to change its value.</p>
+    </section>
+
+    <section class="panel lab-side">
+      <div class="panel-head"><b id="stepKicker">Step 1</b><span class="lab-edited" id="edited" hidden>Values changed by hand</span></div>
+      <div class="panel-body">
+        <h1 class="lab-title" id="stepTitle"></h1>
+        <div class="lab-say">
+          <img class="lab-face" id="face" alt="">
+          <p id="stepText"></p>
+        </div>
+        <div class="lab-math" id="math"></div>
+        <div class="lab-steps">
+          <button class="ghost" id="prevBtn" type="button">‹ Back</button>
+          <div class="lab-dots" id="dots" aria-hidden="true"></div>
+          <button class="run" id="nextBtn" type="button">Next step ›</button>
+        </div>
+        <button class="lab-reset" id="resetBtn" type="button" hidden>Reset values</button>
+      </div>
+    </section>
+  </main>
+
+  <div class="lab-edit" id="editor" hidden>
+    <label for="editValue" id="editLabel">Value</label>
+    <div class="lab-edit-row"><input id="editValue" type="text" inputmode="decimal" autocomplete="off" spellcheck="false" /><span id="editUnit"></span></div>
+    <div class="lab-edit-row"><button class="run" id="editOk" type="button">Apply</button><button class="ghost" id="editCancel" type="button">Cancel</button></div>
+  </div>
+
+  <script src="common.js"></script>
+  <script src="arcade.js"></script>
+  <script src="cast.js"></script>
+  <script src="circuit-lab.js"></script>
+</body>
+</html>

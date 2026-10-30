@@ -122,12 +122,15 @@
     text = text != null ? String(text) : el.textContent;
     if (still() || !text) { el.textContent = text; return; }
     var total = ms || Math.min(900, 260 + text.length * 22), began = performance.now(), over = false;
+    // A newer decode on the same element wins; this one stops touching it.
+    var token = (el.__decode || 0) + 1;
+    el.__decode = token;
     el.setAttribute('aria-label', text);
-    function end() { over = true; el.textContent = text; el.removeAttribute('aria-label'); }
+    function end() { over = true; if (el.__decode !== token) return; el.textContent = text; el.removeAttribute('aria-label'); }
     // A hidden tab gets no animation frames, so a timer makes sure the real text always lands.
     setTimeout(end, total + 50);
     (function frame(now) {
-      if (over) return;
+      if (over || el.__decode !== token) return;
       var done = Math.min(1, (now - began) / total), settled = Math.floor(done * text.length), out = '';
       for (var i = 0; i < text.length; i++) {
         var ch = text[i];
