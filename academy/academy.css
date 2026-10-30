@@ -273,8 +273,109 @@ body.has-stage { overflow: hidden; }
 .stage-btn:hover { filter: brightness(1.12); }
 .stage-flyer { position: fixed; z-index: 200001; object-fit: contain; object-position: 50% 100%; pointer-events: none; filter: drop-shadow(0 0 22px color-mix(in srgb, var(--acc, #00f0ff) 55%, transparent)); }
 
+/* Arrival by ship: it swoops in from the top right, hovers while the beam
+   brings the teacher down onto a landing ring, then leaves to the top left. */
+.stage-ship { position: absolute; left: 50%; top: -24%; width: 170%; aspect-ratio: 320 / 120; margin-left: -85%; z-index: 2; pointer-events: none; filter: drop-shadow(0 0 22px rgba(0,240,255,.35)) drop-shadow(0 18px 24px rgba(0,0,0,.7)); animation: stage-ship 3.3s cubic-bezier(.45,0,.25,1) .1s both; }
+.stage-ship svg { display: block; width: 100%; height: 100%; animation: stage-hover 1.2s ease-in-out infinite alternate; }
+.st-flame { transform-box: fill-box; transform-origin: center; animation: st-flame .12s linear infinite alternate; }
+.st-lights circle { animation: st-light .9s steps(1) infinite; }
+.st-lights circle:nth-child(2) { animation-delay: .22s; }
+.st-lights circle:nth-child(3) { animation-delay: .44s; }
+.st-lights circle:nth-child(4) { animation-delay: .66s; }
+.st-emitter { transform-box: fill-box; transform-origin: center; animation: st-emit 3.3s ease .1s both; }
+@keyframes stage-ship {
+  0% { transform: translate(85vw, -60vh) scale(.35) rotate(-14deg); opacity: 0; }
+  6% { opacity: 1; }
+  30% { transform: translate(-3%, 4%) scale(1.04) rotate(3deg); }
+  38% { transform: translate(0, 0) scale(1) rotate(0); }
+  70% { transform: translate(0, -2%) scale(1) rotate(0); opacity: 1; }
+  100% { transform: translate(-90vw, -70vh) scale(.3) rotate(-18deg); opacity: 0; }
+}
+@keyframes stage-hover { from { transform: translateY(-2%); } to { transform: translateY(3%); } }
+@keyframes st-flame { from { transform: scaleX(.75); opacity: .65; } to { transform: scaleX(1.15); opacity: 1; } }
+@keyframes st-light { 0% { opacity: 1; } 50% { opacity: .2; } }
+@keyframes st-emit { 0%, 30% { transform: scale(.4); opacity: .3; } 36%, 68% { transform: scale(1.5); opacity: 1; } 76%, 100% { transform: scale(.4); opacity: .3; } }
+
+.stage-beam { position: absolute; left: 4%; right: 4%; top: 6%; bottom: -3%; z-index: 0; pointer-events: none; transform-origin: 50% 0; clip-path: polygon(41% 0, 59% 0, 100% 100%, 0 100%); background: linear-gradient(180deg, rgba(255,255,255,.75), rgba(0,240,255,.5) 18%, rgba(0,240,255,.18) 70%, rgba(0,240,255,.32)); -webkit-mask-image: repeating-linear-gradient(180deg, #000 0 10px, rgba(0,0,0,.55) 10px 14px); mask-image: repeating-linear-gradient(180deg, #000 0 10px, rgba(0,0,0,.55) 10px 14px); filter: blur(1px); animation: stage-beam 1.35s ease 1.05s both; }
+@keyframes stage-beam { 0% { transform: scaleY(0); opacity: 0; } 20% { transform: scaleY(1); opacity: 1; } 75% { opacity: .9; } 100% { transform: scaleY(1); opacity: 0; } }
+
+.stage.is-arrival .stage-portal { left: 2%; right: 2%; top: auto; bottom: -9%; aspect-ratio: auto; height: 15%; background: none; -webkit-mask: none; mask: none; filter: none; border: 2px solid rgba(0,240,255,.85); box-shadow: 0 0 18px rgba(0,240,255,.6), inset 0 0 18px rgba(0,240,255,.45); animation: stage-pad-in .5s cubic-bezier(.2,.9,.3,1.3) 2s both, stage-pad 2.4s ease-in-out 2.5s infinite; }
+.stage.is-arrival .stage-portal::after { inset: 22% 18%; border: 1px solid rgba(255,255,255,.35); background: none; }
+@keyframes stage-pad-in { from { transform: scale(.2); opacity: 0; } to { transform: none; opacity: 1; } }
+@keyframes stage-pad { 0%, 100% { box-shadow: 0 0 18px rgba(0,240,255,.6), inset 0 0 18px rgba(0,240,255,.45); } 50% { box-shadow: 0 0 34px rgba(0,240,255,.9), inset 0 0 26px rgba(0,240,255,.7); } }
+.stage.is-ship .stage-lift { animation: stage-beam-in 1s cubic-bezier(.2,.8,.3,1) 1.25s both, stage-float 3.6s ease-in-out 2.3s infinite; }
+.stage.is-arrival .stage-floor { animation: stage-land .7s ease-out 2.05s both, stage-floor 3.6s ease-in-out 2.75s infinite; }
+.stage.is-arrival .stage-plate { animation-delay: 1.9s; }
+.stage.is-arrival .stage-dialog { animation-delay: 2.1s; }
+@keyframes stage-beam-in {
+  0% { transform: translateY(-46%) scale(.55); opacity: 0; filter: brightness(6) blur(8px); clip-path: inset(0 0 100% 0); }
+  55% { opacity: 1; filter: brightness(2.4) blur(2px); clip-path: inset(0 0 0 0); }
+  85% { transform: translateY(2%) scale(1.02); filter: brightness(1.2); }
+  100% { transform: none; filter: none; clip-path: inset(0 0 0 0); }
+}
+@keyframes stage-land { 0% { transform: scale(2.4); opacity: 1; filter: brightness(2); } 100% { transform: scale(1); opacity: .9; filter: none; } }
+
+/* Byte: code rain, a scan line, and the character loading in with a glitch */
+.stage-rain { position: absolute; left: -60%; right: -60%; top: -40%; bottom: 0; overflow: hidden; pointer-events: none; -webkit-mask-image: linear-gradient(180deg, transparent, #000 25%, #000 75%, transparent); mask-image: linear-gradient(180deg, transparent, #000 25%, #000 75%, transparent); animation: stage-fade-out .5s ease 1.9s both; }
+.stage-rain i { position: absolute; top: 0; white-space: pre; font: 700 15px/1.15 var(--mono); font-style: normal; color: var(--acc); text-shadow: 0 0 8px var(--acc); opacity: 0; animation: stage-rain linear both; }
+@keyframes stage-rain { 0% { transform: translateY(-110%); opacity: 0; } 15% { opacity: .9; } 100% { transform: translateY(160%); opacity: 0; } }
+.stage-scan { position: absolute; left: -12%; right: -12%; height: 3px; top: 0; background: #fff; box-shadow: 0 0 18px var(--acc), 0 0 40px var(--acc); opacity: 0; animation: stage-scan 1s cubic-bezier(.5,0,.5,1) 1s both; }
+@keyframes stage-scan { 0% { top: 0; opacity: 0; } 10% { opacity: 1; } 90% { opacity: 1; } 100% { top: 100%; opacity: 0; } }
+.stage.is-code .stage-lift { animation: stage-code-in 1s steps(10) 1s both, stage-glitch .5s steps(2) 2s 2, stage-float 3.6s ease-in-out 2.3s infinite; }
+@keyframes stage-code-in { from { clip-path: inset(0 0 100% 0); filter: brightness(3) hue-rotate(0deg); } to { clip-path: inset(0 0 0 0); filter: none; } }
+@keyframes stage-glitch { 0% { transform: translateX(-6px); filter: drop-shadow(4px 0 0 rgba(0,240,255,.8)); } 50% { transform: translateX(5px); filter: drop-shadow(-4px 0 0 #fff); } 100% { transform: none; filter: none; } }
+
+/* Voltio: a lightning strike, a white flash and a ring of sparks */
+.stage-bolt { position: absolute; left: 30%; width: 40%; top: -60%; height: 158%; opacity: 0; filter: drop-shadow(0 0 12px var(--acc)); animation: stage-bolt .55s linear .9s both; pointer-events: none; }
+@keyframes stage-bolt { 0% { opacity: 0; } 4% { opacity: 1; } 20% { opacity: 0; } 34% { opacity: 1; } 60% { opacity: .7; } 100% { opacity: 0; } }
+.stage-flash { position: absolute; inset: 0; background: radial-gradient(circle at 50% 70%, #fff, rgba(0,240,255,.5) 40%, transparent 75%); opacity: 0; pointer-events: none; animation: stage-flash .7s ease-out .95s both; }
+@keyframes stage-flash { 0% { opacity: 0; } 12% { opacity: .95; } 100% { opacity: 0; } }
+.stage-burst { position: absolute; left: 50%; bottom: 2%; width: 0; height: 0; }
+.stage-burst i { position: absolute; width: 4px; height: 14px; margin: -7px -2px; border-radius: 2px; background: #fff; box-shadow: 0 0 10px var(--acc), 0 0 4px #fff; opacity: 0; transform: rotate(var(--a)); animation: stage-spark-out .8s cubic-bezier(.1,.7,.3,1) 1s both; }
+@keyframes stage-spark-out { 0% { transform: rotate(var(--a)) translateY(0); opacity: 0; } 6% { opacity: 1; } 100% { transform: rotate(var(--a)) translateY(calc(var(--d) * -1)); opacity: 0; } }
+.stage.is-bolt .stage-lift { animation: stage-zap-in .8s cubic-bezier(.2,.9,.3,1.4) 1.05s both, stage-float 3.6s ease-in-out 2.3s infinite; }
+@keyframes stage-zap-in { 0% { transform: scale(.3); opacity: 0; filter: brightness(8) saturate(0); } 30% { opacity: 1; } 60% { transform: scale(1.08); filter: brightness(2); } 100% { transform: none; filter: none; } }
+
+/* Chispa: a drop pod falls, slams down, the screen shakes and the doors open */
+.stage-pod { position: absolute; left: 8%; right: 8%; top: -4%; bottom: -2%; animation: stage-pod-fall .85s cubic-bezier(.6,0,1,.6) .15s both; z-index: 2; }
+.stage-pod-half { position: absolute; top: 0; bottom: 0; width: 50%; filter: drop-shadow(0 0 14px rgba(0,240,255,.35)); }
+.stage-pod-half svg { width: 100%; height: 100%; display: block; }
+.stage-pod-half.is-left { left: 0; animation: stage-pod-left .6s cubic-bezier(.3,0,.2,1) 1.35s both; }
+.stage-pod-half.is-right { right: 0; transform: scaleX(-1); animation: stage-pod-right .6s cubic-bezier(.3,0,.2,1) 1.35s both; }
+.stage-pod-fire { position: absolute; left: 30%; right: 30%; top: -30%; height: 32%; background: linear-gradient(0deg, rgba(255,255,255,.9), rgba(0,240,255,.6) 40%, transparent); border-radius: 50%; filter: blur(4px); animation: stage-fade-out .2s ease .95s both; }
+@keyframes stage-pod-fall { 0% { transform: translateY(-130vh); } 100% { transform: none; } }
+@keyframes stage-pod-left { 0% { transform: none; opacity: 1; } 100% { transform: translateX(-70%) rotate(-14deg); opacity: 0; } }
+@keyframes stage-pod-right { 0% { transform: scaleX(-1); opacity: 1; } 100% { transform: scaleX(-1) translateX(-70%) rotate(-14deg); opacity: 0; } }
+.stage-dust { position: absolute; left: -40%; right: -40%; bottom: -10%; height: 26%; border-radius: 50%; background: radial-gradient(closest-side, rgba(233,251,255,.55), rgba(0,240,255,.2) 50%, transparent); opacity: 0; animation: stage-dust .9s ease-out 1s both; }
+@keyframes stage-dust { 0% { transform: scale(.3); opacity: 0; } 20% { opacity: 1; } 100% { transform: scale(1.3); opacity: 0; } }
+.stage.is-pod { animation: stage-shake .45s linear 1s both; }
+@keyframes stage-shake { 0%, 100% { transform: none; } 15% { transform: translate(-10px, 6px); } 30% { transform: translate(9px, -6px); } 45% { transform: translate(-7px, 4px); } 60% { transform: translate(5px, -3px); } 80% { transform: translate(-2px, 1px); } }
+.stage.is-pod .stage-lift { animation: stage-pod-out .7s cubic-bezier(.2,.9,.3,1.3) 1.4s both, stage-float 3.6s ease-in-out 2.3s infinite; }
+@keyframes stage-pod-out { 0% { transform: scale(.85) translateY(6%); opacity: 0; } 40% { opacity: 1; } 70% { transform: scale(1.04) translateY(-4%); } 100% { transform: none; } }
+
+/* Mate: a wireframe solid draws itself, spins, shrinks into the character */
+.stage-solid { position: absolute; left: -10%; right: -10%; top: 8%; width: 120%; overflow: visible; animation: stage-solid 2s cubic-bezier(.5,0,.3,1) .1s both; }
+.stage-solid line { stroke: var(--acc); stroke-width: .9; stroke-dasharray: 1; stroke-dashoffset: 1; filter: drop-shadow(0 0 2px var(--acc)); animation: stage-draw .45s ease both; }
+.stage-solid circle { fill: #fff; filter: drop-shadow(0 0 3px var(--acc)); }
+@keyframes stage-draw { to { stroke-dashoffset: 0; } }
+@keyframes stage-solid { 0% { transform: rotate(0) scale(1); opacity: 1; } 55% { transform: rotate(60deg) scale(1); opacity: 1; } 80% { transform: rotate(180deg) scale(.15); opacity: 1; } 100% { transform: rotate(240deg) scale(0); opacity: 0; } }
+.stage.is-grid .stage-lift { animation: stage-grow-in .8s cubic-bezier(.2,.9,.3,1.3) 1.5s both, stage-float 3.6s ease-in-out 2.3s infinite; }
+@keyframes stage-grow-in { 0% { transform: scale(.05); opacity: 0; filter: brightness(5); } 50% { opacity: 1; } 100% { transform: none; filter: none; } }
+
+/* Neura: a neural network lights up, pulses, then collapses into the character */
+.stage-net { position: absolute; left: -45%; right: -45%; top: -10%; width: 190%; overflow: visible; animation: stage-net 2s cubic-bezier(.6,0,.3,1) .1s both; }
+.stage-net line { stroke: var(--acc); stroke-width: .35; stroke-opacity: .7; stroke-dasharray: 1; stroke-dashoffset: 1; animation: stage-draw .5s ease both; }
+.stage-net circle { fill: #fff; filter: drop-shadow(0 0 2px var(--acc)); transform-box: fill-box; transform-origin: center; animation: stage-node .4s cubic-bezier(.2,.9,.3,1.6) both, stage-node-pulse .5s ease-in-out .9s 2 alternate; }
+@keyframes stage-node { from { transform: scale(0); } to { transform: none; } }
+@keyframes stage-node-pulse { to { fill: var(--acc); transform: scale(1.6); } }
+@keyframes stage-net { 0%, 62% { transform: scale(1); opacity: 1; } 88% { transform: scale(.08); opacity: 1; } 100% { transform: scale(0); opacity: 0; } }
+.stage.is-mind .stage-lift { animation: stage-grow-in .8s cubic-bezier(.2,.9,.3,1.3) 1.55s both, stage-float 3.6s ease-in-out 2.3s infinite; }
+
+@keyframes stage-fade-out { to { opacity: 0; } }
+
 @media (max-width: 760px) {
-  .stage-hero { top: 38%; height: 40vh; }
+  .stage-hero { top: 40%; height: 38vh; }
+  .stage-ship { width: 150%; margin-left: -75%; top: -30%; }
   .stage-plate { left: 16px; right: 16px; top: 64px; max-width: none; }
   .stage-plate b { font-size: 40px; }
   .stage-text { font-size: 16.5px; }
@@ -283,6 +384,7 @@ body.has-stage { overflow: hidden; }
 @media (prefers-reduced-motion: reduce) {
   .stage, .stage *, .stage-sky i { animation: none !important; transition: none !important; }
   .stage-sky { display: none; }
+  .stage-ship, .stage-beam, .stage-rain, .stage-scan, .stage-bolt, .stage-flash, .stage-burst, .stage-pod, .stage-dust, .stage-solid, .stage-net { display: none; }
 }
 
 /* ---------- Mission page motion ---------- */
@@ -311,3 +413,83 @@ body.has-stage { overflow: hidden; }
 @keyframes vt-out { to { opacity: 0; transform: translateY(-14px) scale(.99); } }
 @keyframes vt-in { from { opacity: 0; transform: translateY(18px); } }
 @media (prefers-reduced-motion: reduce) { ::view-transition-old(root), ::view-transition-new(root) { animation: none; } }
+
+/* ---------- Game layer (arcade.js) ---------- */
+
+/* The speaker switch in the top bar */
+.sound { display: grid; place-items: center; width: 34px; height: 34px; border-radius: 50%; border: 1px solid var(--line); background: var(--panel); color: var(--muted); cursor: pointer; transition: color .15s, border-color .15s, box-shadow .15s; }
+.sound:hover { color: var(--text); }
+.sound[aria-pressed="true"] { color: var(--cyan); border-color: rgba(0,240,255,.45); box-shadow: 0 0 14px rgba(0,240,255,.25); }
+
+/* The teacher tells the mission at the top of the briefing */
+.story { --acc: #00f0ff; position: relative; display: grid; grid-template-columns: 74px minmax(0, 1fr); gap: 14px; align-items: start; margin: 18px 0 20px; padding: 16px 18px 16px 12px; border: 1px solid color-mix(in srgb, var(--acc) 35%, transparent); border-radius: 16px; background: linear-gradient(120deg, color-mix(in srgb, var(--acc) 9%, #070910), #070910 70%); box-shadow: 0 0 30px color-mix(in srgb, var(--acc) 8%, transparent); cursor: pointer; animation: c-rise .6s cubic-bezier(.2,.9,.3,1) .15s both; }
+.story::before { content: "INCOMING"; position: absolute; top: -9px; left: 16px; padding: 3px 9px; border-radius: 999px; background: #050608; border: 1px solid color-mix(in srgb, var(--acc) 45%, transparent); color: var(--acc); font: 700 9.5px/1 var(--sk-font); letter-spacing: .24em; }
+.story.is-done::before { content: "BRIEFING"; }
+.story-face { width: 74px; height: 92px; margin: -18px 0 -10px; object-fit: contain; object-position: 50% 100%; filter: drop-shadow(0 0 14px color-mix(in srgb, var(--acc) 55%, transparent)) drop-shadow(0 10px 10px rgba(0,0,0,.6)); animation: stage-float 3.6s ease-in-out infinite; transform-origin: 50% 95%; }
+.story-face.is-talking { animation: stage-float 3.6s ease-in-out infinite, stage-talk .45s ease-in-out infinite alternate; }
+.story-words { display: grid; gap: 8px; min-height: 52px; }
+.story-line { margin: 0; font: 500 15.5px/1.55 var(--sk-font); color: #e9eef8; animation: stage-fade .25s ease both; }
+.story-line b { color: var(--acc); font-weight: 700; }
+.story-line strong { color: #fff; }
+.story-line code { background: rgba(255,255,255,.08); border-radius: 5px; padding: 1px 6px; font: 13.5px var(--mono); }
+
+/* The victory screen */
+body.has-win { overflow: hidden; }
+.win { --acc: #00f0ff; position: fixed; inset: 0; z-index: 210000; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); align-items: center; gap: 2vw; padding: 4vh 6vw; background: radial-gradient(ellipse 60% 55% at 32% 55%, color-mix(in srgb, var(--acc) 18%, #030405) 0, #030405 70%); color: var(--text); opacity: 0; transition: opacity .3s ease; }
+.win.is-on { opacity: 1; }
+.win.is-leaving { opacity: 0; pointer-events: none; }
+.win-confetti { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+.win-hero { position: relative; justify-self: end; height: min(64vh, 560px); aspect-ratio: 2 / 3; }
+.win-lift { position: absolute; inset: 0; animation: win-jump 1s cubic-bezier(.2,.9,.3,1.3) .1s both, stage-float 3.2s ease-in-out 1.1s infinite; }
+.win-char { width: 100%; height: 100%; object-fit: contain; object-position: 50% 100%; filter: drop-shadow(0 0 34px color-mix(in srgb, var(--acc) 60%, transparent)) drop-shadow(0 30px 30px rgba(0,0,0,.6)); }
+@keyframes win-jump { 0% { transform: translateY(30%) scale(.6); opacity: 0; } 45% { transform: translateY(-12%) scale(1.06) rotate(-3deg); opacity: 1; } 70% { transform: translateY(2%) scale(.98) rotate(1deg); } 100% { transform: none; } }
+.win-floor { position: absolute; left: 12%; right: 12%; bottom: -4%; height: 9%; border-radius: 50%; background: radial-gradient(closest-side, color-mix(in srgb, var(--acc) 65%, transparent), transparent); animation: stage-floor 3.2s ease-in-out 1.1s infinite; }
+
+.win-card { position: relative; display: grid; justify-items: start; gap: 10px; max-width: 560px; }
+.win-card > * { animation: c-rise .6s cubic-bezier(.2,.9,.3,1) both; }
+.win-card > :nth-child(2) { animation-delay: .08s; }
+.win-card > :nth-child(3) { animation-delay: .16s; }
+.win-card > :nth-child(4) { animation-delay: .24s; }
+.win-card > :nth-child(5) { animation-delay: .32s; }
+.win-card > :nth-child(6) { animation-delay: .4s; }
+.win-kicker { margin: 0; font: 700 13px/1.2 var(--mono); letter-spacing: .3em; color: var(--acc); text-shadow: 0 0 16px color-mix(in srgb, var(--acc) 60%, transparent); }
+.win-xp { font: 800 clamp(64px, 10vw, 132px)/.95 var(--sk-display); letter-spacing: -.04em; color: #fff; text-shadow: 0 0 30px color-mix(in srgb, var(--acc) 70%, transparent), 0 0 80px color-mix(in srgb, var(--acc) 35%, transparent); font-variant-numeric: tabular-nums; }
+.win-xp.is-full { animation: win-pop .45s cubic-bezier(.3,1.6,.5,1); }
+@keyframes win-pop { 40% { transform: scale(1.08); color: var(--acc); } }
+.win-title { margin: 0; font: 600 18px/1.35 var(--sk-font); color: var(--muted); }
+.win-meter { display: grid; grid-template-columns: auto minmax(140px, 300px); grid-template-rows: auto auto; column-gap: 12px; row-gap: 6px; align-items: center; margin-top: 4px; }
+.win-lv { grid-row: span 2; padding: 8px 11px; border-radius: 999px; background: var(--acc); color: #00141a; font: 800 13px/1 var(--sk-font); box-shadow: 0 0 18px color-mix(in srgb, var(--acc) 55%, transparent); }
+.win-track { height: 10px; border-radius: 5px; background: rgba(255,255,255,.1); overflow: hidden; }
+.win-fill { display: block; height: 100%; width: 0; border-radius: 5px; background: linear-gradient(90deg, #7af7ff, var(--acc)); box-shadow: 0 0 12px var(--acc); transition: width .7s cubic-bezier(.3,.9,.3,1); }
+.win-next { font: 600 12px/1 var(--sk-font); color: var(--muted); }
+.win-card.is-levelled .win-lv { animation: win-level 1s cubic-bezier(.3,1.6,.5,1); }
+@keyframes win-level { 30% { transform: scale(1.35); box-shadow: 0 0 40px var(--acc); } }
+.win-quip { margin: 6px 0 0; min-height: 1.5em; font: 500 17px/1.5 var(--sk-font); color: #e9eef8; }
+.win-quip b { color: var(--acc); }
+
+.win-menu { display: grid; gap: 4px; margin-top: 14px; min-width: min(380px, 100%); opacity: 0; transition: opacity .25s ease; }
+.win-menu.is-ready { opacity: 1; }
+.win-item { display: grid; grid-template-columns: 20px auto 1fr; align-items: baseline; gap: 8px; width: 100%; text-align: left; padding: 10px 12px; border: 1px solid transparent; border-radius: 12px; background: none; color: var(--muted); font: 700 18px/1.2 var(--sk-font); cursor: pointer; transition: color .12s, background .12s, border-color .12s, transform .12s; }
+.win-cursor { color: var(--acc); opacity: 0; transform: translateX(-6px); transition: opacity .12s, transform .12s; }
+.win-hint { justify-self: end; font: 500 12.5px/1.2 var(--sk-font); color: #6b7286; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 220px; }
+.win-item.is-on { color: #fff; background: color-mix(in srgb, var(--acc) 9%, transparent); border-color: color-mix(in srgb, var(--acc) 40%, transparent); transform: translateX(4px); }
+.win-item.is-on .win-cursor { opacity: 1; transform: none; animation: win-blink .7s steps(2) infinite; }
+.win-item.is-on .win-hint { color: var(--muted); }
+.win-item:focus-visible { outline: none; }
+@keyframes win-blink { 50% { opacity: .2; } }
+
+@media (max-width: 860px) {
+  .win { grid-template-columns: minmax(0, 1fr); grid-template-rows: auto auto; align-content: center; justify-items: center; gap: 8px; padding: 24px 16px; overflow-y: auto; }
+  .win-hero { justify-self: center; height: 26vh; }
+  .win-card { justify-items: center; text-align: center; }
+  .win-meter { justify-content: center; }
+  .win-menu { width: 100%; }
+  .win-hint { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .story, .story-face, .story-line, .win, .win *, .win-card > * { animation: none !important; transition: none !important; }
+}
+
+/* The student's avatar beside their level on the victory screen */
+.win-meter.has-me { grid-template-columns: auto auto minmax(140px, 300px); }
+.win-me { grid-row: span 2; width: 46px; height: 46px; border-radius: 50%; object-fit: cover; object-position: 50% 18%; border: 2px solid var(--acc); box-shadow: 0 0 18px color-mix(in srgb, var(--acc) 55%, transparent); background: #0b0d14; }

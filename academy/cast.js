@@ -45,6 +45,28 @@
     kernel: 'I have seen every language come and go. The habits are what last.'
   };
 
+  // How each character opens a mission briefing and what they shout when you
+  // pass one. The mission page picks one by the mission's number, so the same
+  // mission always sounds the same.
+  var OPENERS = {
+    zack: ['Ready? Here is the next step.', 'Okay, new mission. Small and doable.', 'You are on a roll. Next one.'],
+    byte: ['Fresh terminal, clean slate.', 'New ticket on the board.', 'Coffee is hot, the console is waiting.'],
+    neura: ['Let\'s build the intuition for this one.', 'Picture it first. Then we make it real.', 'A new idea is coming. Stay curious.'],
+    chispa: ['Grab the toolbox, all four arms ready.', 'Power on. Sensors up.', 'New part on the workbench.'],
+    mate: ['Pencil out. This one checks by hand.', 'A new puzzle. It shrinks if you let it.', 'Numbers first, then the code.'],
+    voltio: ['Safety glasses on!', 'New circuit on the bench, zero sparks so far.', 'Check the pins, then we go.'],
+    kernel: ['Slow and steady. Read it twice.', 'I have seen this one trip up the best.', 'Habits first, speed later.']
+  };
+  var CHEERS = {
+    zack: ['That is how it is done!', 'One more step up the ladder.', 'You made that look easy.'],
+    byte: ['Clean. Ship it.', 'Zero errors. I like you.', 'That is code I would merge.'],
+    neura: ['See? The idea clicked.', 'Your model of it is right now.', 'Beautiful. Intuition plus proof.'],
+    chispa: ['It moves! It actually moves!', 'Bolted, wired and running.', 'Four thumbs up from me.'],
+    mate: ['Checks out to the last digit.', 'Q.E.D. Next.', 'Exact. Not approximately, exactly.'],
+    voltio: ['No smoke! Perfect circuit!', 'Full voltage, full marks!', 'Everything lit up. Including you.'],
+    kernel: ['Good. You read it before you wrote it.', 'That habit will last you.', 'Calm hands, correct code.']
+  };
+
   // Who gives each course. Courses that are not listed get Zack.
   var LEADS = {
     programming: 'byte', javascript: 'byte', 'python-robotics': 'byte', 'embedded-linux': 'byte',
@@ -59,7 +81,8 @@
   function card(id) {
     var c = CAST[id] || CAST.zack;
     if (!CAST[id]) id = 'zack';
-    return { id: id, name: c.name, role: c.role, accent: NEON, style: c.style, hello: c.hello, intro: INTROS[id] || '', face: FACES + id + '.webp' };
+    return { id: id, name: c.name, role: c.role, accent: NEON, style: c.style, hello: c.hello, intro: INTROS[id] || '', face: FACES + id + '.webp',
+      openers: OPENERS[id] || OPENERS.zack, cheers: CHEERS[id] || CHEERS.zack };
   }
 
   function lead(courseId) { return card(LEADS[courseId] || 'zack'); }
@@ -243,7 +266,8 @@
       }
       misses = 0;
       backToLead();
-      if (!page.code) return;
+      // A page with a victory screen offers the duel from its own menu.
+      if (!page.code || page.offerDuel === false) return;
       var won = wins(0);
       setTimeout(function () {
         speak('bug', won ? 'Passed again. ' + won + ' wins against me so far. Double or nothing?' : 'Passed? Let me break your code. If you find my bug in two minutes, you win.', [
@@ -252,6 +276,16 @@
         ], true);
       }, 1400);
     });
+
+    return {
+      duel: startDuel,
+      wins: function () { return wins(0); },
+      // Whether Bug has any line of this code he could try to break.
+      possible: function () {
+        var code = page.getCode();
+        return SABOTAGES.some(function (rule) { return !!sabotage(code, rule); });
+      }
+    };
   }
 
   root.Cast = {

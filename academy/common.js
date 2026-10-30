@@ -46,10 +46,22 @@
     timer = setInterval(function () {
       shown += 1;
       paint(shown);
+      // A soft blip every few letters, like a character talking in a game.
+      if (shown % 3 === 0 && root.Arcade) root.Arcade.play('tick');
       if (shown >= total) finish();
     }, msPerLetter || 18);
     return finish;
   };
+
+  // The browser skips the page transition when you click again before it ends,
+  // and then rejects its promises. That is expected, so it is not an error.
+  function quietTransition(e) {
+    var t = e.viewTransition;
+    if (!t) return;
+    [t.ready, t.finished, t.updateCallbackDone].forEach(function (p) { if (p && p.catch) p.catch(function () {}); });
+  }
+  root.addEventListener('pageswap', quietTransition);
+  root.addEventListener('pagereveal', quietTransition);
 
   // ---------- progress ----------
   // Shape: { xp, courses: { [courseId]: { done: [lessonId] } }, last: { course, lesson, at } }

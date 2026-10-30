@@ -940,6 +940,11 @@
       }
     });
 
+    // While the code runs the character leans in to watch.
+    document.addEventListener('academy:running', function (e) {
+      rootNode.classList.toggle('is-watching', !!(e.detail && e.detail.on));
+    });
+
     function leadOf(course) { if (root.Cast && course && course.id) dress(root.Cast.lead(course.id)); }
 
     quickButtons();

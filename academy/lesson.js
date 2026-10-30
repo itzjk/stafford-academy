@@ -49,9 +49,17 @@
     node.appendChild(p);
   }
 
-  // The mascot listens for this event to celebrate or to offer help.
+  // The mascot listens for this event to celebrate or to offer help. A pass
+  // gets its sound from the victory screen.
   function announceResult(res) {
+    if (!res.ok && window.Arcade) window.Arcade.play('fail');
     try { document.dispatchEvent(new CustomEvent('academy:result', { detail: { ok: !!res.ok, title: res.title || '' } })); } catch (e) {}
+  }
+
+  // The teacher leans in to watch while the code runs.
+  function announceRunning(on) {
+    if (on && window.Arcade) window.Arcade.play('run');
+    try { document.dispatchEvent(new CustomEvent('academy:running', { detail: { on: !!on } })); } catch (e) {}
   }
 
   // ---------- the checker ----------
@@ -361,16 +369,41 @@
     box.scrollIntoView({ behavior: A.reducedMotion() ? 'auto' : 'smooth', block: 'nearest' });
   }
 
+  function courseUrl() { return 'course.html?c=' + encodeURIComponent(courseId); }
+  function nextUrl() { return state.next ? 'lesson.html?c=' + encodeURIComponent(courseId) + '&l=' + encodeURIComponent(state.next.id) : courseUrl(); }
+
   function onPass() {
     var xp = Number(state.lesson.xp || 0);
+    var before = Number(state.progress.xp) || 0;
     var won = A.markDone(state.progress, courseId, lessonId, xp);
     // The home page reads this to offer "Continue where you left off".
     state.progress.last = { course: courseId, lesson: state.next ? state.next.id : lessonId, at: Date.now() };
-    celebrate(won ? xp : 0);
-    A.saveProgress(state.progress).then(function () {
-      // The XP bar fills once the +XP has flown up to it.
+    A.saveProgress(state.progress).then(function () { paintNext(won, won ? xp : 0); });
+    if (state.duelling) { A.paintXp(state.progress); return; }
+    if (!window.Arcade) {
+      celebrate(won ? xp : 0);
       setTimeout(function () { A.paintXp(state.progress); }, won && !A.reducedMotion() ? 900 : 0);
-      paintNext(won, won ? xp : 0);
+      return;
+    }
+    // Staying on the page lands the XP in the top bar with the old burst.
+    function stay() { celebrate(won ? xp : 0); setTimeout(function () { A.paintXp(state.progress); }, won && !A.reducedMotion() ? 900 : 0); }
+    var items = [];
+    items.push(state.next
+      ? { label: 'Next mission', hint: state.next.title, run: function () { location.href = nextUrl(); } }
+      : { label: 'Finish the course', hint: 'That was the last mission', run: function () { location.href = courseUrl(); } });
+    if (state.duel && state.kind === 'code' && state.duel.possible()) {
+      var bugWins = state.duel.wins();
+      items.push({ label: 'Duel Bug', hint: bugWins ? bugWins + ' wins against him' : 'He breaks one line, you find it', run: function () { A.paintXp(state.progress); state.duel.duel(); } });
+    }
+    items.push({ label: 'Back to the map', hint: state.course.title, run: function () { location.href = courseUrl(); } });
+    items.push({ label: 'Stay on this mission', hint: 'Esc', run: stay });
+    window.Arcade.victory({
+      who: mascot ? mascot.character() : (window.Cast ? window.Cast.lead(courseId) : null),
+      title: state.lesson.title,
+      xp: won ? xp : 0,
+      before: before,
+      items: items,
+      onClose: stay
     });
   }
 
@@ -420,15 +453,16 @@
     var language = l.language || course.language || 'python';
     document.title = l.title + ' · Zerack Academy';
 
+    var teacher = window.Cast ? window.Cast.lead(courseId) : null;
     if (mascot) {
       mascot.setLesson({ course: course, chapter: state.chapter, lesson: l });
-      // The teacher briefs every mission as you walk in. The first time in a
-      // session they also say how they can help.
+      // The briefing tells the mission now, so the corner only says how it
+      // can help, once per session.
       var greeted = false;
       try { greeted = sessionStorage.getItem('zerack.mascot.greeted') === '1'; sessionStorage.setItem('zerack.mascot.greeted', '1'); } catch (e) {}
-      mascot.welcome('**Mission ' + (state.index + 1) + ' of ' + state.total + ': ' + l.title + '.** ' + (l.goal || '') +
-        (greeted ? '' : '\n\nIf your code fails, tap me and I will explain the error.'));
+      if (!greeted) mascot.welcome('If your code fails, tap me and I will explain the error.');
     }
+    if (window.Arcade) { window.Arcade.soundButton(); window.Arcade.avatarCorner(); }
 
     A.el('backLink').href = 'course.html?c=' + encodeURIComponent(courseId);
     A.el('barTitle').textContent = String(course.title || '').toUpperCase();
@@ -445,8 +479,19 @@
     crumb.appendChild(a);
     crumb.appendChild(document.createTextNode(' · ' + (state.chapter ? state.chapter.title : '')));
 
-    A.el('lessonTitle').textContent = l.title || '';
+    if (window.Arcade) window.Arcade.decode(A.el('lessonTitle'), l.title || '');
+    else A.el('lessonTitle').textContent = l.title || '';
     A.el('lessonGoal').textContent = l.goal || '';
+    // The teacher tells the mission at the top of the briefing.
+    if (window.Arcade && teacher) {
+      // The teacher says the goal, so it is not repeated under the title.
+      A.el('lessonGoal').hidden = true;
+      var opener = teacher.openers[state.index % teacher.openers.length];
+      window.Arcade.briefing(A.el('lessonStory'), teacher, [
+        opener + ' **Mission ' + (state.index + 1) + ' of ' + state.total + ': ' + l.title + '.**',
+        l.goal || 'Read the briefing, then show me what you can do.'
+      ]);
+    }
     var theory = A.el('lessonTheory');
     A.clear(theory);
     theory.appendChild(A.markdown(l.theory || ''));
@@ -467,6 +512,7 @@
     if (runsCode(l) && window.PythonRunner) window.PythonRunner.warmUp();
 
     var kind = missionKind(l);
+    state.kind = kind;
     var picked = null;
     if (kind !== 'code') setUpAnswer();
 
@@ -539,6 +585,8 @@
 
     A.el('runBtn').addEventListener('click', function () {
       var button = A.el('runBtn');
+      // Beating Bug's duel restores your code; it is not a new victory.
+      state.duelling = document.body.classList.contains('cast-in-duel');
       if (kind !== 'code') { checkAnswer(); return; }
       if (!runsCode(l) || !window.PythonRunner) {
         var r = review(code.value, l, language);
@@ -558,8 +606,10 @@
       }
       button.disabled = true;
       showMessage('is-idle', 'Running your code...', []);
+      announceRunning(true);
       runAndCheck(code.value, l, language).then(function (res) {
         button.disabled = false;
+        announceRunning(false);
         var box = showRun(res.title, res.output, res.ok ? 'is-good' : 'is-bad');
         if (res.note) addNote(box, res.note);
         announceResult(res);
@@ -597,10 +647,12 @@
 
     // The course's character, the hand-off to Kernel or Mate and the duel with Bug.
     if (window.Cast) {
-      window.Cast.lesson({
+      state.duel = window.Cast.lesson({
         mascot: mascot,
         courseId: courseId,
         code: kind === 'code',
+        // The victory screen offers the duel in its menu.
+        offerDuel: !window.Arcade,
         getCode: function () { return code.value; },
         setCode: function (text, save) { code.value = text; if (save) saveDraft(text); },
         passes: function (text) {

@@ -10,6 +10,7 @@
   // The corner helper waits: on this page the teacher stands in the hero, and
   // the corner only takes over once the hero scrolls out of sight.
   var mascot = window.Mascot ? window.Mascot.mount({ page: 'course', hold: true }) : null;
+  if (window.Arcade) { window.Arcade.soundButton(); window.Arcade.avatarCorner(); }
 
   var courseId = A.param('c');
   var MET_KEY = 'zerack.met.';

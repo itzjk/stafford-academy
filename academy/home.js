@@ -16,6 +16,7 @@
 
   A.stars();
   var mascot = window.Mascot ? window.Mascot.mount({ page: 'home' }) : null;
+  if (window.Arcade) window.Arcade.avatarCorner();
 
   Promise.all([
     fetch(CATALOG_URL, { cache: 'no-store' }).then(function (r) { return r.json(); }),
